@@ -15,7 +15,8 @@ class CreateTitulosTable extends Migration
     {
         Schema::create('titulos', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->string('titulo',64)->unique();
+            $table->string('descripcion',255)->nullable();
         });
     }
 

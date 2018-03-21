@@ -15,7 +15,9 @@ class CreateEstudianteTrabajoTable extends Migration
     {
         Schema::create('estudiante_trabajo', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->integer('estudiante_id')->unsigned();
+            $table->integer('empresa_id')->unsigned();
+            $table->string('puesto',64);
         });
     }
 

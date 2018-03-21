@@ -15,7 +15,13 @@ class CreateHorariosTable extends Migration
     {
         Schema::create('horarios', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->integer('dia_id')->unsigned();
+            $table->integer('clase_id')->unsigned();
+            $table->time('hora_entrada');
+            $table->time('hora_salida');
+
+            $table->foreign('dia_id')->references('id')->on('dias');
+            $table->foreign('clase_id')->references('id')->on('clases');
         });
     }
 

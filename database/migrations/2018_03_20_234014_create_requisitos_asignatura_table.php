@@ -15,7 +15,11 @@ class CreateRequisitosAsignaturaTable extends Migration
     {
         Schema::create('requisitos_asignatura', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->integer('asignatura_id')->unsigned();
+            $table->integer('asignatura_requisito_id')->unsigned();
+            
+            $table->foreign('asignatura_id')->references('id')->on('asignaturas');
+            $table->foreign('asignatura_requisito_id')->references('id')->on('asignaturas');
         });
     }
 

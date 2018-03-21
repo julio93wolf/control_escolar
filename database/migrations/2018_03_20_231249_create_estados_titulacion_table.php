@@ -15,6 +15,8 @@ class CreateEstadosTitulacionTable extends Migration
     {
         Schema::create('estados_titulacion', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('estado_titulacion',32)->unique();
+            $table->string('descripcion',255)->nullable();
             $table->timestamps();
         });
     }

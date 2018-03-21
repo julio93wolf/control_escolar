@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOportunidadesTable extends Migration
+class CreateEstadosEstudiante extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateOportunidadesTable extends Migration
      */
     public function up()
     {
-        Schema::create('oportunidades', function (Blueprint $table) {
+        Schema::create('estados_estudiante', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->string('estado_estudiante',32)->unique();
+            $table->string('descripcion',255)->nullable();
         });
     }
 
@@ -26,6 +27,6 @@ class CreateOportunidadesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('oportunidades');
+        Schema::dropIfExists('estados_estudiante');
     }
 }

@@ -15,7 +15,14 @@ class CreateFechasExamenesTable extends Migration
     {
         Schema::create('fechas_examenes', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->integer('tipo_examen_id')->unsigned();
+            $table->date('fecha_inicio');
+            $table->date('fecha_final');
+            $table->integer('periodo_id')->unsigned();
+            $table->string('descripcion',255)->nullable();
+
+            $table->foreign('tipo_examen_id')->references('id')->on('tipos_examenes');
+            $table->foreign('periodo_id')->references('id')->on('periodos');
         });
     }
 

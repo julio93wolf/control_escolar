@@ -15,7 +15,11 @@ class CreateProcedenciaEstudianteTable extends Migration
     {
         Schema::create('procedencia_estudiante', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->integer('estudiante_id')->unsigned();
+            $table->integer('instituto_id')->unsigned();
+
+            $table->foreign('estudiante_id')->references('id')->on('estudiantes');
+            $table->foreign('instituto_id')->references('id')->on('institutos_procedencia');
         });
     }
 

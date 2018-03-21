@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEstadosEstudiantesTable extends Migration
+class CreateTiposDocumentosEstudiante extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateEstadosEstudiantesTable extends Migration
      */
     public function up()
     {
-        Schema::create('estados_estudiantes', function (Blueprint $table) {
+        Schema::create('tipos_documentos_estudiante', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->string('tipo_documento',64)->unique();
+            $table->string('descripcion',255)->nullable();
         });
     }
 
@@ -26,6 +27,6 @@ class CreateEstadosEstudiantesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('estados_estudiantes');
+        Schema::dropIfExists('tipos_documentos_estudiante');
     }
 }

@@ -15,7 +15,11 @@ class CreateDocumentosEstudianteTable extends Migration
     {
         Schema::create('documentos_estudiante', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->integer('estudiante_id')->unsigned();
+            $table->integer('tipo_documento')->unsigned();
+
+            $table->foreign('estudiante_id')->references('id')->on('estudiantes');
+            $table->foreign('tipo_documento')->references('id')->on('tipos_documentos_estudiante');
         });
     }
 

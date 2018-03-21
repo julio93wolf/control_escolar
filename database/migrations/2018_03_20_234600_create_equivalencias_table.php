@@ -15,7 +15,11 @@ class CreateEquivalenciasTable extends Migration
     {
         Schema::create('equivalencias', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->integer('estudiante_id')->unsigned();
+            $table->string('folio',32);
+            $table->date('fecha');
+
+            $table->foreign('estudiante_id')->references('id')->on('estudiantes');
         });
     }
 

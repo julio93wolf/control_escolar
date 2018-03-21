@@ -15,7 +15,11 @@ class CreatePeriodosTable extends Migration
     {
         Schema::create('periodos', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->year('anio');
+            $table->string('periodo',64);
+            $table->string('reconocimiento_oficial',64)->unique();
+            $table->string('dges',64)->unique();
+            $table->date('fecha_reconocimiento');
         });
     }
 

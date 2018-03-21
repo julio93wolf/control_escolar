@@ -15,7 +15,14 @@ class CreateGruposTable extends Migration
     {
         Schema::create('grupos', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->integer('clase_id')->unsigned();
+            $table->integer('estudiante_id')->unsigned();
+            $table->integer('oportunidad_id')->unsigned();
+            $table->decimal('calificacion',2,1)->nullable();
+
+            $table->foreign('clase_id')->references('id')->on('clases');
+            $table->foreign('estudiante_id')->references('id')->on('estudiantes');
+            $table->foreign('oportunidad_id')->references('id')->on('oportunidades');
         });
     }
 

@@ -15,7 +15,8 @@ class CreateMediosEnteradoTable extends Migration
     {
         Schema::create('medios_enterado', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->string('medio_enterado',64)->unique();
+            $table->string('descripcion',255)->nullable();
         });
     }
 

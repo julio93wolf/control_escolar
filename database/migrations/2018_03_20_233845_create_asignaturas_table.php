@@ -15,7 +15,12 @@ class CreateAsignaturasTable extends Migration
     {
         Schema::create('asignaturas', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->string('codigo',32)->unique();
+            $table->string('asignatura',64);
+            $table->tinyInteger('creditos');
+            $table->integer('reticula_id')->unsigned();
+            
+            $table->foreign('reticula_id')->references('id')->on('reticulas');
         });
     }
 

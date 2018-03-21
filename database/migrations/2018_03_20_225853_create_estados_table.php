@@ -15,7 +15,13 @@ class CreateEstadosTable extends Migration
     {
         Schema::create('estados', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->integer('pais_id')->unsigned();
+            $table->string('clave',2)->unique();
+            $table->string('estado',64);
+            $table->string('abreviatura',16);
+            $table->tinyInteger('activo');
+
+            $table->foreign('pais_id')->references('id')->on('paises');
         });
     }
 

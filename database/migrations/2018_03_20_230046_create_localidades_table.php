@@ -15,7 +15,17 @@ class CreateLocalidadesTable extends Migration
     {
         Schema::create('localidades', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->integer('municipio_id')->unsigned();
+            $table->string('clave',4)->unique();
+            $table->string('localidad',128);
+            $table->string('latitud',16);
+            $table->string('longitud',16);
+            $table->decimal('lat',10,7);
+            $table->decimal('lng',10,7);
+            $table->string('altitud',16);
+            $table->tinyInteger('activo');
+
+            $table->foreign('municipio_id')->references('id')->on('municipios');
         });
     }
 

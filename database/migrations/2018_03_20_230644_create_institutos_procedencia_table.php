@@ -15,7 +15,10 @@ class CreateInstitutosProcedenciaTable extends Migration
     {
         Schema::create('institutos_procedencia', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->string('institucion',128);
+            $table->integer('municipio_id')->unsigned();
+            
+            $table->foreign('municipio_id')->references('id')->on('municipios');
         });
     }
 

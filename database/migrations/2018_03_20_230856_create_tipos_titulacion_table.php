@@ -15,7 +15,8 @@ class CreateTiposTitulacionTable extends Migration
     {
         Schema::create('tipos_titulacion', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->string('tipo_titulacion',32)->unique();
+            $table->string('descripcion',255)->nullable();
         });
     }
 
