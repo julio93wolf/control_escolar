@@ -18,6 +18,9 @@ class CreateEstudianteTrabajoTable extends Migration
             $table->integer('estudiante_id')->unsigned();
             $table->integer('empresa_id')->unsigned();
             $table->string('puesto',64);
+
+            $table->foreign('estudiante_id')->references('id')->on('estudiantes');
+            $table->foreign('empresa_id')->references('id')->on('empresas');
         });
     }
 
