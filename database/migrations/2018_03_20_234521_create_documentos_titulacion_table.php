@@ -17,6 +17,7 @@ class CreateDocumentosTitulacionTable extends Migration
             $table->increments('id');
             $table->integer('tipo_id')->unsigned();
             $table->integer('titulo_id')->unsigned();
+            $table->string('documento',255)->nullable();
             
             $table->foreign('tipo_id')->references('id')->on('tipos_documentos_titulacion');
             $table->foreign('titulo_id')->references('id')->on('titulaciones');
