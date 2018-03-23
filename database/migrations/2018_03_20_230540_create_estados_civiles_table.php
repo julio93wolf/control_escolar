@@ -26,6 +26,6 @@ class CreateEstadosCivilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('estado_civil');
+        Schema::dropIfExists('estados_civiles');
     }
 }

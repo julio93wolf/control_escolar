@@ -18,7 +18,7 @@ class CreateEstadosTable extends Migration
             $table->integer('pais_id')->unsigned();
             $table->string('clave',2)->unique();
             $table->string('estado',64);
-            $table->string('abreviatura',16);
+            $table->string('abreviatura',16)->unique();
             $table->tinyInteger('activo');
 
             $table->foreign('pais_id')->references('id')->on('paises');

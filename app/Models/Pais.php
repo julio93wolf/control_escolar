@@ -9,7 +9,7 @@ class Pais extends Model
     protected $table = 'paises';
     
     protected $fillable = [
-    	'clave','pais','activo'
+    	'clave','pais'
     ];
 
     public $timestamps = false;
