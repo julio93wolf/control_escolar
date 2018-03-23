@@ -15,11 +15,11 @@ class CreateDocumentosTitulacionTable extends Migration
     {
         Schema::create('documentos_titulacion', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('tipo_id')->unsigned();
+            $table->integer('tipo_documento_id')->unsigned();
             $table->integer('titulo_id')->unsigned();
             $table->string('documento',255)->nullable();
             
-            $table->foreign('tipo_id')->references('id')->on('tipos_documentos_titulacion');
+            $table->foreign('tipo_documento_id')->references('id')->on('tipos_documentos_titulacion');
             $table->foreign('titulo_id')->references('id')->on('titulaciones');
         });
     }

@@ -16,6 +16,7 @@ class CreateReticulasTable extends Migration
         Schema::create('reticulas', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('especialidad_id')->unsigned();
+            $table->string('reticula',128)->unique();
             $table->integer('periodo_especialidad')->nullable();
             
             $table->foreign('especialidad_id')->references('id')->on('especialidades');

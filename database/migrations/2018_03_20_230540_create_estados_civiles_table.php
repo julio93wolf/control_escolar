@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEstadoCivilTable extends Migration
+class CreateEstadosCivilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateEstadoCivilTable extends Migration
      */
     public function up()
     {
-        Schema::create('estado_civil', function (Blueprint $table) {
+        Schema::create('estados_civiles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('estado_civil',16)->unique();
         });

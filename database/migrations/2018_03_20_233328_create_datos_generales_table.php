@@ -33,7 +33,7 @@ class CreateDatosGeneralesTable extends Migration
             $table->string('foto',64)->unique()->nullable();
             
             $table->foreign('localidad_id')->references('id')->on('localidades');
-            $table->foreign('estado_civil_id')->references('id')->on('estado_civil');
+            $table->foreign('estado_civil_id')->references('id')->on('estados_civiles');
             $table->foreign('nacionalidad_id')->references('id')->on('nacionalidades');
         });
     }
