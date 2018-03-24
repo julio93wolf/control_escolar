@@ -9,7 +9,7 @@ class Especilidad extends Model
     protected $table = 'especialidades';
     
     protected $fillable = [
-    	'nivel_academico_id','clave','especialidad','reconocimiento_oficial','dges','fecha_reconocimiento','descripcion'
+    	'nivel_academico_id','clave','especialidad','reconocimiento_oficial','dges','fecha_reconocimiento','descripcion','modalidad_id'
     ];
 
     public $timestamps = false;
@@ -20,5 +20,9 @@ class Especilidad extends Model
 
     public function nivel_academico(){
     	return $this->belongsTo('App\Models\NivelAcademico','nivel_academico_id');
+    }
+
+    public function modalidad(){
+        return $this->belongsTo('App\Models\ModalidadEspecialidad','modalidad_id');
     }
 }

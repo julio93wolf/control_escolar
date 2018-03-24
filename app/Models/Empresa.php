@@ -15,7 +15,7 @@ class Empresa extends Model
     public $timestamps = false;
 
     public function estudiantes(){
-    	return $this->belongsToMany('App\Models\Estudiante','estudiante_trabajo','empresa_id','estudiante_id')
+    	return $this->belongsToMany('App\Models\Estudiante','estudiantes_trabajos','empresa_id','estudiante_id')
     		->withPivot('puesto');
     }
 }

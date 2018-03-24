@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TipoTitulacion extends Model
 {
-    protected $table = 'tipos_titulacion';
+    protected $table = 'tipos_titulaciones';
     
     protected $fillable = [
     	'tipo_titulacion','descripcion'

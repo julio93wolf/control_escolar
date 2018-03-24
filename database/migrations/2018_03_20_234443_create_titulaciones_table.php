@@ -21,9 +21,9 @@ class CreateTitulacionesTable extends Migration
             $table->string('observaciones',255)->nullable();
             $table->integer('estado_id')->unsigned();
 
-            $table->foreign('tipo_id')->references('id')->on('tipos_titulacion');
+            $table->foreign('tipo_id')->references('id')->on('tipos_titulaciones');
             $table->foreign('estudiante_id')->references('id')->on('estudiantes');
-            $table->foreign('estado_id')->references('id')->on('estados_titulacion');
+            $table->foreign('estado_id')->references('id')->on('estados_titulaciones');
         });
     }
 

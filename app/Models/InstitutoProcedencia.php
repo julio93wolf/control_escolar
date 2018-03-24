@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class InstitutoProcedencia extends Model
 {
-    protected $table = 'institutos_procedencia';
+    protected $table = 'institutos_procedencias';
     
     protected $fillable = [
     	'institucion','municipio_id'
@@ -19,6 +19,6 @@ class InstitutoProcedencia extends Model
     }
 
     public function estudiantes(){
-    	return $this->belongsToMany('App\Models\Estudiante','procedencia_estudiante','instituto_id','estudiante_id');
+    	return $this->belongsToMany('App\Models\Estudiante','procedencias_estudiantes','instituto_id','estudiante_id');
     }
 }

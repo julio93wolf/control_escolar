@@ -18,7 +18,7 @@ class Estudiante extends Model
     	return $this->hasMany('App\Models\Equivalencia','estudiante_id');
     }
 
-    public function documentos_estudiante(){
+    public function documentos_estudiantes(){
     	return $this->hasMany('App\Models\DocumentoEstudiante','estudiante_id');
     }
 
@@ -31,16 +31,16 @@ class Estudiante extends Model
     }
 
     public function empresas(){
-    	return $this->belongsToMany('App\Models\Empresa','estudiante_trabajo','estudiante_id','empresa_id')
+    	return $this->belongsToMany('App\Models\Empresa','estudiantes_trabajos','estudiante_id','empresa_id')
     		->withPivot('puesto');
     }
 
-    public function institutos_procedencia(){
-    	return $this->belongsToMany('App\Models\InstitutoProcedencia','procedencia_estudiante','estudiante_id','instituto_id');
+    public function institutos_procedencias(){
+    	return $this->belongsToMany('App\Models\InstitutoProcedencia','procedencias_estudiantes','estudiante_id','instituto_id');
     }
 
     public function datos_generales(){
-    	return $this->belongsTo('App\Models\DatosGenerales','datos_generales_id');
+    	return $this->belongsTo('App\Models\DatoGeneral','datos_generales_id');
     }
 
 		public function especialidad(){
@@ -52,7 +52,7 @@ class Estudiante extends Model
     }
 
     public function modalidad(){
-    	return $this->belongsTo('App\Models\Modalidad','modalidad_id');
+    	return $this->belongsTo('App\Models\ModalidadEstudiante','modalidad_id');
     }
 
     public function medio_enterado(){

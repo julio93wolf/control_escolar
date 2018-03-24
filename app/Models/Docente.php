@@ -19,7 +19,7 @@ class Docente extends Model
     }
 
     public function datos_generales(){
-    	return $this->belongsTo('App\Models\DatosGenerales','datos_generales_id');
+    	return $this->belongsTo('App\Models\DatoGeneral','datos_generales_id');
     }
 
     public function titulo(){

@@ -13,7 +13,7 @@ class Nacionalidad extends Model
     public $timestamps = false;
 
     public function datos_generales(){
-    	return $table->hasMany('App\Models\DatosGenerales','nacionalidad_id');
+    	return $table->hasMany('App\Models\DatoGeneral','nacionalidad_id');
     }
 
 }

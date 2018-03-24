@@ -24,10 +24,10 @@ class Asignatura extends Model
 
     //Revisar
     public function requisitos(){
-    	return $this->belongsToMany('App\Models\Asignatura','requisitos_asignatura','asignatura_id','asignatura_requisito');
+    	return $this->belongsToMany('App\Models\Asignatura','requisitos_asignaturas','asignatura_id','asignatura_requisito');
     }
 
     public function requisito(){
-        return $this->belongsToMany('App\Models\Asignatura','requisitos_asignatura','asignatura_requisito','asignatura_id');
+        return $this->belongsToMany('App\Models\Asignatura','requisitos_asignaturas','asignatura_requisito','asignatura_id');
     }
 }

@@ -18,7 +18,7 @@ class Municipio extends Model
     	return $this->hasMany('App\Models\Localidad','municipio_id');
     }
 
-    public function institutos_procedencia(){
+    public function institutos_procedencias(){
     	return $this->hasMany('App\Models\InstitutoProcedencia','municipio_id');	
     }
 

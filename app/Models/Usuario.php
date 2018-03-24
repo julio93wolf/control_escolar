@@ -9,7 +9,7 @@ class Usuario extends Model
     protected $table = 'usuarios';
     
     protected $fillable = [
-    	'email','password'
+    	'email','password','rol_id'
     ];
 
     protected $hidden = [
@@ -24,5 +24,9 @@ class Usuario extends Model
 
     public function docentes(){
     	return $this->hasMany('App\Models\Docente','usuario_id');
+    }
+
+    public function rol(){
+        return $this->belongsTo('App\Models\RolUsuario','rol_id');
     }
 }

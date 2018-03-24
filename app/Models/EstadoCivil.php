@@ -13,6 +13,6 @@ class EstadoCivil extends Model
     public $timestamps = false;
 
     public function datos_generales(){
-    	return $this->hasMany('App\Models\DatosGenerales','estado_civil_id');
+    	return $this->hasMany('App\Models\DatoGeneral','estado_civil_id');
     }
 }

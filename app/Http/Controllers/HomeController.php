@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Pais;
+use App\Models\Nacionalidad;
 
 class HomeController extends Controller
 {
@@ -24,9 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $pais = Pais::find(35);
-        $estados = $pais->estados();
-        dd($estados);
+        $nacionalidades = Nacionalidad::get();
+        foreach ($nacionalidades as $key => $nacionalidad) {
+            echo 'DB::table("nacionalidades")->insert([ "id" => '.$nacionalidad->id.', "nacionalidad" => "'.$nacionalidad->nacionalidad.'" ]);<br>';
+        }
         //return view('home');
     }
 }

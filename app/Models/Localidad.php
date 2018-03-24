@@ -15,7 +15,7 @@ class Localidad extends Model
     public $timestamps = false;
 
     public function datos_generales(){
-    	return $this->hasMany('App\Models\DatosGenerales','localidad_id');
+    	return $this->hasMany('App\Models\DatoGeneral','localidad_id');
     }
 
     public function municipio(){

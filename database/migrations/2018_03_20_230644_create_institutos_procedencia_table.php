@@ -13,7 +13,7 @@ class CreateInstitutosProcedenciaTable extends Migration
      */
     public function up()
     {
-        Schema::create('institutos_procedencia', function (Blueprint $table) {
+        Schema::create('institutos_procedencias', function (Blueprint $table) {
             $table->increments('id');
             $table->string('institucion',128);
             $table->integer('municipio_id')->unsigned();
@@ -29,6 +29,6 @@ class CreateInstitutosProcedenciaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('institutos_procedencia');
+        Schema::dropIfExists('institutos_procedencias');
     }
 }

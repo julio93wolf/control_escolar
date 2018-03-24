@@ -14,7 +14,7 @@ class Titulacion extends Model
 
     public $timestamps = false;
 
-    public function documentos_titulacion(){
+    public function documentos_titulaciones(){
     	return $this->hasMany('App\Models\DocumentoTitulacion','titulo_id');
     }
 

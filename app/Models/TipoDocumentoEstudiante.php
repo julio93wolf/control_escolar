@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TipoDocumentoEstudiante extends Model
 {
-    protected $table = 'tipos_documentos_estudiante';
+    protected $table = 'tipos_documentos_estudiantes';
     
     protected $fillable = [
     	'tipo_documento','descripcion'
@@ -14,7 +14,7 @@ class TipoDocumentoEstudiante extends Model
 
     public $timestamps = false;
 
-    public function documentos_estudiante(){
+    public function documentos_estudiantes(){
     	return $this->hasMany('App\Models\DocumentoEstudiante','tipo_documento_id');
     }
 }

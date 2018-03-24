@@ -17,6 +17,9 @@ class CreateUsuariosTable extends Migration
             $table->increments('id');
             $table->string('email',128)->unique();
             $table->string('password',64);
+            $table->integer('rol_id')->unsigned();
+
+            $table->foreign('rol_id')->references('id')->on('roles_usuarios');
         });
     }
 
