@@ -26,7 +26,7 @@ class CreateDatosGeneralesTable extends Migration
             $table->string('telefono_casa')->nullable();
             $table->string('telefono_personal')->nullable();
             $table->integer('estado_civil_id')->unsigned();
-            $table->enum('F',['M','O']);
+            $table->enum('sexo',['F','M','O']);
             $table->date('fecha_registro');
             $table->integer('nacionalidad_id')->unsigned();
             $table->string('email',128)->unique()->nullable();
