@@ -12,7 +12,7 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         if(\Session::has('usuario')){
-            return "Logueado";
+            return edirect(route('menuAdmin'));
         }
         return view('auth.login');
     }
@@ -23,7 +23,7 @@ class LoginController extends Controller
         if($usuario){
             if(password_verify($req -> password,$usuario -> password)){
                 \Session::put('usuario', $usuario);
-                return redirect(route('showLoginForm'));
+                return redirect(route('menuAdmin'));
             }else{
                 \Session::flash('msg','Tus credenciales son incorrectas. Favor de revisarlas e intente de nuevo.');        
             }

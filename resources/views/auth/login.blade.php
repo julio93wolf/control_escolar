@@ -1,4 +1,8 @@
-@extends('auth.layouts.app')
+@extends('auth.layouts.scaffold')
+
+@section('title')
+	Iniciar Sesión
+@stop
 
 @section('content')
 	<div class="row z-depth-4 white">

@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TiposPlanesTableSeeder::class);
         $this->call(EspecialidadesTableSeeder::class);
         $this->call(EstadosTitulacionesTableSeeder::class);
-        $this->call(DatosGeneralesTableSeeder::class);
         $this->call(UsuariosTableSeeder::class);
+        //$this->call(DatosGeneralesTableSeeder::class);
     }
 }
