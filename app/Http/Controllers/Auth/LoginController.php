@@ -2,38 +2,42 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Usuario;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    
+    public function showLoginForm()
     {
-        $this->middleware('guest')->except('logout');
+        if(\Session::has('usuario')){
+            return "Logueado";
+        }
+        return view('auth.login');
     }
+    
+    public function login(Request $req)
+    {
+        $usuario = Usuario::where('email',$req->email)->first();
+        if($usuario){
+            if(password_verify($req -> password,$usuario -> password)){
+                \Session::put('usuario', $usuario);
+                return redirect(route('showLoginForm'));
+            }else{
+                \Session::flash('msg','Tus credenciales son incorrectas. Favor de revisarlas e intente de nuevo.');        
+            }
+        }else{
+            \Session::flash('msg','Usuario no registrado');    
+        }
+        return redirect(route('login'));
+    }
+
+    public function logout()
+    {
+        \Session::flush();
+            \Session::flash('msg','Has terminado tu sesión.');
+            return redirect('login');
+    }
+    
 }
