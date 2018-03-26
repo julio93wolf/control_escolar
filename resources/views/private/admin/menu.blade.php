@@ -2,7 +2,7 @@
 
 @section('title')
 	UNICEBA
-@stop
+@endsection
 
 @section('content')
 	
@@ -29,7 +29,7 @@
 			<div class="divider"></div>
 			<div class="row">
 				<div class="col s6 m4">
-					<a href="{{--route('estudiantes.index')--}}">
+					<a href="{{ route('estudiantes.index') }}">
 						<div class="center promo hoverable">
 							<i class="material-icons">school</i>
 							<p class="promo-caption">Estudiantes</p>
@@ -145,5 +145,4 @@
 
 		</div>
 	</div>
-
-@stop
+@endsection

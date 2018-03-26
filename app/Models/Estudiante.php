@@ -44,7 +44,7 @@ class Estudiante extends Model
     }
 
 		public function especialidad(){
-    	return $this->belongsTo('App\Models\Especialidad','especialidad_id')
+    	return $this->belongsTo('App\Models\Especialidad','especialidad_id');
     }
 
     public function estado_estudiante(){

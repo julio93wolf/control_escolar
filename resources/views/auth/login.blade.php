@@ -2,7 +2,7 @@
 
 @section('title')
 	Iniciar Sesión
-@stop
+@endsection
 
 @section('content')
 	<div class="row z-depth-4 white">

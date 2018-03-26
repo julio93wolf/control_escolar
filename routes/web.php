@@ -22,4 +22,15 @@ Route::get('/logout','Auth\LoginController@logout')->name('logout');
 //Menu Principal (Admin)
 Route::get('/menu','Admin\MenuController@index')->name('menuAdmin');
 
+//Estudiantes
+Route::resource('estudiantes','Admin\EstudianteController');
+
+/*
+Route::group(['middleware' => ['login']], function () {
+
+});*/
+
+
+
+
 
