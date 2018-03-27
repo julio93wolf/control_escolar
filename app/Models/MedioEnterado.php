@@ -15,6 +15,6 @@ class MedioEnterado extends Model
     public $timestamps = false;
 
     public function estudiantes(){
-    	return $this->hasMany('App\Models\Estudiante','enterado_por_id');
+    	return $this->hasMany('App\Models\Estudiante','medio_enterado_id');
     }
 }

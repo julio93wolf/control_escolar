@@ -22,7 +22,7 @@ class CreateEstudiantesTable extends Migration
             $table->tinyInteger('semestre');
             $table->string('grupo',32);
             $table->integer('modalidad_id')->unsigned();
-            $table->integer('enterado_por_id')->unsigned();
+            $table->integer('medio_enterado_id')->unsigned();
             $table->integer('periodo_id')->unsigned();
             $table->text('otros')->nullable();
             $table->integer('usuario_id')->unsigned();
@@ -31,7 +31,7 @@ class CreateEstudiantesTable extends Migration
             $table->foreign('especialidad_id')->references('id')->on('especialidades');
             $table->foreign('estado_id')->references('id')->on('estados_estudiantes');
             $table->foreign('modalidad_id')->references('id')->on('modalidades_estudiantes');
-            $table->foreign('enterado_por_id')->references('id')->on('medios_enterados');
+            $table->foreign('medio_enterado_id')->references('id')->on('medios_enterados');
             $table->foreign('periodo_id')->references('id')->on('periodos');
             $table->foreign('usuario_id')->references('id')->on('usuarios');
         });

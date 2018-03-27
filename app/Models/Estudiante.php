@@ -9,7 +9,7 @@ class Estudiante extends Model
     protected $table = 'estudiantes';
     
     protected $fillable = [
-    	'datos_generales_id','especialidad_id','estado_id','matricula','semestre','grupo',',modalidad_id','enterado_por_id','periodo_id','otros','usuario_id'
+    	'datos_generales_id','especialidad_id','estado_id','matricula','semestre','grupo',',modalidad_id','medio_enterado_id','periodo_id','otros','usuario_id'
     ];
 
     public $timestamps = false;
@@ -56,7 +56,7 @@ class Estudiante extends Model
     }
 
     public function medio_enterado(){
-    	return $this->belongsTo('App\Models\MedioEnterado','enterado_por_id');
+    	return $this->belongsTo('App\Models\MedioEnterado','medio_enterado_id');
     }
 
     public function periodo(){

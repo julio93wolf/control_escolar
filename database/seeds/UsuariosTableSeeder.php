@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Faker\Generator as Faker;
 use App\Models\Usuario;
 use App\Models\Estudiante;
 
@@ -14,30 +13,22 @@ class UsuariosTableSeeder extends Seeder
      */
     public function run()
     {
-        /*
-        $faker = Faker::class;
-        factory(App\Models\Usuario::class,150)->create();
-        $usuarios = App\Models\Usuario::get();
-        foreach ($usuarios as $key => $usuario) {
+        
+        factory(App\Models\Usuario::class,1500)->create()->each(function(App\Models\Usuario $usuario){
             if($usuario->rol_id == 2){
-                Estudiante::create([
-                    'datos_generales_id' => $key,
-                    'especialidad_id' => rand(1,18),
-                    'estado_id' => rand(1,4),
-                    'matricula' => $faker->creditCardNumber,
-                    'semestre' => rand(1,6),
-                    'grupo' => $faker->randomLetter,
-                    'modalidad_id' => rand(1,3),
-                    'enterado_por_id' => rand(1,5),
-                    'periodo_id' => ()
-
+                factory(App\Models\Estudiante::class,1)->create([
+                    'datos_generales_id' => $usuario->id,
+                    'usuario_id' => $usuario->id
                 ]);
             }
             if($usuario->rol_id == 3){
-                
+                factory(App\Models\Estudiante::class,1)->create([
+                    'datos_generales_id' => $usuario->id,
+                    'usuario_id' => $usuario->id
+                ]);
             }
-        }*/
-        
+        });
+
         Usuario::create([
         	'email' => 'admin@appsamx.com',
         	'password' => bcrypt('Appsa2016'),

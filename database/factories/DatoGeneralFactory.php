@@ -4,7 +4,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\DatoGeneral::class, function (Faker $faker) {
     return [
-    	'curp' => $faker->isbn13,
+    	'curp' => $faker->unique()->isbn13,
         'nombre' => $faker->firstName,
         'apaterno' => $faker->lastName,
         'amaterno' => $faker->lastName,
@@ -18,7 +18,7 @@ $factory->define(App\Models\DatoGeneral::class, function (Faker $faker) {
         'sexo' => $faker->randomElement(['F','M','O']),
         'fecha_registro' => date("Y-m-d"),
         'nacionalidad_id' => 104,
-        'email' => $faker->email,
-        'foto' => $faker->imageUrl($width = 640, $height = 480, 'people')
+        'email' => $faker->unique()->email,
+        'foto' => $faker->unique()->imageUrl($width = 640, $height = 480, 'people')
     ];
 });

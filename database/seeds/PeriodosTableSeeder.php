@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class DatosGeneralesTableSeeder extends Seeder
+class PeriodosTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class DatosGeneralesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\DatoGeneral::class,1500)->create();
+        factory(App\Models\Periodo::class,15)->create();
     }
 }
