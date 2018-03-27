@@ -19,18 +19,18 @@ Route::get('/login','Auth\LoginController@showLoginForm')->name('showLoginForm')
 Route::post('/login','Auth\LoginController@login')->name('login');
 Route::get('/logout','Auth\LoginController@logout')->name('logout');
 
-//Menu Principal (Admin)
-Route::get('/menu','Admin\MenuController@index')->name('menuAdmin');
-
-//Estudiantes
-Route::resource('estudiantes','Admin\EstudianteController');
-
-/*
 Route::group(['middleware' => ['login']], function () {
+	
+	Route::prefix('admin')->group(function () {
+		
+		//Menu Principal (Admin)
+		Route::get('/menu','Admin\MenuController@index')->name('admin.menu');
 
-});*/
+		//Estudiantes
+		Route::resource('/estudiantes','Admin\EstudianteController');
 
-
-
-
-
+		//DataTable
+		Route::get('/datatable/estudiantes','Admin\DataTableController@estudiantes')->name('estudiantes.get');		 
+		 
+	});
+});

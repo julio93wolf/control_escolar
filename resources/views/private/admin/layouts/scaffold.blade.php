@@ -10,14 +10,6 @@
   <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	
-	{{--
-		<link rel="stylesheet" href="/css/progressjs.min.css">
-		<link rel="stylesheet" href="/css/materialize.css">
-		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
-		<link rel="stylesheet" href="/css/app.css">
-		<link rel="stylesheet" href="/css/lightbox.css">
-	--}}
 </head>
 <body>
 	<header>
@@ -48,23 +40,7 @@
 
 	<!-- Compiled and minified JavaScript -->
 	<script src="{{ asset('/js/vendor.js') }}"></script>
-	{{--
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<link href="http://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
-		<script src="http://code.jquery.com/ui/1.12.0/jquery-ui.js" ></script>
-		<script src="/js/materialize.js"></script>
-		<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-		<script src="/js/lightbox.js"></script>
-		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-		<script src="/js/progress.min.js"></script>
-
-		<script src="/js/jquery.inputmask.bundle.js"></script>
-		<script src="/js/inputmask/phone-codes/phone.js"></script>
-		<script src="/js/inputmask/phone-codes/phone-be.js"></script>
-		<script src="/js/inputmask/phone-codes/phone-ru.js"></script>
-	--}}
 	<script type="text/javascript">
-
 	  $(document).ready(function(){
 	  	
 	  	$('.dropdown-button').dropdown({
@@ -85,8 +61,6 @@
 
 	    $('.fixed-action-btn').openFAB();
   		$('.fixed-action-btn').closeFAB();
-  		$('.fixed-action-btn.toolbar').openToolbar();
-  		$('.fixed-action-btn.toolbar').closeToolbar();
 	  });
 		
 		/*

@@ -32,18 +32,18 @@
 }
 
 [type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:after{
-  background-color: #64b5f6;
+  background-color: #0d47a1;
 
 }
 
 [type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:before, [type="radio"].with-gap:checked+label:after{
-  border: 2px solid #64b5f6;
+  border: 2px solid #0d47a1;
 
 }
 
 [type="checkbox"]:checked+label:before{
-  border-right: 2px solid #64b5f6;
-  border-bottom: 2px solid #64b5f6;
+  border-right: 2px solid #0d47a1;
+  border-bottom: 2px solid #0d47a1;
 
 }
 
@@ -58,7 +58,7 @@
 .input-field input[type=search]:focus + label,
 .materialize-textarea:focus:not([readonly]) + label,
 .picker__close, .picker__today, .picker__clear{
-  color: #64b5f6 !important;
+  color: #0d47a1 !important;
 
 }
 
@@ -67,23 +67,23 @@
 .input-field input[type=email]:focus,
 .input-field input[type=search]:focus,
 .materialize-textarea:focus:not([readonly]){
-  border-bottom: 1px solid #64b5f6 !important;
-  box-shadow: 0 1px 0 0 #64b5f6 !important;
+  border-bottom: 1px solid #0d47a1 !important;
+  box-shadow: 0 1px 0 0 #0d47a1 !important;
 
 }
 
 .input-field .prefix.active{
-  color: #64b5f6;
+  color: #0d47a1;
 
 }
 
 .dropdown-content li>a, .dropdown-content li>span{
-  color: #64b5f6;
+  color: #0d47a1;
 
 }
 
 .picker__date-display{
-  background-color: #64b5f6;
+  background-color: #0d47a1;
 
 }
 
@@ -94,7 +94,7 @@
 }
 
 .picker__day.picker__day--today{
-  color: #64b5f6;
+  color: #0d47a1;
 
 }
 
@@ -229,14 +229,14 @@ div.disabled{
   text-align: center;
 }
 [type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:after {
-    background-color: #64b5f6;
+    background-color: #0d47a1;
 }
 [type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:before, [type="radio"].with-gap:checked+label:after {
-    border: 2px solid #64b5f6;
+    border: 2px solid #0d47a1;
 }
 [type="checkbox"]:checked+label:before {
-    border-right: 2px solid #64b5f6;
-    border-bottom: 2px solid #64b5f6;
+    border-right: 2px solid #0d47a1;
+    border-bottom: 2px solid #0d47a1;
 }
 
 .picker__clear{
@@ -248,7 +248,7 @@ div.disabled{
 .input-field input[type=search]:focus + label,
 .materialize-textarea:focus:not([readonly]) + label,
 .picker__close, .picker__today, .picker__clear {
-  color: #64b5f6 !important;
+  color: #0d47a1 !important;
 }
 /* label underline focus color */
 .input-field input[type=text]:focus,
@@ -256,24 +256,24 @@ div.disabled{
 .input-field input[type=email]:focus,
 .input-field input[type=search]:focus,
 .materialize-textarea:focus:not([readonly]) {
-  border-bottom: 1px solid #64b5f6 !important;
-  box-shadow: 0 1px 0 0 #64b5f6 !important;
+  border-bottom: 1px solid #0d47a1 !important;
+  box-shadow: 0 1px 0 0 #0d47a1 !important;
 }
 .input-field .prefix.active {
-  color: #64b5f6;
+  color: #0d47a1;
 }
 .dropdown-content li>a, .dropdown-content li>span{
-  color: #64b5f6;
+  color: #0d47a1;
 }
 .picker__date-display {
-    background-color: #64b5f6;
+    background-color: #0d47a1;
 }
 .picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected{
   color: #fff;
   background-color: #0089ec;
 }
 .picker__day.picker__day--today {
-    color: #64b5f6;
+    color: #0d47a1;
 }
 input:not([type]).valid,
 input:not([type]):focus.valid,

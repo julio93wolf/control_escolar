@@ -39,7 +39,7 @@ class Estudiante extends Model
     	return $this->belongsToMany('App\Models\InstitutoProcedencia','procedencias_estudiantes','estudiante_id','instituto_id');
     }
 
-    public function datos_generales(){
+    public function dato_general(){
     	return $this->belongsTo('App\Models\DatoGeneral','datos_generales_id');
     }
 

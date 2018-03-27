@@ -1,4 +1,4 @@
-@extends('auth.layouts.scaffold')
+@extends('public.auth.layouts.scaffold')
 
 @section('title')
 	Iniciar Sesión
