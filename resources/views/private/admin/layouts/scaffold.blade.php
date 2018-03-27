@@ -38,7 +38,7 @@
 			</div>
 			</div>
 		</div>
-		<div class="parallax"><img src="{{ asset('/images/footer.jpg') }}"></div>
+		<div class="parallax"><img src="{{ asset('/') }}images/footer.jpg"></div>
 	</div>
 
 	<footer class="page-footer blue darken-2">

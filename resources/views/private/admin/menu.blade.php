@@ -8,7 +8,7 @@
 	
 	<!-- Parallax -->
 	<div class="parallax-container valign-wrapper hide-on-small-only">
-		<div class="parallax"><img src="{{ asset('/images/banner.jpg') }}"></div>
+		<div class="parallax"><img src="{{ asset('/') }}images/banner.jpg"></div>
 		<div class="section no-pad-bot">
 			<div class="container">
 				<div class="row center valign-wrapper banner-text" style="margin: auto;">

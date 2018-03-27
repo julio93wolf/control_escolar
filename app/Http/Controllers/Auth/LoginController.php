@@ -12,7 +12,7 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         if(\Session::has('usuario')){
-            return edirect(route('menuAdmin'));
+            return redirect(route('menuAdmin'));
         }
         return view('auth.login');
     }
