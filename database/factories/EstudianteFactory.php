@@ -4,7 +4,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\Estudiante::class, function (Faker $faker) {
     return [
-        'datos_generales_id' => 1,
+        'dato_general_id' => 1,
         'especialidad_id' => rand(1,18),
         'estado_id' => rand(1,4),
         'matricula' => $faker->unique()->isbn13,

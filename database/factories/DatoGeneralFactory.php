@@ -11,6 +11,7 @@ $factory->define(App\Models\DatoGeneral::class, function (Faker $faker) {
         'fecha_nacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
         'calle_numero' => $faker->streetAddress,
         'colonia' => $faker->streetName,
+        'codigo_postal' => $faker->buildingNumber,
         'localidad_id' => rand(94493,94517),
         'telefono_personal' => $faker->tollFreePhoneNumber,
         'telefono_casa' => $faker->tollFreePhoneNumber,

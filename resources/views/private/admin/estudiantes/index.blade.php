@@ -42,6 +42,9 @@
                 <th>Matricula</th>
                 <th>Nombre</th>
                 <th>Grupo</th>
+                <th>Datos generales</th>
+                <th>Otros datos</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tfoot>
@@ -49,6 +52,9 @@
                 <th>Matricula</th>
                 <th>Nombre</th>
                 <th>Grupo</th>
+                <th>Datos generales</th>
+                <th>Otros datos</th>
+                <th>Acciones</th>
             </tr>
         </tfoot>
         <tbody>

@@ -30,9 +30,52 @@
       serverSide: true,
       ajax: "{{ route('estudiantes.get') }}",
       columns: [
-          { data: 'matricula', name: 'matricula' },
-          { data: 'nombre', name: 'nombre' },
-          { data: 'grupo', name: 'grupo' }
+          { data: 'matricula',  name: 'matricula' },
+          { data: 'nombre',     name: 'nombre' },
+          { data: 'grupo',      name: 'grupo' },
+          { 
+            data: 'email',
+            render: function ( data, type, row, meta ) {
+              
+              var today = new Date();
+              var birthday = new Date(row.fecha_nacimiento);
+              var years = today.getFullYear() - birthday.getFullYear();
+              birthday.setFullYear(today.getFullYear());
+              if (today < birthday){ years--; }
+
+              var data =
+                row.direccion+`<br>`+
+                row.telefono_personal+`<br>`+
+                row.email+`<br>`+
+                years+` años`;
+              return data;
+            }
+          },
+          {
+            data: 'modalidad_estudiante',
+            render: function ( data, type, row, meta ) {
+              if(row.empresa_id == 1){
+                var data =
+                  `<strong>Modalidad: </strong>`+row.modalidad_estudiante+`<br>`+
+                  `<strong>Enterado por: </strong>`+row.medio_enterado+`<br>`+
+                  `<strong>Trabajo: </strong>`+row.empresa+`<br>`;
+              }else{
+                var data =
+                  `<strong>Modalidad: </strong>`+row.modalidad_estudiante+`<br>`+
+                  `<strong>Enterado por: </strong>`+row.medio_enterado+`<br>`+
+                  `<strong>Trabajo: </strong>`+row.empresa+` (`+row.puesto+`)<br>`;  
+              }
+              return data;
+            }
+          },
+          {
+            data: 'estudiante_id',
+            render: function ( data, type, row, meta ) {
+              return `<a href="/admin/estudiantes/`+data+`/edit" class="btn-floating btn-meddium waves-effect waves-light"><i class="material-icons circle green">mode_edit</i></a>`;
+            },
+            orderable: false, 
+            searchable: false
+          }
       ]
     });
     $("select").val('10');

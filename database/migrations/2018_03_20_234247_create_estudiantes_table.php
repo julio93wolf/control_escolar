@@ -15,7 +15,7 @@ class CreateEstudiantesTable extends Migration
     {
         Schema::create('estudiantes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('datos_generales_id')->unsigned();
+            $table->integer('dato_general_id')->unsigned();
             $table->integer('especialidad_id')->unsigned();
             $table->integer('estado_id')->unsigned();
             $table->string('matricula',32)->unique();
@@ -27,7 +27,7 @@ class CreateEstudiantesTable extends Migration
             $table->text('otros')->nullable();
             $table->integer('usuario_id')->unsigned();
 
-            $table->foreign('datos_generales_id')->references('id')->on('datos_generales');
+            $table->foreign('dato_general_id')->references('id')->on('datos_generales');
             $table->foreign('especialidad_id')->references('id')->on('especialidades');
             $table->foreign('estado_id')->references('id')->on('estados_estudiantes');
             $table->foreign('modalidad_id')->references('id')->on('modalidades_estudiantes');

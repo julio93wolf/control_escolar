@@ -22,6 +22,7 @@ class CreateDatosGeneralesTable extends Migration
             $table->date('fecha_nacimiento');
             $table->string('calle_numero',64);
             $table->string('colonia',32);
+            $table->integer('codigo_postal')->unsigned();
             $table->integer('localidad_id')->unsigned();
             $table->string('telefono_casa')->nullable();
             $table->string('telefono_personal')->nullable();

@@ -9,7 +9,7 @@ class Docente extends Model
     protected $table = 'docente';
     
     protected $fillable = [
-    	'codigo','datos_generales_id','rfc','titulo_id','usuario_id'
+    	'codigo','dato_general_id','rfc','titulo_id','usuario_id'
     ];
 
     public $timestamps = false;
@@ -19,7 +19,7 @@ class Docente extends Model
     }
 
     public function datos_generales(){
-    	return $this->belongsTo('App\Models\DatoGeneral','datos_generales_id');
+    	return $this->belongsTo('App\Models\DatoGeneral','dato_general_id');
     }
 
     public function titulo(){

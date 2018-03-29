@@ -16,12 +16,12 @@ class CreateDocentesTable extends Migration
         Schema::create('docentes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('codigo',32)->unique();
-            $table->integer('datos_generales_id')->unsigned();
+            $table->integer('dato_general_id')->unsigned();
             $table->string('rfc',16)->unique();
             $table->integer('titulo_id')->unsigned();
             $table->integer('usuario_id')->unsigned();
 
-            $table->foreign('datos_generales_id')->references('id')->on('datos_generales');
+            $table->foreign('dato_general_id')->references('id')->on('datos_generales');
             $table->foreign('titulo_id')->references('id')->on('titulos');
             $table->foreign('usuario_id')->references('id')->on('usuarios');
         });

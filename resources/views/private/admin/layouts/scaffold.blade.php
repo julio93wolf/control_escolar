@@ -61,6 +61,15 @@
 
 	    $('.fixed-action-btn').openFAB();
   		$('.fixed-action-btn').closeFAB();
+
+  		$('.datepicker').pickadate({
+				formatSubmit: 'yyyy/mm/dd',
+				selectMonths: true,
+				selectYears: 30,
+				today: 'Today',
+		    clear: 'Clear',
+		    close: 'Ok',
+			});
 	  });
 		
 		/*

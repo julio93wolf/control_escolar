@@ -17,13 +17,7 @@ class UsuariosTableSeeder extends Seeder
         factory(App\Models\Usuario::class,1500)->create()->each(function(App\Models\Usuario $usuario){
             if($usuario->rol_id == 2){
                 factory(App\Models\Estudiante::class,1)->create([
-                    'datos_generales_id' => $usuario->id,
-                    'usuario_id' => $usuario->id
-                ]);
-            }
-            if($usuario->rol_id == 3){
-                factory(App\Models\Estudiante::class,1)->create([
-                    'datos_generales_id' => $usuario->id,
+                    'dato_general_id' => $usuario->id,
                     'usuario_id' => $usuario->id
                 ]);
             }

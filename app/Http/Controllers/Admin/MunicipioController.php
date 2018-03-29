@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Estudiante;
-use App\Models\EstadoCivil;
-use App\Models\Nacionalidad;
-use App\Models\Estado;
-
+use App\Models\Municipio;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class EstudianteController extends Controller
+class MunicipioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +15,7 @@ class EstudianteController extends Controller
      */
     public function index()
     {
-        return view('private.admin.estudiantes.index');
+        //
     }
 
     /**
@@ -29,11 +25,7 @@ class EstudianteController extends Controller
      */
     public function create()
     {
-        return view('private.admin.estudiantes.create',[
-            'estados_civiles'   => EstadoCivil::orderBy('estado_civil','ASC')->get(),
-            'nacionalidades'    => Nacionalidad::orderBy('nacionalidad','ASC')->get(),
-            'estados'           => Estado::orderBy('estado','ASC')->get()
-        ]);
+        //
     }
 
     /**
@@ -50,10 +42,10 @@ class EstudianteController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Estudiante  $estudiante
+     * @param  \App\Models\Municipio  $municipio
      * @return \Illuminate\Http\Response
      */
-    public function show(Estudiante $estudiante)
+    public function show(Municipio $municipio)
     {
         //
     }
@@ -61,10 +53,10 @@ class EstudianteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Estudiante  $estudiante
+     * @param  \App\Models\Municipio  $municipio
      * @return \Illuminate\Http\Response
      */
-    public function edit(Estudiante $estudiante)
+    public function edit(Municipio $municipio)
     {
         //
     }
@@ -73,10 +65,10 @@ class EstudianteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Estudiante  $estudiante
+     * @param  \App\Models\Municipio  $municipio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Estudiante $estudiante)
+    public function update(Request $request, Municipio $municipio)
     {
         //
     }
@@ -84,10 +76,10 @@ class EstudianteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Estudiante  $estudiante
+     * @param  \App\Models\Municipio  $municipio
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Estudiante $estudiante)
+    public function destroy(Municipio $municipio)
     {
         //
     }

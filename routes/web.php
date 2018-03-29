@@ -31,6 +31,10 @@ Route::group(['middleware' => ['login']], function () {
 
 		//DataTable
 		Route::get('/datatable/estudiantes','Admin\DataTableController@estudiantes')->name('estudiantes.get');		 
-		 
+
+		//Municipios
+		Route::resource('/municipios','Admin\MunicipioController')->only('show');
+
+		
 	});
 });

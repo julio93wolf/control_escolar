@@ -89,13 +89,17 @@
 
 .picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected{
   color: #fff;
-  background-color: #0089ec;
+  background-color: #1976d2;
 
 }
 
 .picker__day.picker__day--today{
   color: #0d47a1;
 
+}
+
+.picker__close, .picker__today, .picker__clear{
+  
 }
 
 input:not([type]).valid,
@@ -270,7 +274,7 @@ div.disabled{
 }
 .picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected{
   color: #fff;
-  background-color: #0089ec;
+  background-color: #1976d2;
 }
 .picker__day.picker__day--today {
     color: #0d47a1;

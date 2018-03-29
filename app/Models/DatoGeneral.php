@@ -15,11 +15,11 @@ class DatoGeneral extends Model
     public $timestamps = false;
 
     public function docentes(){
-    	return $this->hasMany('App\Models\Docente','datos_generales_id');
+    	return $this->hasMany('App\Models\Docente','dato_general_id');
     }
 
     public function estudiantes(){
-    	return $this->hasMany('App\Models\Estudiante','datos_generales_id');
+    	return $this->hasMany('App\Models\Estudiante','dato_general_id');
     }
 
     public function localidad(){
