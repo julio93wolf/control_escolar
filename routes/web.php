@@ -26,15 +26,37 @@ Route::group(['middleware' => ['login']], function () {
 		//Menu Principal (Admin)
 		Route::get('/menu','Admin\MenuController@index')->name('admin.menu');
 
-		//Estudiantes
-		Route::resource('/estudiantes','Admin\EstudianteController');
+		Route::prefix('academicos')->group(function () {
 
-		//DataTable
-		Route::get('/datatable/estudiantes','Admin\DataTableController@estudiantes')->name('estudiantes.get');		 
+			//Estudiantes
+			Route::resource('/estudiantes','Admin\EstudianteController');
 
-		//Municipios
-		Route::resource('/municipios','Admin\MunicipioController')->only('show');
+		});
 
+		Route::prefix('escolares')->group(function () {
+
+			//Asignaturas
+			Route::resource('/asignaturas','Admin\AsignaturaController');
+
+		});
+
+		Route::prefix('datatable')->group(function () {
+
+			//Estudiantes
+			Route::get('/estudiantes','Admin\DataTableController@estudiantes')->name('estudiantes.get');
+			//Asignaturas
+			Route::get('/asignaturas/{especialidad_id}','Admin\DataTableController@asignaturas')->name('asignatuas.get');
+
+		});
+
+		Route::prefix('select')->group(function () {
+
+			//Asignaturas
+			Route::get('/especialidades/{nivel_academico}','Admin\SelectController@especialidades')->name('select.estudiantes');
+			//Reticulas
+			Route::get('/reticulas/{especialidad}','Admin\SelectController@reticulas')->name('select.reticulas');
+
+		});
 		
 	});
 });

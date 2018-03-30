@@ -25,7 +25,7 @@ class EstudiantesTrabajosTableSeeder extends Seeder
         		]);
         	}else{
         		$estudiante->empresas()->attach($empresa_id,[
-        			'puesto' => $faker->jobTitle
+        			'puesto' => $faker->word
         		]);
         	}
 

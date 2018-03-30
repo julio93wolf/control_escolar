@@ -56,6 +56,7 @@
 .input-field input[type=password]:focus + label,
 .input-field input[type=email]:focus + label,
 .input-field input[type=search]:focus + label,
+.input-field input[type=number]:focus + label,
 .materialize-textarea:focus:not([readonly]) + label,
 .picker__close, .picker__today, .picker__clear{
   color: #0d47a1 !important;
@@ -66,6 +67,7 @@
 .input-field input[type=password]:focus,
 .input-field input[type=email]:focus,
 .input-field input[type=search]:focus,
+.input-field input[type=number]:focus,
 .materialize-textarea:focus:not([readonly]){
   border-bottom: 1px solid #0d47a1 !important;
   box-shadow: 0 1px 0 0 #0d47a1 !important;
@@ -89,13 +91,17 @@
 
 .picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected{
   color: #fff;
-  background-color: #0089ec;
+  background-color: #1976d2;
 
 }
 
 .picker__day.picker__day--today{
   color: #0d47a1;
 
+}
+
+.picker__close, .picker__today, .picker__clear{
+  
 }
 
 input:not([type]).valid,
@@ -270,7 +276,7 @@ div.disabled{
 }
 .picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected{
   color: #fff;
-  background-color: #0089ec;
+  background-color: #1976d2;
 }
 .picker__day.picker__day--today {
     color: #0d47a1;

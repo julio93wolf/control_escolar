@@ -25,6 +25,11 @@
       </div>
       <!--JavaScript at end of body for optimized loading-->
       <script type="text/javascript" src="{{ asset('/js/vendor.js') }}"></script> 
+      <script type="text/javascript">
+        $(document).ready(function() {
+          Materialize.updateTextFields();
+        });
+      </script></s>
     </body>
   </html>
         

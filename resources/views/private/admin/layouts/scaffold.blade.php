@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
 	<title>@yield('title')</title>
 	<link rel="icon" href="{{ asset('/') }}images/buo.png">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -9,7 +12,6 @@
   <link type="text/css" rel="stylesheet" href="{{ asset('/css/vendor.css') }}"  media="screen,projection"/>
   <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
 	<header>
@@ -41,6 +43,12 @@
 	<!-- Compiled and minified JavaScript -->
 	<script src="{{ asset('/js/vendor.js') }}"></script>
 	<script type="text/javascript">
+		$.ajaxSetup({
+    	headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    	}
+		});
+		
 	  $(document).ready(function(){
 	  	
 	  	$('.dropdown-button').dropdown({
@@ -57,6 +65,7 @@
 	    $(".button-collapse").sideNav();
 	    $('.collapsible').collapsible();
 	    $('.parallax').parallax();
+	    $('select').material_select();
 
 
 	    $('.fixed-action-btn').openFAB();
@@ -70,6 +79,8 @@
 		    clear: 'Clear',
 		    close: 'Ok',
 			});
+
+			$('.modal').modal();
 	  });
 		
 		/*

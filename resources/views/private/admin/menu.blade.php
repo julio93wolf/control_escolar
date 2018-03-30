@@ -61,7 +61,7 @@
 			<div class="divider"></div>
 			<div class="row">
 				<div class="col s6 m4">
-					<a href='{{--route('asignaturas.index')--}}'>
+					<a href='{{route('asignaturas.index')}}'>
 						<div class="center promo hoverable">
 							<i class="material-icons">create</i>
 							<p class="promo-caption">Asignaturas</p>

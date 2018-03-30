@@ -72,5 +72,5 @@
 @endsection
 
 @section('script')
-	@include('private.admin.estudiantes.scripts.index')
+	@include('private.admin.academicos.estudiantes.scripts.index')
 @endsection
