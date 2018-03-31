@@ -16,11 +16,16 @@ let mix = require('laravel-mix');
 
 mix.scripts([
 	'resources/assets/js/vendor/jquery-3.3.1.js',
+	//'resources/assets/js/vendor/jquery.validate.js',
 	'resources/assets/js/vendor/datatables.js',
 	'resources/assets/js/vendor/materialize.js',
 	'resources/assets/js/vendor/sweetalert2.js',
 	'resources/assets/js/vendor/select2.js'
 ],'public/js/vendor.js');
+
+mix.scripts([
+	'resources/assets/js/app/asignaturas.js'
+],'public/js/asignaturas.js');
 
 mix.styles([
 	'resources/assets/css/vendor/materialize.css',

@@ -12,8 +12,8 @@ class EmpresasTableSeeder extends Seeder
      */
     public function run()
     {
-    		Empresa::create([
-        	'empresa' => 'No trabaja'
+        Empresa::create([
+            'empresa' => 'No trabaja'
         ]);
         
         factory(App\Models\Empresa::class,50)->create();

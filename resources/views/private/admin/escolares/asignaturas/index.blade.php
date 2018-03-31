@@ -94,51 +94,63 @@
     </a>
   </div>
 
+	<form id="form_asignatura" action="">
   <!-- Modal Structure -->
 	<div id="nueva_asignatura" class="modal">
 		<div class="modal-content">
+			
 			<h5>Asignatura para <strong id="nombre_especialidad">esp</strong></h5>
 			<div class="divider"></div>
 			<br>
-				<div class="row">
-					<div class="input-field col s12">
-						<i class="material-icons prefix">subject</i>
-						<input type="text" class="validate" id="asignatura">
-						<label>Asignatura</label>
-					</div>
 
-					<div class="row">
-						<div class="input-field col s12 l6">
-							<i class="material-icons prefix">vpn_key</i>
-							<input type="text" class="validate" id="codigo">
-							<label>Codigo</label>
-						</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<i class="material-icons prefix">subject</i>
+					<input type="text" class="validate" id="asignatura" name="asignatura" required>
+					<label for="asignatura" data-error="wrong" class="active">Asignatura</label>
+				</div>
+			</div>
 
-						<div class="col s6 l3  right-align">
-							<a class="waves-effect waves-light btn center-align blue darken-2" style="width: 100%"><i class="material-icons left">autorenew</i>Generar</a>
-						</div>
-						<div class="col s6 l3 right-align">
-							<a class="waves-effect waves-light btn center-align blue darken-2" style="width: 100%"><i class="material-icons left">check_circle</i>Validar</a>
-						</div>
-					</div>
+			<div class="row">
+				<div class="input-field col s12 l6">
+					<i class="material-icons prefix">vpn_key</i>
+					<input type="text" class="validate" id="codigo">
+					<label>Codigo</label>
+				</div>
 
-					<div class="input-field col s12">
-						<i class="material-icons prefix">exposure_plus_1</i>
-						<input type="number" class="validate" id="creditos">
-						<label>Creditos</label>
-					</div>
+				<div class="col s6 l3  right-align">
+					<a class="waves-effect waves-light btn center-align blue darken-2" style="width: 100%"><i class="material-icons left">autorenew</i>Generar</a>
+				</div>
+
+				<div class="col s6 l3 right-align">
+					<a class="waves-effect waves-light btn center-align blue darken-2" style="width: 100%"><i class="material-icons left">check_circle</i>Validar</a>
+				</div>
 
 			</div>
+
+			<div class="row">
+				<div class="input-field col s12">
+					<i class="material-icons prefix">exposure_plus_1</i>
+					<input type="number" class="validate" id="creditos">
+					<label>Creditos</label>
+				</div>
+			</div>	
 		</div>
 		<div class="modal-footer">
 			<a class="waves-effect waves-red btn-flat modal-action modal-close" id="cancelar_asignatura"><i class="material-icons left">close</i>cancelar</a>
 			<a class="waves-effect waves-green btn-flat" id="guardar_asignatura"><i class="material-icons left">save</i>Guardar</a>
+			<button class="btn waves-effect waves-light" type="submit" name="action">Submit
+		    <i class="material-icons right">send</i>
+		  </button>
 
 		</div>
 	</div>
-
+	</form>
 @endsection
 
 @section('script')
-	@include('private.admin.escolares.asignaturas.scripts.index')
+	{{-- @include('private.admin.escolares.asignaturas.scripts.index') --}}
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="{{ asset('/js/asignaturas.js') }}"></script>
+	
 @endsection
