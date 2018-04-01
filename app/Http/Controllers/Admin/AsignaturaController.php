@@ -40,11 +40,19 @@ class AsignaturaController extends Controller
      */
     public function store(Request $request)
     {
-        $validate_data = $request->validate([
-            'asignacion' => 'required',
-            'codigo' => 'required'
+        $this->validate($request,[
+            'asignatura' => 'required',
+            'codigo' => 'required|unique:asignaturas',
+            'creditos' => 'required',
+            'reticula_id' => 'required'
         ]);
-        return;
+        Asignatura::create([
+            'asignatura' => $request->asignatura,
+            'codigo' => $request->codigo,
+            'creditos' => $request->creditos,
+            'reticula_id' => $request->reticula_id
+        ]);
+        return ;
     }
 
     /**

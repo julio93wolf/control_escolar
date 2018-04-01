@@ -94,7 +94,7 @@
     </a>
   </div>
 
-	<form id="form_asignatura" action="">
+	<form id="form_asignatura" novalidate="novalidate">
   <!-- Modal Structure -->
 	<div id="nueva_asignatura" class="modal">
 		<div class="modal-content">
@@ -106,16 +106,16 @@
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">subject</i>
-					<input type="text" class="validate" id="asignatura" name="asignatura" required>
-					<label for="asignatura" data-error="wrong" class="active">Asignatura</label>
+					<input type="text" id="asignatura" name="asignatura" required="" aria-required="true">
+					<label for="asignatura">Asignatura</label>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="input-field col s12 l6">
 					<i class="material-icons prefix">vpn_key</i>
-					<input type="text" class="validate" id="codigo">
-					<label>Codigo</label>
+					<input type="text" id="codigo" name="codigo" required="">
+					<label for="codigo">Codigo</label>
 				</div>
 
 				<div class="col s6 l3  right-align">
@@ -131,16 +131,15 @@
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">exposure_plus_1</i>
-					<input type="number" class="validate" id="creditos">
-					<label>Creditos</label>
+					<input type="number" id="creditos" name="creditos" required="" aria-required="true">
+					<label for="creditos">Creditos</label>
 				</div>
 			</div>	
 		</div>
 		<div class="modal-footer">
 			<a class="waves-effect waves-red btn-flat modal-action modal-close" id="cancelar_asignatura"><i class="material-icons left">close</i>cancelar</a>
-			<a class="waves-effect waves-green btn-flat" id="guardar_asignatura"><i class="material-icons left">save</i>Guardar</a>
-			<button class="btn waves-effect waves-light" type="submit" name="action">Submit
-		    <i class="material-icons right">send</i>
+			<button id="guardar_asignatura" class="waves-effect waves-green btn-flat" type="submit" name="action">Guardar
+		    <i class="material-icons left">save</i>
 		  </button>
 
 		</div>
@@ -150,7 +149,8 @@
 
 @section('script')
 	{{-- @include('private.admin.escolares.asignaturas.scripts.index') --}}
-	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
+	<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.js"></script>
 	<script type="text/javascript" src="{{ asset('/js/asignaturas.js') }}"></script>
 	
 @endsection

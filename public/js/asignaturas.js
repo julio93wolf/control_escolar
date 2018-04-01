@@ -2,43 +2,7 @@ load_especialidades();
 load_reticulas();
 load_asignaturas();
 
-// Extension pour comptabilité avec materialize.css
-$.validator.setDefaults({
-  errorClass: 'invalid',
-  validClass: "valid",
-  errorPlacement: function(error, element) {
-    $(element)
-      .closest("form")
-      .find("label[for='" + element.attr("id") + "']")
-      .attr('data-error', error.text());
-  },
-  submitHandler: function(form) {
-    console.log('form ok');
-  }
-});
-
-$("#form_asignatura").validate({
-	rules: {
-    asignatura: {
-        required: true,
-        minlength: 2
-    }
-	},
-	messages: {
-      asignatura:{
-          required: "Ingresa una asignatura",
-          minlength: "Enter at least 5 characters"
-      }
-  }
-});
-
-/*
-$('#form_asignatura').submit(function(event) {
-    // Stop the browser from submitting the form.
-    event.preventDefault();
-
-    // TODO
-});*/
+var new_asignatura = false;
 
 function load_especialidades (){
 	var nivel_academico_id = $('#nivel_academico_id').val();
@@ -119,26 +83,6 @@ function load_asignaturas(){
   $("select[name$='table_id_length']").material_select();
 }
 
-function store_asignatura(json){
-	console.log(json);
-	$.post('admin/escolares/asignaturas',json,function(data){
-		console.log(data);
-		console.log('Success');
-	}).fail(function(data) {
-		var errors = data.responseJSON.errors;
-		Materialize.updateTextFields();
-		var str_errors = '';
-		for(var error in errors) {
-		 	str_errors += '<p>'+errors[error]+'</p>';
-		}
-		swal({
-			type: 'error',
-			title: 'Error al crear',
-			html: str_errors
-		});
-	});
-}
-
 $('#nivel_academico_id').change(function(){
 	load_especialidades();
 });
@@ -152,30 +96,92 @@ $('#reticula_id').change(function(){
 });
 
 $('#btn_nueva_asignatura').on('click',function(){
-	
+	$('#nombre_especialidad').text($('#nivel_academico_id :selected').text() +' en ' + $('#especialidad_id :selected').text() + ' - ' + $('#reticula_id :selected').text() );
 	$('#asignatura').val('');
 	$('#codigo').val('');
 	$('#creditos').val('');
 	Materialize.updateTextFields();
-
-	$('#nombre_especialidad').text($('#nivel_academico_id :selected').text() +' en ' + $('#especialidad_id :selected').text() + ' - ' + $('#reticula_id :selected').text() );
-	
-	Materialize.updateTextFields();
+	new_asignatura = true;
+  validator.resetForm();
 	$('#nueva_asignatura').modal('open');
 });
 
-$('#guardar_asignatura').on('click',function(){
-	
-	/*
-	json = {
-		asignacion: $('#asignatura').val(),
-		codigo: $('#codigo').val(),
-		creditos: $('#creditos').val(),
-		reticula_id: $('#reticula_id').val()
-	}
-	store_asignatura(json);*/
+$.validator.setDefaults({
+    errorClass: 'invalid',
+    validClass: "valid",
+    errorPlacement: function(error, element) {
+      $(element)
+        .closest("form")
+        .find("label[for='" + element.attr("id") + "']")
+        .attr('data-error', error.text());
+    }
+  });
+
+var validator = $("#form_asignatura").validate({
+	rules: {
+    asignatura: {
+        required: true
+    },
+    codigo: {
+    	required: true
+    },
+    creditos: {
+    	required: true,
+    	digits: true,
+    	min: 1
+    }
+	},
+	messages: {
+		asignatura:{
+			required: "Ingresa el nombre de la asignatura"
+    },
+    codigo: {
+     	required:  "Ingresa un código unico"
+    },
+    creditos:{
+    	required:  "Ingresa el numero de creditos",
+    	digits: "El credito debe tener un valor mayor a 1",
+    	min: "El credito debe tener un valor mayor a 1"
+    }
+  },
+  submitHandler: function(form) {
+    if (new_asignatura) {
+      json = {
+        asignatura: $('#asignatura').val(),
+        codigo: $('#codigo').val(),
+        creditos: $('#creditos').val(),
+        reticula_id: $('#reticula_id').val()
+      }
+      store_asignatura(json);
+    }
+  }
 });
 
+/*
+$('#form_asignatura').submit(function(event) {
+    event.preventDefault();
+});*/
 
-	
-
+function store_asignatura(json){
+	$.post('/admin/escolares/asignaturas',json,function(data){
+		load_asignaturas();
+		swal({
+		  type: 'success',
+		  title: 'La asignatura ha sido guardada',
+		  showConfirmButton: false,
+		  timer: 1500
+		});
+    $('#nueva_asignatura').modal('close');
+	}).fail(function(data) {
+    var errors = data.responseJSON.errors;
+    var str_errors = '';
+    for(var error in errors) {
+      str_errors += ''+errors[error]+'<br>';
+    }
+		swal({
+			type: 'error',
+			title: 'Error al guardar la asignatura',
+      html: str_errors
+		});
+	});
+}
