@@ -69,7 +69,7 @@
 					</a>
 				</div>
 				<div class="col s6 m4">
-					<a href="{{--route('periodos.index')--}}">
+					<a href="{{route('periodos.index')}}">
 						<div class="center promo hoverable">
 							<i class="material-icons">date_range</i>
 							<p class="promo-caption">Periodos</p>

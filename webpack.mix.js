@@ -45,3 +45,11 @@ mix.scripts([
 	'resources/assets/js/app/asignaturas.js'
 ],'public/js/asignaturas.js');
 
+// Periodos
+mix.scripts([
+	'resources/assets/js/app/periodos.js'
+],'public/js/periodos.js');
+
+mix.scripts([
+	'resources/assets/js/app/form.periodo.js'
+],'public/js/form.periodo.js');

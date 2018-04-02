@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Estudiante;
 use App\Models\Asignatura;
+use App\Models\Periodo;
 use App\Models\DataTableModel;
 
 class DataTableController extends Controller
@@ -22,4 +23,10 @@ class DataTableController extends Controller
     	$asignaturas = Asignatura::where('reticula_id',$reticula_id);
     	return Datatables::of($asignaturas)->make(true);	
     }
+
+    public function periodos(){
+    	$periodos = Periodo::get();
+    	return Datatables::of($periodos)->make(true);
+    }
+
 }

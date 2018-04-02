@@ -27,11 +27,11 @@ $(document).ready(function(){
 	$('.fixed-action-btn').closeFAB();
 
 	$('.datepicker').pickadate({
-		formatSubmit: 'yyyy/mm/dd',
+		formatSubmit: 'yyyy-mm-dd',
 		selectMonths: true,
 		selectYears: 30,
-		today: 'Today',
-    clear: 'Clear',
+		today: 'Hoy',
+    clear: 'Limpiar',
     close: 'Ok',
 	});
 

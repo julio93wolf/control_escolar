@@ -1,12 +1,12 @@
 <ul id="dropdown_academicos" class="dropdown-content">
-  <li><a href="#!" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">school</i>Estudiantes</a></li>
+  <li><a href="{{ route('estudiantes.index') }}" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">school</i>Estudiantes</a></li>
   <li><a href="#!" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">work</i>Docentes</a></li>
   <li><a href="#!" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">import_contacts</i>Clases</a></li>
 </ul>
 
 <ul id="dropdown_escolares" class="dropdown-content">
-  <li><a href="#!" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">create</i>Asignaturas</a></li>
-  <li><a href="#!" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">date_range</i>Periodos</a></li>
+  <li><a href="{{ route('asignaturas.index') }}" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">create</i>Asignaturas</a></li>
+  <li><a href="{{ route('periodos.index') }}" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">date_range</i>Periodos</a></li>
   <li><a href="#!" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">build</i>Especialidades</a></li>
 </ul>
 
@@ -67,7 +67,7 @@
       <div class="collapsible-header"><i class="material-icons">school</i>Académicos</a></div>
       <div class="collapsible-body">
         <ul>
-          <li><a href="#!"><i class="material-icons blue-text text-darken-2">school</i>Estudiantes</a></li>
+          <li><a href="{{ route('estudiantes.index') }}"><i class="material-icons blue-text text-darken-2">school</i>Estudiantes</a></li>
           <li><a href="#!"><i class="material-icons blue-text text-darken-2">work</i>Docentes</a></li>
           <li><a href="#!"><i class="material-icons blue-text text-darken-2">import_contacts</i>Clases</a></li>
         </ul>
@@ -77,8 +77,8 @@
       <div class="collapsible-header"><i class="material-icons">location_city</i>Escolares</div>
       <div class="collapsible-body">
         <ul>
-          <li><a href="#!"><i class="material-icons blue-text text-darken-2">create</i>Asignaturas</a></li>
-          <li><a href="#!"><i class="material-icons blue-text text-darken-2">date_range</i>Periodos</a></li>
+          <li><a href="{{ route('asignaturas.index') }}"><i class="material-icons blue-text text-darken-2">create</i>Asignaturas</a></li>
+          <li><a href="{{ route('periodos.index') }}"><i class="material-icons blue-text text-darken-2">date_range</i>Periodos</a></li>
           <li><a href="#!"><i class="material-icons blue-text text-darken-2">build</i>Especialidades</a></li>  
         </ul>
       </div>

@@ -31,5 +31,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EstudiantesTrabajosTableSeeder::class);
         $this->call(ReticulasTableSeeder::class);
         $this->call(AsignaturasTableSeeder::class);
+        $this->call(TiposExamenesTableSeeder::class);
+        $this->call(FechasExamenesTableSeeder::class);
     }
 }

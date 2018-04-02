@@ -38,7 +38,10 @@ Route::group(['middleware' => ['login']], function () {
 			//Asignaturas
 			Route::resource('/asignaturas','Admin\AsignaturaController')->only([
     		'index', 'store', 'update'
-			]);;
+			]);
+
+			//Periodos
+			Route::resource('/periodos','Admin\PeriodoController');
 
 		});
 
@@ -46,8 +49,12 @@ Route::group(['middleware' => ['login']], function () {
 
 			//Estudiantes
 			Route::get('/estudiantes','Admin\DataTableController@estudiantes')->name('estudiantes.get');
+			
 			//Asignaturas
 			Route::get('/asignaturas/{especialidad_id}','Admin\DataTableController@asignaturas')->name('asignatuas.get');
+
+			//Periodos
+			Route::get('/periodos','Admin\DataTableController@periodos')->name('periodos.get');
 
 		});
 
@@ -55,6 +62,7 @@ Route::group(['middleware' => ['login']], function () {
 
 			//Asignaturas
 			Route::get('/especialidades/{nivel_academico}','Admin\SelectController@especialidades')->name('select.estudiantes');
+			
 			//Reticulas
 			Route::get('/reticulas/{especialidad}','Admin\SelectController@reticulas')->name('select.reticulas');
 

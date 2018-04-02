@@ -78,9 +78,8 @@ function load_asignaturas(){
         }
     ]
   });
-  $("select[name$='table_id_length']").val('10');
-  $("select[name$='table_id_length']").material_select();
-
+  $("select[name$='table_asignaturas_length']").val('10');
+  $("select[name$='table_asignaturas_length']").material_select();
   edit_asignatura('#table_asignaturas tbody',table);
 }
 
