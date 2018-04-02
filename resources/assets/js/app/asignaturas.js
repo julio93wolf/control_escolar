@@ -1,8 +1,7 @@
 load_especialidades();
-load_reticulas();
-load_asignaturas();
 
 var new_asignatura = false;
+var asignatura_id = null;
 
 function load_especialidades (){
 	var nivel_academico_id = $('#nivel_academico_id').val();
@@ -36,7 +35,7 @@ function load_reticulas (){
 
 function load_asignaturas(){
 	var reticula_id = $('#reticula_id').val();
-	$('#table_id').DataTable({
+	var table = $('#table_asignaturas').DataTable({
   	"language": {
       "sProcessing":     "Procesando...",
       "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -72,7 +71,7 @@ function load_asignaturas(){
         {
           data: 'id',
           render: function ( data, type, row, meta ) {
-            return `<a href="/admin/escolares/asignaturas/`+data+`/edit" class="btn-floating btn-meddium waves-effect waves-light"><i class="material-icons circle green">mode_edit</i></a>`;
+            return `<a class="btn-floating btn-meddium waves-effect waves-light edit-asignatura"><i class="material-icons circle green">mode_edit</i></a>`;
           },
           orderable: false, 
           searchable: false
@@ -81,6 +80,8 @@ function load_asignaturas(){
   });
   $("select[name$='table_id_length']").val('10');
   $("select[name$='table_id_length']").material_select();
+
+  edit_asignatura('#table_asignaturas tbody',table);
 }
 
 $('#nivel_academico_id').change(function(){
@@ -102,20 +103,33 @@ $('#btn_nueva_asignatura').on('click',function(){
 	$('#creditos').val('');
 	Materialize.updateTextFields();
 	new_asignatura = true;
-  validator.resetForm();
+  asignatura_id = null;
 	$('#nueva_asignatura').modal('open');
 });
 
-$.validator.setDefaults({
-    errorClass: 'invalid',
-    validClass: "valid",
-    errorPlacement: function(error, element) {
-      $(element)
-        .closest("form")
-        .find("label[for='" + element.attr("id") + "']")
-        .attr('data-error', error.text());
-    }
+function edit_asignatura (tbody,table){
+  $(tbody).on('click','a.edit-asignatura',function(){
+    var data = table.row( $(this).parents('tr') ).data();
+    asignatura_id = data.id;
+    $('#asignatura').val(data.asignatura);
+    $('#codigo').val(data.codigo);
+    $('#creditos').val(data.creditos);
+    Materialize.updateTextFields();
+    new_asignatura = false;
+    $('#nueva_asignatura').modal('open');
   });
+}
+
+$.validator.setDefaults({
+  errorClass: 'invalid',
+  validClass: "valid",
+  errorPlacement: function(error, element) {
+    $(element)
+      .closest("form")
+      .find("label[for='" + element.attr("id") + "']")
+      .attr('data-error', error.text());
+  }
+});
 
 var validator = $("#form_asignatura").validate({
 	rules: {
@@ -153,14 +167,17 @@ var validator = $("#form_asignatura").validate({
         reticula_id: $('#reticula_id').val()
       }
       store_asignatura(json);
+    }else{
+      json = {
+        id: asignatura_id,
+        asignatura: $('#asignatura').val(),
+        codigo: $('#codigo').val(),
+        creditos: $('#creditos').val()
+      }
+      update_asignatura(json);
     }
   }
 });
-
-/*
-$('#form_asignatura').submit(function(event) {
-    event.preventDefault();
-});*/
 
 function store_asignatura(json){
 	$.post('/admin/escolares/asignaturas',json,function(data){
@@ -184,4 +201,34 @@ function store_asignatura(json){
       html: str_errors
 		});
 	});
+}
+
+function update_asignatura(json){
+  $.ajax({
+    url: '/admin/escolares/asignaturas/'+asignatura_id,
+    data: json,
+    type: 'PUT',
+    success: function(result) {
+      load_asignaturas();
+      swal({
+        type: 'success',
+        title: 'La asignatura ha sido actualizada',
+        showConfirmButton: false,
+        timer: 1500
+      });
+      $('#nueva_asignatura').modal('close');    
+    },
+    error: function (data) {
+      var errors = data.responseJSON.errors;
+      var str_errors = '';
+      for(var error in errors) {
+        str_errors += ''+errors[error]+'<br>';
+      }
+      swal({
+        type: 'error',
+        title: 'Error al guardar la asignatura',
+        html: str_errors
+      });  
+    }
+  });
 }

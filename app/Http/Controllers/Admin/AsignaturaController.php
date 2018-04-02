@@ -42,16 +42,16 @@ class AsignaturaController extends Controller
     {
         $this->validate($request,[
             'asignatura' => 'required',
-            'codigo' => 'required|unique:asignaturas',
+            'codigo' => 'required|unique:asignaturas,codigo',
             'creditos' => 'required',
             'reticula_id' => 'required'
         ]);
-        Asignatura::create([
-            'asignatura' => $request->asignatura,
-            'codigo' => $request->codigo,
-            'creditos' => $request->creditos,
-            'reticula_id' => $request->reticula_id
-        ]);
+        $asignatura = new Asignatura;
+        $asignatura->asignatura = $request->asignatura;
+        $asignatura->codigo = $request->codigo;
+        $asignatura->creditos = $request->creditos;
+        $asignatura->reticula_id = $request->reticula_id;
+        $asignatura->save();
         return ;
     }
 
@@ -86,7 +86,17 @@ class AsignaturaController extends Controller
      */
     public function update(Request $request, Asignatura $asignatura)
     {
-        //
+        $this->validate($request,[
+            'asignatura' => 'required',
+            'codigo' => 'required|unique:asignaturas,codigo,'.$request->id,
+            'creditos' => 'required'
+        ]);
+        $asignatura = Asignatura::find($asignatura->id);
+        $asignatura->asignatura = $request->asignatura;
+        $asignatura->codigo = $request->codigo;
+        $asignatura->creditos = $request->creditos;
+        $asignatura->save();
+        return ;
     }
 
     /**

@@ -36,7 +36,9 @@ Route::group(['middleware' => ['login']], function () {
 		Route::prefix('escolares')->group(function () {
 
 			//Asignaturas
-			Route::resource('/asignaturas','Admin\AsignaturaController');
+			Route::resource('/asignaturas','Admin\AsignaturaController')->only([
+    		'index', 'store', 'update'
+			]);;
 
 		});
 

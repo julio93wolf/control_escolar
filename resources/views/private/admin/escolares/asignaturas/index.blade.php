@@ -65,7 +65,7 @@
 				</div>
 			</div>
 
-			<table id="table_id" class="display highlight" cellspacing="0" width="100%">
+			<table id="table_asignaturas" class="display highlight" cellspacing="0" width="100%">
         <thead>
             <tr>
                 <th>Codigo</th>
