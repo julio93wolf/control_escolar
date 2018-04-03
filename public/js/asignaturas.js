@@ -1,40 +1,9 @@
-load_especialidades();
+load_asignaturas();
 
 var new_asignatura = false;
 var asignatura_id = null;
 
-function load_especialidades (){
-	var nivel_academico_id = $('#nivel_academico_id').val();
-	$.get('/admin/select/especialidades/' + nivel_academico_id,function(data) {
-		$('#especialidad_id').empty();
-		for(i = 0; i < data.length; i++){
-			$('#especialidad_id').append('<option value="' + data[i].id + '">' + data[i].especialidad + ' (' + data[i].clave +')</option>');
-		}
-		$('#especialidad_id').material_select();
-		load_reticulas();
-	})
-	.fail(function() {
-		swal("Error", "Ocurrio un error al cargar las especialidades.", "error");
-	});
-}
-
-function load_reticulas (){
-	var especialidad_id = $('#especialidad_id').val();
-	$.get('/admin/select/reticulas/' + especialidad_id,function(data) {
-		$('#reticula_id').empty();
-		for(i = 0; i < data.length; i++){
-			$('#reticula_id').append('<option value="' + data[i].id + '">' + data[i].reticula + '</option>');
-		}
-		$('#reticula_id').material_select();
-		load_asignaturas();
-	})
-	.fail(function() {
-		swal("Error", "Ocurrio un error al cargar las reticulas.", "error");
-	});
-}
-
 function load_asignaturas(){
-	var reticula_id = $('#reticula_id').val();
 	var table = $('#table_asignaturas').DataTable({
   	"language": {
       "sProcessing":     "Procesando...",
@@ -63,7 +32,7 @@ function load_asignaturas(){
     destroy: true,
     processing: true,
     serverSide: true,
-    ajax: '/admin/datatable/asignaturas/'+reticula_id,
+    ajax: '/admin/datatable/asignaturas',
     columns: [
         { data: 'codigo',			name: 'codigo' },
         { data: 'asignatura',	name: 'asignatura' },
@@ -83,20 +52,7 @@ function load_asignaturas(){
   edit_asignatura('#table_asignaturas tbody',table);
 }
 
-$('#nivel_academico_id').change(function(){
-	load_especialidades();
-});
-
-$('#especialidad_id').change(function(){
-	load_reticulas();
-});
-
-$('#reticula_id').change(function(){
-	load_asignaturas();
-});
-
 $('#btn_nueva_asignatura').on('click',function(){
-	$('#nombre_especialidad').text($('#nivel_academico_id :selected').text() +' en ' + $('#especialidad_id :selected').text() + ' - ' + $('#reticula_id :selected').text() );
 	$('#asignatura').val('');
 	$('#codigo').val('');
 	$('#creditos').val('');
@@ -162,8 +118,7 @@ var validator = $("#form_asignatura").validate({
       json = {
         asignatura: $('#asignatura').val(),
         codigo: $('#codigo').val(),
-        creditos: $('#creditos').val(),
-        reticula_id: $('#reticula_id').val()
+        creditos: $('#creditos').val()
       }
       store_asignatura(json);
     }else{

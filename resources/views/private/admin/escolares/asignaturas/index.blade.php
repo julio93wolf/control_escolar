@@ -37,34 +37,6 @@
 	<div class="row">
 		<div class="col s10 offset-s1">
 
-			<div class="section">
-				<div class="input-field col s12 l4">
-					<i class="material-icons prefix">list</i>
-					<select id="nivel_academico_id">
-						@foreach($niveles_academicos as $nivel_academico)
-							@if($nivel_academico -> id == 1)
-								<option value="{{ $nivel_academico -> id }}" selected>{{ $nivel_academico -> nivel_academico }}</option>
-							@else
-								<option value="{{ $nivel_academico -> id }}">{{ $nivel_academico -> nivel_academico }}</option>
-							@endif
-						@endforeach
-					</select>
-					<label>Nivel académico</label>
-				</div>
-				<div class="input-field col s12 l4">
-					<i class="material-icons prefix">list</i>
-					<select id="especialidad_id">
-					</select>
-					<label>Especialidad</label>
-				</div>
-				<div class="input-field col s12 l4">
-					<i class="material-icons prefix">list</i>
-					<select id="reticula_id">
-					</select>
-					<label>Reticula</label>
-				</div>
-			</div>
-
 			<table id="table_asignaturas" class="display highlight" cellspacing="0" width="100%">
         <thead>
             <tr>
@@ -98,8 +70,7 @@
   <!-- Modal Structure -->
 	<div id="nueva_asignatura" class="modal">
 		<div class="modal-content">
-			
-			<h5>Asignatura para <strong id="nombre_especialidad">esp</strong></h5>
+			<h5>Nueva asignatura</h5>
 			<div class="divider"></div>
 			<br>
 

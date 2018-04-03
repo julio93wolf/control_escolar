@@ -26,8 +26,7 @@ class AsignaturaStoreRequest extends FormRequest
         return [
             'asignatura' => 'required',
             'codigo' => 'required|unique:asignaturas,codigo',
-            'creditos' => 'required',
-            'reticula_id' => 'required'
+            'creditos' => 'required'
         ];
     }
 

@@ -20,8 +20,8 @@ class DataTableController extends Controller
     	return Datatables::of($estudiantes)->make(true);
     }
 
-    public function asignaturas($reticula_id){
-    	$asignaturas = Asignatura::where('reticula_id',$reticula_id);
+    public function asignaturas(){
+    	$asignaturas = Asignatura::get();
     	return Datatables::of($asignaturas)->make(true);	
     }
 

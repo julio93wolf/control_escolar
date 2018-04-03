@@ -47,7 +47,6 @@ class AsignaturaController extends Controller
         $asignatura->asignatura = $request->asignatura;
         $asignatura->codigo = $request->codigo;
         $asignatura->creditos = $request->creditos;
-        $asignatura->reticula_id = $request->reticula_id;
         $asignatura->save();
         return ;
     }

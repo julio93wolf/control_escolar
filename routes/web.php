@@ -26,6 +26,7 @@ Route::group(['middleware' => ['login']], function () {
 		//Menu Principal (Admin)
 		Route::get('menu','Admin\MenuController@index')->name('admin.menu');
 
+		//Academicos
 		Route::prefix('academicos')->group(function () {
 
 			//Estudiantes
@@ -33,6 +34,7 @@ Route::group(['middleware' => ['login']], function () {
 
 		});
 
+		//Escolares
 		Route::prefix('escolares')->group(function () {
 
 			//Asignaturas
@@ -57,13 +59,14 @@ Route::group(['middleware' => ['login']], function () {
 
 		});
 
+		//Datatable
 		Route::prefix('datatable')->group(function () {
 
 			//Estudiantes
 			Route::get('estudiantes','Admin\DataTableController@estudiantes')->name('estudiantes.get');
 			
 			//Asignaturas
-			Route::get('asignaturas/{especialidad_id}','Admin\DataTableController@asignaturas')->name('asignatuas.get');
+			Route::get('asignaturas','Admin\DataTableController@asignaturas')->name('asignatuas.get');
 
 			//Periodos
 			Route::get('periodos','Admin\DataTableController@periodos')->name('periodos.get');
@@ -73,6 +76,7 @@ Route::group(['middleware' => ['login']], function () {
 
 		});
 
+		//Selects
 		Route::prefix('select')->group(function () {
 
 			//Asignaturas
