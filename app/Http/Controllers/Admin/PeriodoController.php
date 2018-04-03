@@ -97,6 +97,6 @@ class PeriodoController extends Controller
      */
     public function destroy(Periodo $periodo)
     {
-        //
+        Periodo::find($periodo->id)->delete();
     }
 }

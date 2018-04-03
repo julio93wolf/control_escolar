@@ -12,7 +12,7 @@ class FechasExamenesTableSeeder extends Seeder
      */
     public function run()
     {
-        $periodos = Periodo::get();
+    	$periodos = Periodo::get();
         foreach ($periodos as $key => $periodo) {
         	factory(App\Models\FechaExamen::class,4)->create([
       			'periodo_id' => $periodo->id

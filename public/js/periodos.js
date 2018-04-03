@@ -1,5 +1,7 @@
 load_periodos();
 
+var periodo_id = null;
+
 function load_periodos(){
 	var table = $('#table_periodos').DataTable({
   	language: {
@@ -56,13 +58,64 @@ function load_periodos(){
         {
           data: 'id',
           render: function ( data, type, row, meta ) {
-            return `<a data-method="delete" href="/admin/escolares/periodos/`+data+`" class="btn-floating btn-meddium waves-effect waves-light"><i class="material-icons circle red">close</i></a>`;
+            return `<a class="btn-floating btn-meddium waves-effect waves-light delete-periodo"><i class="material-icons circle red">close</i></a>`;
           },
           orderable: false, 
           searchable: false
         }
     ]
   });
+  delete_periodo('#table_periodos tbody',table);
   $("select[name$='table_periodos_length']").val('10');
   $("select[name$='table_periodos_length']").material_select();
+}
+
+function delete_periodo (tbody,table){
+  $(tbody).on('click','a.delete-periodo',function(){
+    var data = table.row( $(this).parents('tr') ).data();
+
+    swal({
+      title: 'Desea eliminar el periodo?',
+      text: "Esta acción no se puede revertir",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.value) {
+        periodo_id= data.id;
+        json= {
+          id: periodo_id
+        };
+        destroy_periodo(json);    
+      }
+    })
+  });
+}
+
+function destroy_periodo(json){
+  $.ajax({
+    url: '/admin/escolares/periodos/'+periodo_id,
+    data: json,
+    type: 'DELETE',
+    success: function(result) {
+      load_periodos();
+      swal({
+        type: 'success',
+        title: 'El periodo ha sido eliminado',
+        showConfirmButton: false,
+        timer: 1500
+      });
+      periodo_id = null;
+    },
+    error: function (data) {
+      swal({
+        type: 'error',
+        title: 'Error al eliminar el período',
+        text: 'El período esta relacionado con uno o más datos'
+      });  
+    }
+  });
 }
