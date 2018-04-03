@@ -8,6 +8,9 @@ use App\Models\NivelAcademico;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\AsignaturaStoreRequest;
+use App\Http\Requests\AsignaturaUpdateRequest;
+
 class AsignaturaController extends Controller
 {
     /**
@@ -38,14 +41,8 @@ class AsignaturaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AsignaturaStoreRequest $request)
     {
-        $this->validate($request,[
-            'asignatura' => 'required',
-            'codigo' => 'required|unique:asignaturas,codigo',
-            'creditos' => 'required',
-            'reticula_id' => 'required'
-        ]);
         $asignatura = new Asignatura;
         $asignatura->asignatura = $request->asignatura;
         $asignatura->codigo = $request->codigo;
@@ -84,13 +81,8 @@ class AsignaturaController extends Controller
      * @param  \App\Models\Asignatura  $asignatura
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Asignatura $asignatura)
+    public function update(AsignaturaUpdateRequest $request, Asignatura $asignatura)
     {
-        $this->validate($request,[
-            'asignatura' => 'required',
-            'codigo' => 'required|unique:asignaturas,codigo,'.$request->id,
-            'creditos' => 'required'
-        ]);
         $asignatura = Asignatura::find($asignatura->id);
         $asignatura->asignatura = $request->asignatura;
         $asignatura->codigo = $request->codigo;
