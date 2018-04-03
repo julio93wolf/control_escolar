@@ -40,7 +40,8 @@
 
 @section('script')
 	<script type="text/javascript">
-		$('#fecha_reconocimiento').pickadate({
+		var fecha_reconocimiento = $('#fecha_reconocimiento').val();
+		var $input = $('#fecha_reconocimiento').pickadate({
 			formatSubmit: 'yyyy-mm-dd',
 			selectMonths: true,
 			selectYears: 30,
@@ -48,7 +49,8 @@
 	    clear: 'Limpiar',
 	    close: 'Ok',
 		});
-		$('#fecha_reconocimiento').pickadate().pickadate('picker').set('select', new Date(fecha_reconocimiento).toUTCString()).trigger("change");
+		var picker = $input.pickadate('picker');
+		picker.set('select',fecha_reconocimiento, { format: 'yyyy-mm-dd' });
 	</script>
 	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
 	<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.js"></script>

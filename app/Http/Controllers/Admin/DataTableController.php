@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Estudiante;
 use App\Models\Asignatura;
 use App\Models\Periodo;
+use App\Models\FechaExamen;
 use App\Models\DataTableModel;
 
 class DataTableController extends Controller
@@ -27,6 +28,11 @@ class DataTableController extends Controller
     public function periodos(){
     	$periodos = Periodo::get();
     	return Datatables::of($periodos)->make(true);
+    }
+
+    public function fechas_examenes($periodo_id){
+        $fechas_examenes = DataTableModel::fechas_examenes($periodo_id);
+        return Datatables::of($fechas_examenes)->make(true);    
     }
 
 }

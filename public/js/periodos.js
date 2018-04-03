@@ -42,7 +42,7 @@ function load_periodos(){
         {
           data: 'id',
           render: function ( data, type, row, meta ) {
-            return `<a href="/admin/escolares/periodos/`+data+`/edit" class="btn-floating btn-meddium waves-effect waves-light"><i class="material-icons circle blue">school</i></a>`;
+            return `<a href="/admin/escolares/periodos/fechas_examenes?periodo=`+data+`" class="btn-floating btn-meddium waves-effect waves-light"><i class="material-icons circle blue">school</i></a>`;
           },
           orderable: false, 
           searchable: false
@@ -73,7 +73,6 @@ function load_periodos(){
 function delete_periodo (tbody,table){
   $(tbody).on('click','a.delete-periodo',function(){
     var data = table.row( $(this).parents('tr') ).data();
-
     swal({
       title: 'Desea eliminar el periodo?',
       text: "Esta acción no se puede revertir",

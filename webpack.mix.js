@@ -53,3 +53,8 @@ mix.scripts([
 mix.scripts([
 	'resources/assets/js/app/form.periodo.js'
 ],'public/js/form.periodo.js');
+
+//Fechas Examenes
+mix.scripts([
+	'resources/assets/js/app/fechas_examenes.js'
+],'public/js/fechas_examenes.js');
