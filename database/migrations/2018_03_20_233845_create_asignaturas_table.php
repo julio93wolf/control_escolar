@@ -17,11 +17,7 @@ class CreateAsignaturasTable extends Migration
             $table->increments('id');
             $table->string('codigo',32)->unique();
             $table->string('asignatura',64);
-            $table->tinyInteger('semestre')->nullable();
             $table->tinyInteger('creditos');
-            $table->integer('reticula_id')->unsigned();
-            
-            $table->foreign('reticula_id')->references('id')->on('reticulas');
         });
     }
 

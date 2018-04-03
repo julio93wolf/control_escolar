@@ -6,5 +6,6 @@
     "/js/asignaturas.js": "/js/asignaturas.js",
     "/js/periodos.js": "/js/periodos.js",
     "/js/form.periodo.js": "/js/form.periodo.js",
-    "/js/fechas_examenes.js": "/js/fechas_examenes.js"
+    "/js/fechas_examenes.js": "/js/fechas_examenes.js",
+    "/js/especialidades.js": "/js/especialidades.js"
 }

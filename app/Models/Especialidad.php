@@ -9,7 +9,7 @@ class Especialidad extends Model
     protected $table = 'especialidades';
     
     protected $fillable = [
-    	'nivel_academico_id','clave','especialidad','reconocimiento_oficial','dges','fecha_reconocimiento','descripcion','modalidad_id'
+    	'nivel_academico_id','clave','especialidad','periodos','reconocimiento_oficial','dges','fecha_reconocimiento','descripcion','modalidad_id'
     ];
 
     public $timestamps = false;
@@ -24,5 +24,9 @@ class Especialidad extends Model
 
     public function modalidad(){
         return $this->belongsTo('App\Models\ModalidadEspecialidad','modalidad_id');
+    }
+
+    public function tipo_plan(){
+        return $this->belongsTo('App\Models\TipoPlan','tipo_plan_id');
     }
 }

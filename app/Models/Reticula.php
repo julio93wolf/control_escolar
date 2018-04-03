@@ -21,8 +21,4 @@ class Reticula extends Model
     public function especialidad(){
     	return $this->belongsTo('App\Models\Especialidad','especialida_id');
     }
-
-    public function tipo_plan(){
-        return $this->belongsTo('App\Models\TipoPlan','tipo_plan_id');
-    }
 }

@@ -14,7 +14,7 @@ class TipoPlan extends Model
 
     public $timestamps = false;
 
-    public function reticulas(){
-    	return $this->hasMany('App\Models\Reticula','tipo_plan_id');
+    public function especialidades(){
+    	return $this->hasMany('App\Models\Especialidad','tipo_plan_id');
     }
 }
