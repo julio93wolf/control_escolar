@@ -78,7 +78,7 @@
 
 				</div>
 				<div class="col s6 m4">
-					<a href="{{--route('especialidades.index')--}}">
+					<a href="{{route('especialidades.index')}}">
 						<div class="center promo hoverable">
 							<i class="material-icons">build</i>
 							<p class="promo-caption">Especialidades</p>

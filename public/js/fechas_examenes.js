@@ -203,7 +203,7 @@ function update_fecha_examen(json){
   $.ajax({
     url: '/admin/escolares/periodos/fechas_examenes/'+fecha_examen_id,
     data: json,
-    type: 'put',
+    type: 'PUT',
     success: function(result) {
       fecha_examen_id = null;
       $('#tipo_examen_id').val(1).material_select();

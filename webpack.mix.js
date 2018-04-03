@@ -11,16 +11,12 @@ let mix = require('laravel-mix');
  |
  */
 
-
-
 //Vendor
-
 mix.styles([
 	'resources/assets/css/vendor/materialize.css',
 	'resources/assets/css/vendor/datatables.css',
 	'resources/assets/css/vendor/select2-materialize.css'
 ], 'public/css/vendor.css');
-
 mix.scripts([
 	'resources/assets/js/vendor/jquery-3.3.1.js',
 	'resources/assets/js/vendor/datatables.js',
@@ -30,17 +26,14 @@ mix.scripts([
 ],'public/js/vendor.js');
 
 //App
-
 mix.styles([
 	'resources/assets/css/app/app.css'
 ],'public/css/app.css');
-
 mix.scripts([
 	'resources/assets/js/app/app.js'
 ],'public/js/app.js');
 
 // Asignaturas
-
 mix.scripts([
 	'resources/assets/js/app/asignaturas.js'
 ],'public/js/asignaturas.js');
@@ -49,7 +42,6 @@ mix.scripts([
 mix.scripts([
 	'resources/assets/js/app/periodos.js'
 ],'public/js/periodos.js');
-
 mix.scripts([
 	'resources/assets/js/app/form.periodo.js'
 ],'public/js/form.periodo.js');
@@ -58,3 +50,8 @@ mix.scripts([
 mix.scripts([
 	'resources/assets/js/app/fechas_examenes.js'
 ],'public/js/fechas_examenes.js');
+
+//Especialidades
+mix.scripts([
+	'resources/assets/js/app/especialidades.js'
+],'public/js/especialidades.js');

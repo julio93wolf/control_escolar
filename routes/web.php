@@ -50,6 +50,11 @@ Route::group(['middleware' => ['login']], function () {
 
 			});
 
+			//Especialidades
+			Route::resource('especialidades','Admin\EspecialidadController')->only([
+    		'index', 'store', 'update', 'destroy'
+			]);
+
 		});
 
 		Route::prefix('datatable')->group(function () {

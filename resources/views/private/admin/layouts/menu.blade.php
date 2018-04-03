@@ -7,7 +7,7 @@
 <ul id="dropdown_escolares" class="dropdown-content">
   <li><a href="{{ route('asignaturas.index') }}" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">create</i>Asignaturas</a></li>
   <li><a href="{{ route('periodos.index') }}" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">date_range</i>Periodos</a></li>
-  <li><a href="#!" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">build</i>Especialidades</a></li>
+  <li><a href="{{ route('especialidades.index') }}" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">build</i>Especialidades</a></li>
 </ul>
 
 <ul id="dropdown_configuraciones" class="dropdown-content">
@@ -79,7 +79,7 @@
         <ul>
           <li><a href="{{ route('asignaturas.index') }}"><i class="material-icons blue-text text-darken-2">create</i>Asignaturas</a></li>
           <li><a href="{{ route('periodos.index') }}"><i class="material-icons blue-text text-darken-2">date_range</i>Periodos</a></li>
-          <li><a href="#!"><i class="material-icons blue-text text-darken-2">build</i>Especialidades</a></li>  
+          <li><a href="{{ route('especialidades.index') }}"><i class="material-icons blue-text text-darken-2">build</i>Especialidades</a></li>  
         </ul>
       </div>
     </li>
