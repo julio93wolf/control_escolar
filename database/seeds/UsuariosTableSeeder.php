@@ -17,16 +17,16 @@ class UsuariosTableSeeder extends Seeder
         factory(App\Models\Usuario::class,1500)->create()->each(function(App\Models\Usuario $usuario){
             if($usuario->rol_id == 2){
                 factory(App\Models\Estudiante::class,1)->create([
-                    'dato_general_id' => $usuario->id,
-                    'usuario_id' => $usuario->id
+                    'dato_general_id'   => $usuario->id,
+                    'usuario_id'        => $usuario->id
                 ]);
             }
         });
 
         Usuario::create([
-        	'email' => 'admin@appsamx.com',
+        	'email'    => 'admin@appsamx.com',
         	'password' => bcrypt('Appsa2016'),
-            'rol_id' => 1
+            'rol_id'   => 1
         ]);
     }
 }

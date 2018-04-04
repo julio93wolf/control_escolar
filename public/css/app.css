@@ -375,3 +375,34 @@ div.disabled
   color: rgba(255,255,255,.9);
 
 }
+
+
+/* Cards */
+.card.xsmall{
+  position: relative;
+}
+
+.card.xsmall .card-image, .card.medium .card-image, .card.large .card-image {
+  max-height: 60%;
+  overflow: hidden;
+}
+
+.card.xsmall .card-image + .card-content, .card.medium .card-image + .card-content, .card.large .card-image + .card-content {
+  max-height: 40%;
+}
+
+.card.xsmall .card-content, .card.medium .card-content, .card.large .card-content {
+  max-height: 100%;
+  overflow: hidden;
+}
+
+.card.xsmall .card-action, .card.medium .card-action, .card.large .card-action {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.card.xsmall {
+  height: 150px;
+}

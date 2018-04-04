@@ -11,6 +11,6 @@ class TiposPlanesReticulasTableSeeder extends Seeder
      */
     public function run()
     {
-    	DB::table("tipos_planes_reticulas")->insert([ "id" => 1, "tipo_plan_reticula" => "Default" ]);
+			DB::table("tipos_planes_reticulas")->insert([ "id" => 1, "tipo_plan_reticula" => "Default" ]);
     }
 }

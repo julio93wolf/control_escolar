@@ -55,3 +55,8 @@ mix.scripts([
 mix.scripts([
 	'resources/assets/js/app/especialidades.js'
 ],'public/js/especialidades.js');
+
+//Reticulas
+mix.scripts([
+	'resources/assets/js/app/reticulas.js'
+],'public/js/reticulas.js');

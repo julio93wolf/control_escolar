@@ -54,7 +54,9 @@ as
         dges,
         especialidades.descripcion as descripcion,
         modalidad_id,
-        tipo_plan_especialidad_id
+        modalidad_especialidad,
+        tipo_plan_especialidad_id,
+        tipo_plan_especialidad
     from especialidades
 		join niveles_academicos on niveles_academicos.id = especialidades.nivel_academico_id
         join modalidades_especialidades on modalidades_especialidades.id = especialidades.modalidad_id
