@@ -14,12 +14,14 @@ class Asignatura extends Model
 
     public $timestamps = false;
 
-    public function clases(){
-    	return $this->hasMany('App\Models\Clase','asignatura_id');
+    public function especialidades(){
+        return $this->belongsToMany('App\Models\Especialidad','reticulas','asignatura_id','especialidad_id')
+            ->withPivot('periodo_especialidad','tipo_plan_reticula_id');
     }
 
-    public function reticula(){
-    	return $this->belongsTo('App\Models\Reticula','reticula_id');
+    public function tipos_planes_reticulas(){
+        return $this->belongsToMany('App\Models\TipoPlanReticula','reticulas','asignatura_id','tipo_plan_reticula_id')
+            ->withPivot('periodo_especialidad','especialidad_id');
     }
 
     //Revisar
