@@ -9,7 +9,7 @@
 		<div class="row blue hide-on-small-only">
 			<nav> 
 		    <div class="nav-wrapper blue">
-		      <div class="col s11 offset-s1">
+		      <div class="col s10 offset-s1">
 		        <a href="{{route('admin.menu')}}" class="breadcrumb">Menú</a>
 		        <a href="{{route('admin.menu')}}#escolares" class="breadcrumb">Escolares</a>
 		        <a href="{{route('periodos.index')}}" class="breadcrumb">Periodos</a>

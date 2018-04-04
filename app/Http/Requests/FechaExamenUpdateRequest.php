@@ -21,23 +21,24 @@ class FechaExamenUpdateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+   public function rules()
     {
         return [
-            'tipo_examen_id' => 'required',
-            'fecha_inicio' => 'required|date',
-            'fecha_final' => 'required|date'
+            'tipo_examen_id'    => 'required',
+            'fecha_inicio'      => 'required|date',
+            'fecha_final'       => 'required|date|after_or_equal:fecha_inicio'
         ];
     }
 
     public function messages()
     {
         return [
-            'tipo_examen_id.required' => 'El tipo de examen es requerido',
-            'fecha_inicio_submit.required' => 'La fecha de inicio es requerida',
-            'fecha_inicio_submit.date' => 'El dato tiene que ser una fecha',
-            'fecha_final_submit.required' => 'El tipo de examen es requerido',
-            'fecha_final_submit.date' => 'El dato tiene que ser una fecha'
+            'tipo_examen_id.required'       => 'El tipo de examen es requerido',
+            'fecha_inicio.required'         => 'La fecha de inicio es requerida',
+            'fecha_inicio.date'             => 'El dato tiene que ser una fecha',
+            'fecha_final.required'          => 'El tipo de examen es requerido',
+            'fecha_final.date'              => 'El dato tiene que ser una fecha',
+            'fecha_final.after_or_equal'    => 'La fecha final tiene que ser mayor o igual a la fecha de inicio'
         ];
     }
 }

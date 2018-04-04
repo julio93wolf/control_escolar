@@ -20,8 +20,8 @@ class FechaExamenController extends Controller
     public function index(Request $request)
     {
         return view('private.admin.escolares.fechas_examenes.index',[
-            'periodo' => $request->periodo,
-            'tipos_examenes' => TipoExamen::orderBy('id','ASC')->get()
+            'periodo'           => $request->periodo,
+            'tipos_examenes'    => TipoExamen::orderBy('id','ASC')->get()
         ]);
     }
 
@@ -44,11 +44,13 @@ class FechaExamenController extends Controller
     public function store(FechaExamenStoreRequest $request)
     {
         $fecha_examen = new FechaExamen;
-        $fecha_examen->tipo_examen_id = $request->tipo_examen_id;
-        $fecha_examen->fecha_inicio = $request->fecha_inicio;
-        $fecha_examen->fecha_final = $request->fecha_final;
-        $fecha_examen->periodo_id = $request->periodo_id;
-        $fecha_examen->descripcion = $request->descripcion;
+
+        $fecha_examen->tipo_examen_id   = $request->tipo_examen_id;
+        $fecha_examen->fecha_inicio     = $request->fecha_inicio;
+        $fecha_examen->fecha_final      = $request->fecha_final;
+        $fecha_examen->periodo_id       = $request->periodo_id;
+        $fecha_examen->descripcion      = $request->descripcion;
+
         $fecha_examen->save();
         return ;
     }
@@ -85,10 +87,12 @@ class FechaExamenController extends Controller
     public function update(FechaExamenUpdateRequest $request, FechaExamen $fechas_examene)
     {
         $fecha_examen = FechaExamen::find($fechas_examene->id);
-        $fecha_examen->tipo_examen_id = $request->tipo_examen_id;
-        $fecha_examen->fecha_inicio = $request->fecha_inicio;
-        $fecha_examen->fecha_final = $request->fecha_final;
-        $fecha_examen->descripcion = $request->descripcion;
+
+        $fecha_examen->tipo_examen_id   = $request->tipo_examen_id;
+        $fecha_examen->fecha_inicio     = $request->fecha_inicio;
+        $fecha_examen->fecha_final      = $request->fecha_final;
+        $fecha_examen->descripcion      = $request->descripcion;
+
         $fecha_examen->save();
         return ;
     }

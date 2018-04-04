@@ -24,11 +24,11 @@ class PeriodoUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'anio' => 'required',
-            'periodo' => 'required',
-            'reconocimiento_oficial' => 'required|unique:periodos,reconocimiento_oficial,'.$this->id,
-            'dges' => 'required|unique:periodos,dges,'.$this->id,
-            'fecha_reconocimiento_submit' => 'required|date'
+            'anio'                          => 'required',
+            'periodo'                       => 'required',
+            'reconocimiento_oficial'        => 'required|unique:periodos,reconocimiento_oficial,'.$this->id,
+            'dges'                          => 'required|unique:periodos,dges,'.$this->id,
+            'fecha_reconocimiento_submit'   => 'required|date'
         ];
     }
 

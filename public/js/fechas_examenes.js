@@ -175,14 +175,13 @@ var validator = $("#form_fecha_examen").validate({
 });
 
 function store_fecha_examen(json){
-  console.log(json);
   $.post('/admin/escolares/periodos/fechas_examenes',json,function(data){
     $('#tipo_examen_id').val(1).material_select();
     $('#fecha_inicio').val('');
     $('#fecha_final').val('');
     $('#descripcion').val('');
     Materialize.updateTextFields();
-    load_fechas_examenes();
+    $('#table_fechas_examenes').DataTable().ajax.reload();
     swal({
       type: 'success',
       title: 'El examen ha sido guardado',
@@ -199,7 +198,6 @@ function store_fecha_examen(json){
 }
 
 function update_fecha_examen(json){
-  console.log(json);
   $.ajax({
     url: '/admin/escolares/periodos/fechas_examenes/'+fecha_examen_id,
     data: json,
@@ -213,7 +211,7 @@ function update_fecha_examen(json){
       Materialize.updateTextFields();
       edit_fecha_examen = false;
       $('#cancel_fecha_examen').addClass('hide');
-      load_fechas_examenes();
+      $('#table_fechas_examenes').DataTable().ajax.reload();
       swal({
         type: 'success',
         title: 'La asignatura ha sido actualizada',
@@ -265,7 +263,7 @@ function destroy_fecha_examen(json){
       Materialize.updateTextFields();
       edit_fecha_examen = false;
       $('#cancel_fecha_examen').addClass('hide');
-      load_fechas_examenes();
+      $('#table_fechas_examenes').DataTable().ajax.reload();
       swal({
         type: 'success',
         title: 'El examen ha sido eliminado',

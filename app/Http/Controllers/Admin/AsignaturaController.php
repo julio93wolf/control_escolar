@@ -20,9 +20,7 @@ class AsignaturaController extends Controller
      */
     public function index()
     {
-        return view('private.admin.escolares.asignaturas.index',[
-            'niveles_academicos'   => NivelAcademico::orderBy('id','ASC')->get()
-        ]);
+        return view('private.admin.escolares.asignaturas.index');
     }
 
     /**
@@ -44,9 +42,11 @@ class AsignaturaController extends Controller
     public function store(AsignaturaStoreRequest $request)
     {
         $asignatura = new Asignatura;
+
         $asignatura->asignatura = $request->asignatura;
-        $asignatura->codigo = $request->codigo;
-        $asignatura->creditos = $request->creditos;
+        $asignatura->codigo     = $request->codigo;
+        $asignatura->creditos   = $request->creditos;
+
         $asignatura->save();
         return ;
     }
@@ -83,9 +83,11 @@ class AsignaturaController extends Controller
     public function update(AsignaturaUpdateRequest $request, Asignatura $asignatura)
     {
         $asignatura = Asignatura::find($asignatura->id);
+
         $asignatura->asignatura = $request->asignatura;
-        $asignatura->codigo = $request->codigo;
-        $asignatura->creditos = $request->creditos;
+        $asignatura->codigo     = $request->codigo;
+        $asignatura->creditos   = $request->creditos;
+        
         $asignatura->save();
         return ;
     }

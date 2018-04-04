@@ -22,7 +22,7 @@ class CreateFechasExamenesTable extends Migration
             $table->string('descripcion',255)->nullable();
 
             $table->foreign('tipo_examen_id')->references('id')->on('tipos_examenes');
-            $table->foreign('periodo_id')->references('id')->on('periodos');
+            $table->foreign('periodo_id')->references('id')->on('periodos')->onDelete('cascade');
         });
     }
 

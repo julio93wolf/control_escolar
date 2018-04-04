@@ -24,9 +24,9 @@ class AsignaturaStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'asignatura' => 'required',
-            'codigo' => 'required|unique:asignaturas,codigo',
-            'creditos' => 'required'
+            'asignatura'    => 'required',
+            'codigo'        => 'required|unique:asignaturas,codigo',
+            'creditos'      => 'required'
         ];
     }
 

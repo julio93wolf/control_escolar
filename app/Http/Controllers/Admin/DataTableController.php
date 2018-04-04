@@ -35,4 +35,8 @@ class DataTableController extends Controller
         return Datatables::of($fechas_examenes)->make(true);    
     }
 
+    public function especialidades(){
+        $especialidades = DataTableModel::especialidades();
+        return Datatables::of($especialidades)->make(true);
+    }
 }

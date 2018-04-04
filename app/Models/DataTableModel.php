@@ -14,4 +14,8 @@ class DataTableModel extends Model
   	static function fechas_examenes($periodo_id){
     	return \DB::table('vw_fechas_examenes')->where('periodo_id',$periodo_id)->get();
   	}
+
+		static function especialidades(){
+	    return \DB::table('vw_especialidades')->orderBy('id','desc')->get();
+	  }  	
 }

@@ -39,11 +39,13 @@ class PeriodoController extends Controller
     public function store(PeriodoStoreRequest $request)
     {
         $periodo = new Periodo;
-        $periodo->periodo = $request->periodo;
-        $periodo->anio = $request->anio;
-        $periodo->reconocimiento_oficial = $request->reconocimiento_oficial;
-        $periodo->dges = $request->dges;
-        $periodo->fecha_reconocimiento = $request->fecha_reconocimiento_submit;
+
+        $periodo->periodo                   = $request->periodo;
+        $periodo->anio                      = $request->anio;
+        $periodo->reconocimiento_oficial    = $request->reconocimiento_oficial;
+        $periodo->dges                      = $request->dges;
+        $periodo->fecha_reconocimiento      = $request->fecha_reconocimiento_submit;
+
         $periodo->save();
         return view('private.admin.escolares.periodos.index');
     }
@@ -80,11 +82,13 @@ class PeriodoController extends Controller
     public function update(PeriodoUpdateRequest $request, Periodo $periodo)
     {
         $periodo = Periodo::find($periodo->id);
-        $periodo->periodo = $request->periodo;
-        $periodo->anio = $request->anio;
-        $periodo->reconocimiento_oficial = $request->reconocimiento_oficial;
-        $periodo->dges = $request->dges;
-        $periodo->fecha_reconocimiento = $request->fecha_reconocimiento_submit;
+
+        $periodo->periodo                   = $request->periodo;
+        $periodo->anio                      = $request->anio;
+        $periodo->reconocimiento_oficial    = $request->reconocimiento_oficial;
+        $periodo->dges                      = $request->dges;
+        $periodo->fecha_reconocimiento      = $request->fecha_reconocimiento_submit;
+        
         $periodo->save();
         return view('private.admin.escolares.periodos.index');
     }

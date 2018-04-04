@@ -24,9 +24,9 @@ class AsignaturaUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'asignatura' => 'required',
-            'codigo' => 'required|unique:asignaturas,codigo,'.$this->id,
-            'creditos' => 'required'
+            'asignatura'    => 'required',
+            'codigo'        => 'required|unique:asignaturas,codigo,'.$this->id,
+            'creditos'      => 'required'
         ];
     }
 

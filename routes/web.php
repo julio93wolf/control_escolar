@@ -71,8 +71,11 @@ Route::group(['middleware' => ['login']], function () {
 			//Periodos
 			Route::get('periodos','Admin\DataTableController@periodos')->name('periodos.get');
 
-			//Periodos
+			//Fechas de Examenes
 			Route::get('fechas_examenes/{periodo_id}','Admin\DataTableController@fechas_examenes')->name('fechas_examenes.get');
+
+			//Especialidades
+			Route::get('especialidades','Admin\DataTableController@especialidades')->name('especialidades.get');
 
 		});
 

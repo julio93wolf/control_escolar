@@ -52,27 +52,26 @@ function load_asignaturas(){
   edit_asignatura('#table_asignaturas tbody',table);
 }
 
-$('#btn_nueva_asignatura').on('click',function(){
+$('#create_asignatura').on('click',function(){
 	$('#asignatura').val('');
 	$('#codigo').val('');
 	$('#creditos').val('');
 	Materialize.updateTextFields();
 	new_asignatura = true;
   asignatura_id = null;
-	$('#nueva_asignatura').modal('open');
+	$('#modal_asignatura').modal('open');
 });
 
 function edit_asignatura (tbody,table){
   $(tbody).on('click','a.edit-asignatura',function(){
     var data = table.row( $(this).parents('tr') ).data();
-    console.log(data);
     asignatura_id = data.id;
     $('#asignatura').val(data.asignatura);
     $('#codigo').val(data.codigo);
     $('#creditos').val(data.creditos);
     Materialize.updateTextFields();
     new_asignatura = false;
-    $('#nueva_asignatura').modal('open');
+    $('#modal_asignatura').modal('open');
   });
 }
 
@@ -136,14 +135,14 @@ var validator = $("#form_asignatura").validate({
 
 function store_asignatura(json){
 	$.post('/admin/escolares/asignaturas',json,function(data){
-		load_asignaturas();
+		$('#table_asignaturas').DataTable().ajax.reload();
 		swal({
 		  type: 'success',
 		  title: 'La asignatura ha sido guardada',
 		  showConfirmButton: false,
 		  timer: 1500
 		});
-    $('#nueva_asignatura').modal('close');
+    $('#modal_asignatura').modal('close');
 	}).fail(function(data) {
     var errors = data.responseJSON.errors;
     //var str_errors = '';
@@ -166,14 +165,14 @@ function update_asignatura(json){
     data: json,
     type: 'PUT',
     success: function(result) {
-      load_asignaturas();
+      $('#table_asignaturas').DataTable().ajax.reload();
       swal({
         type: 'success',
         title: 'La asignatura ha sido actualizada',
         showConfirmButton: false,
         timer: 1500
       });
-      $('#nueva_asignatura').modal('close');    
+      $('#modal_asignatura').modal('close');    
     },
     error: function (data) {
       var errors = data.responseJSON.errors;
