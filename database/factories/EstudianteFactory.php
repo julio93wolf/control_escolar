@@ -14,7 +14,6 @@ $factory->define(App\Models\Estudiante::class, function (Faker $faker) {
         'medio_enterado_id' => rand(1,5),
         'periodo_id' => rand(1,15),
         'otros' => $faker->text(100),
-        'usuario_id' => 1,
-        "tipo_plan_reticula_id" => 1
+        'usuario_id' => 1
     ];
 });

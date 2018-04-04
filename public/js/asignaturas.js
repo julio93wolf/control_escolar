@@ -65,7 +65,6 @@ $('#btn_nueva_asignatura').on('click',function(){
 function edit_asignatura (tbody,table){
   $(tbody).on('click','a.edit-asignatura',function(){
     var data = table.row( $(this).parents('tr') ).data();
-    console.log(data);
     asignatura_id = data.id;
     $('#asignatura').val(data.asignatura);
     $('#codigo').val(data.codigo);

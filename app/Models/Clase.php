@@ -22,8 +22,8 @@ class Clase extends Model
     	return $this->hasMany('App\Models\Grupo','clase_id');
     }
 
-    public function reticula(){
-    	return $this->belongsTo('App\Models\Reticula','reticula_id');
+    public function asignatura(){
+    	return $this->belongsTo('App\Models\Asignatura','asignatura_id');
     }
 
     public function docente(){

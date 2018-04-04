@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Reticula;
 
 class AsignaturasTableSeeder extends Seeder
 {
@@ -11,6 +12,11 @@ class AsignaturasTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Asignatura::class,200)->create();
+        $reticulas = Reticula::get();
+        foreach ($reticulas as $key => $reticula) {
+        	factory(App\Models\Asignatura::class,20)->create([
+      			'reticula_id' => $reticula->id
+      		]);
+        }
     }
 }

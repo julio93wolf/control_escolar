@@ -24,11 +24,13 @@ class CreateEspecialidadesTable extends Migration
             $table->date('fecha_reconocimiento');
             $table->string('descripcion',255)->nullable();
             $table->integer('modalidad_id')->unsigned();
-            $table->integer('tipo_plan_especialidad_id')->unsigned();
+            $table->integer('tipo_plan_id')->unsigned();
 
             $table->foreign('nivel_academico_id')->references('id')->on('niveles_academicos');
+
             $table->foreign('modalidad_id')->references('id')->on('modalidades_especialidades');
-            $table->foreign('tipo_plan_especialidad_id')->references('id')->on('tipos_planes_especialidades');
+
+            $table->foreign('tipo_plan_id')->references('id')->on('tipos_planes');
         });
     }
 

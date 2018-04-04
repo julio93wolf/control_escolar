@@ -21,8 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ModalidadesEstudiantesTableSeeder::class);
         $this->call(NacionalidadesTableSeeder::class);
         $this->call(NivelesAcademicosTableSeeder::class);
-        $this->call(TiposPlanesEspecialidadesTableSeeder::class);
-        $this->call(TiposPlanesReticulasTableSeeder::class);
+        $this->call(TiposPlanesTableSeeder::class);
         $this->call(EspecialidadesTableSeeder::class);
         $this->call(EstadosTitulacionesTableSeeder::class);
         $this->call(DatosGeneralesTableSeeder::class);
@@ -30,8 +29,8 @@ class DatabaseSeeder extends Seeder
         $this->call(UsuariosTableSeeder::class);
         $this->call(EmpresasTableSeeder::class);
         $this->call(EstudiantesTrabajosTableSeeder::class);
-        $this->call(AsignaturasTableSeeder::class);
         $this->call(ReticulasTableSeeder::class);
+        $this->call(AsignaturasTableSeeder::class);
         $this->call(TiposExamenesTableSeeder::class);
         $this->call(FechasExamenesTableSeeder::class);
     }

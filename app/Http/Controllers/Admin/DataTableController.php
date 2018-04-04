@@ -21,12 +21,12 @@ class DataTableController extends Controller
     }
 
     public function asignaturas(){
-    	$asignaturas = Asignatura::orderBy('id','desc')->get();
+    	$asignaturas = Asignatura::get();
     	return Datatables::of($asignaturas)->make(true);	
     }
 
     public function periodos(){
-    	$periodos = Periodo::orderBy('id','desc')->get();
+    	$periodos = Periodo::get();
     	return Datatables::of($periodos)->make(true);
     }
 

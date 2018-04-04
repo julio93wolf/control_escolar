@@ -14,9 +14,8 @@ class ReticulasTableSeeder extends Seeder
     {
       	$especialidades = Especialidad::get();
       	foreach ($especialidades as $key => $especialidad) {
-      		factory(App\Models\Reticula::class,25)->create([
-      			'especialidad_id' => $especialidad->id,
-            'periodo_especialidad' => rand(1,$especialidad->periodos)
+      		factory(App\Models\Reticula::class,5)->create([
+      			'especialidad_id' => $especialidad->id
       		]);
       	}
     }
