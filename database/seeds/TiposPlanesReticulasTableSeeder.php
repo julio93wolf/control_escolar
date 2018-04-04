@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class AsignaturasTableSeeder extends Seeder
+class TiposPlanesReticulasTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class AsignaturasTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Asignatura::class,200)->create();
+    	DB::table("tipos_planes_reticulas")->insert([ "id" => 1, "tipo_plan_reticula" => "Default" ]);
     }
 }

@@ -9,7 +9,7 @@ class Estudiante extends Model
     protected $table = 'estudiantes';
     
     protected $fillable = [
-    	'dato_general_id','especialidad_id','estado_id','matricula','semestre','grupo',',modalidad_id','medio_enterado_id','periodo_id','otros','usuario_id'
+    	'dato_general_id','especialidad_id','estado_id','matricula','semestre','grupo',',modalidad_id','medio_enterado_id','periodo_id','otros','usuario_id','tipo_plan_reticula_id'
     ];
 
     public $timestamps = false;
@@ -66,5 +66,9 @@ class Estudiante extends Model
     public function usuario(){
     	return $this->belongsTo('App\Models\Usuario','usuario_id');
     }
+
+    public function tipo_plan_reticula(){
+        return $this->belongsTo('App\Models\TipoPlanReticula','tipo_plan_reticula_id');
+    }    
 
 }
