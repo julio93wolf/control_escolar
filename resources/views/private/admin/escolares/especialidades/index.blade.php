@@ -75,6 +75,7 @@
 			</div>
 		</div>
 		<div class="col s10 offset-s1">
+			<br>
 			<div class="section">
 				<div class="input-field col s12 l6">
 					<i class="material-icons prefix">list</i>
@@ -96,7 +97,8 @@
 					<label>Especialidad</label>
 				</div>
 			</div>
-			<h5>Reticula de: </h5>
+			<br>
+			<h4 id="name_reticula">Reticula de: </h4>
 			<div id="section_reticula" class="section">
 				
 			</div>
@@ -104,6 +106,8 @@
 	</div>
 
 	@include('private.admin.escolares.especialidades.modals.especialidades')
+
+	@include('private.admin.escolares.especialidades.modals.reticulas')
 
 	<div class="fixed-action-btn hide-on-med-and-up">
     <a href="#!" class="btn-floating btn-large blue darken-2">

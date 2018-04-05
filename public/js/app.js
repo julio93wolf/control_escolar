@@ -38,4 +38,6 @@ $(document).ready(function(){
 	$('.modal').modal();
 
   $('ul.tabs').tabs('select_tab', 'tab_id', {swipeable: true});
+
+  $('.js-example-basic-single').select2();
 });

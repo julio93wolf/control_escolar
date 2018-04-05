@@ -58,7 +58,10 @@ Route::group(['middleware' => ['login']], function () {
 			]);
 
 			//Reticulas
-			Route::get('reticulas/asignaturas','Admin\AsignaturaReticulaController@asignaturas_periodo');
+			Route::resource('reticulas','Admin\ReticulaController')->only([
+				'index','store','destroy'
+			]);
+			Route::get('reticulas/asignaturas','Admin\AsignaturaReticulaController@asignaturas_periodo')->name('reticulas.asignaturas');
 
 		});
 
@@ -85,11 +88,14 @@ Route::group(['middleware' => ['login']], function () {
 		//Selects
 		Route::prefix('select')->group(function () {
 
-			//Asignaturas
-			Route::get('especialidades/{nivel_academico}','Admin\SelectController@especialidades')->name('select.estudiantes');
+			//Especialidades
+			Route::get('especialidades_nivel/{nivel_academico}','Admin\SelectController@especialidades_nivel')->name('select.especialidades_nivel');
 			
 			//Reticulas
-			Route::get('reticulas/{especialidad}','Admin\SelectController@reticulas')->name('select.reticulas');
+			//Route::get('reticulas/{especialidad}','Admin\SelectController@reticulas')->name('select.reticulas');
+
+			//Asignaturas Reticula
+			Route::get('asignaturas_reticula/{especialidad_id}','Admin\SelectController@asignaturas_reticula')->name('select.asignaturas_reticula');
 
 		});
 		
