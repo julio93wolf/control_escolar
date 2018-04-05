@@ -72,22 +72,7 @@ class EspecialidadController extends Controller
      */
     public function show(Especialidad $especialidade)
     {
-        $response = [];
-        $especialidad   = Especialidad::find($especialidade->id);
-        $asignaturas = $especialidad->asignaturas;
-
-        /*
-        foreach ($especialidad->asignaturas as $key => $value) {
-            # code...
-        }*/
-
-        
-        
-        $response = [
-            'especialidad'  => $especialidad,
-            'asignaturas'   => $asignaturas
-        ];
-        return $response;
+        return $especialidad   = Especialidad::find($especialidade->id);
     }
 
     /**

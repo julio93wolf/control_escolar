@@ -1,5 +1,8 @@
 load_especialidades();
 
+var periodo_especialidad = null;
+var especialidad_id = null;
+
 function load_especialidades (){
 	var nivel_academico_id = $('#nivel_academico').val();
 	$.get('/admin/select/especialidades/' + nivel_academico_id,function(data) {
@@ -24,40 +27,46 @@ $('#especialidad_id').change(function(){
 });
 
 function load_reticula (){
-	var especialidad_id = $('#especialidad_id').val();
+	especialidad_id = $('#especialidad_id').val();
 	$.get('/admin/escolares/especialidades/' + especialidad_id,function(data){
-		
+		var especialidad = data;		
 		$('#section_reticula').empty();
-		var especialidad = data.especialidad;
-		var asignaturas = data.asignaturas;
-
-		console.log(asignaturas);
-
 		for (var i = 1; i <= especialidad.periodos; i++) {
-
-			var asignaturas_periodo = ``;
-
-			for (var j = 0; j < asignaturas.length; j++) {
-				var asignatura = asignaturas[j];
-				if(asignatura.pivot.periodo_especialidad == i){
-					asignaturas_periodo += print_card(asignatura);
-				}
-			}
-
 			$('#section_reticula').append(`
 				<div class="row">
 					<h5>Periodo `+i+`:</h5>
 					<div class="divider"></div><br>
 					<div class="row">
-						<div="col s12">
-							`+asignaturas_periodo+new_card()+`
+						<div id="periodo_`+i+`_asignaturas" class="col s12">
 						</div>
 					</div>
 				</div>
 			`);
+			asignaturas_periodo(i);
 		}
 	}).fail(function() {
 		swal("Error", "Ocurrio un error al cargar la reticula.", "error");
+	});
+}
+
+function asignaturas_periodo (periodo){
+	json = {
+		especialidad_id: especialidad_id,
+		periodo_especialidad: periodo
+	};
+	$('#periodo_'+periodo+'_asignaturas').empty();
+	var asignaturas_periodo = ``;
+	$.get('/admin/escolares/reticulas/asignaturas',json,function(data){
+		var asignaturas = data;
+		for (var i = 0; i < asignaturas.length; i++) {
+			var asignatura = asignaturas[i];
+			asignaturas_periodo += print_card(asignatura);
+		}
+		asignaturas_periodo += new_card(periodo);
+		$('#periodo_'+periodo+'_asignaturas').append(asignaturas_periodo);
+		add_periodo(periodo);
+	}).fail(function() {
+		swal("Error", "Ocurrio un error al cargar las asignaturas.", "error");
 	});
 }
 
@@ -78,7 +87,7 @@ function print_card(asignatura){
   return card;
 }
 
-function new_card(){
+function new_card(periodo){
 	var card = 
 	`<div class="col s12 m6 l4 xl3">
 		<div class="card xsmall valign-wrapper">
@@ -86,9 +95,22 @@ function new_card(){
         <div class="valign-wrapper">
 				  <h5 class="center-align" style="width: 100%;">Nueva Asignatura</h5>
 				</div>
-				<a class="btn-floating halfway-fab waves-effect waves-light green" style="position: absolute; left:78%; top:-10%;"><i class="material-icons">add</i></a>
+				<a 
+					id="add_periodo_`+periodo+`"
+					class="btn-floating halfway-fab waves-effect waves-light green" 
+					style="position: absolute; left:78%; top:-10%;"
+					periodo_especialidad="`+periodo+`" >
+					<i class="material-icons">add</i>
+				</a>
       </div>
      </div>
   </div>`;
   return card;
+}
+
+function add_periodo(periodo){
+	$('#add_periodo_'+periodo).on('click', function(event) {
+		periodo_especialidad = $(this).attr('periodo_especialidad');
+		console.log(periodo_especialidad);
+	});
 }

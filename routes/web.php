@@ -57,6 +57,9 @@ Route::group(['middleware' => ['login']], function () {
     		'index', 'show', 'store', 'update', 'destroy'
 			]);
 
+			//Reticulas
+			Route::get('reticulas/asignaturas','Admin\AsignaturaReticulaController@asignaturas_periodo');
+
 		});
 
 		//Datatable
