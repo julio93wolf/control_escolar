@@ -23,13 +23,4 @@ class Asignatura extends Model
         return $this->belongsToMany('App\Models\TipoPlanReticula','reticulas','asignatura_id','tipo_plan_reticula_id')
             ->withPivot('periodo_especialidad','especialidad_id');
     }
-
-    //Revisar
-    public function requisitos(){
-    	return $this->belongsToMany('App\Models\Asignatura','requisitos_asignaturas','asignatura_id','asignatura_requisito');
-    }
-
-    public function requisito(){
-        return $this->belongsToMany('App\Models\Asignatura','requisitos_asignaturas','asignatura_requisito','asignatura_id');
-    }
 }

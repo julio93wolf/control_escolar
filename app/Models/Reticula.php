@@ -29,4 +29,8 @@ class Reticula extends Model
     public function tipo_plan_reticula(){
         return $this->belongsTo('App\Models\TipoPlanReticula','tipo_plan_reticula_id');
     }
+
+    public function requisitos(){
+        return $this->belongsToMany('App\Models\Reticula','requisitos_reticulas','reticula_id','reticula_requisito_id');
+    }
 }
