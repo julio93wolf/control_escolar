@@ -38,8 +38,8 @@
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">account_circle</i>
-					<input id="periodos" name="periodos" type="number" class="validate" required="" aria-required="true">
-					<label for="periodos">Perdiodos a cursar</label>
+					<input id="periodos" name="periodos" type="number" min="1" step="1" value="1" class="validate" required="" aria-required="true">
+					<label for="periodos">Períodos a cursar</label>
 				</div>
 			</div>
 

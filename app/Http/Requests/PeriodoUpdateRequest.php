@@ -24,7 +24,7 @@ class PeriodoUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'anio'                          => 'required',
+            'anio'                          => 'required|integer|min:1950',
             'periodo'                       => 'required',
             'reconocimiento_oficial'        => 'required|unique:periodos,reconocimiento_oficial,'.$this->id,
             'dges'                          => 'required|unique:periodos,dges,'.$this->id,
@@ -35,8 +35,20 @@ class PeriodoUpdateRequest extends FormRequest
     public function messages()
     {
         return [
-            'reconocimiento_oficial.unique' => 'El reconocimiento ya ha sido utilizado',
-            'dges.unique'  => 'El DGES ya ha sido utilizado'
+            'anio.required'                         => 'El año es requerido',
+            'anio.integer'                          => 'El año tiene que ser un número entero',
+            'anio.min'                              => 'El año tiene que ser mínimo 1950',
+
+            'periodo.required'                      => 'El período es requerido',
+
+            'reconocimiento_oficial.required'       => 'El reconocimiento oficial es requerido',
+            'reconocimiento_oficial.unique'         => 'El reconocimiento oficial ya ha está en uso',
+
+            'dges.unique'                           => 'El DGES es requerido',
+            'dges.unique'                           => 'El DGES ya está en uso',
+
+            'fecha_reconocimiento_submit.required'  => 'La fecha de reconocimiento es requerida',
+            'fecha_reconocimiento_submit.date'      => 'El dato tiene que ser una fecha'
         ];
     }
 }

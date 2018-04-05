@@ -31,21 +31,21 @@ var validator = $("#form_periodo").validate({
 	},
 	messages: {
 		anio: {
-      required: "Ingresa un año",
-      digits: "Solo se pueden ingresar números",
-      min: "El año minimo es 1950"
+      required: "El año es requerido",
+      digits: "El año tiene que ser un número entero",
+      min: "El año tiene que ser mínimo 1950"
     },
     periodo: {
-      required: "Ingresa un periodo"
+      required: "El período es requerido"
     },
     reconocimiento_oficial: {
-      required: "Ingresa su reconocimiento oficial"
+      required: "El reconocimiento oficial es requerido"
     },
     dges: {
-      required: "Ingresa su DGES"
+      required: "El DGES es requerido"
     },
     fecha_reconocimiento: {
-      required: "Ingresa una fecha de reconocimiento"
+      required: "La fecha de reconocimiento es requerida"
     }
   }
 });

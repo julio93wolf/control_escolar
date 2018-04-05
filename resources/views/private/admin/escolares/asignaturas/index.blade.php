@@ -40,17 +40,17 @@
 			<table id="table_asignaturas" class="display highlight" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th>Codigo</th>
+                <th>Código</th>
                 <th>Asignatura</th>
-                <th>Creditos</th>
+                <th>Créditos</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
-                <th>Codigo</th>
+                <th>Código</th>
                 <th>Asignatura</th>
-                <th>Creditos</th>
+                <th>Créditos</th>
                 <th>Acciones</th>
             </tr>
         </tfoot>
@@ -87,7 +87,7 @@
 				<div class="input-field col s12 l6">
 					<i class="material-icons prefix">vpn_key</i>
 					<input type="text" id="codigo" name="codigo" required="" aria-required="true">
-					<label for="codigo">Codigo</label>
+					<label for="codigo">Código</label>
 				</div>
 
 				<div class="col s6 l3  right-align">
@@ -103,8 +103,8 @@
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">exposure_plus_1</i>
-					<input type="number" id="creditos" name="creditos" required="" aria-required="true">
-					<label for="creditos">Creditos</label>
+					<input type="number" id="creditos" min="1" step="1" name="creditos" required="" aria-required="true" value="1">
+					<label for="creditos">Créditos</label>
 				</div>
 			</div>	
 		</div>

@@ -36,7 +36,7 @@ function load_reticula (){
 		for (var i = 1; i <= especialidad.periodos; i++) {
 			$('#section_reticula').append(`
 				<div class="row">
-					<h5>Periodo `+i+`:</h5>
+					<h5>Período `+i+`:</h5>
 					<div class="divider"></div><br>
 					<div class="row">
 						<div id="periodo_`+i+`_asignaturas" class="col s12">
@@ -46,7 +46,7 @@ function load_reticula (){
 			`);
 			asignaturas_periodo(i);
 		}
-		$('#name_reticula').text('Reticula de '+ $('#nivel_academico :selected').text() + ' en ' + $('#especialidad_id :selected').text());
+		$('#name_reticula').text('Retícula de '+ $('#nivel_academico :selected').text() + ' en ' + $('#especialidad_id :selected').text());
 	}).fail(function() {
 		swal("Error", "Ocurrio un error al cargar la reticula.", "error");
 	});
@@ -146,7 +146,7 @@ $('a.delete-asignatura').on('click',function(){
 
 function create_reticula(periodo){
 	load_asignaturas();
-	$('#title_modal_reticula').text('Agregar asignatura al periodo '+periodo);
+	$('#title_modal_reticula').text('Agregar asignatura al período '+periodo);
 	$('#modal_reticula').modal('open');
 }
 
@@ -187,8 +187,8 @@ var validator = $("#form_reticula").validate({
 	messages: {
     creditos:{
     	required:  "La asginatura es requerida",
-    	digits: "La asignatura debe tener un valor mayor a 1",
-    	min: "La asignatura debe tener un valor mayor a 1"
+    	digits: "La asignatura tiene que ser un número entero",
+    	min: "La asignatura tiene que ser mínimo 1"
     }
   },
   submitHandler: function(form) {

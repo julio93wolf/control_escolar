@@ -82,14 +82,40 @@ $('#create_especialidad').on('click',function(){
   $('#nivel_academico_id').val(1).material_select();
   $('#especialidad').val('');
   $('#clave').val('');
-  $('#periodos').val('');
+  $('#periodos').val('1');
   $('#descripcion').val('');
   $('#modalidad_id').val(1).material_select();
   $('#tipo_plan_especialidad_id').val(1).material_select();
   $('#reconocimiento_oficial').val('');
   $('#fecha_reconocimiento').val('');
   $('#dges').val('');
+
+  $("label[for='nivel_academico_id']").attr('data-error','');
+  $("label[for='especialidad']").attr('data-error','');
+  $("label[for='clave']").attr('data-error','');
+  $("label[for='periodos']").attr('data-error','');
+  $("label[for='descripcion']").attr('data-error','');
+  $("label[for='modalidad_id']").attr('data-error','');
+  $("label[for='tipo_plan_especialidad_id']").attr('data-error','');
+  $("label[for='reconocimiento_oficial']").attr('data-error','');
+  $("label[for='fecha_reconocimiento']").attr('data-error','');
+  $("label[for='dges']").attr('data-error','');
+  
+  $('#nivel_academico_id').removeClass('invalid');
+  $('#especialidad').removeClass('invalid');
+  $('#clave').removeClass('invalid');
+  $('#periodos').removeClass('invalid');
+  $('#descripcion').removeClass('invalid');
+  $('#modalidad_id').removeClass('invalid');
+  $('#tipo_plan_especialidad_id').removeClass('invalid');
+  $('#reconocimiento_oficial').removeClass('invalid');
+  $('#fecha_reconocimiento').removeClass('invalid');
+  $('#dges').removeClass('invalid');
+
   Materialize.updateTextFields();
+
+
+
   new_especialidad = true;
   especialidad_id = null;
   $('#modal_especialidad').modal('open');
@@ -99,6 +125,28 @@ function edit_especialidad (tbody,table){
   $(tbody).on('click','a.edit-especialidad',function(){
     var data = table.row( $(this).parents('tr') ).data();
     especialidad_id = data.id;
+    
+    $("label[for='nivel_academico_id']").attr('data-error','');
+    $("label[for='especialidad']").attr('data-error','');
+    $("label[for='clave']").attr('data-error','');
+    $("label[for='periodos']").attr('data-error','');
+    $("label[for='descripcion']").attr('data-error','');
+    $("label[for='modalidad_id']").attr('data-error','');
+    $("label[for='tipo_plan_especialidad_id']").attr('data-error','');
+    $("label[for='reconocimiento_oficial']").attr('data-error','');
+    $("label[for='fecha_reconocimiento']").attr('data-error','');
+    $("label[for='dges']").attr('data-error','');
+    
+    $('#nivel_academico_id').removeClass('invalid');
+    $('#especialidad').removeClass('invalid');
+    $('#clave').removeClass('invalid');
+    $('#periodos').removeClass('invalid');
+    $('#descripcion').removeClass('invalid');
+    $('#modalidad_id').removeClass('invalid');
+    $('#tipo_plan_especialidad_id').removeClass('invalid');
+    $('#reconocimiento_oficial').removeClass('invalid');
+    $('#fecha_reconocimiento').removeClass('invalid');
+    $('#dges').removeClass('invalid');
     
     $('#nivel_academico_id').val(data.nivel_academico_id).material_select();
     $('#especialidad').val(data.especialidad);
@@ -142,7 +190,8 @@ var validator = $("#form_especialidad").validate({
   rules: {
     nivel_academico_id: {
       required: true,
-      digits: true
+      digits: true,
+      min: 1
     },
     especialidad: {
       required: true
@@ -157,11 +206,13 @@ var validator = $("#form_especialidad").validate({
     },
     modalidad_id: {
       required: true,
-      digits: true
+      digits: true,
+      min: 1
     },
     tipo_plan_especialidad_id: {
       required: true,
-      digits: true
+      digits: true,
+      min: 1
     },
     reconocimiento_oficial: {
       required: true
@@ -175,27 +226,30 @@ var validator = $("#form_especialidad").validate({
   },
   messages: {
    nivel_academico_id: {
-      required: "El nivel academico es requerido",
-      digits: "Solo se aceptan números positivos"
+      required: "El nivel académico es requerido",
+      digits: "El nivel académico tiene que ser un número entero",
+      min: "El nivel académico tiene que ser mínimo 1"
     },
     especialidad: {
       required: "El nombre de la especialidad es requerido"
     },
     clave: {
-      required: "La clave única de la especialidad es requerida"
+      required: "La clave es requerida"
     },
     periodos: {
       required: "El número de periodos es requerido",
-      digits: "Solo se aceptan números positivos",
-      min: "El valor tiene que se mayor a 1"
+      digits: "El número de periodos tiene que ser un numero entero",
+      min: "El número de periodos tiene que ser mínimo 1"
     },
     modalidad_id: {
       required: "La modalidad es requerida",
-      digits: "Solo se aceptan números positivos"
+      digits: "La modalidad tiene que ser un número entero",
+      min: "La modalidad tiene que ser mínimo 1"
     },
     tipo_plan_especialidad_id: {
       required: "El tipo de plan es requerido",
-      digits: "Solo se aceptan números positivos"
+      digits: "Solo se aceptan números positivos",
+      min: "El tipo de plan tiene que ser mínimo 1"
     },
     reconocimiento_oficial: {
       required: "El reconocimiento oficial es requerido"

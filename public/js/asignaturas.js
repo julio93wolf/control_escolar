@@ -55,8 +55,17 @@ function load_asignaturas(){
 $('#create_asignatura').on('click',function(){
 	$('#asignatura').val('');
 	$('#codigo').val('');
-	$('#creditos').val('');
-	Materialize.updateTextFields();
+	$('#creditos').val('1');
+
+  $("label[for='asignatura']").attr('data-error','');
+  $("label[for='codigo']").attr('data-error','');
+  $("label[for='creditos']").attr('data-error','');
+
+  $('#asignatura').removeClass('invalid');
+  $('#codigo').removeClass('invalid');
+  $('#creditos').removeClass('invalid');
+
+  Materialize.updateTextFields();
 	new_asignatura = true;
   asignatura_id = null;
 	$('#modal_asignatura').modal('open');
@@ -66,6 +75,15 @@ function edit_asignatura (tbody,table){
   $(tbody).on('click','a.edit-asignatura',function(){
     var data = table.row( $(this).parents('tr') ).data();
     asignatura_id = data.id;
+
+    $("label[for='asignatura']").attr('data-error','');
+    $("label[for='codigo']").attr('data-error','');
+    $("label[for='creditos']").attr('data-error','');
+
+    $('#asignatura').removeClass('invalid');
+    $('#codigo').removeClass('invalid');
+    $('#creditos').removeClass('invalid');
+
     $('#asignatura').val(data.asignatura);
     $('#codigo').val(data.codigo);
     $('#creditos').val(data.creditos);
@@ -89,28 +107,28 @@ $.validator.setDefaults({
 var validator = $("#form_asignatura").validate({
 	rules: {
     asignatura: {
-        required: true
+      required: true
     },
     codigo: {
     	required: true
     },
     creditos: {
     	required: true,
-    	digits: true,
+    	digits:true,
     	min: 1
     }
 	},
 	messages: {
 		asignatura:{
-			required: "Ingresa el nombre de la asignatura"
+			required: "La asignatura es requerida"
     },
     codigo: {
-     	required:  "Ingresa un código unico"
+     	required: "El código es requerido"
     },
     creditos:{
-    	required:  "Ingresa el numero de creditos",
-    	digits: "El credito debe tener un valor mayor a 1",
-    	min: "El credito debe tener un valor mayor a 1"
+    	required: "El número de creditos es requerido",
+    	digits: "El número de creditos tiene que ser un número entero",
+    	min: "El número de creditos mínimos es 1"
     }
   },
   submitHandler: function(form) {
@@ -145,17 +163,10 @@ function store_asignatura(json){
     $('#modal_asignatura').modal('close');
 	}).fail(function(data) {
     var errors = data.responseJSON.errors;
-    //var str_errors = '';
     for(var error in errors) {
-      //str_errors += ''+errors[error]+'<br>';
       $("label[for='"+error+"']").attr('data-error',errors[error]);
       $("#"+error+"").addClass('invalid');
     }
-		/*swal({
-			type: 'error',
-			title: 'Error al guardar la asignatura',
-      html: str_errors
-		});*/
 	});
 }
 

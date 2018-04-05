@@ -72,7 +72,7 @@
 					<a href="{{route('periodos.index')}}">
 						<div class="center promo hoverable">
 							<i class="material-icons">date_range</i>
-							<p class="promo-caption">Periodos</p>
+							<p class="promo-caption">Períodos</p>
 						</div>
 					</a>
 

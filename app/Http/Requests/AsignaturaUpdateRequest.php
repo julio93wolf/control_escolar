@@ -26,14 +26,21 @@ class AsignaturaUpdateRequest extends FormRequest
         return [
             'asignatura'    => 'required',
             'codigo'        => 'required|unique:asignaturas,codigo,'.$this->id,
-            'creditos'      => 'required'
+            'creditos'      => 'required|integer|min:1'
         ];
     }
 
     public function messages()
     {
         return [
-            'codigo.unique' => 'El codigo ya ha sido utilizado',
+            'asignatura.required'   => 'La asignatura es requerida',
+
+            'codigo.required'       => 'El código es requerido',
+            'codigo.unique'         => 'Este código ya está en uso',
+            
+            'creditos.required'     => 'El número de creditos es requerido',
+            'creditos.integer'      => 'El número de creditos tiene que ser un número entero',
+            'creditos.min'          => 'El número de creditos mínimos es 1'
         ];
     }
 }

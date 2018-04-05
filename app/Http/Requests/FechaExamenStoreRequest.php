@@ -24,10 +24,10 @@ class FechaExamenStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'tipo_examen_id'    => 'required',
+            'tipo_examen_id'    => 'required|integer|min:1',
             'fecha_inicio'      => 'required|date',
             'fecha_final'       => 'required|date|after_or_equal:fecha_inicio',
-            'periodo_id'        => 'required'
+            'periodo_id'        => 'required|integer'
         ];
     }
 
@@ -35,12 +35,19 @@ class FechaExamenStoreRequest extends FormRequest
     {
         return [
             'tipo_examen_id.required'       => 'El tipo de examen es requerido',
+            'tipo_examen_id.integer'        => 'El tipo de examen tiene que ser un número entero',
+            'tipo_examen_id.min'            => 'El tipo de examen tiene que ser mínimo 1',
+
             'fecha_inicio.required'         => 'La fecha de inicio es requerida',
             'fecha_inicio.date'             => 'El dato tiene que ser una fecha',
-            'fecha_final.required'          => 'El tipo de examen es requerido',
+
+            'fecha_final.required'          => 'El fecha final es requerida',
             'fecha_final.date'              => 'El dato tiene que ser una fecha',
             'fecha_final.after_or_equal'    => 'La fecha final tiene que ser mayor o igual a la fecha de inicio',
-            'periodo_id.required'           => 'El periodo es requerido'
+
+            'periodo_id.required'           => 'El período es requerido',
+            'periodo_id.integer'            => 'El período tiene que ser un número entero',
+            'periodo_id.min'                => 'El período tiene que ser mínimo 1'
         ];
     }
 }

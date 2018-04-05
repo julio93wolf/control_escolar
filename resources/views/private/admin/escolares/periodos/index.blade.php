@@ -1,7 +1,7 @@
 @extends('private.admin.layouts.scaffold')
 
 @section('title')
-	UNICEBA - Periodos
+	UNICEBA - Períodos
 @endsection
 
 @section('content')
@@ -23,13 +23,13 @@
 				<br>
 			</div>
 			<div class="col s10 offset-s1">
-					<h5>Periodos</h5>				
+					<h5>Períodos</h5>				
 			</div>
 			<div class="col s10 offset-s1 m5 offset-m1">
-					<p>Lista de los periodos escolares.</p>
+					<p>Lista de los períodos escolares.</p>
 			</div>
 			<div class="col m5 right-align hide-on-small-only">
-					<a href="{{route('periodos.create')}}" class="waves-effect waves-light btn center-align blue darken-2"><i class="material-icons left">add</i>Nuevo periodo</a>
+					<a href="{{route('periodos.create')}}" class="waves-effect waves-light btn center-align blue darken-2"><i class="material-icons left">add</i>Nuevo período</a>
 			</div>
 		</div>
 	</div>
@@ -40,24 +40,24 @@
 			<table id="table_periodos" class="display highlight" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th>Periodo</th>
+                <th>Período</th>
                 <th>Año</th>
-                <th>Reconocimiento oficial</th>
+                <th>Reconocimiento Oficial</th>
                 <th>DGES</th>
                 <th>Fecha de Reconocimiento</th>
-                <th>Fecha de Examenes</th>
+                <th>Fecha de Exámenes</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
-                <th>Periodo</th>
+                <th>Período</th>
                 <th>Año</th>
-                <th>Reconocimiento oficial</th>
+                <th>Reconocimiento Oficial</th>
                 <th>DGES</th>
                 <th>Fecha de Reconocimiento</th>
-                <th>Fecha de Examenes</th>
+                <th>Fecha de Exámenes</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
             </tr>

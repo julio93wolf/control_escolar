@@ -2,7 +2,7 @@
 	<div class="input-field col s12">
 		<i class="material-icons prefix">account_circle</i>
 		<input id="periodo" name="periodo" type="text" class="validate" required="" aria-required="true" value="@if(old('periodo')){{ old('periodo') }}@elseif(isset($periodo)){{ $periodo->periodo }}@endif">
-		<label for="periodo" >Periodo</label>
+		<label for="periodo" >Período</label>
 	</div>
 </div>
 

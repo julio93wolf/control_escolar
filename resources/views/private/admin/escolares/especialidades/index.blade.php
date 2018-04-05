@@ -44,7 +44,7 @@
 			<table id="table_especialidades" class="display highlight" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th>Codigo</th>
+                <th>Código</th>
                 <th>Especialidad</th>
                 <th>Detalles</th>
                 <th>Acciones</th>
@@ -68,7 +68,7 @@
 		<div class="row blue white-text">
 			<div class="hide-on-med-and-up"><br></div>
 			<div class="col s10 offset-s1">
-				<h5>Reticulas</h5>				
+				<h5>Retículas</h5>				
 			</div>
 			<div class="col s10 offset-s1 m5 offset-m1">
 				<p>Gestor de reticulas.</p>
@@ -98,7 +98,7 @@
 				</div>
 			</div>
 			<br>
-			<h4 id="name_reticula">Reticula de: </h4>
+			<h4 id="name_reticula">Retícula de </h4>
 			<div id="section_reticula" class="section">
 				
 			</div>

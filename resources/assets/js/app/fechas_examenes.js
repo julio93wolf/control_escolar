@@ -66,6 +66,17 @@ function action_fecha_examen (tbody,table){
   $(tbody).on('click','a.edit-fecha-examen',function(){
     var data = table.row( $(this).parents('tr') ).data();
     fecha_examen_id = data.id;
+
+    $("label[for='tipo_examen_id']").attr('data-error','');
+    $("label[for='fecha_inicio']").attr('data-error','');
+    $("label[for='fecha_final']").attr('data-error','');
+    $("label[for='periodo_id']").attr('data-error','');
+
+    $('#tipo_examen_id').removeClass('invalid');
+    $('#fecha_inicio').removeClass('invalid');
+    $('#fecha_final').removeClass('invalid');
+    $('#periodo_id').removeClass('invalid');
+
     $('#tipo_examen_id').val(data.tipo_examen_id).material_select();
     var $input_fecha_inicio = $('#fecha_inicio').pickadate({
       formatSubmit: 'yyyy-mm-dd',
@@ -106,6 +117,17 @@ $('#cancel_fecha_examen').on('click',function(){
     $('#fecha_inicio').val('');
     $('#fecha_final').val('');
     $('#descripcion').val('');
+
+    $("label[for='tipo_examen_id']").attr('data-error','');
+    $("label[for='fecha_inicio']").attr('data-error','');
+    $("label[for='fecha_final']").attr('data-error','');
+    $("label[for='periodo_id']").attr('data-error','');
+
+    $('#tipo_examen_id').removeClass('invalid');
+    $('#fecha_inicio').removeClass('invalid');
+    $('#fecha_final').removeClass('invalid');
+    $('#periodo_id').removeClass('invalid');
+
     Materialize.updateTextFields();
     edit_fecha_examen = false;
     $('#cancel_fecha_examen').addClass('hide');
@@ -125,7 +147,9 @@ $.validator.setDefaults({
 var validator = $("#form_fecha_examen").validate({
   rules: {
     tipo_examen_id: {
-      required: true
+      required: true,
+      digits:true,
+      min: 1
     },
     fecha_inicio: {
       required: true
@@ -134,21 +158,27 @@ var validator = $("#form_fecha_examen").validate({
       required: true
     },
     periodo_id: {
-      required: true
+      required: true,
+      digits:true,
+      min: 1
     }
   },
   messages: {
     tipo_examen_id: {
-      required: "El tipo de examen es requerido"
+      required: "El tipo de examen es requerido",
+      digits:"El tipo de examen tiene que ser un número entero",
+      min: "El tipo de examen tiene que ser mínimo 1"
     },
     fecha_inicio: {
-      required: "La fecha de inicio es requerido"
+      required: "La fecha de inicio es requerida"
     },
     fecha_final: {
-      required: "La fecha de termino es requerido"
+      required: "El fecha final es requerida"
     },
     periodo_id: {
-      required: "El periodo es requerido"
+      required: "El período es requerido",
+      digits:"El período tiene que ser un número entero",
+      min: "El período tiene que ser mínimo 1"
     }
   },
   submitHandler: function(form) {
@@ -256,6 +286,17 @@ function destroy_fecha_examen(json){
     type: 'DELETE',
     success: function(result) {
       fecha_examen_id = null;
+
+      $("label[for='tipo_examen_id']").attr('data-error','');
+      $("label[for='fecha_inicio']").attr('data-error','');
+      $("label[for='fecha_final']").attr('data-error','');
+      $("label[for='periodo_id']").attr('data-error','');
+
+      $('#tipo_examen_id').removeClass('invalid');
+      $('#fecha_inicio').removeClass('invalid');
+      $('#fecha_final').removeClass('invalid');
+      $('#periodo_id').removeClass('invalid');
+
       $('#tipo_examen_id').val(1).material_select();
       $('#fecha_inicio').val('');
       $('#fecha_final').val('');
