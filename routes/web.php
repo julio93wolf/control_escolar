@@ -32,6 +32,9 @@ Route::group(['middleware' => ['login']], function () {
 			//Estudiantes
 			Route::resource('estudiantes','Admin\EstudianteController');
 
+			//Docentes
+			Route::resource('docentes','Admin\DocenteController');
+
 		});
 
 		//Escolares

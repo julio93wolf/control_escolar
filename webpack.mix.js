@@ -60,3 +60,13 @@ mix.scripts([
 mix.scripts([
 	'resources/assets/js/app/reticulas.js'
 ],'public/js/reticulas.js');
+
+//Docentes
+mix.scripts([
+	'resources/assets/js/app/docentes.js'
+],'public/js/docentes.js');
+
+//Docentes
+mix.scripts([
+	'resources/assets/js/app/form.docentes.js'
+],'public/js/form.docentes.js');

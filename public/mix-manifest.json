@@ -8,5 +8,7 @@
     "/js/form.periodo.js": "/js/form.periodo.js",
     "/js/fechas_examenes.js": "/js/fechas_examenes.js",
     "/js/especialidades.js": "/js/especialidades.js",
-    "/js/reticulas.js": "/js/reticulas.js"
+    "/js/reticulas.js": "/js/reticulas.js",
+    "/js/docentes.js": "/js/docentes.js",
+    "/js/form.docentes.js": "/js/form.docentes.js"
 }

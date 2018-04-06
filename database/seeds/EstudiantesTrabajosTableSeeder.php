@@ -13,7 +13,7 @@ class EstudiantesTrabajosTableSeeder extends Seeder
      */
     public function run()
     {
-    		$faker = Faker::create();
+    	$faker = Faker::create();
         $estudiantes = Estudiante::get();
         foreach ($estudiantes as $key => $estudiante) {
         	

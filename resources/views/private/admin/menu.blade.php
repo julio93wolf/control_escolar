@@ -37,7 +37,7 @@
 					</a>
 				</div>
 				<div class="col s6 m4">
-					<a href="{{--route('docentes.index')--}}">
+					<a href="{{ route('docentes.index') }}">
 						<div class="center promo hoverable">
 							<i class="material-icons">work</i>
 							<p class="promo-caption">Docentes</p>
@@ -61,7 +61,7 @@
 			<div class="divider"></div>
 			<div class="row">
 				<div class="col s6 m4">
-					<a href='{{route('asignaturas.index')}}'>
+					<a href='{{ route('asignaturas.index') }}'>
 						<div class="center promo hoverable">
 							<i class="material-icons">create</i>
 							<p class="promo-caption">Asignaturas</p>
@@ -69,7 +69,7 @@
 					</a>
 				</div>
 				<div class="col s6 m4">
-					<a href="{{route('periodos.index')}}">
+					<a href="{{ route('periodos.index') }}">
 						<div class="center promo hoverable">
 							<i class="material-icons">date_range</i>
 							<p class="promo-caption">Períodos</p>
@@ -78,7 +78,7 @@
 
 				</div>
 				<div class="col s6 m4">
-					<a href="{{route('especialidades.index')}}">
+					<a href="{{ route('especialidades.index') }}">
 						<div class="center promo hoverable">
 							<i class="material-icons">build</i>
 							<p class="promo-caption">Especialidades</p>

@@ -2,8 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Usuario;
-use App\Models\Estudiante;
-
 class UsuariosTableSeeder extends Seeder
 {
     /**
@@ -17,6 +15,12 @@ class UsuariosTableSeeder extends Seeder
         factory(App\Models\Usuario::class,1500)->create()->each(function(App\Models\Usuario $usuario){
             if($usuario->rol_id == 2){
                 factory(App\Models\Estudiante::class,1)->create([
+                    'dato_general_id'   => $usuario->id,
+                    'usuario_id'        => $usuario->id
+                ]);
+            }
+            if($usuario->rol_id == 3){
+                factory(App\Models\Docente::class,1)->create([
                     'dato_general_id'   => $usuario->id,
                     'usuario_id'        => $usuario->id
                 ]);
