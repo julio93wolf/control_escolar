@@ -3,9 +3,12 @@
 	<div id="modal_reticula" class="modal">
 		<div class="modal-content">
 
-			<h4 id="title_modal_reticula" >Agregar asignatura al periodo </h4>
-			<div class="divider"></div>
-			<br>
+			<div class="row">
+				<div class="col s10 offset-s1">
+					<h4 id="title_modal_reticula" >Agregar asignatura al periodo </h4>
+					<div class="divider"></div>		
+				</div>
+			</div>
 			
 			<div class="row">
 				<div class="input-field col s10 offset-s1">
