@@ -21,7 +21,7 @@ class SelectController extends Controller
     	return $reticulas;
     }
 
-		public function asignaturas_reticula($especialidad_id){
+		public function asignaturas_especialidad($especialidad_id){
     	$response = [];
     	$especialidad = Especialidad::find($especialidad_id);
     	$asignaturas_especialidad = $especialidad->asignaturas;

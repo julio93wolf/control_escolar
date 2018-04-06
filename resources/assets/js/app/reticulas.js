@@ -152,7 +152,7 @@ function create_reticula(periodo){
 
 function load_asignaturas(){
 	especialidad_id = $('#especialidad_id').val();
-	$.get('/admin/select/asignaturas_reticula/' + especialidad_id,function(data) {
+	$.get('/admin/select/asignaturas_especialidad/' + especialidad_id,function(data) {
 		$('#select_asignaturas').empty();
 		for(i = 0; i < data.length; i++){
 			$('#select_asignaturas').append('<option value="' + data[i].id + '">' + data[i].asignatura + ' (' + data[i].codigo +')</option>');
@@ -238,23 +238,14 @@ function delete_reticula(){
         asignatura_id: asignatura_id,
         periodo_especialidad: periodo_especialidad
       };
-      $.get('/admin/escolares/reticulas',json,function(data){
-  			destroy_reticula(data.id);
-		  }).fail(function(data) {
-		    swal({
-        	type: 'error',
-        	title: 'Error al buscar la reticula',
-        	text: 'No se pudo encontrar la reticula'
-      	});  
-		  });
+      destroy_reticula(json);
     }
   });
 }
 
-function destroy_reticula(reticula_id){
-	json = {id:reticula_id};
+function destroy_reticula(json){
   $.ajax({
-    url: '/admin/escolares/reticulas/'+reticula_id,
+    url: '/admin/escolares/reticulas/'+especialidad_id+'_'+asignatura_id,
     data: json,
     type: 'DELETE',
     success: function(result) {      
@@ -272,7 +263,7 @@ function destroy_reticula(reticula_id){
       swal({
         type: 'error',
         title: 'Error al eliminar la asignatura',
-        text: 'La asignatura debe tener clasess asignadas'
+        text: 'La asignatura debe tener dependencias o clases asignadas'
       });  
     }
   });

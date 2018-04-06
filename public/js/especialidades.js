@@ -114,8 +114,6 @@ $('#create_especialidad').on('click',function(){
 
   Materialize.updateTextFields();
 
-
-
   new_especialidad = true;
   especialidad_id = null;
   $('#modal_especialidad').modal('open');

@@ -93,8 +93,15 @@ class ReticulaController extends Controller
      * @param  \App\Models\Reticula  $reticula
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Reticula $reticula)
+    public function destroy(Request $request, Reticula $reticula)
     {
+        $reticula = Reticula::where([
+            ['especialidad_id',$request->especialidad_id],
+            ['asignatura_id',$request->asignatura_id],
+            ['periodo_especialidad',$request->periodo_especialidad],
+            ['tipo_plan_reticula_id',1],
+        ])->first();
         Reticula::find($reticula->id)->delete();
+        return ;
     }
 }

@@ -95,7 +95,7 @@ Route::group(['middleware' => ['login']], function () {
 			//Route::get('reticulas/{especialidad}','Admin\SelectController@reticulas')->name('select.reticulas');
 
 			//Asignaturas Reticula
-			Route::get('asignaturas_reticula/{especialidad_id}','Admin\SelectController@asignaturas_reticula')->name('select.asignaturas_reticula');
+			Route::get('asignaturas_especialidad/{especialidad_id}','Admin\SelectController@asignaturas_especialidad')->name('select.asignaturas_especialidad');
 
 		});
 		
