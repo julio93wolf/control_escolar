@@ -3,6 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Docente;
+use App\Models\EstadoCivil;
+use App\Models\Nacionalidad;
+use App\Models\Estado;
+use App\Models\Municipio;
+use App\Models\Localidad;
+use App\Models\Titulo;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -25,7 +32,14 @@ class DocenteController extends Controller
      */
     public function create()
     {
-        //
+        return view('private.admin.academicos.docentes.create',[
+            'estados_civiles'   => EstadoCivil::orderBy('estado_civil','ASC')->get(),
+            'nacionalidades'    => Nacionalidad::orderBy('nacionalidad','ASC')->get(),
+            'estados'           => Estado::orderBy('estado','ASC')->get(),
+            'municipios'        => Municipio::where('estado_id',11)->orderBy('municipio','ASC')->get(),
+            'localidades'       => Localidad::where('municipio_id',327)->orderBy('localidad','ASC')->get(),
+            'titulos'           => Titulo::orderBy('id','ASC')->get()
+        ]);
     }
 
     /**

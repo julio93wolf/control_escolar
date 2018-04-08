@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Especialidad;
 use App\Models\Reticula;
 use App\Models\Asignatura;
+use App\Models\Localidad;
+use App\Models\Municipio;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -76,5 +78,15 @@ class SelectController extends Controller
             }        
         }
         return $response;
+    }
+
+    public function municipios($estado_id){
+        $municipios = Municipio::where('estado_id',$estado_id)->orderBy('municipio','asc')->get();
+        return $municipios;
+    }
+
+    public function localidades($municipio_id){
+        $localidades = Localidad::where('municipio_id',$municipio_id)->orderBy('localidad','asc')->get();
+        return $localidades;
     }    
 }

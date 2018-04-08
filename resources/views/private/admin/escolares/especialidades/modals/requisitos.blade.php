@@ -1,6 +1,6 @@
 <form id="form_requisito" novalidate="novalidate">
 	<!-- Nueva especialidad -->
-	<div id="modal_requisito" class="modal">
+	<div id="modal_requisito" class="modal modal-fixed-footer add">
 		<div class="modal-content">
 
 			<div class="row">

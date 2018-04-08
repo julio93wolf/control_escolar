@@ -63,3 +63,21 @@ as
         join tipos_planes_especialidades on tipos_planes_especialidades.id = especialidades.tipo_plan_especialidad_id;
 
 select * from vw_especialidades;
+
+drop view if exists vw_docentes;
+create view vw_docentes 
+as
+	select 
+		docentes.id as docente_id,
+        codigo,
+        nombre,
+        apaterno,
+        amaterno,
+        fecha_nacimiento,
+        telefono_casa,
+        rfc,
+        titulo
+    from docentes
+		join datos_generales on datos_generales.id = docentes.dato_general_id
+        join titulos on titulos.id = docentes.titulo_id;
+select * from vw_docentes;

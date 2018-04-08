@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class DataTableModel extends Model
+class DataTable extends Model
 {
     static function estudiantes(){
     	return \DB::table('vw_estudiantes');
@@ -18,4 +18,8 @@ class DataTableModel extends Model
 		static function especialidades(){
 	    return \DB::table('vw_especialidades')->orderBy('id','desc')->get();
 	  }  	
+
+	  static function docentes(){
+	    return \DB::table('vw_docentes')->orderBy('docente_id','desc')->get();
+	  }
 }
