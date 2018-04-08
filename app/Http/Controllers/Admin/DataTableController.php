@@ -11,12 +11,12 @@ use App\Models\Estudiante;
 use App\Models\Asignatura;
 use App\Models\Periodo;
 use App\Models\FechaExamen;
-use App\Models\DataTableModel;
+use App\Models\DataTable;
 
 class DataTableController extends Controller
 {
     public function estudiantes(){
-    	$estudiantes = DataTableModel::estudiantes();
+    	$estudiantes = DataTable::estudiantes();
     	return Datatables::of($estudiantes)->make(true);
     }
 
@@ -31,12 +31,23 @@ class DataTableController extends Controller
     }
 
     public function fechas_examenes($periodo_id){
-        $fechas_examenes = DataTableModel::fechas_examenes($periodo_id);
+        $fechas_examenes = DataTable::fechas_examenes($periodo_id);
         return Datatables::of($fechas_examenes)->make(true);    
     }
 
     public function especialidades(){
-        $especialidades = DataTableModel::especialidades();
+        $especialidades = DataTable::especialidades();
         return Datatables::of($especialidades)->make(true);
+    }
+
+    public function docentes(){
+        $docentes = DataTable::docentes();
+        foreach ($docentes as $key => $docente) {
+            $fecha_nacimiento = new \DateTime($docente->fecha_nacimiento);
+            $today = new \DateTime(date("Y-m-d"));
+            $edad = $fecha_nacimiento->diff($today);
+            $docente->edad = $edad->y;
+        }
+        return Datatables::of($docentes)->make(true);
     }
 }

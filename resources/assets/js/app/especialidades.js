@@ -32,6 +32,7 @@ function load_especialidades(){
     destroy: true,
     processing: true,
     serverSide: true,
+    scrollX: true,
     ajax: '/admin/datatable/especialidades',
     columns: [
         { 

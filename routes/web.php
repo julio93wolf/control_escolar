@@ -92,6 +92,9 @@ Route::group(['middleware' => ['login']], function () {
 			//Especialidades
 			Route::get('especialidades','Admin\DataTableController@especialidades')->name('especialidades.get');
 
+			//Docentes
+			Route::get('docentes','Admin\DataTableController@docentes')->name('docentes.get');
+
 		});
 
 		//Selects
@@ -99,15 +102,18 @@ Route::group(['middleware' => ['login']], function () {
 
 			//Especialidades
 			Route::get('especialidades_nivel/{nivel_academico}','Admin\SelectController@especialidades_nivel')->name('select.especialidades_nivel');
-			
-			//Reticulas
-			//Route::get('reticulas/{especialidad}','Admin\SelectController@reticulas')->name('select.reticulas');
 
 			//Asignaturas Reticula
 			Route::get('asignaturas_especialidad/{especialidad_id}','Admin\SelectController@asignaturas_especialidad')->name('select.asignaturas_especialidad');
 
 			//Asignaturas Requisito
 			Route::get('asignaturas_requisito/{reticula_id}','Admin\SelectController@asignaturas_requisito')->name('select.asignaturas_requisito');
+
+			//Municipios
+			Route::get('municipios/{estado_id}','Admin\SelectController@municipios')->name('select.municipios');
+
+			//Localidades
+			Route::get('localidades/{municipio_id}','Admin\SelectController@localidades')->name('select.localidades');
 
 		});
 		

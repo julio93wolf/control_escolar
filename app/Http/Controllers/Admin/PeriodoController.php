@@ -27,7 +27,7 @@ class PeriodoController extends Controller
      */
     public function create()
     {
-        return view('private.admin.escolares.periodos.new');
+        return view('private.admin.escolares.periodos.create');
     }
 
     /**

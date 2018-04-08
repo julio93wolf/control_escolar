@@ -32,6 +32,7 @@ function load_asignaturas(){
     destroy: true,
     processing: true,
     serverSide: true,
+    scrollX: true,
     ajax: '/admin/datatable/asignaturas',
     columns: [
         { data: 'codigo',			name: 'codigo' },
