@@ -15,14 +15,16 @@ let mix = require('laravel-mix');
 mix.styles([
 	'resources/assets/css/vendor/materialize.css',
 	'resources/assets/css/vendor/datatables.css',
-	'resources/assets/css/vendor/select2-materialize.css'
+	'resources/assets/css/vendor/select2-materialize.css',
+	'resources/assets/css/vendor/dropify.css'
 ], 'public/css/vendor.css');
 mix.scripts([
 	'resources/assets/js/vendor/jquery-3.3.1.js',
 	'resources/assets/js/vendor/datatables.js',
 	'resources/assets/js/vendor/materialize.js',
 	'resources/assets/js/vendor/sweetalert2.js',
-	'resources/assets/js/vendor/select2.js'
+	'resources/assets/js/vendor/select2.js',
+	'resources/assets/js/vendor/dropify.js'
 ],'public/js/vendor.js');
 
 //App
