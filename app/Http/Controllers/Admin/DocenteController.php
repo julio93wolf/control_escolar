@@ -13,6 +13,8 @@ use App\Models\Titulo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\DocenteStoreRequest;
+
 class DocenteController extends Controller
 {
     /**
@@ -48,7 +50,7 @@ class DocenteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DocenteStoreRequest $request)
     {
         //
     }
