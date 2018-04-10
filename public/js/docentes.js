@@ -60,5 +60,49 @@ function load_docentes(){
   });
   $("select[name$='table_docentes_length']").val('10');
   $("select[name$='table_docentes_length']").material_select();
-  //edit_asignatura('#table_docentes tbody',table);
+  btn_delete_docente('#table_docentes tbody',table);
+}
+
+function btn_delete_docente (tbody,table){
+  $(tbody).on('click','a.delete-docente',function(){
+    var data = table.row( $(this).parents('tr') ).data();
+    swal({
+      title: 'Desea eliminar el docente?',
+      text: "Esta acción no se puede revertir",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.value) {
+        docente_id= data.docente_id;
+        destroy_docente(docente_id);    
+      }
+    })
+  });
+}
+
+function destroy_docente(docente_id){
+  $.ajax({
+    url: '/admin/academicos/docentes/'+docente_id,
+    type: 'DELETE',
+    success: function(result) {
+      load_docentes();
+      swal({
+        type: 'success',
+        title: 'El docente ha sido eliminado',
+        showConfirmButton: false,
+        timer: 1500
+      });
+    },
+    error: function (data) {
+      swal({
+        type: 'error',
+        title: 'Error al eliminar el docente',
+        text: 'El docente esta relacionado con uno o más datos'
+      });  
+    }
+  });
 }

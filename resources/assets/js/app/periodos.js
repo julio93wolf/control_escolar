@@ -1,7 +1,5 @@
 load_periodos();
 
-var periodo_id = null;
-
 function load_periodos(){
 	var table = $('#table_periodos').DataTable({
   	language: {
@@ -85,19 +83,15 @@ function delete_periodo (tbody,table){
     }).then((result) => {
       if (result.value) {
         periodo_id= data.id;
-        json= {
-          id: periodo_id
-        };
-        destroy_periodo(json);    
+        destroy_periodo(periodo_id);    
       }
     })
   });
 }
 
-function destroy_periodo(json){
+function destroy_periodo(periodo_id){
   $.ajax({
     url: '/admin/escolares/periodos/'+periodo_id,
-    data: json,
     type: 'DELETE',
     success: function(result) {
       load_periodos();
@@ -107,7 +101,6 @@ function destroy_periodo(json){
         showConfirmButton: false,
         timer: 1500
       });
-      periodo_id = null;
     },
     error: function (data) {
       swal({

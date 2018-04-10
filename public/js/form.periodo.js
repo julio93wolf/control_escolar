@@ -14,7 +14,7 @@ var validator = $("#form_periodo").validate({
     anio: {
       required: true,
       digits: true,
-      min: 1950
+      min: 2000
     },
     periodo: {
     	required: true

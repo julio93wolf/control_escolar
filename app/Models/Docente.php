@@ -18,7 +18,7 @@ class Docente extends Model
     	return $this->hasMany('App\Models\Clase','docente_id');
     }
 
-    public function datos_generales(){
+    public function dato_general(){
     	return $this->belongsTo('App\Models\DatoGeneral','dato_general_id');
     }
 

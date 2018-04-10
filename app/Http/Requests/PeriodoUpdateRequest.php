@@ -24,7 +24,7 @@ class PeriodoUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'anio'                          => 'required|integer|min:1950',
+            'anio'                          => 'required|integer|min:2000',
             'periodo'                       => 'required',
             'reconocimiento_oficial'        => 'required|unique:periodos,reconocimiento_oficial,'.$this->id,
             'dges'                          => 'required|unique:periodos,dges,'.$this->id,
@@ -37,7 +37,7 @@ class PeriodoUpdateRequest extends FormRequest
         return [
             'anio.required'                         => 'El año es requerido',
             'anio.integer'                          => 'El año tiene que ser un número entero',
-            'anio.min'                              => 'El año tiene que ser mínimo 1950',
+            'anio.min'                              => 'El año tiene que ser mínimo 2000',
 
             'periodo.required'                      => 'El período es requerido',
 

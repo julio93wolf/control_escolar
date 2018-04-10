@@ -57,7 +57,7 @@ return [
 
         'docentes' => [
             'driver' => 'local',
-            'root' => storage_path('app/docentes'),
+            'root' => public_path('images/docentes'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],

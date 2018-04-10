@@ -416,5 +416,9 @@
 <div class="row">
 	<p>Fotografía</p>
 	<div class="divider"></div>
-	<input id="foto" name="foto" type="file" class="dropify" data-show-remove="false" data-max-file-size="3M" data-allowed-file-extensions="jpg png jpeg"/>
+	<input id="foto" name="foto" type="file" class="dropify" data-show-remove="false" data-max-file-size="3M" data-allowed-file-extensions="jpg png jpeg"
+	@if (isset($docente))
+		data-default-file="{{ asset('/images/docentes/'.$docente->foto) }}"
+	@endif
+	/>
 </div>
