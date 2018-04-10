@@ -9,10 +9,12 @@ use App\Models\Estado;
 use App\Models\Municipio;
 use App\Models\Localidad;
 use App\Models\Titulo;
+use App\Models\Usuario;
+use App\Models\DatoGeneral;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\DocenteStoreRequest;
 
 class DocenteController extends Controller
@@ -52,7 +54,44 @@ class DocenteController extends Controller
      */
     public function store(DocenteStoreRequest $request)
     {
-        //
+        $usuario = new Usuario;
+        $usuario->email     = $request->codigo.'@uniceba.edu.mx';
+        $usuario->password  = password_hash('secret',PASSWORD_BCRYPT);
+        $usuario->rol_id    = 3;
+        $usuario->save();
+
+        $dato_general = new DatoGeneral;
+        $dato_general->curp                 = $request->curp;
+        $dato_general->nombre               = $request->nombre;
+        $dato_general->apaterno             = $request->apaterno;
+        $dato_general->amaterno             = $request->amaterno;
+        $dato_general->fecha_nacimiento     = $request->fecha_nacimiento_submit;
+        $dato_general->calle_numero         = $request->calle_numero;
+        $dato_general->colonia              = $request->colonia;
+        $dato_general->localidad_id         = $request->localidad_id;
+        $dato_general->telefono_personal    = $request->telefono_personal;
+        $dato_general->telefono_casa        = $request->telefono_casa;
+        $dato_general->estado_civil_id      = $request->estado_civil_id;
+        $dato_general->sexo                 = $request->sexo;
+        $dato_general->fecha_registro       = date("Y-m-d");
+        $dato_general->nacionalidad_id      = $request->nacionalidad_id;
+        $dato_general->email                = $request->email;
+        $dato_general->codigo_postal        = $request->codigo_postal;
+        $dato_general->save();
+
+        //Image
+        if($request->foto){
+            $path = Storage::disk('docentes')->put('foto',$request->foto);
+            $dato_general->fill(['foto' => asset($path)])->save();
+        }
+
+        $docente = new Docente;
+        $docente->codigo            = $request->codigo;
+        $docente->dato_general_id   = $dato_general->id;
+        $docente->rfc               = $request->rfc;
+        $docente->titulo_id         = $request->titulo_id;
+        $docente->usuario_id        = $usuario->id;
+        $docente->save();
     }
 
     /**

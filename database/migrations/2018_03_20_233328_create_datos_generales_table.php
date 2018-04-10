@@ -31,7 +31,7 @@ class CreateDatosGeneralesTable extends Migration
             $table->date('fecha_registro');
             $table->integer('nacionalidad_id')->unsigned();
             $table->string('email',128)->unique()->nullable();
-            $table->string('foto',64)->unique()->nullable();
+            $table->text('foto')->nullable();
             
             $table->foreign('localidad_id')->references('id')->on('localidades');
             $table->foreign('estado_civil_id')->references('id')->on('estados_civiles');

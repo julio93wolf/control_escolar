@@ -161,7 +161,7 @@
 	<div class="input-field col s12 m12 l4">
 		<i class="material-icons prefix">flag</i>
 		<select id="nacionalidad_id" name="nacionalidad_id" class="validate
-		@if( $errors->has('nacionalidad_id')) 
+		@if($errors->has('nacionalidad_id')) 
 			invalid
 		@endif" required="" aria-required="true">
 			@foreach($nacionalidades as $nacionalidad)
@@ -177,7 +177,7 @@
 						@endif >{{ $nacionalidad->nacionalidad }}</option>	
 				@else
 					<option value="{{ $nacionalidad->id }}" 
-						@if($nacionalidad->id == 1) 
+						@if($nacionalidad->id == 104) 
 							selected 
 						@endif >{{ $nacionalidad->nacionalidad }}</option>	
 				@endif
@@ -253,7 +253,7 @@
 						@endif >{{ $estado->estado }}</option>	
 				@else
 					<option value="{{ $estado->id }}" 
-						@if($estado->id == 1) 
+						@if($estado->id == 11) 
 							selected 
 						@endif >{{ $estado->estado }}</option>	
 				@endif
@@ -278,7 +278,7 @@
 						@endif >{{ $municipio->municipio }}</option>	
 				@else
 					<option value="{{ $municipio->id }}" 
-						@if($municipio->id == 1) 
+						@if($municipio->id == 327) 
 							selected 
 						@endif >{{ $municipio->municipio }}</option>	
 				@endif
@@ -306,7 +306,7 @@
 						@endif >{{ $localidad->localidad }}</option>	
 				@else
 					<option value="{{ $localidad->id }}" 
-						@if($localidad->id == 1) 
+						@if($localidad->id == 94493) 
 							selected 
 						@endif >{{ $localidad->localidad }}</option>	
 				@endif
@@ -416,5 +416,5 @@
 <div class="row">
 	<p>Fotografía</p>
 	<div class="divider"></div>
-	<input id="foto" name="foto" type="file" class="dropify" data-max-file-size="3M" data-allowed-file-extensions="jpg png jpeg"/>
+	<input id="foto" name="foto" type="file" class="dropify" data-show-remove="false" data-max-file-size="3M" data-allowed-file-extensions="jpg png jpeg"/>
 </div>
