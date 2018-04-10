@@ -60,6 +60,9 @@ Route::group(['middleware' => ['login']], function () {
     		'index', 'show', 'store', 'update', 'destroy'
 			]);
 
+			//PlanEspecialidad
+			Route::Resource('planes_especialidades','Admin\PlanEspecialidadController')->only(['show']);
+
 			//Reticulas
 			Route::resource('reticulas','Admin\ReticulaController')->only([
 				'store','destroy'
@@ -103,8 +106,11 @@ Route::group(['middleware' => ['login']], function () {
 			//Especialidades
 			Route::get('especialidades_nivel/{nivel_academico}','Admin\SelectController@especialidades_nivel')->name('select.especialidades_nivel');
 
+			//Especialidades
+			Route::get('planes_especialidades/{especialidad_id}','Admin\SelectController@planes_especialidades')->name('select.planes_especialidades');
+
 			//Asignaturas Reticula
-			Route::get('asignaturas_especialidad/{especialidad_id}','Admin\SelectController@asignaturas_especialidad')->name('select.asignaturas_especialidad');
+			Route::get('asignaturas_reticula/{plan_especialidad_id}','Admin\SelectController@asignaturas_reticula')->name('select.asignaturas_reticula');
 
 			//Asignaturas Requisito
 			Route::get('asignaturas_requisito/{reticula_id}','Admin\SelectController@asignaturas_requisito')->name('select.asignaturas_requisito');

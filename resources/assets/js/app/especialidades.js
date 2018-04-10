@@ -83,7 +83,6 @@ $('#create_especialidad').on('click',function(){
   $('#nivel_academico_id').val(1).material_select();
   $('#especialidad').val('');
   $('#clave').val('');
-  $('#periodos').val('1');
   $('#descripcion').val('');
   $('#modalidad_id').val(1).material_select();
   $('#tipo_plan_especialidad_id').val(1).material_select();
@@ -94,7 +93,6 @@ $('#create_especialidad').on('click',function(){
   $("label[for='nivel_academico_id']").attr('data-error','');
   $("label[for='especialidad']").attr('data-error','');
   $("label[for='clave']").attr('data-error','');
-  $("label[for='periodos']").attr('data-error','');
   $("label[for='descripcion']").attr('data-error','');
   $("label[for='modalidad_id']").attr('data-error','');
   $("label[for='tipo_plan_especialidad_id']").attr('data-error','');
@@ -105,7 +103,6 @@ $('#create_especialidad').on('click',function(){
   $('#nivel_academico_id').removeClass('invalid');
   $('#especialidad').removeClass('invalid');
   $('#clave').removeClass('invalid');
-  $('#periodos').removeClass('invalid');
   $('#descripcion').removeClass('invalid');
   $('#modalidad_id').removeClass('invalid');
   $('#tipo_plan_especialidad_id').removeClass('invalid');
@@ -128,7 +125,6 @@ function edit_especialidad (tbody,table){
     $("label[for='nivel_academico_id']").attr('data-error','');
     $("label[for='especialidad']").attr('data-error','');
     $("label[for='clave']").attr('data-error','');
-    $("label[for='periodos']").attr('data-error','');
     $("label[for='descripcion']").attr('data-error','');
     $("label[for='modalidad_id']").attr('data-error','');
     $("label[for='tipo_plan_especialidad_id']").attr('data-error','');
@@ -139,7 +135,6 @@ function edit_especialidad (tbody,table){
     $('#nivel_academico_id').removeClass('invalid');
     $('#especialidad').removeClass('invalid');
     $('#clave').removeClass('invalid');
-    $('#periodos').removeClass('invalid');
     $('#descripcion').removeClass('invalid');
     $('#modalidad_id').removeClass('invalid');
     $('#tipo_plan_especialidad_id').removeClass('invalid');
@@ -150,7 +145,6 @@ function edit_especialidad (tbody,table){
     $('#nivel_academico_id').val(data.nivel_academico_id).material_select();
     $('#especialidad').val(data.especialidad);
     $('#clave').val(data.clave);
-    $('#periodos').val(data.periodos);
     $('#descripcion').val(data.descripcion);
     $('#modalidad_id').val(data.modalidad_id).material_select();
     $('#tipo_plan_especialidad_id').val(data.tipo_plan_especialidad_id).material_select();
@@ -198,11 +192,6 @@ var validator = $("#form_especialidad").validate({
     clave: {
       required: true
     },
-    periodos: {
-      required: true,
-      digits: true,
-      min: 1
-    },
     modalidad_id: {
       required: true,
       digits: true,
@@ -235,11 +224,6 @@ var validator = $("#form_especialidad").validate({
     clave: {
       required: "La clave es requerida"
     },
-    periodos: {
-      required: "El número de periodos es requerido",
-      digits: "El número de periodos tiene que ser un numero entero",
-      min: "El número de periodos tiene que ser mínimo 1"
-    },
     modalidad_id: {
       required: "La modalidad es requerida",
       digits: "La modalidad tiene que ser un número entero",
@@ -266,7 +250,6 @@ var validator = $("#form_especialidad").validate({
         nivel_academico_id: $('#nivel_academico_id').val(),
         especialidad: $('#especialidad').val(),
         clave: $('#clave').val(),
-        periodos: $('#periodos').val(),
         descripcion: $('#descripcion').val(),
         modalidad_id: $('#modalidad_id').val(),
         tipo_plan_especialidad_id: $('#tipo_plan_especialidad_id').val(),
@@ -281,7 +264,6 @@ var validator = $("#form_especialidad").validate({
         nivel_academico_id: $('#nivel_academico_id').val(),
         especialidad: $('#especialidad').val(),
         clave: $('#clave').val(),
-        periodos: $('#periodos').val(),
         descripcion: $('#descripcion').val(),
         modalidad_id: $('#modalidad_id').val(),
         tipo_plan_especialidad_id: $('#tipo_plan_especialidad_id').val(),

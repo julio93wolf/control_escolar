@@ -33,7 +33,7 @@ var validator = $("#form_periodo").validate({
 		anio: {
       required: "El año es requerido",
       digits: "El año tiene que ser un número entero",
-      min: "El año tiene que ser mínimo 1950"
+      min: "El año tiene que ser mínimo 2000"
     },
     periodo: {
       required: "El período es requerido"

@@ -48,7 +48,6 @@ as
 		nivel_academico_id,
 		clave,
         especialidad,
-        periodos,
         reconocimiento_oficial,
         fecha_reconocimiento,
         dges,

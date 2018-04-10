@@ -18,7 +18,6 @@ class CreateEspecialidadesTable extends Migration
             $table->integer('nivel_academico_id')->unsigned();
             $table->string('clave',8)->unique();
             $table->string('especialidad',128);
-            $table->tinyInteger('periodos');
             $table->string('reconocimiento_oficial',64)->unique();
             $table->string('dges',64)->unique();
             $table->date('fecha_reconocimiento');

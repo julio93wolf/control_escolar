@@ -24,26 +24,26 @@ class ReticulaStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'especialidad_id'       => 'required|integer|min:1',
+            'plan_especialidad_id'  => 'required|integer|min:1',
             'asignatura_id'         => 'required|integer|min:1',
-            'periodo_especialidad'  => 'required|integer|min:1'
+            'periodo_reticula'      => 'required|integer|min:1'
         ];
     }
 
     public function messages()
     {
         return [
-            'especialidad_id.required'          => 'La especialidad es requerida',
-            'especialidad_id.integer'           => 'La especialidad tiene que ser un número entero',
-            'especialidad_id.min'               => 'La especialidad tiene que ser mínimo 1',
+            'plan_especialidad_id.required' => 'El plan de estudios es requerido',
+            'plan_especialidad_id.integer'  => 'El plan de estudios tiene que ser un número entero',
+            'plan_especialidad_id.min'      => 'El plan de estudios tiene que ser mínimo 1',
 
-            'asignatura_id.required'            => 'La asignatura es requerida',
-            'asignatura_id.integer'             => 'La asignatura tiene que ser un número entero',
-            'asignatura_id.min'                 => 'La asignatura tiene que ser mínimo 1',
+            'asignatura_id.required'        => 'La asignatura es requerida',
+            'asignatura_id.integer'         => 'La asignatura tiene que ser un número entero',
+            'asignatura_id.min'             => 'La asignatura tiene que ser mínimo 1',
 
-            'periodo_especialidad.required'     => 'El período de especialidad es requerida',
-            'periodo_especialidad.integer'      => 'La período de especialidad tiene que ser un número entero',
-            'periodo_especialidad.min'          => 'La período de especialidad tiene que ser mínimo 1'
+            'periodo_reticula.required'     => 'El período es requerido',
+            'periodo_reticula.integer'      => 'La período tiene que ser un número entero',
+            'periodo_reticula.min'          => 'La período tiene que ser mínimo 1'
         ];
     }
 }

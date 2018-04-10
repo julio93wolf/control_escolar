@@ -1,7 +1,8 @@
 load_especialidades();
 
-var periodo_especialidad = null;
-var especialidad_id = null;
+var periodo_reticula = null;
+var plan_especialidad_id = null;
+//var especialidad_id = null;
 var asignatura_id = null;
 var reticula_id = null;
 var requisito_id = null;
@@ -18,11 +19,26 @@ function load_especialidades (){
 			$('#especialidad_id').append('<option value="' + data[i].id + '">' + data[i].especialidad + ' (' + data[i].clave +')</option>');
 		}
 		$('#especialidad_id').material_select();
-		load_reticula ();
+		load_planes();
 	})
 	.fail(function() {
 		swal("Error", "Ocurrio un error al cargar las especialidades.", "error");
 	});
+}
+
+function load_planes (){
+  var especialidad_id = $('#especialidad_id').val();
+  $.get('/admin/select/planes_especialidades/' + especialidad_id,function(data) {
+    $('#plan_especialidad_id').empty();
+    for(i = 0; i < data.length; i++){
+      $('#plan_especialidad_id').append('<option value="' + data[i].id + '">' + data[i].plan_especialidad + '</option>');
+    }
+    $('#plan_especialidad_id').material_select();
+    load_reticula ();
+  })
+  .fail(function() {
+    swal("Error", "Ocurrio un error al cargar los planes academivos.", "error");
+  });
 }
 
 $('#nivel_academico').change(function(){
@@ -30,16 +46,19 @@ $('#nivel_academico').change(function(){
 });
 
 $('#especialidad_id').change(function(){
-	load_reticula();
-  especialidad_id = $('#especialidad_id').val();
+	load_planes();
+});
+
+$('#plan_especialidad_id').change(function(){
+  load_reticula();
 });
 
 function load_reticula (){
-	especialidad_id = $('#especialidad_id').val();
-	$.get('/admin/escolares/especialidades/' + especialidad_id,function(data){
-		var especialidad = data;		
+	plan_especialidad_id = $('#plan_especialidad_id').val();
+	$.get('/admin/escolares/planes_especialidades/' + plan_especialidad_id,function(data){
+		var plan_especialidad = data;		
 		$('#section_reticula').empty();
-		for (var i = 1; i <= especialidad.periodos; i++) {
+		for (var i = 1; i <= plan_especialidad.periodos; i++) {
 			$('#section_reticula').append(`
 				<div class="row">
 					<h5>Período `+i+`:</h5>
@@ -52,16 +71,17 @@ function load_reticula (){
 			`);
 			asignaturas_periodo(i);
 		}
-		$('#name_reticula').text('Retícula de '+ $('#nivel_academico :selected').text() + ' en ' + $('#especialidad_id :selected').text());
+		$('#name_reticula').text('Retícula de '+ $('#nivel_academico :selected').text() + ' en ' + $('#especialidad_id :selected').text()+' ('+$('#plan_especialidad_id :selected').text()+')');
 	}).fail(function() {
 		swal("Error", "Ocurrio un error al cargar la reticula.", "error");
 	});
 }
 
+
 function asignaturas_periodo (periodo){
 	json = {
-		especialidad_id: especialidad_id,
-		periodo_especialidad: periodo
+		plan_especialidad_id: plan_especialidad_id,
+		periodo_reticula: periodo
 	};
 	$('#periodo_'+periodo+'').empty();
 	var asignaturas_periodo = ``;
@@ -84,6 +104,7 @@ function asignaturas_periodo (periodo){
 	});
 }
 
+
 function print_card_reticula(asignatura,periodo){
 	var card = 
 	`<div class="col s12 m6 l4 xl3">
@@ -98,7 +119,7 @@ function print_card_reticula(asignatura,periodo){
         	class="btn-floating halfway-fab waves-effect waves-light red delete-asignatura"  
         	style="position: absolute; left:94%; top:-10%;"
         	reticula="`+asignatura.reticula+`"
-          periodo_especialidad="`+periodo+`"
+          periodo_reticula="`+periodo+`"
           asignatura="`+asignatura.asignatura+`"
         ><i class="material-icons">close</i></a>
         <a
@@ -114,6 +135,7 @@ function print_card_reticula(asignatura,periodo){
   return card;
 }
 
+
 function new_card_reticula(periodo){
 	var card = 
 	`<div class="col s12 m6 l4 xl3">
@@ -126,7 +148,7 @@ function new_card_reticula(periodo){
 					id="add_reticula_`+periodo+`"
 					class="btn-floating halfway-fab waves-effect waves-light green" 
 					style="position: absolute; left:78%; top:-10%;"
-					periodo_especialidad="`+periodo+`" >
+					periodo_reticula="`+periodo+`" >
 					<i class="material-icons">add</i>
 				</a>
       </div>
@@ -135,16 +157,18 @@ function new_card_reticula(periodo){
   return card;
 }
 
+
 function btn_add_reticula(periodo){
 	$('#add_reticula_'+periodo).on('click', function(event) {
-		periodo_especialidad = $(this).attr('periodo_especialidad');
+		periodo_reticula = $(this).attr('periodo_reticula');
 		create_reticula();
 	});
 }
 
+
 function btn_delete_reticula(reticula){
   $(`#delete_reticula_`+reticula+``).on('click', function() {
-    periodo_especialidad = $(this).attr('periodo_especialidad');
+    periodo_reticula = $(this).attr('periodo_reticula');
     reticula_id = $(this).attr('reticula');
     asignatura = $(this).attr('asignatura');
     delete_reticula(asignatura);
@@ -160,13 +184,14 @@ function btn_requisito_asignatura(reticula){
 }
 
 function create_reticula(){
-  load_asignaturas_especialidad();
-  $('#title_modal_reticula').text('Agregar asignatura al período '+periodo_especialidad);
+  load_asignaturas_reticula();
+  $('#title_modal_reticula').text('Agregar asignatura al período '+periodo_reticula);
   $('#modal_reticula').modal('open');
 }
 
-function load_asignaturas_especialidad(){
-  $.get('/admin/select/asignaturas_especialidad/' + especialidad_id,function(data) {
+
+function load_asignaturas_reticula(){
+  $.get('/admin/select/asignaturas_reticula/' + plan_especialidad_id,function(data) {
     $('#select_asignaturas').empty();
     for(i = 0; i < data.length; i++){
       $('#select_asignaturas').append('<option value="' + data[i].id + '">' + data[i].asignatura + ' (' + data[i].codigo +')</option>');
@@ -178,6 +203,7 @@ function load_asignaturas_especialidad(){
     swal("Error", "Ocurrio un error al cargar las asignaturas.", "error");
   });
 }
+
 
 $.validator.setDefaults({
   errorClass: 'invalid',
@@ -208,8 +234,8 @@ var validator = $("#form_reticula").validate({
   submitHandler: function(form) {
     json = {
       asignatura_id: $('#select_asignaturas').val(),
-      especialidad_id: especialidad_id,
-      periodo_especialidad: periodo_especialidad
+      plan_especialidad_id: plan_especialidad_id,
+      periodo_reticula: periodo_reticula
     }
     store_reticula(json);
   }
@@ -217,8 +243,8 @@ var validator = $("#form_reticula").validate({
 
 function store_reticula(json){
   $.post('/admin/escolares/reticulas',json,function(data){
-  	asignaturas_periodo(periodo_especialidad);
-    periodo_especialidad = null;
+  	asignaturas_periodo(periodo_reticula);
+    periodo_reticula = null;
     asignatura_id = null;
   	$('#modal_reticula').modal('close');
     swal({
@@ -258,14 +284,14 @@ function destroy_reticula(){
     url: '/admin/escolares/reticulas/'+reticula_id,
     type: 'DELETE',
     success: function(result) {      
-      asignaturas_periodo(periodo_especialidad);
+      asignaturas_periodo(periodo_reticula);
       swal({
         type: 'success',
         title: 'La asignatura ha sido eliminada',
         showConfirmButton: false,
         timer: 1500
       });
-      periodo_especialidad = null;
+      periodo_reticula = null;
       reticula_id = null;
     },
     error: function (data) {
@@ -301,6 +327,7 @@ function load_asignaturas_requisito(){
   asignaturas_requisito();
 }
 
+
 function asignaturas_requisito (){
   $('#requisitos_reticula').empty();
   var asignaturas_requisito = ``;
@@ -313,7 +340,7 @@ function asignaturas_requisito (){
     $('#requisitos_reticula').append(asignaturas_requisito);
     for (var i = 0; i < asignaturas.length; i++) {
       var asignatura = asignaturas[i];
-      btn_delete_requisito(asignatura.requisito);
+      //btn_delete_requisito(asignatura.requisito);
     }
   }).fail(function() {
     swal("Error", "Ocurrio un error al cargar las asignaturas.", "error");
@@ -330,7 +357,7 @@ function print_card_requisito(asignatura){
         <div class="divider"></div>
         Código: `+asignatura.codigo+`<br>
         Créditos: `+asignatura.creditos+`<br>
-        Periodo: `+asignatura.periodo_especialidad+`<br>
+        Periodo: `+asignatura.periodo_reticula+`<br>
         <a 
           id="delete_requisito_`+asignatura.requisito+`"
           class="btn-floating halfway-fab waves-effect waves-light red delete-asignatura"  
@@ -344,6 +371,7 @@ function print_card_requisito(asignatura){
   return card;
 }
 
+/*
 function btn_delete_requisito(requisito){
   $(`#delete_requisito_`+requisito+``).on('click', function() {
     requisito_id = $(this).attr('requisito');
@@ -433,4 +461,4 @@ function destroy_requisito(){
       });  
     }
   });
-}
+}*/

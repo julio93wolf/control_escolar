@@ -27,7 +27,6 @@ class EspecialidadUpdateRequest extends FormRequest
             'nivel_academico_id'        => 'required|integer|min:1',
             'especialidad'              => 'required',
             'clave'                     => 'required|unique:especialidades,clave,'.$this->id,
-            'periodos'                  => 'required|integer|min:1',
             'modalidad_id'              => 'required|integer|min:1',
             'tipo_plan_especialidad_id' => 'required|integer|min:1',
             'reconocimiento_oficial'    => 'required|unique:especialidades,reconocimiento_oficial,'.$this->id,
@@ -47,10 +46,6 @@ class EspecialidadUpdateRequest extends FormRequest
 
             'clave.required'                        => 'La clave es requerida',
             'clave.unique'                          => 'La clave ya está en uso',
-
-            'periodos.required'                     => 'El número de periodos es requerido',
-            'periodos.integer'                      => 'El número de periodos tiene que ser un numero entero',
-            'periodos.min'                          => 'El número de periodos tiene que ser mínimo 1',
 
             'modalidad_id.required'                 => 'La modalidad es requerida',
             'modalidad_id.integer'                  => 'La modalidad tiene que ser un número entero',

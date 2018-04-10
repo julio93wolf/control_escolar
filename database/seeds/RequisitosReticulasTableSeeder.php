@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Especialidad;
+use App\Models\PlanEspecialidad;
 use App\Models\Reticula;
 use App\Models\RequisitoReticula;
 
@@ -14,67 +14,62 @@ class RequisitosReticulasTableSeeder extends Seeder
      */
     public function run()
     {
-        $asignaturas_anteriores = [];
-        
-        $especialidades = Especialidad::get();
-        foreach ($especialidades as $key => $especialidad) {
-        	$asignaturas = $especialidad->asignaturas;
-        	
-        	foreach ($asignaturas as $key => $asignatura) {
+      $asignaturas_anteriores = [];
+      $planes_especialidades = PlanEspecialidad::get();
+      foreach ($planes_especialidades as $key => $plan_especialidad) {
+      	$asignaturas = $plan_especialidad->asignaturas;
+      	
+      	foreach ($asignaturas as $key => $asignatura) {
 
-        		$pivot = $asignatura->pivot;
+      		$pivot = $asignatura->pivot;
 
-        		$reticula = Reticula::where([
-            	['especialidad_id',$pivot->especialidad_id],
-            	['asignatura_id',$pivot->asignatura_id],
-            	['periodo_especialidad',$pivot->periodo_especialidad],
-            	['tipo_plan_reticula_id',1],
-        		])->first();
-        		
-        		//Periodo
-      		 	$periodo_especialidad = $asignatura->pivot->periodo_especialidad;
-      		 	
-      		 	//Asignaturas Anteriores
-      		 	foreach ($asignaturas as $key_ant => $asignatura_ant) {
-      		 		if($asignatura_ant->id != $asignatura->id ){
-      		 			if($asignatura_ant->pivot->periodo_especialidad <= $periodo_especialidad){
-      		 				array_push($asignaturas_anteriores,$asignatura_ant);
-      		 			}
-      		 		}
-      			}
+      		$reticula = Reticula::where([
+          	['plan_especialidad_id',$pivot->plan_especialidad_id],
+          	['asignatura_id',$pivot->asignatura_id],
+          	['periodo_reticula',$pivot->periodo_reticula]
+      		])->first();
+      
+      		//Periodo
+    		 	$periodo_reticula = $pivot->periodo_reticula;
+    		 	
+    		 	//Asignaturas Anteriores
+    		 	foreach ($asignaturas as $key_ant => $asignatura_ant) {
+    		 		if($asignatura_ant->id != $asignatura->id ){
+    		 			if($asignatura_ant->pivot->periodo_reticula < $periodo_reticula){
+    		 				array_push($asignaturas_anteriores,$asignatura_ant);
+    		 			}
+    		 		}
+    			}
 
-      			if(count($asignaturas_anteriores)>0){
-      				
-      				$ini = count($asignaturas_anteriores)-3;
-      				$fin = count($asignaturas_anteriores);
+          //Si en encuentra materias anteriores
+    			if(sizeof($asignaturas_anteriores)>0){
+    				
+    				$ini = sizeof($asignaturas_anteriores)-3;
+    				$fin = sizeof($asignaturas_anteriores);
 
-							if($ini<0){
-								$ini=0;
-							}
-							
-      				for ($i=$ini; $i < $fin; $i++) { 
-      					
-      					$asignatura_anterior = $asignaturas_anteriores[$i];
+						if($ini<0){
+							$ini=0;
+						}
+						
+    				for ($i=$ini; $i < $fin; $i++) { 
+    					
+    					$asignatura_anterior = $asignaturas_anteriores[$i];
 
-      					$pivot_ant = $asignatura_anterior->pivot;
+    					$pivot_ant = $asignatura_anterior->pivot;
 
-      					$reticula_requisito = Reticula::where([
-		            	['especialidad_id',$pivot_ant->especialidad_id],
-		            	['asignatura_id',$pivot_ant->asignatura_id],
-		            	['periodo_especialidad',$pivot_ant->periodo_especialidad],
-		            	['tipo_plan_reticula_id',1],
-		        		])->first();
+    					$reticula_requisito = Reticula::where([
+	            	['plan_especialidad_id',$pivot_ant->plan_especialidad_id],
+	            	['asignatura_id',$pivot_ant->asignatura_id],
+	            	['periodo_reticula',$pivot_ant->periodo_reticula]
+	        		])->first();
 
-      					RequisitoReticula::create([
-				        	'reticula_id'						=> $reticula->id,
-				        	'reticula_requisito_id'	=> $reticula_requisito->id
-				        ]);
-      				}
-      			}
-      			
-      					
-
-        	}
-        }
+    					RequisitoReticula::create([
+			        	'reticula_id'						=> $reticula->id,
+			        	'reticula_requisito_id'	=> $reticula_requisito->id
+			        ]);
+    				}
+    			}
+      	}
+      }
     }
 }

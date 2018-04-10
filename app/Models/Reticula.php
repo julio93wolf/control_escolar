@@ -9,7 +9,7 @@ class Reticula extends Model
     protected $table = 'reticulas';
     
     protected $fillable = [
-    	'especialidad_id','asignatura_id','periodo_especialidad','tipo_plan_reticula_id'
+    	'plan_especialidad_id','asignatura_id','periodo_reticula'
     ];
 
     public $timestamps = false;
@@ -18,12 +18,8 @@ class Reticula extends Model
     	return $this->belongsTo('App\Models\Asignatura','asignatura_id');
     }
 
-    public function especialidad(){
-    	return $this->belongsTo('App\Models\Especialidad','especialidad_id');
-    }
-
-    public function tipo_plan_reticula(){
-        return $this->belongsTo('App\Models\TipoPlanReticula','tipo_plan_reticula_id');
+    public function plan_especialidad(){
+        return $this->belongsTo('App\Models\PlanEspecialidad','plan_especialidad_id');
     }
 
     public function requisitos(){

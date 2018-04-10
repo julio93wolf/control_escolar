@@ -9,18 +9,17 @@ class Asignatura extends Model
     protected $table = 'asignaturas';
 
     protected $fillable = [
-    	'codigo','asignatura','semestre','creditos','reticula_id'
+    	'codigo','asignatura','creditos'
     ];
 
     public $timestamps = false;
 
-    public function especialidades(){
-        return $this->belongsToMany('App\Models\Especialidad','reticulas','asignatura_id','especialidad_id')
-            ->withPivot('periodo_especialidad','tipo_plan_reticula_id');
+    public function planes_especialidades(){
+        return $this->belongsToMany('App\Models\PlanEspecialidad','reticulas','asignatura_id','plan_especialidad_id')
+            ->withPivot('periodo_reticula');
     }
 
-    public function tipos_planes_reticulas(){
-        return $this->belongsToMany('App\Models\TipoPlanReticula','reticulas','asignatura_id','tipo_plan_reticula_id')
-            ->withPivot('periodo_especialidad','especialidad_id');
+    public function reticulas(){
+        return $this->hasMany('App\Models\Reticula','asignatura_id');
     }
 }

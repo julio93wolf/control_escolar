@@ -52,7 +52,6 @@ class EspecialidadController extends Controller
         $especialidad->nivel_academico_id           = $request->nivel_academico_id;
         $especialidad->clave                        = $request->clave;
         $especialidad->especialidad                 = $request->especialidad;
-        $especialidad->periodos                     = $request->periodos;
         $especialidad->reconocimiento_oficial       = $request->reconocimiento_oficial;
         $especialidad->dges                         = $request->dges;
         $especialidad->fecha_reconocimiento         = $request->fecha_reconocimiento;
@@ -72,7 +71,7 @@ class EspecialidadController extends Controller
      */
     public function show(Especialidad $especialidade)
     {
-        return $especialidad   = Especialidad::find($especialidade->id);
+        //
     }
 
     /**
@@ -100,7 +99,6 @@ class EspecialidadController extends Controller
         $especialidad->nivel_academico_id           = $request->nivel_academico_id;
         $especialidad->clave                        = $request->clave;
         $especialidad->especialidad                 = $request->especialidad;
-        $especialidad->periodos                     = $request->periodos;
         $especialidad->reconocimiento_oficial       = $request->reconocimiento_oficial;
         $especialidad->dges                         = $request->dges;
         $especialidad->fecha_reconocimiento         = $request->fecha_reconocimiento;

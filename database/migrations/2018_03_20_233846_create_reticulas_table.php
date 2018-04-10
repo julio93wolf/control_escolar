@@ -15,14 +15,12 @@ class CreateReticulasTable extends Migration
     {
         Schema::create('reticulas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('especialidad_id')->unsigned();
             $table->integer('asignatura_id')->unsigned();
-            $table->integer('tipo_plan_reticula_id')->unsigned();
-            $table->tinyInteger('periodo_especialidad');
+            $table->integer('plan_especialidad_id')->unsigned();
+            $table->tinyInteger('periodo_reticula');
             
-            $table->foreign('especialidad_id')->references('id')->on('especialidades');
             $table->foreign('asignatura_id')->references('id')->on('asignaturas');
-            $table->foreign('tipo_plan_reticula_id')->references('id')->on('tipos_planes_reticulas');
+            $table->foreign('plan_especialidad_id')->references('id')->on('planes_especialidades');
         });
     }
 

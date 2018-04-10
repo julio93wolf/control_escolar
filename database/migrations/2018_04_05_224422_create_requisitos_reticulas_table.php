@@ -18,7 +18,7 @@ class CreateRequisitosReticulasTable extends Migration
             $table->integer('reticula_id')->unsigned();
             $table->integer('reticula_requisito_id')->unsigned();
 
-            $table->foreign('reticula_id')->references('id')->on('reticulas');
+            $table->foreign('reticula_id')->references('id')->on('reticulas')->onDelete('cascade');
             $table->foreign('reticula_requisito_id')->references('id')->on('reticulas');
         });
     }

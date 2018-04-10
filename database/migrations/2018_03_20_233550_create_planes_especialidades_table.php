@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTiposPlanesReticulasTable extends Migration
+class CreatePlanesEspecialidadesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateTiposPlanesReticulasTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipos_planes_reticulas', function (Blueprint $table) {
+        Schema::create('planes_especialidades', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('tipo_plan_reticula',32)->unique();
+            $table->string('plan_especialidad',32)->unique();
+            $table->tinyInteger('periodos');
             $table->string('descripcion',255)->nullable();
+            $table->integer('especialidad_id')->unsigned();
+            
+            $table->foreign('especialidad_id')->references('id')->on('especialidades');
         });
     }
 
@@ -27,6 +31,6 @@ class CreateTiposPlanesReticulasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipos_planes_reticulas');
+        Schema::dropIfExists('planes_especialidades');
     }
 }

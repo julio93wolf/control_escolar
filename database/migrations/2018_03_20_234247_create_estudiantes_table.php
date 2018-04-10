@@ -26,7 +26,7 @@ class CreateEstudiantesTable extends Migration
             $table->integer('periodo_id')->unsigned();
             $table->text('otros')->nullable();
             $table->integer('usuario_id')->unsigned();
-            $table->integer('tipo_plan_reticula_id')->unsigned();
+            $table->integer('plan_especialidad_id')->unsigned();
 
             $table->foreign('dato_general_id')->references('id')->on('datos_generales');
             $table->foreign('especialidad_id')->references('id')->on('especialidades');
@@ -35,7 +35,7 @@ class CreateEstudiantesTable extends Migration
             $table->foreign('medio_enterado_id')->references('id')->on('medios_enterados');
             $table->foreign('periodo_id')->references('id')->on('periodos');
             $table->foreign('usuario_id')->references('id')->on('usuarios');
-            $table->foreign('tipo_plan_reticula_id')->references('id')->on('tipos_planes_reticulas');
+            $table->foreign('plan_especialidad_id')->references('id')->on('planes_especialidades');
         });
     }
 
