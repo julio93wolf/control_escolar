@@ -11,6 +11,18 @@ class PeriodosTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Periodo::class,15)->create();
+    		for ($i=0; $i < 15; $i++) { 
+    			if ($i%2 == 0) {
+    				factory(App\Models\Periodo::class,1)->create([
+    					'anio'		=>	(2000+$i),
+    					'periodo'	=> 'Febrero - Junio'
+        		]);
+    			}else{
+    				factory(App\Models\Periodo::class,1)->create([
+    					'anio' 		=> (2000+$i),
+    					'periodo' => 'Agosto - Diciembre'	
+        		]);
+    			}
+    		}
     }
 }

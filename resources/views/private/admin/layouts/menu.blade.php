@@ -1,7 +1,7 @@
 <ul id="dropdown_academicos" class="dropdown-content">
   <li><a href="{{ route('estudiantes.index') }}" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">school</i>Estudiantes</a></li>
   <li><a href="{{ route('docentes.index') }}" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">work</i>Docentes</a></li>
-  <li><a href="#!" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">import_contacts</i>Clases</a></li>
+  <li><a href="{{ route('clases.index') }}" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">import_contacts</i>Clases</a></li>
 </ul>
 
 <ul id="dropdown_escolares" class="dropdown-content">
@@ -69,7 +69,7 @@
         <ul>
           <li><a href="{{ route('estudiantes.index') }}"><i class="material-icons blue-text text-darken-2">school</i>Estudiantes</a></li>
           <li><a href="{{ route('docentes.index') }}"><i class="material-icons blue-text text-darken-2">work</i>Docentes</a></li>
-          <li><a href="#!"><i class="material-icons blue-text text-darken-2">import_contacts</i>Clases</a></li>
+          <li><a href="{{ route('clases.index') }}"><i class="material-icons blue-text text-darken-2">import_contacts</i>Clases</a></li>
         </ul>
       </div>
     </li>

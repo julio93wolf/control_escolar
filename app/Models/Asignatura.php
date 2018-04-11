@@ -22,4 +22,8 @@ class Asignatura extends Model
     public function reticulas(){
         return $this->hasMany('App\Models\Reticula','asignatura_id');
     }
+
+    public function clases(){
+        return $this->hasMany('App\Models\Clase','asignatura_id');
+    }
 }

@@ -45,7 +45,7 @@
 					</a>
 				</div>
 				<div class="col s6 m4">
-					<a href="{{--route('clases.index')--}}">
+					<a href="{{ route('clases.index') }}">
 						<div class="center promo hoverable">
 							<i class="material-icons">import_contacts</i>
 							<p class="promo-caption">Clases</p>

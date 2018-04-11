@@ -35,6 +35,9 @@ Route::group(['middleware' => ['login']], function () {
 			//Docentes
 			Route::resource('docentes','Admin\DocenteController');
 
+			//Clases
+			Route::resource('clases','Admin\ClaseController');
+
 		});
 
 		//Escolares
@@ -97,6 +100,9 @@ Route::group(['middleware' => ['login']], function () {
 
 			//Docentes
 			Route::get('docentes','Admin\DataTableController@docentes')->name('docentes.get');
+
+			//Clases
+			Route::get('clases','Admin\DataTableController@clases')->name('clases.get');
 
 		});
 

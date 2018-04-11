@@ -84,20 +84,11 @@
 			</div>
 
 			<div class="row">
-				<div class="input-field col s12 l6">
+				<div class="input-field col s12">
 					<i class="material-icons prefix">vpn_key</i>
 					<input type="text" id="codigo" name="codigo" required="" aria-required="true">
 					<label for="codigo">Código</label>
 				</div>
-
-				<div class="col s6 l3  right-align">
-					<a class="waves-effect waves-light btn center-align blue darken-2" style="width: 100%"><i class="material-icons left">autorenew</i>Generar</a>
-				</div>
-
-				<div class="col s6 l3 right-align">
-					<a class="waves-effect waves-light btn center-align blue darken-2" style="width: 100%"><i class="material-icons left">check_circle</i>Validar</a>
-				</div>
-
 			</div>
 
 			<div class="row">

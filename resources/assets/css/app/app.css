@@ -52,6 +52,7 @@
 
 }
 
+.input-field input[type=tel]:focus + label,
 .input-field input[type=text]:focus + label,
 .input-field input[type=password]:focus + label,
 .input-field input[type=email]:focus + label,
@@ -60,9 +61,9 @@
 .materialize-textarea:focus:not([readonly]) + label,
 .picker__close, .picker__today, .picker__clear{
   color: #0d47a1 !important;
-
 }
 
+.input-field input[type=tel]:focus,
 .input-field input[type=text]:focus,
 .input-field input[type=password]:focus,
 .input-field input[type=email]:focus,
@@ -248,6 +249,7 @@ div.disabled{
 .picker__clear{
   color: #f44336;
 }
+.input-field input[type=tel]:focus + label,
 .input-field input[type=text]:focus + label,
 .input-field input[type=password]:focus + label,
 .input-field input[type=email]:focus + label,
@@ -257,6 +259,7 @@ div.disabled{
   color: #0d47a1 !important;
 }
 /* label underline focus color */
+.input-field input[type=tel]:focus,
 .input-field input[type=text]:focus,
 .input-field input[type=password]:focus,
 .input-field input[type=email]:focus,

@@ -2,7 +2,6 @@ load_especialidades();
 
 var periodo_reticula = null;
 var plan_especialidad_id = null;
-//var especialidad_id = null;
 var asignatura_id = null;
 var reticula_id = null;
 var requisito_id = null;
@@ -22,7 +21,10 @@ function load_especialidades (){
 		load_planes();
 	})
 	.fail(function() {
-		swal("Error", "Ocurrio un error al cargar las especialidades.", "error");
+    $('#name_reticula').text('');
+		$('#section_reticula').empty();
+    swal("Error", "No existen especialidades", "error");
+
 	});
 }
 
@@ -37,7 +39,9 @@ function load_planes (){
     load_reticula ();
   })
   .fail(function() {
-    swal("Error", "Ocurrio un error al cargar los planes academivos.", "error");
+    $('#name_reticula').text('');
+    $('#section_reticula').empty();
+    swal("Error", "No existen planes de estudio", "error");
   });
 }
 
@@ -73,7 +77,9 @@ function load_reticula (){
 		}
 		$('#name_reticula').text('Retícula de '+ $('#nivel_academico :selected').text() + ' en ' + $('#especialidad_id :selected').text()+' ('+$('#plan_especialidad_id :selected').text()+')');
 	}).fail(function() {
-		swal("Error", "Ocurrio un error al cargar la reticula.", "error");
+    $('#name_reticula').text('');
+    $('#section_reticula').empty();
+		swal("Error", "No existen un plan de estudio", "error");
 	});
 }
 

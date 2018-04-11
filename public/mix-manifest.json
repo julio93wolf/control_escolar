@@ -10,5 +10,7 @@
     "/js/especialidades.js": "/js/especialidades.js",
     "/js/reticulas.js": "/js/reticulas.js",
     "/js/docentes.js": "/js/docentes.js",
-    "/js/form.docentes.js": "/js/form.docentes.js"
+    "/js/form.docentes.js": "/js/form.docentes.js",
+    "/js/clases.js": "/js/clases.js",
+    "/js/form.clases.js": "/js/form.clases.js"
 }

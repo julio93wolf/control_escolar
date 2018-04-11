@@ -22,4 +22,11 @@ class DataTable extends Model
 	  static function docentes(){
 	    return \DB::table('vw_docentes')->orderBy('docente_id','desc')->get();
 	  }
+
+	  static function clases($periodo_id,$especialidad_id){
+	    return \DB::table('vw_clases')->where([
+	    	['periodo_id',						$periodo_id],
+	    	['especialidad_id',	$especialidad_id]
+	    ])->get();
+	  }
 }

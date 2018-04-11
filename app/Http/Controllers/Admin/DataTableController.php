@@ -50,4 +50,9 @@ class DataTableController extends Controller
         }
         return Datatables::of($docentes)->make(true);
     }
+
+    public function clases(Request $request){
+        $clases = DataTable::clases($request->periodo_id,$request->especialidad_id);
+        return Datatables::of($clases)->make(true);
+    }
 }

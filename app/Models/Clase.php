@@ -9,7 +9,7 @@ class Clase extends Model
     protected $table = 'clases';
     
     protected $fillable = [
-    	'asignatura_id','clase','docente_id','periodo_id'
+    	'asignatura_id','clase','docente_id','periodo_id','especialidad_id'
     ];
 
     public $timestamps = false;
@@ -22,8 +22,8 @@ class Clase extends Model
     	return $this->hasMany('App\Models\Grupo','clase_id');
     }
 
-    public function reticula(){
-    	return $this->belongsTo('App\Models\Reticula','reticula_id');
+    public function asignatura(){
+    	return $this->belongsTo('App\Models\Asignatura','asignatura_id');
     }
 
     public function docente(){
@@ -32,5 +32,9 @@ class Clase extends Model
 
     public function periodo(){
     	return $this->belongsTo('App\Models\Periodo','periodo_id');
+    }
+
+    public function especialidad(){
+        return $this->belongsTo('App\Models\Especialidad','especialidad_id');
     }
 }

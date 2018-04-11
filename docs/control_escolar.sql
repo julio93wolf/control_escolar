@@ -80,3 +80,23 @@ as
 		join datos_generales on datos_generales.id = docentes.dato_general_id
         join titulos on titulos.id = docentes.titulo_id;
 select * from vw_docentes;
+
+
+drop view if exists vw_clases;
+create view vw_clases 
+as
+	select 
+		clases.id as clase_id,
+		asignaturas.codigo,
+        clases.clase,
+        asignaturas.asignatura ,
+        concat(datos_generales.nombre,' ',datos_generales.apaterno,' ',datos_generales.amaterno) as docente,
+        clases.periodo_id,
+        clases.especialidad_id
+    from clases
+        join asignaturas on asignaturas.id = clases.asignatura_id
+        join docentes on docentes.id = clases.docente_id
+        join datos_generales on datos_generales.id = docentes.dato_general_id
+	order by clases.especialidad_id,clases.periodo_id,asignaturas.codigo,clases.clase;
+
+select * from vw_clases;

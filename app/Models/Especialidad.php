@@ -18,6 +18,10 @@ class Especialidad extends Model
         return $this->hasMany('App\Models\PlanEspecialidad','especialidad_id');
     }
 
+    public function clases(){
+        return $this->hasMany('App\Models\Clase','especialidad_id');
+    }
+
     public function nivel_academico(){
     	return $this->belongsTo('App\Models\NivelAcademico','nivel_academico_id');
     }

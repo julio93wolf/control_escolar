@@ -20,8 +20,8 @@
 		<div class="row blue white-text">
 			<div class="nav-content blue col s10 offset-s1">
 				<ul id="tabs_especialidades_reticulas" class="tabs tabs-transparent">
-					<li class="tab"><a href="#tab_especialidades" >Lista de especialidades</a></li>
-					<li class="tab"><a id="btn_tab_reticulas" href="#tab_reticulas" class="active">Retículas</a></li>
+					<li class="tab"><a href="#tab_especialidades" class="active">Lista de especialidades</a></li>
+					<li class="tab"><a id="btn_tab_reticulas" href="#tab_reticulas">Retículas</a></li>
 				</ul>
 			</div>	
 		</div>
