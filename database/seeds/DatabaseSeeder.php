@@ -36,6 +36,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ReticulasTableSeeder::class);
         $this->call(TiposExamenesTableSeeder::class);
         $this->call(FechasExamenesTableSeeder::class);
-        //$this->call(RequisitosReticulasTableSeeder::class);
+        $this->call(RequisitosReticulasTableSeeder::class);
     }
 }

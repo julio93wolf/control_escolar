@@ -14,38 +14,29 @@ class RequisitosReticulasTableSeeder extends Seeder
      */
     public function run()
     {
-      $asignaturas_anteriores = [];
+      $reticulas_ant = [];
       $planes_especialidades = PlanEspecialidad::get();
       foreach ($planes_especialidades as $key => $plan_especialidad) {
-      	$asignaturas = $plan_especialidad->asignaturas;
       	
-      	foreach ($asignaturas as $key => $asignatura) {
+        $reticulas = $plan_especialidad->reticulas;
+      	
+      	foreach ($reticulas as $key => $reticula) {
 
-      		$pivot = $asignatura->pivot;
-
-      		$reticula = Reticula::where([
-          	['plan_especialidad_id',$pivot->plan_especialidad_id],
-          	['asignatura_id',$pivot->asignatura_id],
-          	['periodo_reticula',$pivot->periodo_reticula]
-      		])->first();
-      
-      		//Periodo
-    		 	$periodo_reticula = $pivot->periodo_reticula;
     		 	
     		 	//Asignaturas Anteriores
-    		 	foreach ($asignaturas as $key_ant => $asignatura_ant) {
-    		 		if($asignatura_ant->id != $asignatura->id ){
-    		 			if($asignatura_ant->pivot->periodo_reticula < $periodo_reticula){
-    		 				array_push($asignaturas_anteriores,$asignatura_ant);
+    		 	foreach ($reticulas as $key_ant => $reticula_ant) {
+    		 		if($reticula_ant->id != $reticula->id ){
+    		 			if($reticula_ant->periodo_reticula < $reticula->periodo_reticula){
+    		 				array_push($reticulas_ant,$reticula_ant);
     		 			}
     		 		}
     			}
 
           //Si en encuentra materias anteriores
-    			if(sizeof($asignaturas_anteriores)>0){
+    			if(count($reticulas_ant)>0){
     				
-    				$ini = sizeof($asignaturas_anteriores)-3;
-    				$fin = sizeof($asignaturas_anteriores);
+    				$ini = count($reticulas_ant)-3;
+    				$fin = count($reticulas_ant);
 
 						if($ini<0){
 							$ini=0;
@@ -53,15 +44,9 @@ class RequisitosReticulasTableSeeder extends Seeder
 						
     				for ($i=$ini; $i < $fin; $i++) { 
     					
-    					$asignatura_anterior = $asignaturas_anteriores[$i];
+    					$reticula_requisito = $reticulas_ant[$i];
 
-    					$pivot_ant = $asignatura_anterior->pivot;
-
-    					$reticula_requisito = Reticula::where([
-	            	['plan_especialidad_id',$pivot_ant->plan_especialidad_id],
-	            	['asignatura_id',$pivot_ant->asignatura_id],
-	            	['periodo_reticula',$pivot_ant->periodo_reticula]
-	        		])->first();
+              if($reticula->periodo_reticula > $reticula_requisito->periodo_reticula)
 
     					RequisitoReticula::create([
 			        	'reticula_id'						=> $reticula->id,

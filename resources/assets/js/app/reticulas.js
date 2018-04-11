@@ -97,7 +97,9 @@ function asignaturas_periodo (periodo){
 		for (var i = 0; i < asignaturas.length; i++) {
 			var asignatura = asignaturas[i];
 			btn_delete_reticula(asignatura.reticula);
-      btn_requisito_asignatura(asignatura.reticula);
+      if(periodo>1){
+        btn_requisito_asignatura(asignatura.reticula);
+      }
 		}
 	}).fail(function() {
 		swal("Error", "Ocurrio un error al cargar las asignaturas.", "error");
@@ -106,32 +108,53 @@ function asignaturas_periodo (periodo){
 
 
 function print_card_reticula(asignatura,periodo){
-	var card = 
-	`<div class="col s12 m6 l4 xl3">
-		<div class="card xsmall">
-			<div class="card-content">
-        <strong>`+asignatura.asignatura+`</strong>
-        <div class="divider"></div>
-        Código: `+asignatura.codigo+`<br>
-        Créditos: `+asignatura.creditos+`<br>
-        <a 
-        	id="delete_reticula_`+asignatura.reticula+`"
-        	class="btn-floating halfway-fab waves-effect waves-light red delete-asignatura"  
-        	style="position: absolute; left:94%; top:-10%;"
-        	reticula="`+asignatura.reticula+`"
-          periodo_reticula="`+periodo+`"
-          asignatura="`+asignatura.asignatura+`"
-        ><i class="material-icons">close</i></a>
-        <a
-          id="requisito_reticula_`+asignatura.reticula+`"
-        	class="btn-floating halfway-fab waves-effect waves-light blue delete-asignatura" 
-        	style="position: absolute; left:78%; top:-10%;"
-          reticula="`+asignatura.reticula+`"
-          asignatura="`+asignatura.asignatura+`"
-        ><i class="material-icons">timeline</i></a>
-      </div>
-     </div>
-  </div>`;
+  var card =``; 
+  if (periodo>1){
+    card = `<div class="col s12 m6 l4 xl3">
+      <div class="card xsmall">
+        <div class="card-content">
+          <strong>`+asignatura.asignatura+`</strong>
+          <div class="divider"></div>
+          Código: `+asignatura.codigo+`<br>
+          Créditos: `+asignatura.creditos+`<br>
+          <a 
+            id="delete_reticula_`+asignatura.reticula+`"
+            class="btn-floating halfway-fab waves-effect waves-light red delete-asignatura"  
+            style="position: absolute; left:94%; top:-10%;"
+            reticula="`+asignatura.reticula+`"
+            periodo_reticula="`+periodo+`"
+            asignatura="`+asignatura.asignatura+`"
+          ><i class="material-icons">close</i></a>
+          <a
+            id="requisito_reticula_`+asignatura.reticula+`"
+            class="btn-floating halfway-fab waves-effect waves-light blue delete-asignatura" 
+            style="position: absolute; left:78%; top:-10%;"
+            reticula="`+asignatura.reticula+`"
+            asignatura="`+asignatura.asignatura+`"
+          ><i class="material-icons">timeline</i></a>
+        </div>
+       </div>
+    </div>`;  
+  }else{
+    card = `<div class="col s12 m6 l4 xl3">
+      <div class="card xsmall">
+        <div class="card-content">
+          <strong>`+asignatura.asignatura+`</strong>
+          <div class="divider"></div>
+          Código: `+asignatura.codigo+`<br>
+          Créditos: `+asignatura.creditos+`<br>
+          <a 
+            id="delete_reticula_`+asignatura.reticula+`"
+            class="btn-floating halfway-fab waves-effect waves-light red delete-asignatura"  
+            style="position: absolute; left:94%; top:-10%;"
+            reticula="`+asignatura.reticula+`"
+            periodo_reticula="`+periodo+`"
+            asignatura="`+asignatura.asignatura+`"
+          ><i class="material-icons">close</i></a>
+        </div>
+       </div>
+    </div>`;  
+  }
   return card;
 }
 
@@ -340,7 +363,7 @@ function asignaturas_requisito (){
     $('#requisitos_reticula').append(asignaturas_requisito);
     for (var i = 0; i < asignaturas.length; i++) {
       var asignatura = asignaturas[i];
-      //btn_delete_requisito(asignatura.requisito);
+      btn_delete_requisito(asignatura.requisito);
     }
   }).fail(function() {
     swal("Error", "Ocurrio un error al cargar las asignaturas.", "error");
@@ -371,7 +394,7 @@ function print_card_requisito(asignatura){
   return card;
 }
 
-/*
+
 function btn_delete_requisito(requisito){
   $(`#delete_requisito_`+requisito+``).on('click', function() {
     requisito_id = $(this).attr('requisito');
@@ -461,4 +484,4 @@ function destroy_requisito(){
       });  
     }
   });
-}*/
+}
