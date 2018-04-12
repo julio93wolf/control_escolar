@@ -101,9 +101,39 @@
 	<div class="divider"></div>
 </div>
 
-<div class="row">
-	<p>
-    <input type="checkbox" class="filled-in" id="dia_[]"/>
-    <label for="dia_[]">Lunes</label>
-	</p>
-</div>
+@foreach($dias as $dia)
+	<div class="row valign-wrapper">
+		<div class="col s12 m2 l2">
+	    <input type="checkbox" class="filled-in" id="dia_{{ $loop->index }}" name="dia[]" value="{{ $loop->index }}" index="{{ $loop->index }}"/>
+	    <label for="dia_{{ $loop->index }}"/>{{ $dia->dia }}</label>
+		</div>
+		<div class="col s12 m5">
+			<input id="hora_inicio_{{ $loop->index }}" name="hora_inicio[{{ $loop->index }}]" type="text" class="timepicker" disabled="true" />
+			<label for="hora_inicio[{{ $loop->index }}]"></label>
+		</div>
+
+		<div class="col s12 m5">
+			<input id="hora_salida_{{ $loop->index }}" name="hora_salida[{{ $loop->index }}]" type="text" class="timepicker
+			@if( $errors->has('hora_salida.'.$loop->index) ) 
+				invalid
+			@endif"
+			@if( $errors->has('hora_salida.'.$loop->index) )
+				value="{{ old('hora_salida.'.$loop->index) }}" 
+			@else
+				disabled="true"
+			@endif required="" aria-required="true" />
+			<label for="hora_salida[{{ $loop->index }}]"
+			@if( $errors->has('hora_salida.'.$loop->index)) 
+				class="active"  
+			@endif></label>
+		</div>
+
+	</div>	
+@endforeach
+
+
+@if( $errors->has('hora_salida.0') ) 
+	{{ $errors->first('hora_salida.0',':message') }}
+@else
+	
+@endif

@@ -22,6 +22,8 @@
 				<div class="row">
 					<div class="input-field col s12">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<input type="hidden" name="periodo_id" value="{{ $periodo_id }}">
+						<input type="hidden" name="especialidad_id" value="{{ $especialidad_id }}">
 						<div class="right-align">
 							<button class="waves-effect waves-light btn center-align blue darken-2" type="submit">Guardar
 						    <i class="material-icons left">send</i>
@@ -39,8 +41,4 @@
 	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
 	<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.js"></script>
 	<script type="text/javascript" src="{{ asset('js/form.clases.js') }}"></script>
-	<script type="text/javascript">
-		$('#asignatura_id').select2();
-    $('#docente_id').select2();
-	</script>
 @endsection

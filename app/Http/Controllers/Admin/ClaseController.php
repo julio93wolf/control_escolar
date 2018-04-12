@@ -7,9 +7,11 @@ use App\Models\NivelAcademico;
 use App\Models\Periodo;
 use App\Models\Docente;
 use App\Models\Especialidad;
+use App\Models\Dia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ClaseCreateRequest;
+use App\Http\Requests\ClaseStoreRequest;
 
 class ClaseController extends Controller
 {
@@ -52,9 +54,13 @@ class ClaseController extends Controller
             }
         }
         $docentes = Docente::get();
+        $dias = Dia::get();
         return view('private.admin.academicos.clases.create',[
-            'docentes'      => $docentes,
-            'asignaturas'    => $asignaturas_especialidad
+            'docentes'          => $docentes,
+            'asignaturas'       => $asignaturas_especialidad,
+            'dias'              => $dias,
+            'periodo_id'        => $request->periodo_id,
+            'especialidad_id'   => $request->especialidad_id
         ]);
     }
 
@@ -64,9 +70,9 @@ class ClaseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClaseStoreRequest $request)
     {
-        //
+        dd($request);
     }
 
     /**

@@ -67,7 +67,7 @@ class ClasesTableSeeder extends Seeder
                             'docente_id'        => rand(1,$no_docentes),
                             'periodo_id'        => $periodo->id,
                             'especialidad_id'   => $especialidad->id
-                          ]);
+                        ]);
                     }
 
                 }
