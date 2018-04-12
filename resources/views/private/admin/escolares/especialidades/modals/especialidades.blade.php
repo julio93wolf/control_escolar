@@ -9,7 +9,7 @@
 
 			<div class="row">
 				<div class="input-field col s12">
-					<i class="material-icons prefix">list</i>
+					<i class="material-icons prefix">school</i>
 					<select id="nivel_academico_id" name="nivel_academico_id" class="validate" required="" aria-required="true"> 
 						@foreach($niveles_academicos as $nivele_academico)
 						<option value="{{ $nivele_academico -> id }}">{{ $nivele_academico -> nivel_academico }}</option>
@@ -21,7 +21,7 @@
 
 			<div class="row">
 				<div class="input-field col s12">
-					<i class="material-icons prefix">account_circle</i>
+					<i class="material-icons prefix">account_balance</i>
 					<input id="especialidad" name="especialidad" type="text" class="validate" required="" aria-required="true">
 					<label for="especialidad">Especialidad</label>
 				</div>
@@ -29,7 +29,7 @@
 
 			<div class="row">
 				<div class="input-field col s12">
-					<i class="material-icons prefix">account_circle</i>
+					<i class="material-icons prefix">vpn_key</i>
 					<input id="clave" name="clave" type="text" class="validate" required="" aria-required="true">
 					<label for="clave">Código</label>
 				</div>
@@ -37,7 +37,7 @@
 
 			<div class="row">
 				<div class="input-field col s12">
-					<i class="material-icons prefix">account_circle</i>
+					<i class="material-icons prefix">mode_comment</i>
 					<input type="text" class="validate" id="descripcion">
 					<label>Descripción</label>
 				</div>
@@ -77,7 +77,7 @@
 
 			<div class="row">
 				<div class="input-field col s12">
-					<i class="material-icons prefix">account_circle</i>
+					<i class="material-icons prefix">verified_user</i>
 					<input id="reconocimiento_oficial" name="reconocimiento_oficial" type="text" class="validate" required="" aria-required="true">
 					<label for="reconocimiento_oficial">Reconocimiento oficial</label>
 				</div>
@@ -85,7 +85,7 @@
 
 			<div class="row">
 				<div class="input-field col s12">
-					<i class="material-icons prefix">account_circle</i>
+					<i class="material-icons prefix">date_range</i>
 					<input id="fecha_reconocimiento" name="fecha_reconocimiento" type="text" class="datepicker" class="validate" required="" aria-required="true">
 					<label for="fecha_reconocimiento">Fecha de reconocimiento oficial</label>
 				</div>
@@ -93,7 +93,7 @@
 
 			<div class="row">
 				<div class="input-field col s12">
-					<i class="material-icons prefix">account_circle</i>
+					<i class="material-icons prefix">vpn_key</i>
 					<input id="dges" name="dges" type="text" class="validate">
 					<label for="dges">DGES</label>
 				</div>

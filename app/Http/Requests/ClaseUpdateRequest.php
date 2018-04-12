@@ -6,7 +6,7 @@ use App\Models\Clase;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class ClaseStoreRequest extends FormRequest
+class ClaseUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +25,14 @@ class ClaseStoreRequest extends FormRequest
      */
     public function rules()
     {
+        //dd($this);
+
         $clases = [];
         $clases_registradas = Clase::where([
             ['asignatura_id',$this->asignatura_id],
             ['especialidad_id',$this->especialidad_id],
-            ['periodo_id',$this->periodo_id]
+            ['periodo_id',$this->periodo_id],
+            ['id','<>',$this->clase_id]
         ])->get();
         foreach ($clases_registradas as $key => $clase_registrada) {
             array_push($clases,$clase_registrada->clase);
@@ -67,7 +70,7 @@ class ClaseStoreRequest extends FormRequest
     {
         return [
             'clase.required'            => 'La clase es requerida.',
-            'clase.not_in'               => 'El nombre de la clase ya está en uso.',
+            'clase.not_in'              => 'El nombre de la clase ya está en uso.',
 
             'asignatura_id.required'    => 'La asignatura es requerida.',
             'asignatura_id.integer'     => 'La asignatura tiene que ser un número entero.',

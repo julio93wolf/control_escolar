@@ -99,9 +99,53 @@ function load_clases(){
         }
     ]
   });
-  //delete_periodo('#table_clases tbody',table);
+  delete_clase('#table_clases tbody',table);
   $("select[name$='table_clases_length']").val('10');
   $("select[name$='table_clases_length']").material_select();
+}
+
+function delete_clase (tbody,table){
+  $(tbody).on('click','a.delete-clase',function(){
+    var data = table.row( $(this).parents('tr') ).data();
+    swal({
+      title: 'Desea eliminar la clase?',
+      text: "Esta acción no se puede revertir",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.value) {
+        clase_id= data.clase_id;
+        destroy_clase(clase_id);    
+      }
+    })
+  });
+}
+
+function destroy_clase(clase_id){
+  $.ajax({
+    url: '/admin/academicos/clases/'+clase_id,
+    type: 'DELETE',
+    success: function(result) {
+      load_clases();
+      swal({
+        type: 'success',
+        title: 'La clase ha sido eliminada',
+        showConfirmButton: false,
+        timer: 1500
+      });
+    },
+    error: function (data) {
+      swal({
+        type: 'error',
+        title: 'Error al eliminar la clase',
+        text: 'La clase esta relacionado con uno o más datos.'
+      });  
+    }
+  });
 }
 
 function create_clase(){

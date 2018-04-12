@@ -7,7 +7,7 @@
 <div class="row">
 	
 	<div class="input-field col s12">
-		<i class="material-icons prefix">account_circle</i>
+		<i class="material-icons prefix">class</i>
 		<input id="clase" name="clase" type="text" class="validate
 		@if( $errors->has('clase')) 
 			invalid
@@ -21,7 +21,7 @@
 	</div>
 	
 	<div class="input-field col s12" style="margin-bottom: 20px;">
-		<i class="material-icons prefix">favorite</i>
+		<i class="material-icons prefix">school</i>
 		<select id="asignatura_id" name="asignatura_id" class="validate
 		@if( $errors->has('asignatura_id')) 
 			invalid
@@ -52,7 +52,7 @@
 	</div>
 	
 	<div class="input-field col s12">
-		<i class="material-icons prefix">favorite</i>
+		<i class="material-icons prefix">account_box</i>
 		<select id="docente_id" name="docente_id" class="validate
 		@if( $errors->has('docente_id')) 
 			invalid
@@ -95,21 +95,84 @@
 	</div>
 </div>
 
-<div class="section">
+<div class="row">
 	<h5>Horario</h5>
 	<p>Horario de la clase</p>
 	<div class="divider"></div>
 </div>
 
+@if( $errors->has('dia') ) 
+	
+		<div class="chip red darken-4 white-text">
+	    Necesita agregar un horario
+	    <i class="close material-icons white-text">close</i>
+	  </div>
+	
+@endif
+
+@if( $errors->has('hora_inicio.*') ) 
+	
+		<div class="chip red darken-4 white-text">
+	    Hora de inicio incompleta
+	    <i class="close material-icons white-text">close</i>
+	  </div>
+	
+@endif
+
+@if( $errors->has('hora_salida.*') ) 
+	
+		<div class="chip red darken-4 white-text">
+	    Hora de salida incompleta o menor que el horario de inicio 
+	    <i class="close material-icons white-text">close</i>
+	  </div>
+	
+@endif
+
 @foreach($dias as $dia)
 	<div class="row valign-wrapper">
 		<div class="col s12 m2 l2">
-	    <input type="checkbox" class="filled-in" id="dia_{{ $loop->index }}" name="dia[]" value="{{ $loop->index }}" index="{{ $loop->index }}"/>
+	    <input type="checkbox" class="filled-in" id="dia_{{ $loop->index }}" name="dia[]" value="{{ $loop->index }}" index="{{ $loop->index }}"
+	    @if (isset($horarios))
+	    	@foreach ($horarios as $horario)
+	    		@if ($horario->dia_id == $dia->id)
+	    			checked="checked"
+	    		@endif
+	    	@endforeach
+	    @else
+	    	@if ($errors->has('hora_inicio.'.$loop->index) || $errors->has('hora_salida.'.$loop->index) || old('hora_inicio.'.$loop->index) )
+	    		checked="checked"
+	    	@endif
+	    @endif/>
 	    <label for="dia_{{ $loop->index }}"/>{{ $dia->dia }}</label>
 		</div>
+
 		<div class="col s12 m5">
-			<input id="hora_inicio_{{ $loop->index }}" name="hora_inicio[{{ $loop->index }}]" type="text" class="timepicker" disabled="true" />
-			<label for="hora_inicio[{{ $loop->index }}]"></label>
+			<input id="hora_inicio_{{ $loop->index }}" name="hora_inicio[{{ $loop->index }}]" type="text" class="timepicker
+			@if( $errors->has('hora_inicio.'.$loop->index) ) 
+				invalid
+			@endif"
+			@if (isset($horarios))
+			{{ $match=false }}
+				@foreach ($horarios as $horario)
+	    		@if ($horario->dia_id == $dia->id)
+	    			{{ $match=true }}
+	    			value="{{ date("H:i", strtotime($horario->hora_entrada)) }}" 
+	    		@endif
+	    	@endforeach
+	    	@if (!$match)
+	    		disabled="true"
+	    	@endif
+			@else
+				@if( $errors->has('hora_inicio.'.$loop->index) || old('hora_inicio.'.$loop->index) )
+					value="{{ old('hora_inicio.'.$loop->index) }}" 
+				@else
+					disabled="true"
+				@endif
+			@endif required="" aria-required="true"/>
+			<label for="hora_inicio[{{ $loop->index }}]"
+			@if( $errors->has('hora_inicio.'.$loop->index)) 
+				class="active"
+			@endif></label>
 		</div>
 
 		<div class="col s12 m5">
@@ -117,23 +180,29 @@
 			@if( $errors->has('hora_salida.'.$loop->index) ) 
 				invalid
 			@endif"
-			@if( $errors->has('hora_salida.'.$loop->index) )
-				value="{{ old('hora_salida.'.$loop->index) }}" 
+			@if (isset($horarios))
+				{{ $match=false }}
+				@foreach ($horarios as $horario)
+	    		@if ($horario->dia_id == $dia->id)
+	    			{{ $match=true }}
+	    			value="{{ date("H:i", strtotime($horario->hora_salida)) }}" 
+	    		@endif
+	    	@endforeach
+	    	@if (!$match)
+	    		disabled="true"
+	    	@endif
 			@else
-				disabled="true"
+				@if( $errors->has('hora_salida.'.$loop->index) || old('hora_salida.'.$loop->index) )
+					value="{{ old('hora_salida.'.$loop->index) }}" 
+				@else
+					disabled="true"
+				@endif 
 			@endif required="" aria-required="true" />
 			<label for="hora_salida[{{ $loop->index }}]"
 			@if( $errors->has('hora_salida.'.$loop->index)) 
-				class="active"  
+				class="active"
 			@endif></label>
 		</div>
 
 	</div>	
 @endforeach
-
-
-@if( $errors->has('hora_salida.0') ) 
-	{{ $errors->first('hora_salida.0',':message') }}
-@else
-	
-@endif

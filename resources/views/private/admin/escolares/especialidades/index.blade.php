@@ -78,7 +78,7 @@
 			<br>
 			<div class="section">
 				<div class="input-field col s12 l4">
-					<i class="material-icons prefix">list</i>
+					<i class="material-icons prefix">school</i>
 					<select id="nivel_academico">
 						@foreach($niveles_academicos as $nivel_academico)
 							@if($nivel_academico -> id == 1)
@@ -91,7 +91,7 @@
 					<label>Nivel académico</label>
 				</div>
 				<div class="input-field col s12 l4">
-					<i class="material-icons prefix">list</i>
+					<i class="material-icons prefix">account_balance</i>
 					<select id="especialidad_id">
 					</select>
 					<label>Especialidad</label>

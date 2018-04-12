@@ -39,7 +39,7 @@
 			<br>
 			<div class="section">
 				<div class="input-field col s12 l4">
-					<i class="material-icons prefix">list</i>
+					<i class="material-icons prefix">access_time</i>
 					<select id="periodo_id">
 						@foreach($periodos as $periodo)
 							@if($loop->last)
@@ -52,7 +52,7 @@
 					<label>Período</label>
 				</div>
 				<div class="input-field col s12 l4">
-					<i class="material-icons prefix">list</i>
+					<i class="material-icons prefix">school</i>
 					<select id="nivel_academico_id">
 						@foreach($niveles_academicos as $nivel_academico)
 							@if($loop->first)
@@ -65,7 +65,7 @@
 					<label>Nivel académico</label>
 				</div>
 				<div class="input-field col s12 l4">
-					<i class="material-icons prefix">list</i>
+					<i class="material-icons prefix">account_balance</i>
 					<select id="especialidad_id">
 					</select>
 					<label>Especialidad</label>

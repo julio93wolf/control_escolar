@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="input-field col s12">
-		<i class="material-icons prefix">account_circle</i>
+		<i class="material-icons prefix">access_time</i>
 		<input id="periodo" name="periodo" type="text" class="validate" required="" aria-required="true" value="@if(old('periodo')){{ old('periodo') }}@elseif(isset($periodo)){{ $periodo->periodo }}@endif">
 		<label for="periodo" >Período</label>
 	</div>
@@ -16,7 +16,7 @@
 
 <div class="row">
 	<div class="input-field col s12">
-		<i class="material-icons prefix">account_circle</i>
+		<i class="material-icons prefix">verified_user</i>
 		<input id="reconocimiento_oficial" name="reconocimiento_oficial" type="text" class="validate 
 			@if( $errors->has('reconocimiento_oficial')) 
 				invalid  

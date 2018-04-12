@@ -16,14 +16,15 @@
 			
 			
 			<form id="form_clase" class="col s12" action="{{ route('clases.store') }}" method="post" novalidate="novalidate">
+				
+				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+				<input type="hidden" name="periodo_id" value="{{ $periodo_id }}">
+				<input type="hidden" name="especialidad_id" value="{{ $especialidad_id }}">
 
 				@include('private.admin.academicos.clases.forms.form')
 
 				<div class="row">
 					<div class="input-field col s12">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<input type="hidden" name="periodo_id" value="{{ $periodo_id }}">
-						<input type="hidden" name="especialidad_id" value="{{ $especialidad_id }}">
 						<div class="right-align">
 							<button class="waves-effect waves-light btn center-align blue darken-2" type="submit">Guardar
 						    <i class="material-icons left">send</i>
@@ -31,6 +32,7 @@
 						</div>
 					</div>
 				</div>
+				
 			</form>		
 		</div>
 	</div>

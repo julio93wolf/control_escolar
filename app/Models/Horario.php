@@ -18,7 +18,7 @@ class Horario extends Model
     	return $this->belongsTo('App\Models\Dia','dia_id');
     }
 
-    public fuction clase(){
+    public function clase(){
     	return $this->belongsTo('App\Models\Clase','clase_id');
     }
 }

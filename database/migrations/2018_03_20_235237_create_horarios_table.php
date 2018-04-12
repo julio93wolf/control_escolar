@@ -21,7 +21,7 @@ class CreateHorariosTable extends Migration
             $table->time('hora_salida');
 
             $table->foreign('dia_id')->references('id')->on('dias');
-            $table->foreign('clase_id')->references('id')->on('clases');
+            $table->foreign('clase_id')->references('id')->on('clases')->onDelete('cascade');
         });
     }
 
