@@ -1,7 +1,7 @@
 @extends('private.admin.layouts.scaffold')
 
 @section('title')
-	UNICEBA - Estudiantes
+	UNICEBA - Docentes
 @endsection
 
 @section('content')
@@ -30,6 +30,7 @@
 					</div>
 				</div>
 			</form>		
+
 		</div>
 	</div>
 

@@ -36,7 +36,7 @@
 	
 	<div class="row">
 		<div class="col s10 offset-s1">
-			<table id="table_id" class="display highlight" cellspacing="0" width="100%">
+			<table id="table_estudiantes" class="display highlight" cellspacing="0" width="100%">
         <thead>
             <tr>
                 <th>Matricula</th>
@@ -72,5 +72,5 @@
 @endsection
 
 @section('script')
-	@include('private.admin.academicos.estudiantes.scripts.index')
+	<script type="text/javascript" src="{{ asset('js/estudiantes.js') }}"></script>
 @endsection

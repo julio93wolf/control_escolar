@@ -82,3 +82,13 @@ mix.scripts([
 mix.scripts([
 	'resources/assets/js/app/form.clases.js'
 ],'public/js/form.clases.js');
+
+//Estudiantes
+mix.scripts([
+	'resources/assets/js/app/estudiantes.js'
+],'public/js/estudiantes.js');
+
+//Estudiantes
+mix.scripts([
+	'resources/assets/js/app/form.estudiantes.js'
+],'public/js/form.estudiantes.js');

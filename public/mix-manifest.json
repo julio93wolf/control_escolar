@@ -12,5 +12,7 @@
     "/js/docentes.js": "/js/docentes.js",
     "/js/form.docentes.js": "/js/form.docentes.js",
     "/js/clases.js": "/js/clases.js",
-    "/js/form.clases.js": "/js/form.clases.js"
+    "/js/form.clases.js": "/js/form.clases.js",
+    "/js/estudiantes.js": "/js/estudiantes.js",
+    "/js/form.estudiantes.js": "/js/form.estudiantes.js"
 }

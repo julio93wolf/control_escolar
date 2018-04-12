@@ -6,6 +6,14 @@ use App\Models\Estudiante;
 use App\Models\EstadoCivil;
 use App\Models\Nacionalidad;
 use App\Models\Estado;
+use App\Models\Municipio;
+use App\Models\Localidad;
+use App\Models\NivelAcademico;
+use App\Models\ModalidadEstudiante;
+use App\Models\EstadoEstudiante;
+use App\Models\MedioEnterado;
+use App\Models\InstitutoProcedencia;
+use App\Models\Empresa;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -30,9 +38,17 @@ class EstudianteController extends Controller
     public function create()
     {
         return view('private.admin.academicos.estudiantes.create',[
-            'estados_civiles'   => EstadoCivil::orderBy('estado_civil','ASC')->get(),
-            'nacionalidades'    => Nacionalidad::orderBy('nacionalidad','ASC')->get(),
-            'estados'           => Estado::orderBy('estado','ASC')->get()
+            'estados_civiles'           => EstadoCivil::orderBy('estado_civil','ASC')->get(),
+            'nacionalidades'            => Nacionalidad::orderBy('nacionalidad','ASC')->get(),
+            'estados'                   => Estado::orderBy('estado','ASC')->get(),
+            'municipios'                => Municipio::where('estado_id',11)->orderBy('municipio','ASC')->get(),
+            'localidades'               => Localidad::where('municipio_id',327)->orderBy('localidad','ASC')->get(),
+            'niveles_academicos'        => NivelAcademico::orderBy('id','ASC')->get(),
+            'modalidades_estudiantes'   => ModalidadEstudiante::orderBy('id','ASC')->get(),
+            'estados_estudiantes'       => EstadoEstudiante::orderBy('id','ASC')->get(),
+            'medios_enterados'          => MedioEnterado::orderBy('id','ASC')->get(),
+            'institutos_procedencias'   => InstitutoProcedencia::orderBy('id','ASC')->get(),
+            'empresas'                  => Empresa::orderBy('id','ASC')->get()
         ]);
     }
 

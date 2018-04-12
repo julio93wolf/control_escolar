@@ -3,7 +3,6 @@ $('#localidad_id').select2();
 
 
 function load_municipios (municipio_id,localidad_id){
-  console.log(municipio_id);
 	var estado_id = $('#estado_id').val();
 	$.get('/admin/select/municipios/'+estado_id,function(data) {
 		$('#municipio_id').empty();
@@ -28,7 +27,6 @@ function load_municipios (municipio_id,localidad_id){
 }
 
 function load_localidades (localidad_id){
-  console.log(localidad_id);
 	var municipio_id = $('#municipio_id').val();
 	$.get('/admin/select/localidades/'+municipio_id,function(data) {
 		$('#localidad_id').empty();

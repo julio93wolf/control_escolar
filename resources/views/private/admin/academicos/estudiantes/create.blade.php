@@ -6,37 +6,36 @@
 
 @section('content')
 	<div class="row">
-		<div class="row blue hide-on-small-only">
-			<nav> 
-		    <div class="nav-wrapper blue">
-		      <div class="col s11 offset-s1">
-		        <a href="{{route('admin.menu')}}" class="breadcrumb">Menú</a>
-		        <a href="{{route('admin.menu')}}#academicos" class="breadcrumb">Académicos</a>
-		        <a href="{{route('estudiantes.index')}}" class="breadcrumb">Estudiantes</a>
-		        <a href="{{route('estudiantes.create')}}" class="breadcrumb">Nuevo Estudiante</a>
-		      </div>
-		    </div>
-		  </nav>
-		</div>
+		<div class="col s10 offset-s1">
 
-		<div class="row blue white-text">
-			<div class="hide-on-med-and-up">
-				<br>
+			<div class="section">
+		  	<h4>Nuevo estudiante</h4>
+		  	<div class="divider"></div>
 			</div>
-			<div class="col s10 offset-s1">
-					<h5>Nuevo estudiante</h5>				
-			</div>
-			<div class="col s10 offset-s1">
-					<p>Datos escenciales del estudiantes.</p>
-			</div>
+			<h5><a class="valign-wrapper" href="{{route('estudiantes.index')}}"><i class="material-icons">arrow_back</i> Regresar</a></h5>
+			
+			
+			<form id="form_docente" class="col s12" action="{{ route('estudiantes.store') }}" method="post" enctype="multipart/form-data" novalidate="novalidate">
+
+				@include('private.admin.academicos.estudiantes.forms.form')
+
+				<div class="row">
+					<div class="input-field col s12">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<div class="right-align">
+							<button class="waves-effect waves-light btn center-align blue darken-2" type="submit">Guardar
+						    <i class="material-icons left">send</i>
+						  </button>
+						</div>
+					</div>
+				</div>
+			</form>		
+			
 		</div>
 	</div>
-	
-	<div id="form_estudiante" class="row">
-			@include('private.admin.estudiantes.forms.form')
-	</div>
+
 @endsection
 
 @section('script')
-	@include('private.admin.estudiantes.scripts.create')
+	<script type="text/javascript" src="{{ asset('js/form.estudiantes.js') }}"></script>
 @endsection
