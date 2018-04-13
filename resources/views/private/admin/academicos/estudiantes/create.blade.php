@@ -15,7 +15,7 @@
 			<h5><a class="valign-wrapper" href="{{route('estudiantes.index')}}"><i class="material-icons">arrow_back</i> Regresar</a></h5>
 			
 			
-			<form id="form_docente" class="col s12" action="{{ route('estudiantes.store') }}" method="post" enctype="multipart/form-data" novalidate="novalidate">
+			<form id="form_estudiante" class="col s12" action="{{ route('estudiantes.store') }}" method="post" enctype="multipart/form-data" novalidate="novalidate">
 
 				@include('private.admin.academicos.estudiantes.forms.form')
 
@@ -37,5 +37,7 @@
 @endsection
 
 @section('script')
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
+	<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.js"></script>
 	<script type="text/javascript" src="{{ asset('js/form.estudiantes.js') }}"></script>
 @endsection

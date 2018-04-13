@@ -41,7 +41,7 @@ $(document).ready(function(){
 
   $('.js-example-basic-single').select2();
 
-  $('.dropify').dropify({
+  var dropify = $('.dropify').dropify({
     messages: {
         'default': 'Arrastra y suelta una imagen aquí o haz clic',
         'replace': 'Arrastra y suelta o haz clic para reemplazar',

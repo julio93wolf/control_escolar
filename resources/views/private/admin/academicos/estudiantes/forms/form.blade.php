@@ -12,7 +12,7 @@
 		@if( $errors->has('nombre')) 
 			invalid
 		@endif" required="" aria-required="true"
-		value="@if(old('nombre')){{ old('nombre') }}@elseif(isset($docente)){{ $docente->nombre }}@endif" >
+		value="@if(old('nombre')){{ old('nombre') }}@elseif(isset($estudiante)){{ $estudiante->nombre }}@endif" >
 		<label for="nombre"
 		@if( $errors->has('nombre')) 
 			class="active"
@@ -26,7 +26,7 @@
 		@if( $errors->has('apaterno')) 
 			invalid
 		@endif" required="" aria-required="true"
-		value="@if(old('apaterno')){{ old('apaterno') }}@elseif(isset($docente)){{ $docente->apaterno }}@endif" >
+		value="@if(old('apaterno')){{ old('apaterno') }}@elseif(isset($estudiante)){{ $estudiante->apaterno }}@endif" >
 		<label for="apaterno"
 		@if( $errors->has('apaterno')) 
 			class="active"
@@ -40,7 +40,7 @@
 		@if( $errors->has('amaterno')) 
 			invalid
 		@endif" required="" aria-required="true"
-		value="@if(old('amaterno')){{ old('amaterno') }}@elseif(isset($docente)){{ $docente->amaterno }}@endif">
+		value="@if(old('amaterno')){{ old('amaterno') }}@elseif(isset($estudiante)){{ $estudiante->amaterno }}@endif">
 		<label for="amaterno" 
 		@if( $errors->has('amaterno')) 
 			class="active"
@@ -55,7 +55,7 @@
 		@if( $errors->has('curp')) 
 			invalid
 		@endif" required="" aria-required="true"
-		value="@if(old('curp')){{ old('curp') }}@elseif(isset($docente)){{ $docente->curp }}@endif">
+		value="@if(old('curp')){{ old('curp') }}@elseif(isset($estudiante)){{ $estudiante->curp }}@endif">
 		<label for="curp"
 		@if( $errors->has('curp')) 
 			class="active"
@@ -69,7 +69,7 @@
 		@if( $errors->has('fecha_nacimiento')) 
 			invalid
 		@endif" required="" aria-required="true"
-		value="@if(old('fecha_nacimiento')){{ old('fecha_nacimiento') }}@elseif(isset($docente)){{ $docente->fecha_nacimiento }}@endif">
+		value="@if(old('fecha_nacimiento')){{ old('fecha_nacimiento') }}@elseif(isset($estudiante)){{ $estudiante->fecha_nacimiento }}@endif">
 		<label for="fecha_nacimiento"
 		@if( $errors->has('fecha_nacimiento')) 
 			class="active"
@@ -93,14 +93,14 @@
 						@if($estado_civil->id == old('estado_civil_id')) 
 							selected 
 						@endif >{{ $estado_civil->estado_civil }}</option>	
-				@elseif(isset($docente))
+				@elseif(isset($estudiante))
 					<option value="{{ $estado_civil->id }}" 
-						@if($estado_civil->id == $docente->dato_general->estado_civil_id)
+						@if($estado_civil->id == $estudiante->dato_general->estado_civil_id)
 							selected 
 						@endif >{{ $estado_civil->estado_civil }}</option>	
 				@else
 					<option value="{{ $estado_civil->id }}" 
-						@if($estado_civil->id == 1) 
+						@if($loop->first) 
 							selected 
 						@endif >{{ $estado_civil->estado_civil }}</option>	
 				@endif
@@ -132,17 +132,17 @@
 					@if("O" == old('sexo')) 
 						selected 
 					@endif>Otro</option>
-			@elseif(isset($docente))
+			@elseif(isset($estudiante))
 				<option value="M"
-					@if("M" == $docente->sexo) 
+					@if("M" == $estudiante->sexo) 
 						selected 
 					@endif>Hombre</option>
 				<option value="F"
-					@if("F" == $docente->sexo) 
+					@if("F" == $estudiante->sexo) 
 						selected 
 					@endif>Mujer</option>
 				<option value="O"
-					@if("O" == $docente->sexo) 
+					@if("O" == $estudiante->sexo) 
 						selected 
 					@endif>Otro</option>
 			@else
@@ -170,9 +170,9 @@
 						@if($nacionalidad->id == old('nacionalidad_id')) 
 							selected 
 						@endif >{{ $nacionalidad->nacionalidad }}</option>	
-				@elseif(isset($docente))
+				@elseif(isset($estudiante))
 					<option value="{{ $nacionalidad->id }}" 
-						@if($nacionalidad->id == $docente->nacionalidad_id)
+						@if($nacionalidad->id == $estudiante->nacionalidad_id)
 							selected 
 						@endif >{{ $nacionalidad->nacionalidad }}</option>	
 				@else
@@ -195,13 +195,14 @@
 <div class="row">
 	<p>Dirección</p>
 	<div class="divider"></div>
+
 	<div class="input-field col s12 l4">
 		<i class="material-icons prefix">theaters</i>
 		<input id="calle_numero" name="calle_numero" type="text" class="validate
 		@if( $errors->has('calle_numero')) 
 			invalid
 		@endif" required="" aria-required="true"
-		value="@if(old('calle_numero')){{ old('calle_numero') }}@elseif(isset($docente)){{ $docente->calle_numero }}@endif">
+		value="@if(old('calle_numero')){{ old('calle_numero') }}@elseif(isset($estudiante)){{ $estudiante->calle_numero }}@endif">
 		<label for="calle_numero"
 		@if( $errors->has('calle_numero')) 
 			class="active"
@@ -215,7 +216,7 @@
 		@if( $errors->has('colonia')) 
 			invalid
 		@endif" required="" aria-required="true"
-		value="@if(old('colonia')){{ old('colonia') }}@elseif(isset($docente)){{ $docente->colonia }}@endif">
+		value="@if(old('colonia')){{ old('colonia') }}@elseif(isset($estudiante)){{ $estudiante->colonia }}@endif">
 		<label for="colonia"
 		@if( $errors->has('colonia')) 
 			class="active"
@@ -229,7 +230,7 @@
 		@if( $errors->has('codigo_postal')) 
 			invalid
 		@endif" required="" aria-required="true"
-		value="@if(old('codigo_postal')){{ old('codigo_postal') }}@elseif(isset($docente)){{ $docente->codigo_postal }}@endif">
+		value="@if(old('codigo_postal')){{ old('codigo_postal') }}@elseif(isset($estudiante)){{ $estudiante->codigo_postal }}@endif">
 		<label for="codigo_postal"
 		@if( $errors->has('codigo_postal')) 
 			class="active"
@@ -246,9 +247,9 @@
 						@if($estado->id == old('estado_id')) 
 							selected 
 						@endif >{{ $estado->estado }}</option>	
-				@elseif(isset($docente))
+				@elseif(isset($estudiante))
 					<option value="{{ $estado->id }}" 
-						@if($estado->id == $docente->estado_id)
+						@if($estado->id == $estudiante->estado_id)
 							selected 
 						@endif >{{ $estado->estado }}</option>	
 				@else
@@ -262,7 +263,7 @@
 		<label for="estado_id">Estado</label>
 	</div>
 
-	<div class="input-field col s12 l4">
+	<div class="input-field col s12 l4" style="margin-bottom: 16px;">
 		<i class="material-icons prefix">location_city</i>
 		<select id="municipio_id" name="municipio_id">			
 			@foreach($municipios as $municipio)
@@ -271,9 +272,9 @@
 						@if($municipio->id == old('municipio_id')) 
 							selected 
 						@endif >{{ $municipio->municipio }}</option>	
-				@elseif(isset($docente))
+				@elseif(isset($estudiante))
 					<option value="{{ $municipio->id }}" 
-						@if($municipio->id == $docente->municipio_id)
+						@if($municipio->id == $estudiante->municipio_id)
 							selected 
 						@endif >{{ $municipio->municipio }}</option>	
 				@else
@@ -299,9 +300,9 @@
 						@if($localidad->id == old('localidad_id')) 
 							selected 
 						@endif >{{ $localidad->localidad }}</option>	
-				@elseif(isset($docente))
+				@elseif(isset($estudiante))
 					<option value="{{ $localidad->id }}" 
-						@if($localidad->id == $docente->localidad_id)
+						@if($localidad->id == $estudiante->localidad_id)
 							selected 
 						@endif >{{ $localidad->localidad }}</option>	
 				@else
@@ -328,21 +329,21 @@
 	<div class="input-field col s12 l4">
 		<i class="material-icons prefix">phone_android</i>
 		<input id="telefono_personal" name="telefono_personal" type="tel"
-		value="@if(old('telefono_personal')){{ old('telefono_personal') }}@elseif(isset($docente)){{ $docente->telefono_personal }}@endif">
+		value="@if(old('telefono_personal')){{ old('telefono_personal') }}@elseif(isset($estudiante)){{ $estudiante->telefono_personal }}@endif">
 		<label for="telefono_personal">Teléfono personal</label>
 	</div>
 
 	<div class="input-field col s12 l4">
 		<i class="material-icons prefix">local_phone</i>
 		<input id="telefono_casa" name="telefono_casa" type="tel"
-		value="@if(old('telefono_casa')){{ old('telefono_casa') }}@elseif(isset($docente)){{ $docente->telefono_casa }}@endif">
+		value="@if(old('telefono_casa')){{ old('telefono_casa') }}@elseif(isset($estudiante)){{ $estudiante->telefono_casa }}@endif">
 		<label for="telefono_casa">Teléfono de casa</label>
 	</div>
 
 	<div class="input-field col s12 l4">
 		<i class="material-icons prefix">email</i>
 		<input id="email" name="email" type="email"
-		value="@if(old('email')){{ old('email') }}@elseif(isset($docente)){{ $docente->email }}@endif">
+		value="@if(old('email')){{ old('email') }}@elseif(isset($estudiante)){{ $estudiante->email }}@endif">
 		<label for="email">E-mail</label>
 	</div>	
 </div>
@@ -351,8 +352,8 @@
 	<p>Fotografía</p>
 	<div class="divider"></div>
 	<input id="foto" name="foto" type="file" class="dropify" data-show-remove="false" data-max-file-size="3M" data-allowed-file-extensions="jpg png jpeg"
-	@if (isset($docente))
-		data-default-file="{{ asset('/images/docentes/'.$docente->foto) }}"
+	@if (isset($estudiante))
+		data-default-file="{{ asset('/images/estudiantes/'.$estudiante->foto) }}"
 	@endif
 	/>
 </div>
@@ -364,70 +365,203 @@
 </div>
 
 <div class="row">
+	
 	<div class="input-field col s12 l4">
 		<i class="material-icons prefix">school</i>
-		<select id="nivel_academico_id">
+		<select id="nivel_academico_id" name="nivel_academico_id" class="validate
+		@if( $errors->has('nivel_academico_id')) 
+			invalid
+		@endif" required="" aria-required="true">
 			@foreach($niveles_academicos as $nivel_academico)
-				@if($nivel_academico -> id == 1)
-					<option value="{{ $nivel_academico->id }}" selected>{{ $nivel_academico->nivel_academico }}</option>
+				@if(old('nivel_academico_id'))
+					<option value="{{ $nivel_academico->id }}" 
+						@if($nivel_academico->id == old('nivel_academico_id')) 
+							selected 
+						@endif >{{ $nivel_academico->nivel_academico }}</option>	
+				@elseif(isset($estudiante))
+					<option value="{{ $nivel_academico->id }}" 
+						@if($nivel_academico->id == $estudiante->nivel_academico_id)
+							selected 
+						@endif >{{ $nivel_academico->nivel_academico }}</option>	
 				@else
-					<option value="{{ $nivel_academico->id }}">{{ $nivel_academico->nivel_academico }}</option>
+					<option value="{{ $nivel_academico->id }}" 
+						@if($loop->first) 
+							selected 
+						@endif >{{ $nivel_academico->nivel_academico }}</option>	
 				@endif
 			@endforeach
 		</select>
-		<label>Nivel académico</label>
+		<label for="nivel_academico_id"
+		@if( $errors->has('nivel_academico_id')) 
+			class="active"
+			data-error=" {{ $errors->first('nivel_academico_id',':message') }} "  
+		@endif>Nivel académico</label>
 	</div>
+
 	<div class="input-field col s12 l4">
 		<i class="material-icons prefix">account_balance</i>
-		<select id="especialidad_id">
+		<select id="especialidad_id" name="especialidad_id" class="validate
+		@if( $errors->has('especialidad_id')) 
+			invalid
+		@endif" required="" aria-required="true">
+			@foreach($especialidades as $especialidad)
+				@if(old('especialidad_id'))
+					<option value="{{ $especialidad->id }}" 
+						@if($especialidad->id == old('especialidad_id')) 
+							selected 
+						@endif >{{ $especialidad->especialidad }}</option>	
+				@elseif(isset($estudiante))
+					<option value="{{ $especialidad->id }}" 
+						@if($especialidad->id == $estudiante->especialidad_id)
+							selected 
+						@endif >{{ $especialidad->especialidad }}</option>	
+				@else
+					<option value="{{ $especialidad->id }}" 
+						@if($loop->first) 
+							selected 
+						@endif >{{ $especialidad->especialidad }}</option>	
+				@endif
+			@endforeach
 		</select>
-		<label>*Especialidad</label>
+		<label for="especialidad_id"
+		@if( $errors->has('especialidad_id')) 
+			class="active"
+			data-error=" {{ $errors->first('especialidad_id',':message') }} "  
+		@endif>*Especialidad</label>
 	</div>
+
 	<div class="input-field col s12 l4">
 		<i class="material-icons prefix">list</i>
-		<select id="plan_especialidad_id">
+		<select id="plan_especialidad_id" name="plan_especialidad_id" class="validate
+		@if( $errors->has('plan_especialidad_id')) 
+			invalid
+		@endif" required="" aria-required="true">
+			@foreach($planes_especialidades as $plan_especialidad)
+				@if(old('plan_especialidad_id'))
+					<option value="{{ $plan_especialidad->id }}" 
+						@if($plan_especialidad->id == old('plan_especialidad_id')) 
+							selected 
+						@endif >{{ $plan_especialidad->plan_especialidad }}</option>	
+				@elseif(isset($estudiante))
+					<option value="{{ $plan_especialidad->id }}" 
+						@if($plan_especialidad->id == $estudiante->plan_especialidad_id)
+							selected 
+						@endif >{{ $plan_especialidad->plan_especialidad }}</option>	
+				@else
+					<option value="{{ $plan_especialidad->id }}" 
+						@if($loop->last) 
+							selected 
+						@endif >{{ $plan_especialidad->plan_especialidad }}</option>	
+				@endif
+			@endforeach
 		</select>
-		<label>*Plan de Estudio</label>
+		<label for="plan_especialidad_id"
+		@if( $errors->has('plan_especialidad_id')) 
+			class="active"
+			data-error=" {{ $errors->first('plan_especialidad_id',':message') }} "  
+		@endif>*Plan de Estudio</label>
 	</div>
 
 	<div class="input-field col s12 l3">
 		<i class="material-icons prefix">vpn_key</i>
-		<input type="text" class="validate" id="matricula">
-		<label>*Matrícula</label>
+		<input id="matricula" name="matricula" type="text" class="validate
+		@if( $errors->has('matricula')) 
+			invalid
+		@endif" required="" aria-required="true"
+		value="@if(old('matricula')){{ old('matricula') }}@elseif(isset($estudiante)){{ $estudiante->matricula }}@endif">
+		<label for="matricula"
+		@if( $errors->has('matricula')) 
+			class="active"
+			data-error=" {{ $errors->first('matricula',':message') }} "  
+		@endif>*Matrícula</label>
 	</div>
 
 	<div class="input-field col s12 l3">
 		<i class="material-icons prefix">group</i>
-		<input type="text" class="validate" id="grupo">
-		<label>*Grupo</label>
+		<input id="grupo" name="grupo" type="text" class="validate
+		@if( $errors->has('grupo')) 
+			invalid
+		@endif" required="" aria-required="true"
+		value="@if(old('grupo')){{ old('grupo') }}@elseif(isset($estudiante)){{ $estudiante->grupo }}@endif">
+		<label for="grupo"
+		@if( $errors->has('grupo')) 
+			class="active"
+			data-error=" {{ $errors->first('grupo',':message') }} "  
+		@endif>*Grupo</label>
 	</div>
 
 	<div class="input-field col s12 l3">
 		<i class="material-icons prefix">traffic</i>
-		<select id="estado_estudiante_id">
+		<select id="estado_estudiante_id" name="estado_estudiante_id" class="validate
+		@if( $errors->has('estado_estudiante_id')) 
+			invalid
+		@endif" required="" aria-required="true">
 			@foreach($estados_estudiantes as $estado_estudiante)
-			<option value="{{ $estado_estudiante -> id }}">{{ $estado_estudiante -> estado_estudiante }}</option>
+				@if(old('estado_estudiante_id'))
+					<option value="{{ $estado_estudiante->id }}" 
+						@if($estado_estudiante->id == old('estado_estudiante_id')) 
+							selected 
+						@endif >{{ $estado_estudiante->estado_estudiante }}</option>	
+				@elseif(isset($estudiante))
+					<option value="{{ $estado_estudiante->id }}" 
+						@if($estado_estudiante->id == $estudiante->estado_id)
+							selected 
+						@endif >{{ $estado_estudiante->estado_estudiante }}</option>	
+				@else
+					<option value="{{ $estado_estudiante->id }}" 
+						@if($loop->first) 
+							selected 
+						@endif >{{ $estado_estudiante->estado_estudiante }}</option>	
+				@endif
 			@endforeach
 		</select>
-		<label>*Estado</label>
+		<label for="estado_estudiante_id"
+		@if( $errors->has('estado_estudiante_id')) 
+			class="active"
+			data-error=" {{ $errors->first('estado_estudiante_id',':message') }} "  
+		@endif>*Estado</label>
 	</div>
 
 	<div class="input-field col s12 l3">
 		<i class="material-icons prefix">sort</i>
-		<select id="modalidad_id">
+		<select id="modalidad_id" name="modalidad_id" class="validate
+		@if( $errors->has('modalidad_id')) 
+			invalid
+		@endif" required="" aria-required="true">
 			@foreach($modalidades_estudiantes as $modalidad_estudiante)
-			<option value="{{ $modalidad_estudiante -> id }}">{{ $modalidad_estudiante -> modalidad_estudiante }}</option>
+				@if(old('modalidad_id'))
+					<option value="{{ $modalidad_estudiante->id }}" 
+						@if($modalidad_estudiante->id == old('modalidad_id')) 
+							selected 
+						@endif >{{ $modalidad_estudiante->modalidad_estudiante }}</option>	
+				@elseif(isset($estudiante))
+					<option value="{{ $modalidad_estudiante->id }}" 
+						@if($modalidad_estudiante->id == $estudiante->modalidad_id)
+							selected 
+						@endif >{{ $modalidad_estudiante->modalidad_estudiante }}</option>	
+				@else
+					<option value="{{ $modalidad_estudiante->id }}" 
+						@if($loop->first) 
+							selected 
+						@endif >{{ $modalidad_estudiante->modalidad_estudiante }}</option>	
+				@endif
 			@endforeach
 		</select>
-		<label>*Modalidad</label>
+		<label for="modalidad_id"
+		@if( $errors->has('modalidad_id')) 
+			class="active"
+			data-error=" {{ $errors->first('modalidad_id',':message') }} "  
+		@endif>*Modalidad</label>
 	</div>
+
 </div>
 
 <div class="row">
 	<div class="input-field col s12">
 		<i class="material-icons prefix">mode_edit</i>
-		<textarea class="materialize-textarea" id="otros"></textarea>
-		<label for="icon_prefix2">Detalles</label>
+		<textarea id="otros" name="otros" class="materialize-textarea" 
+		value="@if(old('otros')){{ old('otros') }}@elseif(isset($estudiante)){{ $estudiante->otros }}@endif"></textarea>
+		<label for="otors">Detalles</label>
 	</div>
 </div>
 
@@ -440,22 +574,66 @@
 <div class="row">
 	<div class="input-field col s12">
 		<i class="material-icons prefix">compare_arrows</i>
-		<select id="enterado_por_id">
+		<select id="medio_enterado_id" name="medio_enterado_id" class="validate
+		@if( $errors->has('medio_enterado_id')) 
+			invalid
+		@endif" required="" aria-required="true">
 			@foreach($medios_enterados as $medio_enterado)
-			<option value="{{ $medio_enterado -> id }}">{{ $medio_enterado -> medio_enterado }}</option>
+				@if(old('medio_enterado_id'))
+					<option value="{{ $medio_enterado->id }}" 
+						@if($medio_enterado->id == old('medio_enterado_id')) 
+							selected 
+						@endif >{{ $medio_enterado->medio_enterado }}</option>	
+				@elseif(isset($estudiante))
+					<option value="{{ $medio_enterado->id }}" 
+						@if($medio_enterado->id == $estudiante->medio_enterado_id)
+							selected 
+						@endif >{{ $medio_enterado->medio_enterado }}</option>	
+				@else
+					<option value="{{ $medio_enterado->id }}" 
+						@if($loop->first) 
+							selected 
+						@endif >{{ $medio_enterado->medio_enterado }}</option>	
+				@endif
 			@endforeach
 		</select>
-		<label>*Enterado por</label>
+		<label for="medio_enterado_id"
+		@if( $errors->has('medio_enterado_id')) 
+			class="active"
+			data-error=" {{ $errors->first('medio_enterado_id',':message') }} "  
+		@endif>*Enterado por</label>
 	</div>
 
-	<div class="input-field col s8">
+	<div class="input-field col s8" style="margin-bottom: 16px;">
 		<i class="material-icons prefix">school</i>
-		<select id="instituto_id">
-			@foreach($institutos_procedencias as $instituto_procedencia)
-			<option value="{{ $instituto_procedencia -> id }}">{{ $instituto_procedencia -> institucion }}</option>
+		<select id="instituto_id" name="instituto_id" class="validate
+		@if( $errors->has('instituto_id')) 
+			invalid
+		@endif" required="" aria-required="true">
+			@foreach($institutos as $institucion)
+				@if(old('instituto_id'))
+					<option value="{{ $institucion->id }}" 
+						@if($institucion->id == old('instituto_id')) 
+							selected 
+						@endif >{{ $institucion->institucion }}</option>	
+				@elseif(isset($estudiante))
+					<option value="{{ $institucion->id }}" 
+						@if($institucion->id == $estudiante->instituto_id)
+							selected 
+						@endif >{{ $institucion->institucion }}</option>	
+				@else
+					<option value="{{ $institucion->id }}" 
+						@if($loop->first) 
+							selected 
+						@endif >{{ $institucion->institucion }}</option>	
+				@endif
 			@endforeach
 		</select>
-		<label>Instituto de procedencia</label>
+		<label for="instituto_id" class="active"
+		@if( $errors->has('instituto_id')) 
+			class="active"
+			data-error=" {{ $errors->first('instituto_id',':message') }} "  
+		@endif>*Instituto de procedencia</label>
 	</div>
 	<div class="input-field col s4">
 		<div class="right-align">
@@ -463,14 +641,36 @@
 		</div>
 	</div>
 
-	<div class="input-field col s8">
+	<div class="input-field col s8" style="margin-bottom: 16px;">
 		<i class="material-icons prefix">work</i>
-		<select id="empresa_id">
+		<select id="empresa_id" name="empresa_id" class="validate
+		@if( $errors->has('empresa_id')) 
+			invalid
+		@endif">
 			@foreach($empresas as $empresa)
-			<option value="{{ $empresa -> id }}">{{ $empresa -> empresa }}</option>
+				@if(old('empresa_id'))
+					<option value="{{ $empresa->id }}" 
+						@if($empresa->id == old('empresa_id')) 
+							selected 
+						@endif >{{ $empresa->empresa }}</option>	
+				@elseif(isset($estudiante))
+					<option value="{{ $empresa->id }}" 
+						@if($empresa->id == $estudiante->empresa_id)
+							selected 
+						@endif >{{ $empresa->empresa }}</option>	
+				@else
+					<option value="{{ $empresa->id }}" 
+						@if($loop->first) 
+							selected 
+						@endif >{{ $empresa->empresa }}</option>	
+				@endif
 			@endforeach
 		</select>
-		<label>Trabajo</label>
+		<label for="empresa_id" class="active"
+		@if( $errors->has('empresa_id')) 
+			class="active"
+			data-error=" {{ $errors->first('empresa_id',':message') }} "  
+		@endif>Trabajo</label>
 	</div>
 	<div class="input-field col s4">
 		<div class="right-align">
@@ -480,8 +680,9 @@
 
 	<div class="input-field col s12">
 		<i class="material-icons prefix">filter_list</i>
-		<input type="text" class="validate" id="puesto">
-		<label>Puesto</label>
+		<input id="puesto" name="puesto" type="text" class="validate"
+		value="@if(old('puesto')){{ old('puesto') }}@elseif(isset($estudiante)){{ $estudiante->puesto }}@endif">
+		<label for="puesto">Puesto</label>
 	</div>
 </div>
 
@@ -489,4 +690,43 @@
 	<h5>Documentos</h5>
 	<p>Documentación entreganda por el estudiante.</p>
 	<div class="divider"></div>
+</div>
+
+<div id="documentos" class="row" no_documentos="{{count($tipos_documentos)}}">
+@foreach($tipos_documentos as $tipo_documento)
+	<div id="tipos" class="row valign-wrapper">
+		<div class="col s12 m3 l2">
+	    <input type="checkbox" class="filled-in" id="tipo_documento_{{ $loop->index }}" name="tipo_documento[]" value="{{ $tipo_documento->id }}" index="{{ $loop->index }}"
+	    @if (isset($documentos_estudiantes))
+	    	@foreach ($documentos_estudiantes as $documento_estudiante)
+	    		@if ($documento_estudiante->tipo_documento_id == $tipo_documento->id)
+	    			checked="checked"
+	    		@endif
+	    	@endforeach
+	    @else
+	    	@if ($errors->has('tipo_documento.'.$loop->index) || old('tipo_documento.'.$loop->index))
+	    		checked="checked"
+	    	@endif
+	    @endif/>
+	    <label for="tipo_documento_{{ $loop->index }}"/>{{ $tipo_documento->tipo_documento }}</label>
+		</div>
+
+		<div class="col s12 m9 l10">
+			<input id="documento_{{$loop->index}}" name="documento[{{ $tipo_documento->id }}]" type="file" class="dropify" data-show-remove="false" data-max-file-size="3M" data-allowed-file-extensions="jpg png jpeg"
+			@if (isset($documentos_estudiantes))
+				@foreach ($documentos_estudiantes as $documento_estudiante)
+	    		@if ($documento_estudiante->tipo_documento_id == $tipo_documento->id)
+	    			@if ($documento_estudiante->pivot->documento != null)
+	    				data-default-file="{{ asset('/images/estudiantes/'.$documento_estudiante->pivot->documento) }}"
+	    			@endif
+	    		@endif
+	    	@endforeach
+			@elseif($errors->has('documento.'.$loop->index) || old('documento.'.$loop->index))
+
+			@else
+				disabled="disabled"
+			@endif/>
+		</div>
+	</div>	
+@endforeach	
 </div>

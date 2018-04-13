@@ -17,7 +17,7 @@ class CreateEstudiantesTable extends Migration
             $table->increments('id');
             $table->integer('dato_general_id')->unsigned();
             $table->integer('especialidad_id')->unsigned();
-            $table->integer('estado_id')->unsigned();
+            $table->integer('estado_estudiante_id')->unsigned();
             $table->string('matricula',32)->unique();
             $table->tinyInteger('semestre');
             $table->string('grupo',32);
@@ -30,7 +30,7 @@ class CreateEstudiantesTable extends Migration
 
             $table->foreign('dato_general_id')->references('id')->on('datos_generales');
             $table->foreign('especialidad_id')->references('id')->on('especialidades');
-            $table->foreign('estado_id')->references('id')->on('estados_estudiantes');
+            $table->foreign('estado_estudiante_id')->references('id')->on('estados_estudiantes');
             $table->foreign('modalidad_id')->references('id')->on('modalidades_estudiantes');
             $table->foreign('medio_enterado_id')->references('id')->on('medios_enterados');
             $table->foreign('periodo_id')->references('id')->on('periodos');

@@ -70,7 +70,7 @@ $('#table_estudiantes').DataTable({
       {
         data: 'estudiante_id',
         render: function ( data, type, row, meta ) {
-          return `<a href="/admin/estudiantes/`+data+`/edit" class="btn-floating btn-meddium waves-effect waves-light"><i class="material-icons circle green">mode_edit</i></a>`;
+          return `<a href="/admin/academicos/estudiantes/`+data+`/edit" class="btn-floating btn-meddium waves-effect waves-light"><i class="material-icons circle green">mode_edit</i></a>`;
         },
         orderable: false, 
         searchable: false

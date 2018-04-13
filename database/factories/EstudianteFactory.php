@@ -6,7 +6,7 @@ $factory->define(App\Models\Estudiante::class, function (Faker $faker) {
     return [
         'dato_general_id'       => 1,
         'especialidad_id'       => 1,
-        'estado_id'             => rand(1,4),
+        'estado_estudiante_id'  => rand(1,4),
         'matricula'             => $faker->unique()->isbn13,
         'semestre'              => rand (1,8),
         'grupo'                 => $faker->randomElement(['A','B','C']),

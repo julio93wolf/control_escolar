@@ -13,6 +13,6 @@ class EstadoEstudiante extends Model
     public $timestamps = false;
 
     public function estudiantes(){
-    	return $this->hasMany('App\Models\Estudiante','estado_id');
+    	return $this->hasMany('App\Models\Estudiante','estado_estudiante_id');
     }
 }

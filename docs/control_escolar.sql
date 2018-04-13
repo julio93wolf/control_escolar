@@ -4,7 +4,7 @@ as
 	select 
 		estudiantes.id as estudiante_id, 
         matricula, 
-        concat(apaterno,' ',amaterno,'',nombre) as nombre,
+        concat(apaterno,' ',amaterno,' ',nombre) as nombre,
         grupo,
         concat(calle_numero,', ',colonia,', ',codigo_postal,', ',municipio) as  direccion,
         telefono_personal,

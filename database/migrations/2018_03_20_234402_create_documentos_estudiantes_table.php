@@ -17,7 +17,7 @@ class CreateDocumentosEstudiantesTable extends Migration
             $table->increments('id');
             $table->integer('estudiante_id')->unsigned();
             $table->integer('tipo_documento_id')->unsigned();
-            $table->string('documento',255)->nullable();
+            $table->text('documento')->nullable();
 
             $table->foreign('estudiante_id')->references('id')->on('estudiantes');
             $table->foreign('tipo_documento_id')->references('id')->on('tipos_documentos_estudiantes');

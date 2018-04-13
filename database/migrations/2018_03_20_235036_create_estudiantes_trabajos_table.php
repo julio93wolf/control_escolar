@@ -17,7 +17,7 @@ class CreateEstudiantesTrabajosTable extends Migration
             $table->increments('id');
             $table->integer('estudiante_id')->unsigned();
             $table->integer('empresa_id')->unsigned();
-            $table->string('puesto',64);
+            $table->string('puesto',64)->nullable();
 
             $table->foreign('estudiante_id')->references('id')->on('estudiantes');
             $table->foreign('empresa_id')->references('id')->on('empresas');
