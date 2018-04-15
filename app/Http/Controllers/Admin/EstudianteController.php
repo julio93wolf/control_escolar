@@ -24,6 +24,7 @@ use App\Models\DatoGeneral;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\EstudianteStoreRequest;
+use App\Http\Requests\EstudianteUpdateRequest;
 use App\Http\Controllers\Controller;
 
 class EstudianteController extends Controller
@@ -166,7 +167,11 @@ class EstudianteController extends Controller
         $especialidad           = $estudiante->especialidad;
         $instituto_procedencia  = $estudiante->instituto_procedencia->first();
         $empresa                = $estudiante->empresa->first();
+
         $documentos_estudiantes = $estudiante->documento_estudiante;
+        foreach ($documentos_estudiantes as $key => $documento_estudiante) {
+            $documento_estudiante->documento = $documento_estudiante->pivot->documento;
+        }
 
         $estudiante->curp                   = $dato_general->curp;
         $estudiante->nombre                 = $dato_general->nombre;
@@ -187,18 +192,20 @@ class EstudianteController extends Controller
         $estudiante->municipio_id           = $localidad->municipio_id;
         $estudiante->estado_id              = $municipio->estado_id;
         $estudiante->nivel_academico_id     = $especialidad->nivel_academico_id;
-        $estudiante->especialidad_id        = $especialidad->id;
         $estudiante->empresa_id             = $empresa->id;
         $estudiante->instituto_id           = $instituto_procedencia->id;
+        $estudiante->puesto                 = $empresa->pivot->puesto;
 
-        return view('private.admin.academicos.estudiantes.create',[
+        //dd($empresa);
+
+        return view('private.admin.academicos.estudiantes.edit',[
             'estudiante'                => $estudiante,
             'documentos_estudiantes'    => $documentos_estudiantes,
             'estados_civiles'           => EstadoCivil::orderBy('estado_civil','ASC')->get(),
             'nacionalidades'            => Nacionalidad::orderBy('nacionalidad','ASC')->get(),
             'estados'                   => Estado::orderBy('estado','ASC')->get(),
-            'municipios'        => Municipio::where('estado_id',$municipio->estado_id)->orderBy('municipio','ASC')->get(),
-            'localidades'       => Localidad::where('municipio_id',$localidad->municipio_id)->orderBy('localidad','ASC')->get(),
+            'municipios'                => Municipio::where('estado_id',$municipio->estado_id)->orderBy('municipio','ASC')->get(),
+            'localidades'               => Localidad::where('municipio_id',$localidad->municipio_id)->orderBy('localidad','ASC')->get(),
             'niveles_academicos'        => NivelAcademico::orderBy('id','ASC')->get(),
             'especialidades'            => Especialidad::where('nivel_academico_id',$especialidad->nivel_academico_id)->orderBy('id','ASC')->get(),
             'planes_especialidades'     => PlanEspecialidad::where('especialidad_id',$especialidad->id)->orderBy('id','ASC')->get(),
@@ -218,9 +225,65 @@ class EstudianteController extends Controller
      * @param  \App\Models\Estudiante  $estudiante
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Estudiante $estudiante)
+    public function update(EstudianteUpdateRequest $request, Estudiante $estudiante)
     {
-        //
+
+        $dato_general = DatoGeneral::find($estudiante->dato_general_id);
+        $dato_general->curp                 = $request->curp;
+        $dato_general->nombre               = $request->nombre;
+        $dato_general->apaterno             = $request->apaterno;
+        $dato_general->amaterno             = $request->amaterno;
+        $dato_general->fecha_nacimiento     = $request->fecha_nacimiento_submit;
+        $dato_general->calle_numero         = $request->calle_numero;
+        $dato_general->colonia              = $request->colonia;
+        $dato_general->localidad_id         = $request->localidad_id;
+        $dato_general->telefono_personal    = $request->telefono_personal;
+        $dato_general->telefono_casa        = $request->telefono_casa;
+        $dato_general->estado_civil_id      = $request->estado_civil_id;
+        $dato_general->sexo                 = $request->sexo;
+        $dato_general->nacionalidad_id      = $request->nacionalidad_id;
+        $dato_general->email                = $request->email;
+        $dato_general->codigo_postal        = $request->codigo_postal;
+        $dato_general->save();
+
+        //Image
+        if($request->foto){
+            $path = Storage::disk('estudiantes')->put('foto',$request->foto);
+            $exists = Storage::disk('estudiantes')->exists($dato_general->foto);
+            if($exists){
+                Storage::disk('estudiantes')->delete($dato_general->foto);
+            }
+            $dato_general->fill([ 'foto' => $path ])->save();
+        }
+
+        $estudiante->especialidad_id        = $request->especialidad_id;
+        $estudiante->estado_estudiante_id   = $request->estado_estudiante_id;
+        $estudiante->grupo                  = $request->grupo;
+        $estudiante->modalidad_id           = $request->modalidad_id;
+        $estudiante->medio_enterado_id      = $request->medio_enterado_id;
+        $estudiante->otros                  = $request->otros;
+        $estudiante->plan_especialidad_id   = $request->plan_especialidad_id;
+        $estudiante->save();
+
+        $empresa = [$request->empresa_id => ['puesto' => $request->puesto]];
+        $estudiante->empresa()->sync($empresa);
+
+        $estudiante->instituto_procedencia()->sync($request->instituto_id);        
+
+        $documentos_estudiantes = [];
+        if($request->tipo_documento){
+            foreach ($request->tipo_documento as $key => $td) {
+                if(isset($request->documento[$td])){
+                    $path = Storage::disk('estudiantes')->put('documentos',$request->documento[$td]);
+                    $documentos_estudiantes[$td] = [ 'documento' => $path];
+                }else{
+                    $documentos_estudiantes[$td] = $td;
+                }
+            }
+        }
+        $result = $estudiante->documento_estudiante()->sync($documentos_estudiantes);
+        return redirect()->route('estudiantes.edit',$estudiante);
+        
     }
 
     /**

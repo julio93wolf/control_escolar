@@ -2,7 +2,6 @@ $('#municipio_id').select2();
 $('#localidad_id').select2();
 $('#instituto_id').select2();
 $('#empresa_id').select2();
-load_especialidades();
 documentos();
 
 $.validator.setDefaults({
@@ -91,15 +90,23 @@ function load_localidades (localidad_id){
 	});
 }
 
-function load_especialidades (){
+function load_especialidades (especialidad_id,plan_especialidad_id){
 	var nivel_academico_id = $('#nivel_academico_id').val();
 	$.get('/admin/select/especialidades_nivel/' + nivel_academico_id,function(data) {
 		$('#especialidad_id').empty();
 		for(i = 0; i < data.length; i++){
-			$('#especialidad_id').append('<option value="' + data[i].id + '">' + data[i].especialidad + ' (' + data[i].clave +')</option>');
-		}
+      if (especialidad_id != undefined) {
+        if (especialidad_id == data[i].id) {
+          $('#especialidad_id').append('<option value="' + data[i].id + '" selected>' + data[i].especialidad + ' (' + data[i].clave +')</option>');
+        }else{
+          $('#especialidad_id').append('<option value="' + data[i].id + '">' + data[i].especialidad + ' (' + data[i].clave +')</option>');
+        }
+      }else{
+        $('#especialidad_id').append('<option value="' + data[i].id + '">' + data[i].especialidad + ' (' + data[i].clave +')</option>');
+      }
+    }
 		$('#especialidad_id').material_select();
-		load_planes();
+		load_planes(plan_especialidad_id);
 	})
 	.fail(function() {
     $('#name_reticula').text('');
@@ -109,16 +116,24 @@ function load_especialidades (){
 	});
 }
 
-function load_planes (){
+function load_planes (plan_especialidad_id){
   var especialidad_id = $('#especialidad_id').val();
   $.get('/admin/select/planes_especialidades/' + especialidad_id,function(data) {
     $('#plan_especialidad_id').empty();
     for(i = 0; i < data.length; i++){
-    	if(i+1<data.length){
-    		$('#plan_especialidad_id').append('<option value="' + data[i].id + '">' + data[i].plan_especialidad + '</option>');
-    	}else{
-    		$('#plan_especialidad_id').append('<option value="' + data[i].id + '" selected>' + data[i].plan_especialidad + '</option>');
-    	}    	
+      if (plan_especialidad_id != undefined) {
+        if (plan_especialidad_id == data[i].id) {
+          $('#plan_especialidad_id').append('<option value="' + data[i].id + '" selected>' + data[i].plan_especialidad + '</option>');
+        }else{
+          $('#plan_especialidad_id').append('<option value="' + data[i].id + '">' + data[i].plan_especialidad + '</option>');
+        }
+      }else{
+        if(i+1<data.length){
+          $('#plan_especialidad_id').append('<option value="' + data[i].id + '">' + data[i].plan_especialidad + '</option>');
+        }else{
+          $('#plan_especialidad_id').append('<option value="' + data[i].id + '" selected>' + data[i].plan_especialidad + '</option>');
+        }     
+      }
     }
     $('#plan_especialidad_id').material_select();
   })

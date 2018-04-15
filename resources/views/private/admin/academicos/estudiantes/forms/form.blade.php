@@ -468,7 +468,10 @@
 		@if( $errors->has('matricula')) 
 			invalid
 		@endif" required="" aria-required="true"
-		value="@if(old('matricula')){{ old('matricula') }}@elseif(isset($estudiante)){{ $estudiante->matricula }}@endif">
+		value="@if(old('matricula')){{ old('matricula') }}@elseif(isset($estudiante)){{ $estudiante->matricula }}@endif"
+		@if ($estudiante)
+			disabled
+		@endif>
 		<label for="matricula"
 		@if( $errors->has('matricula')) 
 			class="active"
@@ -504,7 +507,7 @@
 						@endif >{{ $estado_estudiante->estado_estudiante }}</option>	
 				@elseif(isset($estudiante))
 					<option value="{{ $estado_estudiante->id }}" 
-						@if($estado_estudiante->id == $estudiante->estado_id)
+						@if($estado_estudiante->id == $estudiante->estado_estudiante_id)
 							selected 
 						@endif >{{ $estado_estudiante->estado_estudiante }}</option>	
 				@else
@@ -559,8 +562,7 @@
 <div class="row">
 	<div class="input-field col s12">
 		<i class="material-icons prefix">mode_edit</i>
-		<textarea id="otros" name="otros" class="materialize-textarea" 
-		value="@if(old('otros')){{ old('otros') }}@elseif(isset($estudiante)){{ $estudiante->otros }}@endif"></textarea>
+		<textarea id="otros" name="otros" class="materialize-textarea">@if(old('otros')){{ old('otros') }}@elseif(isset($estudiante)){{ $estudiante->otros }}@endif</textarea>
 		<label for="otors">Detalles</label>
 	</div>
 </div>
@@ -696,15 +698,15 @@
 @foreach($tipos_documentos as $tipo_documento)
 	<div id="tipos" class="row valign-wrapper">
 		<div class="col s12 m3 l2">
-	    <input type="checkbox" class="filled-in" id="tipo_documento_{{ $loop->index }}" name="tipo_documento[]" value="{{ $tipo_documento->id }}" index="{{ $loop->index }}"
+	    <input type="checkbox" class="filled-in" id="tipo_documento_{{ $loop->index }}" name="tipo_documento[{{ $loop->index }}]" value="{{ $tipo_documento->id }}" index="{{ $loop->index }}"
 	    @if (isset($documentos_estudiantes))
 	    	@foreach ($documentos_estudiantes as $documento_estudiante)
-	    		@if ($documento_estudiante->tipo_documento_id == $tipo_documento->id)
+	    		@if ($documento_estudiante->id == $tipo_documento->id)
 	    			checked="checked"
 	    		@endif
 	    	@endforeach
 	    @else
-	    	@if ($errors->has('tipo_documento.'.$loop->index) || old('tipo_documento.'.$loop->index))
+	    	@if ($errors->has('tipo_documento.'.$loop->index) || old('tipo_documento'.$loop->index))
 	    		checked="checked"
 	    	@endif
 	    @endif/>
@@ -714,16 +716,19 @@
 		<div class="col s12 m9 l10">
 			<input id="documento_{{$loop->index}}" name="documento[{{ $tipo_documento->id }}]" type="file" class="dropify" data-show-remove="false" data-max-file-size="3M" data-allowed-file-extensions="jpg png jpeg"
 			@if (isset($documentos_estudiantes))
+				{{ $match = false }}
 				@foreach ($documentos_estudiantes as $documento_estudiante)
-	    		@if ($documento_estudiante->tipo_documento_id == $tipo_documento->id)
-	    			@if ($documento_estudiante->pivot->documento != null)
+	    		@if ($documento_estudiante->id == $tipo_documento->id)
+	    			@if ($documento_estudiante->documento != null)
 	    				data-default-file="{{ asset('/images/estudiantes/'.$documento_estudiante->pivot->documento) }}"
 	    			@endif
+	    			{{ $match = true}}
 	    		@endif
 	    	@endforeach
-			@elseif($errors->has('documento.'.$loop->index) || old('documento.'.$loop->index))
-
-			@else
+	    	@if (!$match)
+	    		disabled="disabled"	
+	    	@endif
+			@elseif(!$errors->has('documento.'.$loop->index) && !old('documento.'.$loop->index))
 				disabled="disabled"
 			@endif/>
 		</div>
