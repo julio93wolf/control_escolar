@@ -41,12 +41,14 @@ Route::group(['middleware' => ['login']], function () {
 			//Clases
 			Route::resource('clases','Admin\ClaseController');
 
+			//Grupos
+			Route::resource('grupos','Admin\GrupoController');
+
 			//Empresas
 			Route::resource('empresas','Admin\EmpresaController')->only('store');
 
 			//InstitutosProcedencias
 			Route::resource('institutos_procedencias','Admin\InstitutoProcedenciaController')->only('store');
-
 
 		});
 

@@ -76,7 +76,7 @@ function load_clases(){
         {
           data: 'clase_id',
           render: function ( data, type, row, meta ) {
-            return `<a href="/admin/academicos/grupos?plan_especialidad_id=`+data+`" class="btn-floating btn-meddium waves-effect waves-light"><i class="material-icons circle teal">group</i></a>`;
+            return `<a href="/admin/academicos/grupos?clase=`+data+`" class="btn-floating btn-meddium waves-effect waves-light"><i class="material-icons circle teal">group</i></a>`;
           },
           orderable: false, 
           searchable: false
