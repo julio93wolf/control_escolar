@@ -100,3 +100,22 @@ as
 	order by clases.especialidad_id,clases.periodo_id,asignaturas.codigo,clases.clase;
 
 select * from vw_clases;
+
+drop view if exists vw_kardex;
+create view vw_kardex 
+as
+	select 
+		asignaturas.codigo,
+        asignaturas.asignatura,
+        kardexs.calificacion,
+        oportunidades.oportunidad,
+        kardexs.semestre,
+        periodos.periodo,
+        periodos.anio,
+        kardexs.estudiante_id
+    from kardexs
+        join asignaturas on asignaturas.id = kardexs.asignatura_id
+        join oportunidades on oportunidades.id = kardexs.oportunidad_id
+        join periodos on periodos.id = kardexs.periodo_id
+	order by kardexs.semestre asc;
+select * from vw_kardex;

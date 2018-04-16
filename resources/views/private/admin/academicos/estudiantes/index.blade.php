@@ -44,7 +44,8 @@
                 <th>Grupo</th>
                 <th>Datos generales</th>
                 <th>Otros datos</th>
-                <th>Acciones</th>
+                <th>Kardex</th>
+                <th>Editar</th>
             </tr>
         </thead>
         <tfoot>
@@ -54,7 +55,8 @@
                 <th>Grupo</th>
                 <th>Datos generales</th>
                 <th>Otros datos</th>
-                <th>Acciones</th>
+                <th>Kardex</th>
+                <th>Editar</th>
             </tr>
         </tfoot>
         <tbody>

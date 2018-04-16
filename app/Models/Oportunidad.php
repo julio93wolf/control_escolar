@@ -17,4 +17,8 @@ class Oportunidad extends Model
     public function grupos(){
     	return $this->hasMany('App\Models\Grupo','oportunidad_id');
     }
+
+    public function kardexs(){
+    	return $this->hasMany('App\Models\Kardex','oportunidad_id');
+    }
 }

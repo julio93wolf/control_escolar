@@ -29,4 +29,8 @@ class DataTable extends Model
 	    	['especialidad_id',	$especialidad_id]
 	    ])->get();
 	  }
+
+	  static function kardex($estudiante_id){
+	    return \DB::table('vw_kardex')->where('estudiante_id',$estudiante_id)->orderBy('semestre','asc')->get();
+	  }
 }

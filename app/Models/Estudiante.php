@@ -42,6 +42,10 @@ class Estudiante extends Model
     	return $this->hasMany('App\Models\Grupo','estudiante_id');
     }
 
+    public function kardexs(){
+        return $this->hasMany('App\Models\Kardex','estudiante_id');
+    }
+
     public function dato_general(){
     	return $this->belongsTo('App\Models\DatoGeneral','dato_general_id');
     }

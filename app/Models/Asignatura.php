@@ -26,4 +26,8 @@ class Asignatura extends Model
     public function clases(){
         return $this->hasMany('App\Models\Clase','asignatura_id');
     }
+
+    public function kardexs(){
+        return $this->hasMany('App\Models\Kardex','asignatura_id');
+    }
 }

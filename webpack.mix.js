@@ -97,3 +97,8 @@ mix.scripts([
 mix.scripts([
 	'resources/assets/js/app/form.estudiantes.js'
 ],'public/js/form.estudiantes.js');
+
+//Kardex
+mix.scripts([
+	'resources/assets/js/app/kardex.js'
+],'public/js/kardex.js');

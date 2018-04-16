@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGruposTable extends Migration
+class CreateKardexsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,19 @@ class CreateGruposTable extends Migration
      */
     public function up()
     {
-        Schema::create('grupos', function (Blueprint $table) {
+        Schema::create('kardexs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('clase_id')->unsigned();
             $table->integer('estudiante_id')->unsigned();
+            $table->integer('asignatura_id')->unsigned();
             $table->integer('oportunidad_id')->unsigned();
-
-            $table->foreign('clase_id')->references('id')->on('clases');
+            $table->tinyInteger('semestre');
+            $table->integer('periodo_id')->unsigned();
+            $table->decimal('calificacion',3,1)->nullable();
+            
             $table->foreign('estudiante_id')->references('id')->on('estudiantes');
+            $table->foreign('asignatura_id')->references('id')->on('asignaturas');
             $table->foreign('oportunidad_id')->references('id')->on('oportunidades');
+            $table->foreign('periodo_id')->references('id')->on('periodos');
         });
     }
 
@@ -32,6 +36,6 @@ class CreateGruposTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('grupos');
+        Schema::dropIfExists('kardexs');
     }
 }

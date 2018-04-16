@@ -32,6 +32,9 @@ Route::group(['middleware' => ['login']], function () {
 			//Estudiantes
 			Route::resource('estudiantes','Admin\EstudianteController');
 
+			//Kardex
+			Route::resource('kardex','Admin\KardexController')->only('index');
+
 			//Docentes
 			Route::resource('docentes','Admin\DocenteController');
 
@@ -114,6 +117,9 @@ Route::group(['middleware' => ['login']], function () {
 
 			//Clases
 			Route::get('clases','Admin\DataTableController@clases')->name('clases.get');
+
+			//Kardex
+			Route::get('kardex/{estudiante_id}','Admin\DataTableController@kardex')->name('kardex.get');
 
 		});
 

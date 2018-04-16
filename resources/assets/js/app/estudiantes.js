@@ -70,6 +70,14 @@ $('#table_estudiantes').DataTable({
       {
         data: 'estudiante_id',
         render: function ( data, type, row, meta ) {
+          return `<a href="/admin/academicos/kardex?estudiante=`+data+`" class="btn-floating btn-meddium waves-effect waves-light"><i class="material-icons circle yellow darken-4">format_list_numbered</i></a>`;
+        },
+        orderable: false, 
+        searchable: false
+      },
+      {
+        data: 'estudiante_id',
+        render: function ( data, type, row, meta ) {
           return `<a href="/admin/academicos/estudiantes/`+data+`/edit" class="btn-floating btn-meddium waves-effect waves-light"><i class="material-icons circle green">mode_edit</i></a>`;
         },
         orderable: false, 

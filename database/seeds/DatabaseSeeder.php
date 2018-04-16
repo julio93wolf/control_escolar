@@ -40,5 +40,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RequisitosReticulasTableSeeder::class);
         $this->call(ClasesTableSeeder::class);
         $this->call(DiasTableSeeder::class);
+        $this->call(OportunidadesTableSeeder::class);
+        $this->call(GruposKardexTableSeeder::class);
     }
 }
