@@ -2,6 +2,7 @@ $('#municipio_id').select2();
 $('#localidad_id').select2();
 $('#instituto_id').select2();
 $('#empresa_id').select2();
+$('#instituto_municipio_id').select2();
 documentos();
 
 $.validator.setDefaults({
@@ -371,3 +372,160 @@ var validator = $("#form_estudiante").validate({
     }
   }
 });
+
+
+function load_instituto_municipios (municipio_id){
+  var estado_id = $('#instituto_estado_id').val();
+  $.get('/admin/select/municipios/'+estado_id,function(data) {
+    $('#instituto_municipio_id').empty();
+    for(i = 0; i < data.length; i++){
+      if(municipio_id != undefined){
+        if(municipio_id == data[i].id ){
+          $('#instituto_municipio_id').append('<option value="' + data[i].id + '" selected>'+ data[i].municipio+'</option>');
+        }else{
+          $('#instituto_municipio_id').append('<option value="' + data[i].id + '">'+ data[i].municipio+'</option>');
+        }
+      }else{
+        $('#instituto_municipio_id').append('<option value="' + data[i].id + '">'+ data[i].municipio+'</option>');
+      }
+    }
+    $('#instituto_municipio_id').select2();
+    $('#instituto_municipio_id').material_select();
+  })
+  .fail(function() {
+    swal("Error", "Ocurrio un error al cargar los municipios.", "error");
+  });
+}
+
+$('#instituto_estado_id').change(function(event){
+  load_instituto_municipios();
+})
+
+$('#create_empresa').on('click',function(event){
+  $('#empresa').val('');
+  $("label[for='empresa']").attr('data-error','');
+  $('#empresa').removeClass('invalid');
+  Materialize.updateTextFields();
+  $('#modal_empresa').modal('open');
+});
+
+$('#create_instituto').on('click',function(event){
+  
+  $('#instituto').val('');
+  $('#instituto_estado_id').val(11).material_select();
+
+  $("label[for='instituto']").attr('data-error','');
+  $("label[for='instituto_municipio_id']").attr('data-error','');
+
+  $('#instituto').removeClass('invalid');
+  $('#instituto_municipio_id').removeClass('invalid');
+
+  Materialize.updateTextFields();
+  load_instituto_municipios(327);
+  $('#modal_instituto').modal('open');
+});
+
+var validator_empresa = $("#form_empresa").validate({
+  rules: {
+    empresa: {
+      required: true
+    }
+  },
+  messages: {
+    empresa: {
+      required: "La empresa es requerida."
+    }
+  },
+  submitHandler: function(form) {
+    json = {
+      empresa: $('#empresa').val()
+    }
+    store_empresa(json);
+  }
+});
+
+var validator_instituto = $("#form_instituto").validate({
+  rules: {
+    instituto: {
+      required: true
+    },
+    instituto_municipio_id: {
+      required: true,
+      digits: true,
+      min: 1
+    }
+  },
+  messages: {
+    instituto: {
+      required: "El instituto es requerido."
+    },
+    instituto_municipio_id: {
+      required: "El municipio es requerido.",
+      digits: "El municipio tiene que ser un número entero.",
+      min: "El municipio minimo es 1."
+    }
+  },
+  submitHandler: function(form) {
+    json = {
+      instituto: $('#instituto').val(),
+      instituto_municipio_id: $('#instituto_municipio_id').val()
+    }
+    store_instituto(json);
+  }
+});
+
+function store_empresa(json){
+  $.post('/admin/academicos/empresas',json,function(data){    
+    $('#empresa_id').empty();
+    for(i = 0; i < data.length; i++){
+      if(i+1==data.length){
+        $('#empresa_id').append('<option value="' + data[i].id + '" selected>'+ data[i].empresa+'</option>');
+      }else{
+        $('#empresa_id').append('<option value="' + data[i].id + '">'+ data[i].empresa+'</option>');
+      }
+    }
+    $('#empresa_id').select2();
+    $('#empresa_id').material_select();
+    swal({
+      type: 'success',
+      title: 'La especialidad ha sido guardada',
+      showConfirmButton: false,
+      timer: 1500
+    });
+    $('#modal_empresa').modal('close');
+  }).fail(function(data) {
+    var errors = data.responseJSON.errors;
+    for(var error in errors) {
+      $("label[for='"+error+"']").attr('data-error',errors[error]);
+      $("#"+error+"").addClass('invalid');
+    }
+  });
+}
+
+function store_instituto(json){
+  $.post('/admin/academicos/institutos_procedencias',json,function(data){    
+    $('#instituto_id').empty();
+    for(i = 0; i < data.length; i++){
+      if(i+1==data.length){
+        $('#instituto_id').append('<option value="' + data[i].id + '" selected>'+ data[i].institucion+'</option>');
+      }else{
+        $('#instituto_id').append('<option value="' + data[i].id + '">'+ data[i].institucion+'</option>');
+      }
+    }
+    $('#instituto_id').select2();
+    $('#instituto_id').material_select();
+    swal({
+      type: 'success',
+      title: 'La especialidad ha sido guardada',
+      showConfirmButton: false,
+      timer: 1500
+    });
+    $('#modal_instituto').modal('close');
+  }).fail(function(data) {
+    var errors = data.responseJSON.errors;
+    for(var error in errors) {
+      $("label[for='"+error+"']").attr('data-error',errors[error]);
+      $("#"+error+"").addClass('invalid');
+    }
+  });
+}

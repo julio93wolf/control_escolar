@@ -34,6 +34,11 @@
 		</div>
 	</div>
 
+	@include('private.admin.academicos.estudiantes.modals.empresa')
+
+	@include('private.admin.academicos.estudiantes.modals.instituto')
+
+
 @endsection
 
 @section('script')

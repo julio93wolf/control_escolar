@@ -469,7 +469,7 @@
 			invalid
 		@endif" required="" aria-required="true"
 		value="@if(old('matricula')){{ old('matricula') }}@elseif(isset($estudiante)){{ $estudiante->matricula }}@endif"
-		@if ($estudiante)
+		@if (isset($estudiante))
 			disabled
 		@endif>
 		<label for="matricula"
@@ -639,7 +639,7 @@
 	</div>
 	<div class="input-field col s4">
 		<div class="right-align">
-			<a class="waves-effect waves-light btn center-align blue darken-2" id="nuevoInstituto" style="width: 100%">Nuevo instituto</a>
+			<a class="waves-effect waves-light btn center-align blue darken-2" id="create_instituto" style="width: 100%">Nuevo instituto</a>
 		</div>
 	</div>
 
@@ -676,7 +676,7 @@
 	</div>
 	<div class="input-field col s4">
 		<div class="right-align">
-			<a class="waves-effect waves-light btn center-align blue darken-2" id="nuevoTrabajo" style="width: 100%" >Nuevo trabajo</a>
+			<a class="waves-effect waves-light btn center-align blue darken-2" id="create_empresa" style="width: 100%" >Nuevo trabajo</a>
 		</div>
 	</div>
 

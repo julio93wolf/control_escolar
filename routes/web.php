@@ -38,6 +38,13 @@ Route::group(['middleware' => ['login']], function () {
 			//Clases
 			Route::resource('clases','Admin\ClaseController');
 
+			//Empresas
+			Route::resource('empresas','Admin\EmpresaController')->only('store');
+
+			//InstitutosProcedencias
+			Route::resource('institutos_procedencias','Admin\InstitutoProcedenciaController')->only('store');
+
+
 		});
 
 		//Escolares
@@ -62,9 +69,10 @@ Route::group(['middleware' => ['login']], function () {
 			Route::resource('especialidades','Admin\EspecialidadController')->only([
     		'index', 'show', 'store', 'update', 'destroy'
 			]);
+			
 
 			//PlanEspecialidad
-			Route::Resource('planes_especialidades','Admin\PlanEspecialidadController')->only(['show']);
+			Route::resource('/planes_especialidades','Admin\PlanEspecialidadController');
 
 			//Reticulas
 			Route::resource('reticulas','Admin\ReticulaController')->only([
@@ -97,6 +105,9 @@ Route::group(['middleware' => ['login']], function () {
 
 			//Especialidades
 			Route::get('especialidades','Admin\DataTableController@especialidades')->name('especialidades.get');
+
+			//Planes especialidades
+			Route::get('planes_especialidades/{especialidad_id}','Admin\DataTableController@planes_especialidades')->name('planes_especialidades.get');
 
 			//Docentes
 			Route::get('docentes','Admin\DataTableController@docentes')->name('docentes.get');

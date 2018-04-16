@@ -58,6 +58,11 @@ mix.scripts([
 	'resources/assets/js/app/especialidades.js'
 ],'public/js/especialidades.js');
 
+//Planes especialidades
+mix.scripts([
+	'resources/assets/js/app/planes_especialidades.js'
+],'public/js/planes_especialidades.js');
+
 //Reticulas
 mix.scripts([
 	'resources/assets/js/app/reticulas.js'

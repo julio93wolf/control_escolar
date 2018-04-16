@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Models\PlanEspecialidad;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PlanEspecialidadIndexRequest;
+use App\Http\Requests\PlanEspecialidadStoreRequest;
+use App\Http\Requests\PlanEspecialidadUpdateRequest;
 
 class PlanEspecialidadController extends Controller
 {
@@ -13,9 +16,11 @@ class PlanEspecialidadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(PlanEspecialidadIndexRequest $request)
     {
-        //
+        return view('private.admin.escolares.planes_especialidades.index',[
+            'especialidad' => $request->especialidad,
+        ]);
     }
 
     /**
@@ -34,9 +39,16 @@ class PlanEspecialidadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PlanEspecialidadStoreRequest $request)
     {
-        //
+        $plan_epecialidad = new PlanEspecialidad;
+        $plan_epecialidad->plan_especialidad    = $request->plan_especialidad;
+        $plan_epecialidad->periodos             = $request->periodos;
+        $plan_epecialidad->especialidad_id      = $request->especialidad_id;
+        $plan_epecialidad->descripcion          = $request->descripcion;
+
+        $plan_epecialidad->save();
+        return;
     }
 
     /**
@@ -68,9 +80,14 @@ class PlanEspecialidadController extends Controller
      * @param  \App\Models\PlanEspecialidad  $planes_especialidade
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PlanEspecialidad $planes_especialidade)
+    public function update(PlanEspecialidadUpdateRequest $request, PlanEspecialidad $planes_especialidade)
     {
-        //
+        $planes_especialidade->plan_especialidad    = $request->plan_especialidad;
+        $planes_especialidade->periodos             = $request->periodos;
+        $planes_especialidade->descripcion          = $request->descripcion;
+
+        $planes_especialidade->save();
+        return;
     }
 
     /**
@@ -81,6 +98,6 @@ class PlanEspecialidadController extends Controller
      */
     public function destroy(PlanEspecialidad $planes_especialidade)
     {
-        //
+        $planes_especialidade->delete();
     }
 }

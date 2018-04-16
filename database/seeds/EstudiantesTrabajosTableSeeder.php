@@ -19,7 +19,6 @@ class EstudiantesTrabajosTableSeeder extends Seeder
         	
         	$empresa_id = rand(1,51);
         	if ($empresa_id == 1) {
-        		$puesto = 'No trabaja';
         		$estudiante->empresa()->attach($empresa_id);
         	}else{
         		$estudiante->empresa()->attach($empresa_id,[

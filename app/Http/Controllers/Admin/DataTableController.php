@@ -11,6 +11,7 @@ use App\Models\Estudiante;
 use App\Models\Asignatura;
 use App\Models\Periodo;
 use App\Models\FechaExamen;
+use App\Models\PlanEspecialidad;
 use App\Models\DataTable;
 
 class DataTableController extends Controller
@@ -38,6 +39,11 @@ class DataTableController extends Controller
     public function especialidades(){
         $especialidades = DataTable::especialidades();
         return Datatables::of($especialidades)->make(true);
+    }
+
+    public function planes_especialidades($especialidad_id){
+        $planes_especialidad = PlanEspecialidad::where('especialidad_id',$especialidad_id)->get();
+        return Datatables::of($planes_especialidad)->make(true);
     }
 
     public function docentes(){

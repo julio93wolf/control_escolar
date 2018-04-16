@@ -47,7 +47,8 @@
                 <th>Código</th>
                 <th>Especialidad</th>
                 <th>Detalles</th>
-                <th>Acciones</th>
+                <th>Planes</th>
+                <th>Editar</th>
             </tr>
         </thead>
         <tfoot>
@@ -55,7 +56,8 @@
                 <th>Codigo</th>
                 <th>Especialidad</th>
                 <th>Detalles</th>
-                <th>Acciones</th>
+                <th>Planes</th>
+                <th>Editar</th>
             </tr>
         </tfoot>
         <tbody>
