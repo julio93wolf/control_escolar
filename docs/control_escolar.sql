@@ -119,3 +119,19 @@ as
         join periodos on periodos.id = kardexs.periodo_id
 	order by kardexs.semestre asc;
 select * from vw_kardex;
+
+drop view if exists vw_grupos;
+create view vw_grupos 
+as
+	select 
+		grupos.id as grupo_id,
+		estudiantes.matricula,
+        concat(datos_generales.nombre,' ',datos_generales.apaterno,' ',datos_generales.amaterno) as nombre,
+        estudiantes.semestre,
+        oportunidades.oportunidad,
+        grupos.clase_id
+    from grupos
+        join estudiantes		on estudiantes.id  		= grupos.estudiante_id
+        join datos_generales	on datos_generales.id	= estudiantes.dato_general_id
+        join oportunidades		on oportunidades.id		= grupos.oportunidad_id;
+select * from vw_grupos;

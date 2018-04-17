@@ -66,4 +66,9 @@ class DataTableController extends Controller
         $kardex = DataTable::kardex($request->estudiante_id);
         return Datatables::of($kardex)->make(true);
     }
+
+    public function grupos(Request $request){
+        $grupo = DataTable::grupos($request->clase);
+        return Datatables::of($grupo)->make(true);
+    }
 }

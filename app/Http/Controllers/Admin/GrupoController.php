@@ -8,6 +8,7 @@ use App\Models\Dia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GrupoIndexRequest;
+use App\Http\Requests\GrupoStoreRequest;
 
 class GrupoController extends Controller
 {
@@ -43,7 +44,7 @@ class GrupoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GrupoStoreRequest $request)
     {
         //
     }

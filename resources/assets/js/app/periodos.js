@@ -61,7 +61,8 @@ function load_periodos(){
           orderable: false, 
           searchable: false
         }
-    ]
+    ],
+    order: [ 1, 'desc' ]
   });
   delete_periodo('#table_periodos tbody',table);
   $("select[name$='table_periodos_length']").val('10');

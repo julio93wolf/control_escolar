@@ -33,4 +33,8 @@ class DataTable extends Model
 	  static function kardex($estudiante_id){
 	    return \DB::table('vw_kardex')->where('estudiante_id',$estudiante_id)->orderBy('semestre','asc')->get();
 	  }
+
+	  static function grupos($clase_id){
+	    return \DB::table('vw_grupos')->where('clase_id',$clase_id)->orderBy('clase_id','asc')->get();
+	  }
 }

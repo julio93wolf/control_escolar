@@ -102,3 +102,8 @@ mix.scripts([
 mix.scripts([
 	'resources/assets/js/app/kardex.js'
 ],'public/js/kardex.js');
+
+//Grupos
+mix.scripts([
+	'resources/assets/js/app/grupos.js'
+],'public/js/grupos.js');
