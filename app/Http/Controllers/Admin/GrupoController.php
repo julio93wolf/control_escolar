@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Clase;
 use App\Models\Grupo;
+use App\Models\Kardex;
 use App\Models\Dia;
+use App\Models\Estudiante;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GrupoIndexRequest;
@@ -46,7 +48,25 @@ class GrupoController extends Controller
      */
     public function store(GrupoStoreRequest $request)
     {
-        //
+        
+        $grupo = new Grupo;
+        $grupo->clase_id        = $request->clase_id;
+        $grupo->estudiante_id   = $request->estudiante_id;
+        $grupo->oportunidad_id  = $request->oportunidad_id;
+        $grupo->save();
+
+        $clase = Clase::find($request->clase_id);
+        $estudiante = Estudiante::find($request->estudiante_id);
+
+        $kardex = new Kardex;
+        $kardex->estudiante_id      = $estudiante->id;
+        $kardex->asignatura_id      = $clase->asignatura_id;
+        $kardex->oportunidad_id     = $request->oportunidad_id;
+        $kardex->periodo_id         = $clase->periodo_id;
+        $kardex->semestre           = $estudiante->semestre;
+        $kardex->save();
+
+        return;
     }
 
     /**
@@ -91,6 +111,17 @@ class GrupoController extends Controller
      */
     public function destroy(Grupo $grupo)
     {
-        //
+        $clase = Clase::find($grupo->clase_id);
+
+        $kardex = Kardex::where([
+            ['estudiante_id',$grupo->estudiante_id],
+            ['asignatura_id',$clase->asignatura_id],
+            ['oportunidad_id',$grupo->oportunidad_id],
+            ['periodo_id',$clase->periodo_id]
+        ])->first();
+
+        $kardex->delete();
+        $grupo->delete();
+        return;
     }
 }

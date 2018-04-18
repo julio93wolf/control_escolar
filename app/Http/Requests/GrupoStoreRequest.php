@@ -27,7 +27,6 @@ class GrupoStoreRequest extends FormRequest
      */
     public function rules()
     {
-        /*
         $estudiante = Estudiante::find($this->estudiante_id);
         $clase = Clase::find($this->clase_id);
 
@@ -38,7 +37,7 @@ class GrupoStoreRequest extends FormRequest
 
         $requisitos = $reticula->requisitos;
         
-        $this->requisitos = true;
+        $requisitos_reticula = true;
 
         foreach ($requisitos as $key_requisito => $requisito) {
 
@@ -55,23 +54,20 @@ class GrupoStoreRequest extends FormRequest
                         $max_calificacion = $kardex->calificacion;
                     }
                 }
-
                 if ($max_calificacion < 7) {
-                    $this->requisitos = false;
+                    $requisitos_reticula = false;
                 }
 
             }else{
-                $this->requisitos = false;
+                $requisitos_reticula = false;
             }
 
-        }*/
+        }
 
-        //dd($this->requisitos);
-
-        $this->requisitos = false;
+        //dd($this->request);
 
         $rules = [
-            'requisitos'        => 'accepted',
+            'requisitos'        => 'required|in:'.$requisitos_reticula,
             'clase_id'          => 'required|integer|min:1',
             'estudiante_id'     => 'required|integer|min:1',
             'oportunidad_id'    => 'required|integer|min:1'
@@ -83,6 +79,8 @@ class GrupoStoreRequest extends FormRequest
     public function messages()
     {
         return [
+            'requisitos.in'             => 'El estudiante no cumple con los requisitos',
+
             'clase_id.required'         => 'La clase es requerida',
             'clase_id.integer'          => 'La clase tiene que ser un número entero',
             'clase_id.min'              => 'La clase mínima es 1.',

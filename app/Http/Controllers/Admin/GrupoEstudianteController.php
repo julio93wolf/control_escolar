@@ -23,14 +23,29 @@ class GrupoEstudianteController extends Controller
 
     	if ($estudiante) {
 
-    		$estudiante_grupo = Grupo::where([
-    			['clase_id',$request->clase_id],
-    			['estudiante_id',$estudiante->id]
-    		])->first();
+            $clase = Clase::find($request->clase_id);
 
-    		if (!$estudiante_grupo) {
+            $clases_grupos = Clase::where([
+                ['asignatura_id',$clase->asignatura_id],
+                ['periodo_id',$clase->periodo_id],
+                ['especialidad_id',$clase->especialidad_id],
+            ])->get();
 
-    			$clase = Clase::find($request->clase_id);
+            $match = false;
+
+            foreach ($clases_grupos as $key => $clase_grupo) {
+                $estudiante_grupo = Grupo::where([
+                    ['clase_id',$clase_grupo->id],
+                    ['estudiante_id',$estudiante->id]
+                ])->first();
+
+                if ($estudiante_grupo) {
+                    $match = true;
+                }
+            }
+
+    		if (!$match) {
+    			
     			$reticulas = $estudiante->plan_especialidad->reticulas;
 
     			$match_asignatura = false;
@@ -50,36 +65,46 @@ class GrupoEstudianteController extends Controller
 
 	    			$oportunidades = Oportunidad::get();
 
-						if( sizeof($kardexs) <= sizeof($oportunidades) ){
+					if( sizeof($kardexs) < sizeof($oportunidades) ){
 
-							$valid = true;
-							foreach ($kardexs as $key => $kardex) {
-								if ($kardex->calificacion >= 7) {
-									$valid = false;
-								}
+						$valid = true;
+						foreach ($kardexs as $key => $kardex) {
+							if ($kardex->calificacion >= 7) {
+								$valid = false;
 							}
-
-							if($valid){
-
-								$no_oportunidad = sizeof($kardexs) + 1;
-								$oportunidad = Oportunidad::find($no_oportunidad);
-								$dato_general = $estudiante->dato_general;
-
-	  						$response['estudiante_id'] = $estudiante->id;
-	  						$response['semestre'] = $estudiante->semestre;
-	  						$response['nombre'] = $dato_general->nombre.' '.$dato_general->apaterno.''.$dato_general->amaterno;
-	  						$response['oportunidad_id'] = $oportunidad->id;
-	  						$response['oportunidad'] = $oportunidad->oportunidad;
-									
-							}
-
 						}
 
-    			}
+						if($valid){
 
-    		}
+							$no_oportunidad = sizeof($kardexs) + 1;
+							$oportunidad = Oportunidad::find($no_oportunidad);
+							$dato_general = $estudiante->dato_general;
 
-    	}
+  						$response['estudiante_id'] = $estudiante->id;
+  						$response['semestre'] = $estudiante->semestre;
+  						$response['nombre'] = $dato_general->nombre.' '.$dato_general->apaterno.''.$dato_general->amaterno;
+  						$response['oportunidad_id'] = $oportunidad->id;
+  						$response['oportunidad'] = $oportunidad->oportunidad;
+								
+						}else{
+                            $response['error'] = 'El estudiante ya aprobó la materia';
+                        }
+
+					}else{
+                        $response['error'] = 'El estudiante ya súpero el número de oportunidades';
+                    }
+
+    			}else{
+                    $response['error'] = 'El estudiante no cuenta con la materia en su plan de estudios';
+                }
+
+    		}else{
+                $response['error'] = 'El estudiante ya está inscrito';
+            }
+
+    	}else{
+            $response['error'] = 'El estudiante no pertenece a la especialidad';
+        }
 
     	return $response;
     }
