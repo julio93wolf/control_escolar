@@ -31,10 +31,12 @@ Route::group(['middleware' => ['login']], function () {
 
 			//Estudiantes
 			Route::resource('estudiantes','Admin\EstudianteController');
-			Route::get('estudiante','Admin\GrupoEstudianteController@get')->name('estudiante.get');
+			Route::get('estudiante','Admin\GrupoEstudianteController@get')
+				->name('estudiante.get');
 
 			//Kardex
-			Route::resource('kardex','Admin\KardexController')->only('index');
+			Route::resource('kardex','Admin\KardexController')
+				->only('index');
 
 			//Docentes
 			Route::resource('docentes','Admin\DocenteController');
@@ -46,10 +48,12 @@ Route::group(['middleware' => ['login']], function () {
 			Route::resource('grupos','Admin\GrupoController');
 
 			//Empresas
-			Route::resource('empresas','Admin\EmpresaController')->only('store');
+			Route::resource('empresas','Admin\EmpresaController')
+				->only('store');
 
 			//InstitutosProcedencias
-			Route::resource('institutos_procedencias','Admin\InstitutoProcedenciaController')->only('store');
+			Route::resource('institutos_procedencias','Admin\InstitutoProcedenciaController')
+				->only('store');
 
 		});
 
@@ -57,40 +61,61 @@ Route::group(['middleware' => ['login']], function () {
 		Route::prefix('escolares')->group(function () {
 
 			//Asignaturas
-			Route::resource('asignaturas','Admin\AsignaturaController')->only([
-    		'index', 'store', 'update'
-			]);
+			Route::resource('asignaturas','Admin\AsignaturaController')
+				->only(['index', 'store', 'update']);
 
 			//Periodos
-			Route::resource('periodos','Admin\PeriodoController')->except('show');
+			Route::resource('periodos','Admin\PeriodoController')
+				->except('show');
 			Route::prefix('periodos')->group(function () {
-
-				Route::resource('fechas_examenes','Admin\FechaExamenController')->only([
-    			'index', 'store', 'update', 'destroy'
-				]);
-
+				Route::resource('fechas_examenes','Admin\FechaExamenController')
+					->only(['index', 'store', 'update', 'destroy']);
 			});
 
 			//Especialidades
-			Route::resource('especialidades','Admin\EspecialidadController')->only([
-    		'index', 'show', 'store', 'update', 'destroy'
-			]);
+			Route::resource('especialidades','Admin\EspecialidadController')
+				->only(['index', 'show', 'store', 'update', 'destroy']);
 			
 
 			//PlanEspecialidad
 			Route::resource('/planes_especialidades','Admin\PlanEspecialidadController');
 
 			//Reticulas
-			Route::resource('reticulas','Admin\ReticulaController')->only([
-				'store','destroy'
-			]);
-			Route::get('reticulas/asignaturas','Admin\AsignaturaReticulaController@asignaturas_periodo')->name('reticulas.asignaturas');
-			Route::get('reticulas/asignaturas_requisito/{reticula_id}','Admin\AsignaturaReticulaController@asignaturas_requisito')->name('reticulas.asignaturas_requisito');
+			Route::resource('reticulas','Admin\ReticulaController')
+				->only(['store','destroy']);
+			Route::get('reticulas/asignaturas','Admin\AsignaturaReticulaController@asignaturas_periodo')
+				->name('reticulas.asignaturas');
+			Route::get('reticulas/asignaturas_requisito/{reticula_id}','Admin\AsignaturaReticulaController@asignaturas_requisito')
+				->name('reticulas.asignaturas_requisito');
 
 			//Requisitos
-			Route::resource('requisitos_reticulas','Admin\RequisitoReticulaController')->only([
-				'store','destroy'
-			]);
+			Route::resource('requisitos_reticulas','Admin\RequisitoReticulaController')
+			->only(['store','destroy']);
+
+		});
+
+		//Configuraciones
+		Route::prefix('configuraciones')->group(function () {
+
+			//Estados de estudiantes
+			Route::resource('estados_estudiantes','Admin\EstadoEstudianteController')
+				->only(['index','store','update','destroy']);
+
+			//Títulos del docente
+			Route::resource('titulos_docentes','Admin\TituloDocenteController')
+				->only(['index','store','update','destroy']);
+
+			//Títulos del docente
+			Route::resource('tipos_examenes','Admin\TipoExamenController')
+				->only(['index','store','update','destroy']);
+
+			//Oportunidades
+			Route::resource('oportunidades','Admin\OportunidadController')
+				->only(['index','store','update','destroy']);
+
+			//Niveles y grados
+			Route::resource('niveles_academicos','Admin\NivelAcademicoController')
+				->only(['index','store','update','destroy']);
 
 		});
 
@@ -98,34 +123,65 @@ Route::group(['middleware' => ['login']], function () {
 		Route::prefix('datatable')->group(function () {
 
 			//Estudiantes
-			Route::get('estudiantes','Admin\DataTableController@estudiantes')->name('estudiantes.get');
+			Route::get('estudiantes','Admin\DataTableController@estudiantes')
+				->name('estudiantes.get');
 			
 			//Asignaturas
-			Route::get('asignaturas','Admin\DataTableController@asignaturas')->name('asignatuas.get');
+			Route::get('asignaturas','Admin\DataTableController@asignaturas')
+				->name('asignatuas.get');
 
 			//Periodos
-			Route::get('periodos','Admin\DataTableController@periodos')->name('periodos.get');
+			Route::get('periodos','Admin\DataTableController@periodos')
+				->name('periodos.get');
 
 			//Fechas de Examenes
-			Route::get('fechas_examenes/{periodo_id}','Admin\DataTableController@fechas_examenes')->name('fechas_examenes.get');
+			Route::get('fechas_examenes/{periodo_id}','Admin\DataTableController@fechas_examenes')
+				->name('fechas_examenes.get');
 
 			//Especialidades
-			Route::get('especialidades','Admin\DataTableController@especialidades')->name('especialidades.get');
+			Route::get('especialidades','Admin\DataTableController@especialidades')
+				->name('especialidades.get');
 
 			//Planes especialidades
-			Route::get('planes_especialidades/{especialidad_id}','Admin\DataTableController@planes_especialidades')->name('planes_especialidades.get');
+			Route::get('planes_especialidades/{especialidad_id}','Admin\DataTableController@planes_especialidades')
+				->name('planes_especialidades.get');
 
 			//Docentes
-			Route::get('docentes','Admin\DataTableController@docentes')->name('docentes.get');
+			Route::get('docentes','Admin\DataTableController@docentes')
+				->name('docentes.get');
 
 			//Clases
-			Route::get('clases','Admin\DataTableController@clases')->name('clases.get');
+			Route::get('clases','Admin\DataTableController@clases')
+				->name('clases.get');
 
 			//Kardex
-			Route::get('kardex/{estudiante_id}','Admin\DataTableController@kardex')->name('kardex.get');
+			Route::get('kardex/{estudiante_id}','Admin\DataTableController@kardex')
+				->name('kardex.get');
 
 			//Grupos
-			Route::get('grupos','Admin\DataTableController@grupos')->name('grupos.get');
+			Route::get('grupos','Admin\DataTableController@grupos')
+				->name('grupos.get');
+
+			//Estados de estudiantes
+			Route::get('estados_estudiantes','Admin\DataTableController@estados_estudiantes')
+				->name('estados_estudiantes.get');
+
+			//Títulos de docentes
+			Route::get('titulos_docentes','Admin\DataTableController@titulos_docentes')
+				->name('titulos_docentes.get');
+
+			//Títulos de docentes
+			Route::get('tipos_examenes','Admin\DataTableController@tipos_examenes')
+				->name('tipos_examenes.get');
+
+			//Oportunidades
+			Route::get('oportunidades','Admin\DataTableController@oportunidades')
+				->name('oportunidades.get');
+
+
+			//Oportunidades
+			Route::get('niveles_academicos','Admin\DataTableController@niveles_academicos')
+				->name('niveles_academicos.get');
 
 		});
 
@@ -139,16 +195,20 @@ Route::group(['middleware' => ['login']], function () {
 			Route::get('planes_especialidades/{especialidad_id}','Admin\SelectController@planes_especialidades')->name('select.planes_especialidades');
 
 			//Asignaturas Reticula
-			Route::get('asignaturas_reticula/{plan_especialidad_id}','Admin\SelectController@asignaturas_reticula')->name('select.asignaturas_reticula');
+			Route::get('asignaturas_reticula/{plan_especialidad_id}','Admin\SelectController@asignaturas_reticula')
+				->name('select.asignaturas_reticula');
 
 			//Asignaturas Requisito
-			Route::get('asignaturas_requisito/{reticula_id}','Admin\SelectController@asignaturas_requisito')->name('select.asignaturas_requisito');
+			Route::get('asignaturas_requisito/{reticula_id}','Admin\SelectController@asignaturas_requisito')
+				->name('select.asignaturas_requisito');
 
 			//Municipios
-			Route::get('municipios/{estado_id}','Admin\SelectController@municipios')->name('select.municipios');
+			Route::get('municipios/{estado_id}','Admin\SelectController@municipios')
+				->name('select.municipios');
 
 			//Localidades
-			Route::get('localidades/{municipio_id}','Admin\SelectController@localidades')->name('select.localidades');
+			Route::get('localidades/{municipio_id}','Admin\SelectController@localidades')
+				->name('select.localidades');
 
 		});
 		

@@ -56,5 +56,5 @@
 @endsection
 
 @section('script')
-	<script type="text/javascript" src="{{ asset('/js/kardex.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('/js/admin/academicos/kardex.js') }}"></script>
 @endsection

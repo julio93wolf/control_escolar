@@ -81,5 +81,5 @@
 	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
 	<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.js"></script>
 	--}}
-	<script type="text/javascript" src="{{ asset('/js/periodos.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('/js/admin/escolares/periodos.js') }}"></script>
 @endsection

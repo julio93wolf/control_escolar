@@ -6,6 +6,9 @@ use App\Models\NivelAcademico;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\Admin\NivelAcademico\StoreRequest;
+use App\Http\Requests\Admin\NivelAcademico\UpdateRequest;
+
 class NivelAcademicoController extends Controller
 {
     /**
@@ -15,7 +18,7 @@ class NivelAcademicoController extends Controller
      */
     public function index()
     {
-        //
+        return view('private.admin.configuraciones.niveles_academicos.index');
     }
 
     /**
@@ -34,18 +37,21 @@ class NivelAcademicoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $nivel_academico = new NivelAcademico;
+        $nivel_academico->nivel_academico       = $request->nivel_academico;
+        $nivel_academico->descripcion           = $request->descripcion;
+        $nivel_academico->save();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\NivelAcademico  $nivelAcademico
+     * @param  \App\Models\NivelAcademico  $niveles_academico
      * @return \Illuminate\Http\Response
      */
-    public function show(NivelAcademico $nivelAcademico)
+    public function show(NivelAcademico $niveles_academico)
     {
         //
     }
@@ -53,10 +59,10 @@ class NivelAcademicoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\NivelAcademico  $nivelAcademico
+     * @param  \App\Models\NivelAcademico  $niveles_academico
      * @return \Illuminate\Http\Response
      */
-    public function edit(NivelAcademico $nivelAcademico)
+    public function edit(NivelAcademico $niveles_academico)
     {
         //
     }
@@ -65,22 +71,24 @@ class NivelAcademicoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\NivelAcademico  $nivelAcademico
+     * @param  \App\Models\NivelAcademico  $niveles_academico
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, NivelAcademico $nivelAcademico)
+    public function update(UpdateRequest $request, NivelAcademico $niveles_academico)
     {
-        //
+        $niveles_academico->nivel_academico     = $request->nivel_academico;
+        $niveles_academico->descripcion         = $request->descripcion;
+        $niveles_academico->save();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\NivelAcademico  $nivelAcademico
+     * @param  \App\Models\NivelAcademico  $niveles_academico
      * @return \Illuminate\Http\Response
      */
-    public function destroy(NivelAcademico $nivelAcademico)
+    public function destroy(NivelAcademico $niveles_academico)
     {
-        //
+        $niveles_academico->delete();
     }
 }

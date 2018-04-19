@@ -74,5 +74,5 @@
 @endsection
 
 @section('script')
-	<script type="text/javascript" src="{{ asset('js/estudiantes.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/admin/academicos/estudiantes.js') }}"></script>
 @endsection

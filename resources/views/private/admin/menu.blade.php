@@ -94,7 +94,7 @@
 			<div class="divider"></div>
 			<div class="row">
 				<div class="col s6 m4">
-					<a href="{{--route('estadosEstudiantes.index')--}}">
+					<a href="{{ route('estados_estudiantes.index') }}">
 						<div class="center promo  hoverable">
 							<i class="material-icons">school</i>
 							<p class="promo-caption">Estados de estudiante</p>
@@ -102,7 +102,7 @@
 					</a>
 				</div>
 				<div class="col s6 m4">
-					<a href="{{--route('titulosProfesor.index')--}}">
+					<a href="{{ route('titulos_docentes.index') }}">
 						<div class="center promo  hoverable">
 							<i class="material-icons">work</i>
 							<p class="promo-caption">Títulos de profesor</p>
@@ -118,7 +118,7 @@
 					</a>
 				</div>
 				<div class="col s6 m4">
-					<a href="{{--route('tiposExamenes.index')--}}">
+					<a href="{{ route('tipos_examenes.index') }}">
 						<div class="center promo hoverable">
 							<i class="material-icons">description</i>
 							<p class="promo-caption">Tipos de exámenes</p>
@@ -126,7 +126,7 @@
 					</a>
 				</div>
 				<div class="col s6 m4">
-					<a href="{{--route('oportunidadesClase.index')--}}">
+					<a href="{{ route('oportunidades.index') }}">
 						<div class="center promo hoverable">
 							<i class="material-icons">autorenew</i>
 							<p class="promo-caption">Oportunidades de clase</p>
@@ -134,7 +134,7 @@
 					</a>
 				</div>
 				<div class="col s6 m4">
-					<a href="{{--route('niveles.index')--}}">
+					<a href="{{ route('niveles_academicos.index') }}">
 						<div class="center promo hoverable">
 							<i class="material-icons">class</i>
 							<p class="promo-caption">Niveles y grados</p>

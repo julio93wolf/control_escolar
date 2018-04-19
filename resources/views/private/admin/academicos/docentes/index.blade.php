@@ -80,5 +80,5 @@
 @endsection
 
 @section('script')
-	<script type="text/javascript" src="{{ asset('js/docentes.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/admin/academicos/docentes.js') }}"></script>
 @endsection

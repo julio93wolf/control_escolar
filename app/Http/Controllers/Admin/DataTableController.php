@@ -13,6 +13,11 @@ use App\Models\Periodo;
 use App\Models\FechaExamen;
 use App\Models\PlanEspecialidad;
 use App\Models\DataTable;
+use App\Models\EstadoEstudiante;
+use App\Models\Titulo;
+use App\Models\TipoExamen;
+use App\Models\Oportunidad;
+use App\Models\NivelAcademico;
 
 class DataTableController extends Controller
 {
@@ -70,5 +75,30 @@ class DataTableController extends Controller
     public function grupos(Request $request){
         $grupo = DataTable::grupos($request->clase);
         return Datatables::of($grupo)->make(true);
+    }
+
+    public function estados_estudiantes(){
+        $estados_estudiantes = EstadoEstudiante::get();
+        return Datatables::of($estados_estudiantes)->make(true);
+    }
+
+    public function titulos_docentes(){
+        $titulos = Titulo::get();
+        return Datatables::of($titulos)->make(true);
+    }
+
+    public function tipos_examenes(){
+        $tipos_examenes = TipoExamen::get();
+        return Datatables::of($tipos_examenes)->make(true);
+    }    
+
+    public function oportunidades(){
+        $oportunidades = Oportunidad::get();
+        return Datatables::of($oportunidades)->make(true);
+    } 
+
+    public function niveles_academicos(){
+        $niveles_academicos = NivelAcademico::get();
+        return Datatables::of($niveles_academicos)->make(true);
     }
 }

@@ -40,5 +40,5 @@
 @section('script')
 	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
 	<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.js"></script>
-	<script type="text/javascript" src="{{ asset('/js/form.periodo.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('/js/admin/escolares/form.periodo.js') }}"></script>
 @endsection

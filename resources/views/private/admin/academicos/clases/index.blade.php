@@ -115,5 +115,5 @@
 @endsection
 
 @section('script')
-	<script type="text/javascript" src="{{ asset('js/clases.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/admin/academicos/clases.js') }}"></script>
 @endsection

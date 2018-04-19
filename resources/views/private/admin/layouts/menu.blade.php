@@ -11,12 +11,12 @@
 </ul>
 
 <ul id="dropdown_configuraciones" class="dropdown-content">
-  <li><a href="#!" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">school</i>Estados de estudiante</a></li>
-  <li><a href="#!" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">work</i>Títulos de profesor</a></li>
+  <li><a href="{{ route('estados_estudiantes.index') }}" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">school</i>Estados de estudiante</a></li>
+  <li><a href="{{ route('titulos_docentes.index') }}" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">work</i>Títulos de profesor</a></li>
   <li><a href="#!" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">build</i>Especialidades</a></li>
-  <li><a href="#!" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">description</i>Tipos de exámenes</a></li>
-  <li><a href="#!" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">autorenew</i>Oportunidades de clase</a></li>
-  <li><a href="#!" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">class</i>Niveles y grados</a></li>
+  <li><a href="{{ route('tipos_examenes.index') }}" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">description</i>Tipos de exámenes</a></li>
+  <li><a href="{{ route('oportunidades.index') }}" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">autorenew</i>Oportunidades de clase</a></li>
+  <li><a href="{{ route('niveles_academicos.index') }}" class="blue-text text-darken-2" ><i class="material-icons blue-text text-darken-2">class</i>Niveles y grados</a></li>
 </ul>
 
 <div class="navbar-fixed">
@@ -87,12 +87,12 @@
       <div class="collapsible-header"><i class="material-icons">settings</i>Configuraciones</div>
       <div class="collapsible-body">
         <ul>
-          <li><a href="#!"><i class="material-icons blue-text text-darken-2">school</i>Estados de estudiante</a></li>
-          <li><a href="#!"><i class="material-icons blue-text text-darken-2">work</i>Títulos de profesor</a></li>
+          <li><a href="{{ route('estados_estudiantes.index') }}"><i class="material-icons blue-text text-darken-2">school</i>Estados de estudiante</a></li>
+          <li><a href="{{ route('titulos_docentes.index') }}"><i class="material-icons blue-text text-darken-2">work</i>Títulos de profesor</a></li>
           <li><a href="#!"><i class="material-icons blue-text text-darken-2">build</i>Especialidades</a></li>
-          <li><a href="#!"><i class="material-icons blue-text text-darken-2">description</i>Tipos de exámenes</a></li>
-          <li><a href="#!"><i class="material-icons blue-text text-darken-2">autorenew</i>Oportunidades de clase</a></li>
-          <li><a href="#!"><i class="material-icons blue-text text-darken-2">class</i>Niveles y grados</a></li>
+          <li><a href="{{ route('tipos_examenes.index') }}"><i class="material-icons blue-text text-darken-2">description</i>Tipos de exámenes</a></li>
+          <li><a href="{{ route('oportunidades.index') }}"><i class="material-icons blue-text text-darken-2">autorenew</i>Oportunidades de clase</a></li>
+          <li><a href="{{ route('niveles_academicos.index') }}"><i class="material-icons blue-text text-darken-2">class</i>Niveles y grados</a></li>
         </ul>
       </div>
     </li>
