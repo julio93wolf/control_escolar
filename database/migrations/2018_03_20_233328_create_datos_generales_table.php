@@ -15,7 +15,7 @@ class CreateDatosGeneralesTable extends Migration
     {
         Schema::create('datos_generales', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('curp',18)->unique();
+            $table->string('curp',18);
             $table->string('nombre',32);
             $table->string('apaterno',32);
             $table->string('amaterno',32);

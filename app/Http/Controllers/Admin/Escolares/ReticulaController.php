@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Escolares;
 
-use App\Models\RequisitoReticula;
+use App\Models\Reticula;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Http\Requests\RequisitoReticulaStoreRequest;
+use App\Http\Requests\Admin\Reticula\StoreRequest;
 
-class RequisitoReticulaController extends Controller
+class ReticulaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,24 +37,25 @@ class RequisitoReticulaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RequisitoReticulaStoreRequest $request)
+    public function store(StoreRequest $request)
     {
-        $requisito_reticula = new RequisitoReticula;
+        $reticula = new Reticula;
 
-        $requisito_reticula->reticula_id            = $request->reticula_id;
-        $requisito_reticula->reticula_requisito_id  = $request->reticula_requisito_id;
+        $reticula->plan_especialidad_id     = $request->plan_especialidad_id;
+        $reticula->asignatura_id            = $request->asignatura_id;
+        $reticula->periodo_reticula         = $request->periodo_reticula;
 
-        $requisito_reticula->save();
+        $reticula->save();
         return;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\RequisitoReticula  $requisitoReticula
+     * @param  \App\Models\Reticula  $reticula
      * @return \Illuminate\Http\Response
      */
-    public function show(RequisitoReticula $requisitos_reticula)
+    public function show(Reticula $reticula)
     {
         //
     }
@@ -62,10 +63,10 @@ class RequisitoReticulaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\RequisitoReticula  $requisitoReticula
+     * @param  \App\Models\Reticula  $reticula
      * @return \Illuminate\Http\Response
      */
-    public function edit(RequisitoReticula $requisitos_reticula)
+    public function edit(Reticula $reticula)
     {
         //
     }
@@ -74,10 +75,10 @@ class RequisitoReticulaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\RequisitoReticula  $requisitoReticula
+     * @param  \App\Models\Reticula  $reticula
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RequisitoReticula $requisitos_reticula)
+    public function update(Request $request, Reticula $reticula)
     {
         //
     }
@@ -85,12 +86,12 @@ class RequisitoReticulaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\RequisitoReticula  $requisitoReticula
+     * @param  \App\Models\Reticula  $reticula
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RequisitoReticula $requisitos_reticula)
+    public function destroy(Reticula $reticula)
     {
-        RequisitoReticula::find($requisitos_reticula->id)->delete();
-        return;
+        $reticula->delete();
+        return ;
     }
 }

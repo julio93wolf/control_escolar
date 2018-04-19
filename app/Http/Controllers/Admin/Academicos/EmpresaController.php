@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Academicos;
 
-use App\Models\RequisitoReticula;
+use App\Models\Empresa;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Http\Requests\RequisitoReticulaStoreRequest;
+use App\Http\Requests\Admin\Empresa\StoreRequest;
 
-class RequisitoReticulaController extends Controller
+class EmpresaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,24 +37,22 @@ class RequisitoReticulaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RequisitoReticulaStoreRequest $request)
+    public function store(StoreRequest $request)
     {
-        $requisito_reticula = new RequisitoReticula;
+        $empresa = new Empresa;
+        $empresa->empresa = $request->empresa;
+        $empresa->save();
 
-        $requisito_reticula->reticula_id            = $request->reticula_id;
-        $requisito_reticula->reticula_requisito_id  = $request->reticula_requisito_id;
-
-        $requisito_reticula->save();
-        return;
+        return Empresa::orderBy('id','ASC')->get();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\RequisitoReticula  $requisitoReticula
+     * @param  \App\Models\Empresa  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function show(RequisitoReticula $requisitos_reticula)
+    public function show(Empresa $empresa)
     {
         //
     }
@@ -62,10 +60,10 @@ class RequisitoReticulaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\RequisitoReticula  $requisitoReticula
+     * @param  \App\Models\Empresa  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function edit(RequisitoReticula $requisitos_reticula)
+    public function edit(Empresa $empresa)
     {
         //
     }
@@ -74,10 +72,10 @@ class RequisitoReticulaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\RequisitoReticula  $requisitoReticula
+     * @param  \App\Models\Empresa  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RequisitoReticula $requisitos_reticula)
+    public function update(Request $request, Empresa $empresa)
     {
         //
     }
@@ -85,12 +83,11 @@ class RequisitoReticulaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\RequisitoReticula  $requisitoReticula
+     * @param  \App\Models\Empresa  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RequisitoReticula $requisitos_reticula)
+    public function destroy(Empresa $empresa)
     {
-        RequisitoReticula::find($requisitos_reticula->id)->delete();
-        return;
+        //
     }
 }
