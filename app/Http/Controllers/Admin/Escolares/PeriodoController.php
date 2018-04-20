@@ -71,14 +71,7 @@ class PeriodoController extends Controller
      */
     public function edit(Periodo $periodo)
     {
-        $periodo->periodo                   = $request->periodo;
-        $periodo->anio                      = $request->anio;
-        $periodo->reconocimiento_oficial    = $request->reconocimiento_oficial;
-        $periodo->dges                      = $request->dges;
-        $periodo->fecha_reconocimiento      = $request->fecha_reconocimiento_submit;
-        $periodo->save();
-
-        return view('private.admin.escolares.periodos.index');
+        return view('private.admin.escolares.periodos.edit',compact('periodo'));
     }
 
     /**
@@ -90,7 +83,14 @@ class PeriodoController extends Controller
      */
     public function update(UpdateRequest $request, Periodo $periodo)
     {
-        //
+        $periodo->periodo                   = $request->periodo;
+        $periodo->anio                      = $request->anio;
+        $periodo->reconocimiento_oficial    = $request->reconocimiento_oficial;
+        $periodo->dges                      = $request->dges;
+        $periodo->fecha_reconocimiento      = $request->fecha_reconocimiento_submit;
+        $periodo->save();
+
+        return view('private.admin.escolares.periodos.index');
     }
 
     /**

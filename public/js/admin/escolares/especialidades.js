@@ -67,7 +67,7 @@ function load_especialidades(){
         {
           data: 'id',
           render: function ( data, type, row, meta ) {
-            return `<a href="/admin/escolares/planes_especialidades?especialidad=`+data+`" class="btn-floating btn-meddium waves-effect waves-light edit-especialidad"><i class="material-icons circle teal">chrome_reader_mode</i></a>`;
+            return `<a href="/admin/escolares/planes_especialidades?especialidad=`+data+`" class="btn-floating btn-meddium waves-effect waves-light"><i class="material-icons circle teal">chrome_reader_mode</i></a>`;
           },
           orderable: false, 
           searchable: false

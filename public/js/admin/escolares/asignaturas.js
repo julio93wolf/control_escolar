@@ -188,17 +188,10 @@ function update_asignatura(json){
     },
     error: function (data) {
       var errors = data.responseJSON.errors;
-      //var str_errors = '';
       for(var error in errors) {
-        //str_errors += ''+errors[error]+'<br>';
         $("label[for='"+error+"']").attr('data-error',errors[error]);
         $("#"+error+"").addClass('invalid');
       }
-      /*swal({
-        type: 'error',
-        title: 'Error al guardar la asignatura',
-        html: str_errors
-      });  */
     }
   });
 }

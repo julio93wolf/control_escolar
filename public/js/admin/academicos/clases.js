@@ -1,5 +1,7 @@
 load_especialidades();
 
+var table = null;
+
 function load_especialidades (){
 	var nivel_academico_id = $('#nivel_academico_id').val();
 	$.get('/admin/select/especialidades_nivel/' + nivel_academico_id,function(data) {
@@ -13,7 +15,7 @@ function load_especialidades (){
 			
 		}
 		$('#especialidad_id').material_select();
-		load_clases();
+    load_clases();
     create_clase();
 	})
 	.fail(function() {
@@ -24,6 +26,7 @@ function load_especialidades (){
 
 $('#nivel_academico_id').change(function(){
   load_especialidades();
+  load_clases();
   create_clase();
 });
 
@@ -38,7 +41,7 @@ $('#periodo_id').change(function(){
 });
 
 function load_clases(){
-  var table = $('#table_clases').DataTable({
+  table = $('#table_clases').DataTable({
     language: {
       "sProcessing":     "Procesando...",
       "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -69,10 +72,10 @@ function load_clases(){
     scrollX: true,
     ajax: '/admin/datatable/clases?periodo_id='+$('#periodo_id').val()+'&especialidad_id='+$('#especialidad_id').val(),
     columns: [
-        { data: 'codigo',      name: 'codigo' },
-        { data: 'clase', name: 'clase' },
-        { data: 'asignatura',   name: 'asignatura' },
-        { data: 'docente',   name: 'docente' },
+        { data: 'codigo',     name: 'codigo' },
+        { data: 'clase',      name: 'clase' },
+        { data: 'asignatura', name: 'asignatura' },
+        { data: 'docente',    name: 'docente' },
         {
           data: 'clase_id',
           render: function ( data, type, row, meta ) {
@@ -99,30 +102,30 @@ function load_clases(){
         }
     ]
   });
-  delete_clase('#table_clases tbody',table);
   $("select[name$='table_clases_length']").val('10');
   $("select[name$='table_clases_length']").material_select();
 }
 
-function delete_clase (tbody,table){
-  $(tbody).on('click','a.delete-clase',function(){
-    var data = table.row( $(this).parents('tr') ).data();
-    swal({
-      title: 'Desea eliminar la clase?',
-      text: "Esta acción no se puede revertir",
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si',
-      cancelButtonText: 'Cancelar',
-    }).then((result) => {
-      if (result.value) {
-        clase_id= data.clase_id;
-        destroy_clase(clase_id);    
-      }
-    })
-  });
+$('#table_clases tbody').on('click','a.delete-clase',function(){
+  var data = table.row( $(this).parents('tr') ).data();
+  delete_clase(data.clase_id);
+});
+
+function delete_clase(clase_id){
+  swal({
+    title: 'Desea eliminar la clase?',
+    text: "Esta acción no se puede revertir",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si',
+    cancelButtonText: 'Cancelar',
+  }).then((result) => {
+    if (result.value) {
+      destroy_clase(clase_id);    
+    }
+  })
 }
 
 function destroy_clase(clase_id){

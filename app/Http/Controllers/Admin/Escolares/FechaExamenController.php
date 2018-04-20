@@ -8,6 +8,7 @@ use App\Models\TipoExamen;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\Admin\FechaExamen\IndexRequest;
 use App\Http\Requests\Admin\FechaExamen\StoreRequest;
 use App\Http\Requests\Admin\FechaExamen\UpdateRequest;
 
@@ -18,7 +19,7 @@ class FechaExamenController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(IndexRequest $request)
     {
         return view('private.admin.escolares.fechas_examenes.index',[
             'periodo'           => $request->periodo,

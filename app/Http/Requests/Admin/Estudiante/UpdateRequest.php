@@ -28,7 +28,7 @@ class UpdateRequest extends FormRequest
             'nombre'                    => 'required',
             'apaterno'                  => 'required',
             'amaterno'                  => 'required',
-            'curp'                      => 'required|unique:datos_generales,curp,'.$this->dato_general_id,
+            'curp'                      => 'required',
             'fecha_nacimiento_submit'   => 'required|date',
             'estado_civil_id'           => 'required|integer|min:1',
             'sexo'                      => 'required|in:F,M,O',

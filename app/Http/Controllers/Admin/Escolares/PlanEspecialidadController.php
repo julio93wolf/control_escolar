@@ -41,7 +41,7 @@ class PlanEspecialidadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         $plan_epecialidad = new PlanEspecialidad;
         $plan_epecialidad->plan_especialidad    = $request->plan_especialidad;
@@ -82,7 +82,7 @@ class PlanEspecialidadController extends Controller
      * @param  \App\Models\PlanEspecialidad  $planes_especialidade
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PlanEspecialidad $planes_especialidade)
+    public function update(UpdateRequest $request, PlanEspecialidad $planes_especialidade)
     {
         $planes_especialidade->plan_especialidad    = $request->plan_especialidad;
         $planes_especialidade->periodos             = $request->periodos;

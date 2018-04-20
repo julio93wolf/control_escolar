@@ -262,7 +262,7 @@
 		<label for="estado_id">Estado</label>
 	</div>
 
-	<div class="input-field col s12 l4">
+	<div class="input-field col s12 l4" style="margin-bottom: 16px;">
 		<i class="material-icons prefix">location_city</i>
 		<select id="municipio_id" name="municipio_id">			
 			@foreach($municipios as $municipio)
@@ -287,7 +287,7 @@
 		<label class="active" for="municipio_id">Municipio</label>
 	</div>	
 
-	<div class="input-field col s12 l4">
+	<div class="input-field col s12 l4" style="margin-bottom: 16px;">
 		<i class="material-icons prefix">domain</i>
 		<select id="localidad_id" name="localidad_id" class="validate
 		@if( $errors->has('localidad_id')) 
@@ -409,7 +409,7 @@
 		@if( $errors->has('titulo_id')) 
 			class="active"
 			data-error=" {{ $errors->first('titulo_id',':message') }} "  
-		@endif>*Localidad</label>
+		@endif>*Título</label>
 	</div>	
 </div>
 

@@ -32,8 +32,8 @@
 			</div>	
 		</div>
 		<div class="modal-footer">
-			<a class="waves-effect waves-red btn-flat modal-action modal-close" id="cancelar_asignatura"><i class="material-icons left">close</i>cancelar</a>
-			<button id="store_asignatura" class="waves-effect waves-green btn-flat" type="submit" name="action">Guardar
+			<a class="waves-effect waves-light btn-flat modal-action modal-close" id="cancelar_asignatura"><i class="material-icons left">close</i>cancelar</a>
+			<button id="store_asignatura" class="waves-effect waves-light btn-flat" type="submit" name="action">Guardar
 		    <i class="material-icons left">save</i>
 		  </button>
 
