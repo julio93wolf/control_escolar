@@ -5,7 +5,9 @@ namespace App\Http\Requests\Admin\Clase;
 use App\Models\Clase;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
+
+use App\Rules\Admin\Clase\NombreClase;
+use App\Rules\Admin\Clase\HorarioDocente;
 
 class UpdateRequest extends FormRequest
 {
@@ -27,21 +29,15 @@ class UpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $clases = [];
-        $clases_registradas = Clase::where([
-            ['asignatura_id',$this->asignatura_id],
-            ['especialidad_id',$this->especialidad_id],
-            ['periodo_id',$this->periodo_id],
-            ['id','<>',$this->clase_id]
-        ])->get();
-        foreach ($clases_registradas as $key => $clase_registrada) {
-            array_push($clases,$clase_registrada->clase);
-        }
-
         $rules = [
             'clase'             => [
                 'required',
-                Rule::notIn($clases)
+                new NombreClase([
+                    'asignatura_id'     => $this->asignatura_id,
+                    'especialidad_id'   => $this->especialidad_id,
+                    'periodo_id'        => $this->periodo_id,
+                    'clase_id'          => $this->clase_id
+                ])
             ],
             'asignatura_id'     => 'required|integer|min:1',
             'docente_id'        => 'required|integer|min:1',
@@ -65,6 +61,7 @@ class UpdateRequest extends FormRequest
                 $rules = array_merge($rules,$rule);
             }
 
+            /*
             $clases_docente = Clase::where([
                 ['docente_id',$this->docente_id],
                 ['periodo_id',$this->periodo_id],
@@ -133,10 +130,22 @@ class UpdateRequest extends FormRequest
                         }
                     }
                 }
-            }    
+            }*/   
         }
 
-        $rule = [ 'docente' => 'required|in:'.$horario_valido ];
+        /*$rule = [ 'docente' => 'required|in:'.$horario_valido ];
+        $rules = array_merge($rules,$rule);*/
+
+        $rule = [ 'docente' => [
+            'required',
+            new HorarioDocente([
+                'dia'              => $this->dia,
+                'hora_entrada'     => $this->hora_inicio,
+                'hora_salida'      => $this->hora_salida,
+                'periodo_id'       => $this->periodo_id,
+                'clase_id'         => $this->clase_id
+            ])
+        ]];
         $rules = array_merge($rules,$rule);
 
         return $rules;

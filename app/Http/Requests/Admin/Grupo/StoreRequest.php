@@ -4,10 +4,7 @@ namespace App\Http\Requests\Admin\Grupo;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-use App\Models\Clase;
-use App\Models\Estudiante;
-use App\Models\Kardex;
-use App\Models\Reticula;
+use App\Rules\Admin\Grupo\Requisitos;
 
 class StoreRequest extends FormRequest
 {
@@ -28,45 +25,14 @@ class StoreRequest extends FormRequest
      */
     public function rules()
     {
-        $estudiante = Estudiante::find($this->estudiante_id);
-        $clase = Clase::find($this->clase_id);
-
-        $reticula = Reticula::where([
-            ['asignatura_id',$clase->asignatura_id],
-            ['plan_especialidad_id',$estudiante->plan_especialidad_id],
-        ])->first();
-
-        $requisitos = $reticula->requisitos;
-        
-        $requisitos_reticula = true;
-
-        foreach ($requisitos as $key_requisito => $requisito) {
-
-            $kardexs = Kardex::where([
-                ['estudiante_id',$estudiante->id],
-                ['asignatura_id',$requisito->asignatura_id]
-            ])->get();
-
-            if($kardexs){
-                $max_calificacion = 0;
-
-                foreach ($kardexs as $key_kardex => $kardex) {
-                    if($kardex->calificacion >= $max_calificacion){
-                        $max_calificacion = $kardex->calificacion;
-                    }
-                }
-                if ($max_calificacion < 7) {
-                    $requisitos_reticula = false;
-                }
-
-            }else{
-                $requisitos_reticula = false;
-            }
-
-        }
-
         $rules = [
-            'requisitos'        => 'required|in:'.$requisitos_reticula,
+            'requisitos'        => [
+                'required',
+                new Requisitos([
+                    'estudiante_id' => $this->estudiante_id,
+                    'clase_id'      => $this->clase_id,
+                ])
+            ],
             'clase_id'          => 'required|integer|min:1',
             'estudiante_id'     => 'required|integer|min:1',
             'oportunidad_id'    => 'required|integer|min:1'
@@ -83,7 +49,7 @@ class StoreRequest extends FormRequest
     public function messages()
     {
         return [
-            'requisitos.in'             => 'El estudiante no cumple con los requisitos',
+            'requisitos.required'       => 'El requisito es requerido',
 
             'clase_id.required'         => 'La clase es requerida',
             'clase_id.integer'          => 'La clase tiene que ser un número entero',
