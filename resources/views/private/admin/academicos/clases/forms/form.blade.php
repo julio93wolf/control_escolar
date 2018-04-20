@@ -51,7 +51,8 @@
 		@endif>*Asignatura</label>
 	</div>
 	
-	<div class="input-field col s12">
+	<div class="input-field col s12" style="margin-bottom: 20px;">
+		<input id="docente" name="docente" type="hidden" value="1">
 		<i class="material-icons prefix">account_box</i>
 		<select id="docente_id" name="docente_id" class="validate
 		@if( $errors->has('docente_id')) 
@@ -89,10 +90,16 @@
 			@endforeach
 		</select>
 		<label for="docente_id" class="active"
-		@if( $errors->has('docente_id')) 
-			data-error=" {{ $errors->first('docente_id',':message') }} "  
+		@if( $errors->has('docente_id') ) 
+			data-error=" {{ $errors->first('docente_id',':message') }} "
 		@endif>*Docente</label>
 	</div>
+	@if( $errors->has('docente') ) 
+		<div class="chip red darken-4 white-text">
+	    {{$errors->first('docente',':message')}}
+	    <i class="close material-icons white-text">close</i>
+	  </div>
+	@endif
 </div>
 
 <div class="row">
