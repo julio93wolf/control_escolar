@@ -11,6 +11,6 @@ class DatosGeneralesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\DatoGeneral::class,1500)->create();
+        factory(App\Models\DatoGeneral::class,150)->create();
     }
 }

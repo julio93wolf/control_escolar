@@ -7,6 +7,7 @@ use App\Models\Clase;
 use Illuminate\Foundation\Http\FormRequest;
 
 use App\Rules\Admin\Clase\NombreClase;
+use App\Rules\Admin\Clase\HorarioDocente;
 
 class StoreRequest extends FormRequest
 {
@@ -44,8 +45,8 @@ class StoreRequest extends FormRequest
             'especialidad_id'   => 'required|integer|min:1',
             'dia'               => 'required|array',
             'dia.*'             => 'required|integer',
-            'hora_inicio'       => 'required|array',
-            'hora_inicio.*'     => 'required|date_format:H:i',
+            'hora_entrada'       => 'required|array',
+            'hora_entrada.*'     => 'required|date_format:H:i',
             'hora_salida'       => 'required|array',
             'hora_salida.*'     => 'required|date_format:H:i'
         ];
@@ -54,93 +55,25 @@ class StoreRequest extends FormRequest
 
         if($this->dia){
             foreach ($this->dia as $key => $dia_value) {
-                $rule = [ 'hora_inicio.'.$dia_value  => 'date_format:H:i' ];
+                $rule = [ 'hora_entrada.'.$dia_value  => 'date_format:H:i' ];
                 $rules = array_merge($rules,$rule);
-                $rule = [ 'hora_salida.'.$dia_value  => 'date_format:H:i|after:hora_inicio.'.$dia_value ];
+                $rule = [ 'hora_salida.'.$dia_value  => 'date_format:H:i|after:hora_entrada.'.$dia_value ];
                 $rules = array_merge($rules,$rule);
             }
-
-            /*
-            $clases_docente = Clase::where([
-                ['docente_id',$this->docente_id],
-                ['periodo_id',$this->periodo_id]
-            ])->get();
-
-            $horarios_docente = [];
-            foreach ($clases_docente as $key => $clase_docente) {
-                $horarios = $clase_docente->horarios;
-                foreach ($horarios as $key => $horario) {
-                    array_push($horarios_docente,$horario);
-                }
-            }
-
-            foreach ($this->dia as $key => $dia_value) {
-                if (isset($this->hora_inicio[$dia_value]) && isset($this->hora_salida[$dia_value])) {
-                    foreach ($horarios_docente as $key_h => $horario_docente) {
-                        if ( ($horario_docente->dia_id-1) == $dia_value ) {
-                            
-                            $h_e = date("H:i:s", strtotime($this->hora_inicio[$dia_value]));
-                            $h_s = date("H:i:s", strtotime($this->hora_salida[$dia_value]));
-
-                            if(
-                                $h_e >= $horario_docente->hora_entrada &&
-                                $h_e < $horario_docente->hora_salida
-                            ){
-                                
-                                $asignatura = $horario_docente->clase->asignatura->asignatura;
-                                $especialidad = $horario_docente->clase->especialidad->especialidad;
-                                $clase = $horario_docente->clase->clase;
-
-                                $this->materia = $asignatura.' ['. $clase .'] - '.$especialidad;
-
-                                $horario_valido = false ;  
-                            } 
-                            if(
-                                $h_s > $horario_docente->hora_entrada &&
-                                $h_s <= $horario_docente->hora_salida
-                            ){
-                                $asignatura = $horario_docente->clase->asignatura->asignatura;
-                                $especialidad = $horario_docente->clase->especialidad->especialidad;
-                                $clase = $horario_docente->clase->clase;
-
-                                $this->materia = $asignatura.' ['. $clase .'] - '.$especialidad;
-
-                                $horario_valido = false ;
-                            }
-                            if(
-                                $h_e <= $horario_docente->hora_entrada &&
-                                $h_s >= $horario_docente->hora_salida
-                            ){
-                                $asignatura = $horario_docente->clase->asignatura->asignatura;
-                                $especialidad = $horario_docente->clase->especialidad->especialidad;
-                                $clase = $horario_docente->clase->clase;
-
-                                $this->materia = $asignatura.' ['. $clase .'] - '.$especialidad;
-                                
-                                $horario_valido = false;
-                            }
-                        }
-                    }
-                }
-            }*/
         }
-        
-        $rule = [ 'docente' => 'required|in:'.$horario_valido ];
-        $rules = array_merge($rules,$rule);*/
 
         $rule = [ 'docente' => [
             'required',
             new HorarioDocente([
                 'dia'               => $this->dia,
-                'hora_entrada'      => $this->hora_inicio,
+                'hora_entrada'      => $this->hora_entrada,
                 'hora_salida'       => $this->hora_salida,
                 'periodo_id'        => $this->periodo_id,
-                'clase_id'          => $this->clase_id
+                'docente_id'        => $this->docente_id
             ])
         ]];
         $rules = array_merge($rules,$rule);
-
-
+        
         return $rules;
     }
 

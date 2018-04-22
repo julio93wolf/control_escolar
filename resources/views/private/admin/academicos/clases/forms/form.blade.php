@@ -117,7 +117,7 @@
 	
 @endif
 
-@if( $errors->has('hora_inicio.*') ) 
+@if( $errors->has('hora_entrada.*') ) 
 	
 		<div class="chip red darken-4 white-text">
 	    Hora de inicio incompleta
@@ -146,7 +146,7 @@
 	    		@endif
 	    	@endforeach
 	    @else
-	    	@if ($errors->has('hora_inicio.'.$loop->index) || $errors->has('hora_salida.'.$loop->index) || old('hora_inicio.'.$loop->index) )
+	    	@if ($errors->has('hora_entrada.'.$loop->index) || $errors->has('hora_salida.'.$loop->index) || old('hora_entrada.'.$loop->index) )
 	    		checked="checked"
 	    	@endif
 	    @endif/>
@@ -154,8 +154,8 @@
 		</div>
 
 		<div class="col s12 m5">
-			<input id="hora_inicio_{{ $loop->index }}" name="hora_inicio[{{ $loop->index }}]" type="text" class="timepicker
-			@if( $errors->has('hora_inicio.'.$loop->index) ) 
+			<input id="hora_entrada_{{ $loop->index }}" name="hora_entrada[{{ $loop->index }}]" type="text" class="timepicker
+			@if( $errors->has('hora_entrada.'.$loop->index) ) 
 				invalid
 			@endif"
 			@if (isset($horarios))
@@ -170,14 +170,14 @@
 	    		disabled="true"
 	    	@endif
 			@else
-				@if( $errors->has('hora_inicio.'.$loop->index) || old('hora_inicio.'.$loop->index) )
-					value="{{ old('hora_inicio.'.$loop->index) }}" 
+				@if( $errors->has('hora_entrada.'.$loop->index) || old('hora_entrada.'.$loop->index) )
+					value="{{ old('hora_entrada.'.$loop->index) }}" 
 				@else
 					disabled="true"
 				@endif
 			@endif required="" aria-required="true"/>
-			<label for="hora_inicio[{{ $loop->index }}]"
-			@if( $errors->has('hora_inicio.'.$loop->index)) 
+			<label for="hora_entrada[{{ $loop->index }}]"
+			@if( $errors->has('hora_entrada.'.$loop->index)) 
 				class="active"
 			@endif></label>
 		</div>

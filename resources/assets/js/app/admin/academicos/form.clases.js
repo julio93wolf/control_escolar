@@ -19,15 +19,15 @@ function horario(){
 		$('#dia_'+i+'').on("click",function(event){
 			if($(this).is(':checked')){
 				var index = $(this).attr('index');
-				$('#hora_inicio_'+index).prop("disabled", false);
+				$('#hora_entrada_'+index).prop("disabled", false);
 				$('#hora_salida_'+index).prop("disabled", false);
 			}else{
 				var index = $(this).attr('index');
-				$('#hora_inicio_'+index).val('');
+				$('#hora_entrada_'+index).val('');
 				$('#hora_salida_'+index).val('');
-				$('#hora_inicio_'+index).prop("disabled", true);
+				$('#hora_entrada_'+index).prop("disabled", true);
 				$('#hora_salida_'+index).prop("disabled", true);
-				$('#hora_inicio_'+index).removeClass("invalid");
+				$('#hora_entrada_'+index).removeClass("invalid");
 				$('#hora_salida_'+index).removeClass("invalid");
 			}
 		});
@@ -36,7 +36,7 @@ function horario(){
 
 function inputs_horarios(){ 
 	for (var i = 0; i < 6; i++) {
-		$('#hora_inicio_'+i+'').change(function(event){
+		$('#hora_entrada_'+i+'').change(function(event){
 			$(this).removeClass('invalid');
 		});
 		$('#hora_salida_'+i+'').change(function(event){

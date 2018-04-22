@@ -2,6 +2,8 @@
 
 namespace App\Rules\Admin\Clase;
 
+use App\Models\Clase;
+
 use Illuminate\Contracts\Validation\Rule;
 
 class HorarioDocente implements Rule
@@ -24,7 +26,7 @@ class HorarioDocente implements Rule
         $this->hora_entrada    = $validate['hora_entrada'];
         $this->hora_salida     = $validate['hora_salida'];
         $this->periodo_id      = $validate['periodo_id'];
-        $this->docente_id      = $validate['docente_id'];
+        $this->docente_id      = $validate['docente_id'];        
 
         if (isset($validate['clase_id'])) {
             $this->clase_id    = $validate['clase_id'];
@@ -40,16 +42,18 @@ class HorarioDocente implements Rule
      */
     public function passes($attribute, $value)
     {
-        if ($clase_id) {
+        $horario_valido = true;
+
+        if ($this->clase_id) {
             $clases_docente = Clase::where([
-                ['docente_id',$this->docente_id],
-                ['periodo_id',$this->periodo_id],
-                ['id','<>',$this->clase_id]
+                ['docente_id',  $this->docente_id],
+                ['periodo_id',  $this->periodo_id],
+                ['id','<>',     $this->clase_id]
             ])->get();    
         }else{
             $clases_docente = Clase::where([
-                ['docente_id',$this->docente_id],
-                ['periodo_id',$this->periodo_id]
+                ['docente_id',  $this->docente_id],
+                ['periodo_id',  $this->periodo_id]
             ])->get();
         }
         
@@ -61,61 +65,56 @@ class HorarioDocente implements Rule
             }
         }
 
-        foreach ($this->dia as $key => $dia_value) {
+        foreach ($this->dia as $key => $dia_id) {
             
-            if (isset($this->hora_inicio[$dia_value]) && isset($this->hora_salida[$dia_value])) {
-                
+            if (isset($this->hora_entrada[$dia_id]) && isset($this->hora_salida[$dia_id])) {
+                    
                 foreach ($horarios_docente as $key_h => $horario_docente) {
 
-                    if ( ($horario_docente->dia_id-1) == $dia_value ) {
+                    if ( ($horario_docente->dia_id - 1) == $dia_id ) {
 
-                        $h_e = date("H:i:s", strtotime($this->hora_inicio[$dia_value]));
-                        $h_s = date("H:i:s", strtotime($this->hora_salida[$dia_value]));
+                        $hora_entrada_request   = date("H:i:s", strtotime($this->hora_entrada[$dia_id]));
+                        $hora_salida_request    = date("H:i:s", strtotime($this->hora_salida[$dia_id]));
 
-                        $h_e_a = date("H:i:s", strtotime($horario_docente->hora_entrada));
-                        $h_s_a = date("H:i:s", strtotime($horario_docente->hora_salida));
+                        $hora_entrada_docente   = date("H:i:s", strtotime($horario_docente->hora_entrada));
+                        $hora_salida_docente    = date("H:i:s", strtotime($horario_docente->hora_salida));
 
-                        if(
-                            $h_e >= $horario_docente->hora_entrada &&
-                            $h_e < $horario_docente->hora_salida
-                        ){
-                            
+                        if( $hora_entrada_request >= $hora_entrada_docente &&
+                            $hora_entrada_request < $hora_salida_docente){
+
                             $asignatura = $horario_docente->clase->asignatura->asignatura;
                             $especialidad = $horario_docente->clase->especialidad->especialidad;
                             $clase = $horario_docente->clase->clase;
 
                             $this->materia = $asignatura.' ['. $clase .'] - '.$especialidad;
-
                             $horario_valido = false ;  
                         } 
-                        if(
-                            $h_s > $horario_docente->hora_entrada &&
-                            $h_s <= $horario_docente->hora_salida
-                        ){
+                        if( $hora_salida_request > $hora_entrada_docente &&
+                            $hora_salida_request <= $hora_salida_docente){
+
                             $asignatura = $horario_docente->clase->asignatura->asignatura;
                             $especialidad = $horario_docente->clase->especialidad->especialidad;
                             $clase = $horario_docente->clase->clase;
 
                             $this->materia = $asignatura.' ['. $clase .'] - '.$especialidad;
-
                             $horario_valido = false ;
                         }
-                        if(
-                            $h_e <= $horario_docente->hora_entrada &&
-                            $h_s >= $horario_docente->hora_salida
-                        ){
+                        if( $hora_entrada_request <= $hora_entrada_docente &&
+                            $hora_salida_request >= $hora_salida_docente){
+
                             $asignatura = $horario_docente->clase->asignatura->asignatura;
                             $especialidad = $horario_docente->clase->especialidad->especialidad;
                             $clase = $horario_docente->clase->clase;
 
                             $this->materia = $asignatura.' ['. $clase .'] - '.$especialidad;
-                            
                             $horario_valido = false;
                         }
                     }
                 }
             }
         }
+
+        return $horario_valido;
     }
 
     /**
@@ -125,6 +124,6 @@ class HorarioDocente implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'El docente tiene cruce de horarios con: '.$this->materia ;
     }
 }

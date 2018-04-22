@@ -13,7 +13,7 @@ class UsuariosTableSeeder extends Seeder
     public function run()
     {
         
-        factory(App\Models\Usuario::class,1500)->create()->each(function(App\Models\Usuario $usuario){
+        factory(App\Models\Usuario::class,150)->create()->each(function(App\Models\Usuario $usuario){
             if($usuario->rol_id == 2){
                 $especialidad_id        = rand(1,18);
                 $planes_especialidades  = PlanEspecialidad::where('especialidad_id',$especialidad_id)->get();

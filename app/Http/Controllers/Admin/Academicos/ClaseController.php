@@ -88,7 +88,7 @@ class ClaseController extends Controller
             $horario = new Horario;
             $horario->dia_id        = $dia+1;
             $horario->clase_id      = $clase->id;
-            $horario->hora_entrada  = $request->hora_inicio[$dia];
+            $horario->hora_entrada  = $request->hora_entrada[$dia];
             $horario->hora_salida   = $request->hora_salida[$dia];
             $horario->save();
         } 
@@ -169,7 +169,7 @@ class ClaseController extends Controller
             $new_horario = new Horario;
             $new_horario->dia_id        = $dia+1;
             $new_horario->clase_id      = $clase->id;
-            $new_horario->hora_entrada  = $request->hora_inicio[$dia];
+            $new_horario->hora_entrada  = $request->hora_entrada[$dia];
             $new_horario->hora_salida   = $request->hora_salida[$dia];
             $new_horario->save();
         } 
