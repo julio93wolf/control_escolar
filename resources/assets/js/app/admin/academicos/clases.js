@@ -1,8 +1,27 @@
-load_especialidades();
+/**
+ * ============================================================================================
+ * @fileOverview  Carga las clases filtradas por periodos, niveles academicos y especialidades,
+ *                además de eliminar la clase seleccionada.
+ *
+ * @version       1.0
+ * 
+ * @author        Julio Cesar Valle Rodriguez <jvalle@appsamx.com>
+ * @copyright     APPSA México
+ * ============================================================================================
+ */
 
+carga_especialidades();
 var table = null;
 
-function load_especialidades (){
+/**
+ * Carga las especialidades del nivel academico seleccionado, y posteriormente las clases en
+ * el DataTable.
+ * 
+ * @async
+ * @function  carga_especialidades
+ * @return    {null}
+ */
+function carga_especialidades (){
 	var nivel_academico_id = $('#nivel_academico_id').val();
 	$.get('/admin/select/especialidades_nivel/' + nivel_academico_id,function(data) {
 		$('#especialidad_id').empty();
@@ -15,7 +34,7 @@ function load_especialidades (){
 			
 		}
 		$('#especialidad_id').material_select();
-    load_clases();
+    carga_clases();
     create_clase();
 	})
 	.fail(function() {
@@ -24,23 +43,54 @@ function load_especialidades (){
 	});
 }
 
-$('#nivel_academico_id').change(function(){
-  load_especialidades();
-  load_clases();
+/**
+ * Llama una funcion para cambiar los valores del select con las las especialidades del 
+ * nivel académico seleccionado.
+ *
+ * @event     change#nivel_academico_id
+ * @type      {object}
+ * @property  {event} change - Indica sí el valor del select ha cambiado.
+ */
+$('#nivel_academico_id').change(function(event){
+  carga_especialidades();
+});
+
+/**
+ * Llama las funciones para cargar las clases asignadas a la especialidad seleccionada en el
+ * periodo indicado.
+ * 
+ * @event     change#especialidad_id
+ * @type      {object}
+ * @property  {event} change - Indica sí el valor del select ha cambiado.
+ */
+$('#especialidad_id').change(function(event){
+  carga_clases();
   create_clase();
 });
 
-$('#especialidad_id').change(function(){
-  load_clases();
-  create_clase();
-});
-
+/**
+ * Llama las funciones para cargar las clases asignadas en el periodo seleccionado de las 
+ * especialidades cargadas.
+ * 
+ * @event     change#periodo_id
+ * @type      {object}
+ * @property  {event} change - Indica sí el valor del select ha cambiado.
+ */
 $('#periodo_id').change(function(){
-  load_clases();
+  carga_clases();
   create_clase();
 });
 
-function load_clases(){
+
+/**
+ * Carga las clases de las especialidades en el periodo indicado a través de una peticion ajax y
+ * son cargado en el DataTable.
+ *
+ * @async
+ * @function  carga_clases
+ * @return    {null}
+ */
+function carga_clases(){
   table = $('#table_clases').DataTable({
     language: {
       "sProcessing":     "Procesando...",
@@ -106,12 +156,26 @@ function load_clases(){
   $("select[name$='table_clases_length']").material_select();
 }
 
+/**
+ * Obtiene el ID de la clase para eliminarla.
+ * 
+ * @event     click#delete-clase
+ * @type      {object}
+ * @property  {event} click - Detecta si el botón fue presionado.
+ */
 $('#table_clases tbody').on('click','a.delete-clase',function(){
   var data = table.row( $(this).parents('tr') ).data();
-  delete_clase(data.clase_id);
+  elimina_clase(data.clase_id);
 });
 
-function delete_clase(clase_id){
+/**
+ * Muestra un sweet alert para confirmar eliminar la clase e invoca a la función para destruirla.
+ *
+ * @function  elimina_clase
+ * @param     {integer} clase_id - ID de la clase a eliminar.
+ * @return    {null}
+ */
+function elimina_clase(clase_id){
   swal({
     title: 'Desea eliminar la clase?',
     text: "Esta acción no se puede revertir",
@@ -128,12 +192,20 @@ function delete_clase(clase_id){
   })
 }
 
+/**
+ * Realiza una petición ajax para destruir la clase seleccionada. 
+ *
+ * @async
+ * @function  destroy_clase
+ * @param     {integer} clase_id - ID de la clase a eliminar.
+ * @return    {null}
+ */
 function destroy_clase(clase_id){
   $.ajax({
     url: '/admin/academicos/clases/'+clase_id,
     type: 'DELETE',
     success: function(result) {
-      load_clases();
+      carga_clases();
       swal({
         type: 'success',
         title: 'La clase ha sido eliminada',
@@ -151,6 +223,12 @@ function destroy_clase(clase_id){
   });
 }
 
+/**
+ * Modifica la URI del boton para crear un nueva clase.
+ *
+ * @function  create_clase
+ * @return    {null}
+ */
 function create_clase(){
   $('#create_clase').attr('href','/admin/academicos/clases/create?periodo_id='+$('#periodo_id').val()+'&especialidad_id='+$('#especialidad_id').val());
 }

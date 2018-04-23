@@ -1,7 +1,39 @@
+/**
+ * ==================================================================================================
+ * @fileOverview  Valida los campos del formulario para agregar o editar un docente, ademas de cargar
+ *                los municipios y localidades seleccionadas en los selects.
+ *
+ * @version       1.0
+ *
+ * @author        Julio Cesar Valle Rodríguez
+ * @copyright     APPSA México
+ * ==================================================================================================
+ */
+
 $('#municipio_id').select2();
 $('#localidad_id').select2();
 
 
+$.validator.setDefaults({
+  errorClass: 'invalid',
+  validClass: "valid",
+  errorPlacement: function(error, element) {
+    $(element)
+      .closest("form")
+      .find("label[for='" + element.attr("id") + "']")
+      .attr('data-error', error.text());
+  }
+});
+
+/**
+ * Carga los municipios del estado seleccionado.
+ *
+ * @async
+ * @function  load_municipios.
+ * @param     {integer} municipio_id - ID del municipcio seleccionado.
+ * @param     {integer} localidad_id - ID de la localidad seleccionada.
+ * @return    {null}
+ */
 function load_municipios (municipio_id,localidad_id){
 	var estado_id = $('#estado_id').val();
 	$.get('/admin/select/municipios/'+estado_id,function(data) {
@@ -26,6 +58,14 @@ function load_municipios (municipio_id,localidad_id){
 	});
 }
 
+/**
+ * Carga las localidades del municipio seleccionado.
+ *
+ * @async
+ * @function  load_localidades
+ * @param     {integer} localidad_id - ID de la localidad seleccionada.
+ * @return    {null}
+ */
 function load_localidades (localidad_id){
 	var municipio_id = $('#municipio_id').val();
 	$.get('/admin/select/localidades/'+municipio_id,function(data) {
@@ -50,25 +90,35 @@ function load_localidades (localidad_id){
 	});
 }
 
+/**
+ * Llama a la funcion para cargar los municipios del estado.
+ * 
+ * @event     change#estado_id
+ * @type      {object}
+ * @property  {event} change - Indica si el valor del select ha cambiado.
+ */
 $('#estado_id').change(function(event){
 	load_municipios();
 });
 
+/**
+ * Llama a la funcion para cargar las localidades del municipio.
+ * 
+ * @event     change#municipio_id
+ * @type      {object}
+ * @property  {event} change - Indica si el valor del select ha cambiado.
+ */
 $('#municipio_id').change(function(event){
 	load_localidades();
 });
 
-$.validator.setDefaults({
-  errorClass: 'invalid',
-  validClass: "valid",
-  errorPlacement: function(error, element) {
-    $(element)
-      .closest("form")
-      .find("label[for='" + element.attr("id") + "']")
-      .attr('data-error', error.text());
-  }
-});
-
+/**
+ * Valida los datos del formulario con la libreria JQuery Validation
+ * 
+ * @event     validate#form_docente
+ * @type      {object}
+ * @property  {event} validate - Valida los inputs del formulario.
+ */
 var validator = $("#form_docente").validate({
 	rules: {
     nombre: {

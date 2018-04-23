@@ -1,8 +1,37 @@
+/**
+ * ==================================================================================================
+ * @fileOverview  Carga la tabla con los niveles académicos y las peticiones para agregar, actualizar
+ *                y eliminar un nivel.
+ *
+ * @version       1.0
+ *
+ * @author        Julio Cesar Valle Rodriguez <jvalle@appsamx.com>
+ * @copyright     APPSA México.
+ */
+
 load_niveles_academicos();
 
 var new_nivel_academico = false;
 var nivel_academico_id = null;
 
+$.validator.setDefaults({
+  errorClass: 'invalid',
+  validClass: "valid",
+  errorPlacement: function(error, element) {
+    $(element)
+      .closest("form")
+      .find("label[for='" + element.attr("id") + "']")
+      .attr('data-error', error.text());
+  }
+});
+
+/**
+ * Realiza una petición ajax para obtener los niveles academicos y los carga en el DataTable.
+ *
+ * @async
+ * @function  load_niveles_academicos
+ * @return    {null}
+ */
 function load_niveles_academicos(){
 	var table = $('#table_niveles_academicos').DataTable({
   	"language": {
@@ -61,6 +90,14 @@ function load_niveles_academicos(){
   delete_nivel_academico('#table_niveles_academicos tbody',table);
 }
 
+/**
+ * Inicializa el modal para agregar un nuevo nivel académico.
+ * 
+ * @event     on:click#create_nivel_academico
+ * @type      {object}
+ * @property  {event} on:click - Detecta que se haga click en el botón para agregar un nuevo
+ *                               nivel academico.
+ */
 $('#create_nivel_academico').on('click',function(){
 	$('#nivel_academico').val('');
 	$('#descripcion').val('');
@@ -72,6 +109,13 @@ $('#create_nivel_academico').on('click',function(){
 	$('#modal_nivel_academico').modal('open');
 });
 
+/**
+ * Carga la información del nivel académico en el modal para ser editado.
+ * 
+ * @param  {tbody} tbody - tbody del DataTable.
+ * @param  {DataTable} table - Instancia del DataTable.
+ * @return {null}
+ */
 function edit_nivel_academico (tbody,table){
   $(tbody).on('click','a.edit-nivel-academico',function(){
     var data = table.row( $(this).parents('tr') ).data();
@@ -87,17 +131,14 @@ function edit_nivel_academico (tbody,table){
   });
 }
 
-$.validator.setDefaults({
-  errorClass: 'invalid',
-  validClass: "valid",
-  errorPlacement: function(error, element) {
-    $(element)
-      .closest("form")
-      .find("label[for='" + element.attr("id") + "']")
-      .attr('data-error', error.text());
-  }
-});
-
+/**
+ * Valida los campos del form_nivel_academico con la libreria JQuery Validator
+ * 
+ * @event     validate#form_nivel_academico
+ * @type      {object}
+ * @property  {event} validate - Valida que los campos para agregar un nuevo nivel académico
+ *                               sean correctos y realiza la peticion correspondiente.
+ */
 var validator = $("#form_nivel_academico").validate({
 	rules: {
     nivel_academico: {
@@ -127,6 +168,14 @@ var validator = $("#form_nivel_academico").validate({
   }
 });
 
+/**
+ * Realiza una petición para agregar un nuevo nivel académico.
+ *
+ * @async
+ * @function  store_nivel_academico
+ * @param     {json} json - JSON con la información a agregar.
+ * @return    {null}
+ */
 function store_nivel_academico(json){
 	$.post('/admin/configuraciones/niveles_academicos',json,function(data){
 		$('#table_niveles_academicos').DataTable().ajax.reload();
@@ -146,6 +195,14 @@ function store_nivel_academico(json){
 	});
 }
 
+/**
+ * Realiza una petición para actualizar un nivel académico.
+ *
+ * @async
+ * @function  update_nivel_academico
+ * @param     {json} json - JSON con la información a actualizar.
+ * @return    {null}
+ */
 function update_nivel_academico(json){
   $.ajax({
     url: '/admin/configuraciones/niveles_academicos/'+nivel_academico_id,
@@ -171,6 +228,14 @@ function update_nivel_academico(json){
   });
 }
 
+/**
+ * Recupera el ID del nivel académico a eliminar.
+ *
+ * @function  delete_nivel_academico
+ * @param     {tbody} tbody - tbody del DataTable.
+ * @param     {DataTable} table - Instancia del DataTable.
+ * @return    {null}
+ */
 function delete_nivel_academico (tbody,table){
   $(tbody).on('click','a.delete-nivel-academico',function(){
     var data = table.row( $(this).parents('tr') ).data();
@@ -192,6 +257,15 @@ function delete_nivel_academico (tbody,table){
   });
 }
 
+
+/**
+ * Realiza la petición ajax para eliminar el nivel académico.
+ *
+ * @async
+ * @function  destroy_nivel_academico
+ * @param     {integer} nivel_academico_id - ID del nivel académico.
+ * @return    {null}
+ */
 function destroy_nivel_academico(nivel_academico_id){
   $.ajax({
     url: '/admin/configuraciones/niveles_academicos/'+nivel_academico_id,

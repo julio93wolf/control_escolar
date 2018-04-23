@@ -1,5 +1,23 @@
+/**
+ * ================================================================================================
+ * @fileOverview  Carga el kardex del los alumnos registrados.
+ *
+ * @version       1.0
+ *
+ * @author        Julio Cesar Valle Rodríguez
+ * @copyright     APPSA México
+ * ================================================================================================
+ */
+
 load_kardex();
 
+/**
+ * Realiza una peticion ajax para obtener el karde de un alumno particula y lo carga en el DataTable.
+ *
+ * @async
+ * @function  load_kardex
+ * @return    {null}
+ */
 function load_kardex(){
 	var table = $('#table_kardex').DataTable({
   	language: {

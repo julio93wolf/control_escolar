@@ -1,8 +1,36 @@
+/**
+ * @fileOverview  Carga la tabla que muestra las oportunidades de las clases y las peticiones para 
+ *                agregar, actualizar y eliminar una oportunidad.
+ *
+ * @version       1.0
+ *
+ * @author        Julio Cesar Valle Rodríguez
+ * @copyright     APPSA México
+ */
+
 load_oportunidades();
 
 var new_oportunidad = false;
 var oportunidad_id = null;
 
+$.validator.setDefaults({
+  errorClass: 'invalid',
+  validClass: "valid",
+  errorPlacement: function(error, element) {
+    $(element)
+      .closest("form")
+      .find("label[for='" + element.attr("id") + "']")
+      .attr('data-error', error.text());
+  }
+});
+
+/**
+ * Realiza una petición ajax para obtener las oportunidades y cargarlas al DataTable.
+ *
+ * @async
+ * @function  load_oportunidades
+ * @return    {null}
+ */
 function load_oportunidades(){
 	var table = $('#table_oportunidades').DataTable({
   	"language": {
@@ -40,7 +68,9 @@ function load_oportunidades(){
         {
           data: 'id',
           render: function ( data, type, row, meta ) {
-            return `<a class="btn-floating btn-meddium waves-effect waves-light edit-oportunidad"><i class="material-icons circle green">mode_edit</i></a>`;
+            return `<a class="btn-floating btn-meddium waves-effect waves-light edit-oportunidad">
+                      <i class="material-icons circle green">mode_edit</i>
+                    </a>`;
           },
           orderable: false, 
           searchable: false
@@ -48,7 +78,9 @@ function load_oportunidades(){
         {
           data: 'id',
           render: function ( data, type, row, meta ) {
-            return `<a class="btn-floating btn-meddium waves-effect waves-light delete-oportunidad"><i class="material-icons circle red">close</i></a>`;
+            return `<a class="btn-floating btn-meddium waves-effect waves-light delete-oportunidad">
+                      <i class="material-icons circle red">close</i>
+                    </a>`;
           },
           orderable: false, 
           searchable: false
@@ -61,6 +93,14 @@ function load_oportunidades(){
   delete_oportunidad('#table_oportunidades tbody',table);
 }
 
+/**
+ * Inicializa el modal para agregar una nueva oportunidad.
+ * 
+ * @event     on:click#create_oportunidad
+ * @type      {object}
+ * @property  {event} on:click - Detecta si se hizo click en el botón para agregar una nueva 
+ *                               oportunidad.
+ */
 $('#create_oportunidad').on('click',function(){
 	$('#oportunidad').val('');
 	$('#descripcion').val('');
@@ -72,6 +112,14 @@ $('#create_oportunidad').on('click',function(){
 	$('#modal_oportunidad').modal('open');
 });
 
+/**
+ * Carga la información de la oportunidad a editar.
+ *
+ * @function  edit_oportunidad
+ * @param     {tbody} tbody - tbody del DataTable.
+ * @param     {DataTable} table - Instancia del DataTable.
+ * @return    {null}
+ */
 function edit_oportunidad (tbody,table){
   $(tbody).on('click','a.edit-oportunidad',function(){
     var data = table.row( $(this).parents('tr') ).data();
@@ -87,17 +135,13 @@ function edit_oportunidad (tbody,table){
   });
 }
 
-$.validator.setDefaults({
-  errorClass: 'invalid',
-  validClass: "valid",
-  errorPlacement: function(error, element) {
-    $(element)
-      .closest("form")
-      .find("label[for='" + element.attr("id") + "']")
-      .attr('data-error', error.text());
-  }
-});
-
+/**
+ * Valida los datos del form_oportunidad con la libreria JQuery Validator.
+ * 
+ * @event     validate#form_oportunidad
+ * @type      {object}
+ * @property  {event} validate - Valida los datos para agregar o actualizar una oportunidad.
+ */
 var validator = $("#form_oportunidad").validate({
 	rules: {
     oportunidad: {
@@ -127,6 +171,14 @@ var validator = $("#form_oportunidad").validate({
   }
 });
 
+/**
+ * Realiza la petición para agregar una nueva oportunidad.
+ *
+ * @async
+ * @function  store_oportunidad
+ * @param     {json} json - JSON son la información a agregar.
+ * @return    {null}
+ */
 function store_oportunidad(json){
 	$.post('/admin/configuraciones/oportunidades',json,function(data){
 		$('#table_oportunidades').DataTable().ajax.reload();
@@ -146,6 +198,14 @@ function store_oportunidad(json){
 	});
 }
 
+/**
+ * Realiza una petición para actualizar una oportunidad.
+ *
+ * @async
+ * @function  update_oportunidad
+ * @param     {json} json - JSON con la información a actualizar.
+ * @return    {null}
+ */
 function update_oportunidad(json){
   $.ajax({
     url: '/admin/configuraciones/oportunidades/'+oportunidad_id,
@@ -171,6 +231,14 @@ function update_oportunidad(json){
   });
 }
 
+/**
+ * Recupera el ID de la oportunidad a eliminar.
+ *
+ * @function  delete_oportunidad
+ * @param     {tbody} tbody - tbody del DataTable.
+ * @param     {DataTable} table - Instancia del  DataTable.
+ * @return    {null}
+ */
 function delete_oportunidad (tbody,table){
   $(tbody).on('click','a.delete-oportunidad',function(){
     var data = table.row( $(this).parents('tr') ).data();
@@ -192,6 +260,14 @@ function delete_oportunidad (tbody,table){
   });
 }
 
+/**
+ * Petición para eliminar una oportunidad específica.
+ *
+ * @async
+ * @function  destroy_oportunidad
+ * @param     {integer} oportunidad_id - ID de la oportunidad.
+ * @return    {null}
+ */
 function destroy_oportunidad(oportunidad_id){
   $.ajax({
     url: '/admin/configuraciones/oportunidades/'+oportunidad_id,

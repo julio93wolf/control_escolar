@@ -1,6 +1,17 @@
+/**
+ * ==========================================================================================
+ * @fileOverview  Carga y valida los campos input del formulario para crear una nueva clase.
+ *
+ * @version       1.0
+ *
+ * @author        Julio Cesar Valle Rodriguez <jvalle@appsamx.com>
+ * @copyright     APPSA México
+ * ==========================================================================================
+ */
+
 $('#asignatura_id').select2();
 $('#docente_id').select2();
-horario();
+checked_dia();
 inputs_horarios();
 
 $.validator.setDefaults({
@@ -14,7 +25,13 @@ $.validator.setDefaults({
   }
 });
 
-function horario(){ 
+/**
+ * Carga el evento on:click en los chekbox de los horarios para habilitar los timepicker
+ *
+ * @function  checked_dia
+ * @return    {null}
+ */
+function checked_dia(){ 
 	for (var i = 0; i < 6; i++) {
 		$('#dia_'+i+'').on("click",function(event){
 			if($(this).is(':checked')){
@@ -34,6 +51,12 @@ function horario(){
 	}
 }
 
+/**
+ * Carga el evento change en los inputs timepicker para eliminar la clase invalid.
+ *
+ * @function inputs_horarios
+ * @return {null}
+ */
 function inputs_horarios(){ 
 	for (var i = 0; i < 6; i++) {
 		$('#hora_entrada_'+i+'').change(function(event){
@@ -56,6 +79,13 @@ $.validator.setDefaults({
   }
 });
 
+/**
+ * Valida los datos del formulario con la libreria JQuery Validation
+ *
+ * @event validate
+ * @property {event} validate - Valida los campos input del formulario.
+ * @type {object}
+ */
 var validator = $("#form_clase").validate({
 	rules: {
     clase: {

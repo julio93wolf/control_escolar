@@ -1,8 +1,38 @@
+/**
+ * ================================================================================================
+ * @fileOverview  Carga la tabla con los tipos de examénes de los periodos, además de realizar las
+ *                peticiones para agregar, actualizar y eliminar un tipo de examen.
+ *
+ * @version       1.0
+ *
+ * @author        Julio Cesar Valle Rodriguez <jvalle@appsamx.com>
+ * @copyright     APPSA México
+ * ================================================================================================
+ */
+
 load_tipos_examenes();
 
 var new_tipo_examen = false;
 var tipo_examen_id = null;
 
+$.validator.setDefaults({
+  errorClass: 'invalid',
+  validClass: "valid",
+  errorPlacement: function(error, element) {
+    $(element)
+      .closest("form")
+      .find("label[for='" + element.attr("id") + "']")
+      .attr('data-error', error.text());
+  }
+});
+
+/**
+ * Realiza una petición ajax para obtener los tipos de examenes y cargarlos en el DataTable.
+ *
+ * @async
+ * @function  load_tipos_examenes
+ * @return    {null}
+ */
 function load_tipos_examenes(){
 	var table = $('#table_tipos_examenes').DataTable({
   	"language": {
@@ -61,6 +91,14 @@ function load_tipos_examenes(){
   delete_tipo_examen('#table_tipos_examenes tbody',table);
 }
 
+/**
+ * Inicializa el modal para agregar un nuevo tipo de examen.
+ *
+ * @event       on:click#create_tipo_examen
+ * @type        {object}
+ * @property    {event} on:click - Detecta si se hizo click en el botón para agregar un nuevo 
+ *                                 tipo de examen.
+ */
 $('#create_tipo_examen').on('click',function(){
 	$('#tipo_examen').val('');
 	$('#descripcion').val('');
@@ -72,6 +110,14 @@ $('#create_tipo_examen').on('click',function(){
 	$('#modal_tipo_examen').modal('open');
 });
 
+/**
+ * Carga la información del tipo de examen a editar.
+ *
+ * @function  edit_tipo_examen
+ * @param     {tbody} tbody - tbody del DataTable.
+ * @param     {DataTable} table - Instancia del DataTable.
+ * @return    {null}
+ */
 function edit_tipo_examen (tbody,table){
   $(tbody).on('click','a.edit-tipo-examen',function(){
     var data = table.row( $(this).parents('tr') ).data();
@@ -87,17 +133,13 @@ function edit_tipo_examen (tbody,table){
   });
 }
 
-$.validator.setDefaults({
-  errorClass: 'invalid',
-  validClass: "valid",
-  errorPlacement: function(error, element) {
-    $(element)
-      .closest("form")
-      .find("label[for='" + element.attr("id") + "']")
-      .attr('data-error', error.text());
-  }
-});
-
+/**
+ * Valida los datos del form_tipo_examen con la libreria JQuery Validator.
+ * 
+ * @event       validate#form_tipo_examen
+ * @type        {object}
+ * @property    {event} validate - Valida que los para agregar o actualizar un tipo de examen.
+ */
 var validator = $("#form_tipo_examen").validate({
 	rules: {
     tipo_examen: {
@@ -127,6 +169,14 @@ var validator = $("#form_tipo_examen").validate({
   }
 });
 
+/**
+ * Realiza la petición para agrega un nuevo tipo de examen.
+ *
+ * @async
+ * @function  store_tipo_examen
+ * @param     {json} json - JSON con la información a agregar.
+ * @return    {null}
+ */
 function store_tipo_examen(json){
 	$.post('/admin/configuraciones/tipos_examenes',json,function(data){
 		$('#table_tipos_examenes').DataTable().ajax.reload();
@@ -146,6 +196,14 @@ function store_tipo_examen(json){
 	});
 }
 
+/**
+ * Realiza la petición para actualizar un tipo de examen.
+ *
+ * @async
+ * @function  update_tipo_examen
+ * @param     {json} json - JSON con la información a actualizar.
+ * @return    {null}
+ */
 function update_tipo_examen(json){
   $.ajax({
     url: '/admin/configuraciones/tipos_examenes/'+tipo_examen_id,
@@ -171,6 +229,14 @@ function update_tipo_examen(json){
   });
 }
 
+/** 
+ * Recupera el ID del tipo de examen a eliminar.
+ *
+ * @function  delete_tipo_examen
+ * @param     {tbody} tbody - tbody DataTable.
+ * @param     {DataTable} table - Instancia del DataTable.
+ * @return    {null}
+ */
 function delete_tipo_examen (tbody,table){
   $(tbody).on('click','a.delete-tipo-examen',function(){
     var data = table.row( $(this).parents('tr') ).data();
@@ -192,6 +258,14 @@ function delete_tipo_examen (tbody,table){
   });
 }
 
+/**
+ * Realiza la petición para eliminar un tipo de examen.
+ *
+ * @async
+ * @function  destroy_tipo_examen
+ * @param     {int} tipo_examen_id - ID del tipo de examen.
+ * @return    {null}
+ */
 function destroy_tipo_examen(tipo_examen_id){
   $.ajax({
     url: '/admin/configuraciones/tipos_examenes/'+tipo_examen_id,

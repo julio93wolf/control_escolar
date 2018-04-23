@@ -1,5 +1,23 @@
+/**
+ * ====================================================================================================
+ * @fileOverview Carga la plantilla de profesores de la institución y elimina a un docente seleccionado.
+ *
+ * @version 1.0
+ * 
+ * @author Julio Cesar Valle Rodríguez <jvalle@appsamx.com>
+ * @copyright APPSA México
+ * ====================================================================================================
+ */
+
 load_docentes();
 
+/**
+ * Realiza una peticion ajax y carga la lista de profesores en el DataTables.
+ *
+ * @async
+ * @function  load_docentes
+ * @return    {null}
+ */
 function load_docentes(){
 	var table = $('#table_docentes').DataTable({
   	"language": {
@@ -60,10 +78,18 @@ function load_docentes(){
   });
   $("select[name$='table_docentes_length']").val('10');
   $("select[name$='table_docentes_length']").material_select();
-  btn_delete_docente('#table_docentes tbody',table);
+  delete_docente('#table_docentes tbody',table);
 }
 
-function btn_delete_docente (tbody,table){
+/**
+ * Obtiene el ID del docente y pregunta con un sweet alert si desea eliminar al docente.
+ *
+ * @function  delete_docente
+ * @param     {tbody} tbody - tbody del DataTable
+ * @param     {DataTable} table - Instancia con la información del DataTable.
+ * @return    {null}
+ */
+function delete_docente (tbody,table){
   $(tbody).on('click','a.delete-docente',function(){
     var data = table.row( $(this).parents('tr') ).data();
     swal({
@@ -84,6 +110,14 @@ function btn_delete_docente (tbody,table){
   });
 }
 
+/**
+ * Realiza una petición ajax para detruir el docente.
+ *
+ * @async
+ * @function  destroy_docente
+ * @param     {integer} docente_id - ID del docente
+ * @return    {null}
+ */
 function destroy_docente(docente_id){
   $.ajax({
     url: '/admin/academicos/docentes/'+docente_id,

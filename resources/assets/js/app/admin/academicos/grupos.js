@@ -1,6 +1,35 @@
+/**
+ * =================================================================================================
+ * @fileOverview  Muetra la tabla con alumnos agregados a una clase, ademas de agregarlo o retirtarlo.
+ *
+ * @version       1.0
+ *
+ * @author        Julio Cesar Valle Rodriguez <jvalle@appsamx.com>
+ * @copyright     APPSA México
+ * =================================================================================================
+ */
+
 var save = false;
 load_grupo();
 
+$.validator.setDefaults({
+  errorClass: 'invalid',
+  validClass: "valid",
+  errorPlacement: function(error, element) {
+    $(element)
+      .closest("form")
+      .find("label[for='" + element.attr("id") + "']")
+      .attr('data-error', error.text());
+  }
+});
+
+/**
+ * Realiza una peticion ajax para cargar los alumnos agregados al grupo en un DataTable.
+ *
+ * @async
+ * @function  load_grupo
+ * @return    {null}
+ */
 function load_grupo(){
 	var table = $('#table_grupo').DataTable({
   	language: {
@@ -53,8 +82,14 @@ function load_grupo(){
   btn_delete_grupo('#table_grupo tbody',table);
 }
 
-
-$('#matricula').bind("enterKey",function(e){
+/**
+ * Reliza una petición ajax para buscar los datos el estudiante a agregar al grupo.
+ * 
+ * @event     bind:enterKey#matricula
+ * @type      {object}
+ * @property  {event} bind:enterKey - Detecta la tecla enter dentro del input #matricula.
+ */
+$('#matricula').bind("enterKey",function(event){
   if(!save){
     json = {
       requisitos: 1,
@@ -86,25 +121,28 @@ $('#matricula').bind("enterKey",function(e){
   }
   
 });
-$('#matricula').keyup(function(e){
+
+/**
+ * Detecta el evento de presionar una tecla y ejecuta una función.
+ * 
+ * @event     keyup#matricula
+ * @type      {object}
+ * @property  {event} keyup - Detecta la presión de cualquier tecla en el input.
+ */
+$('#matricula').keyup(function(event){
     if(e.keyCode == 13)
     {
         $(this).trigger("enterKey");
     }
 });
 
-
-$.validator.setDefaults({
-  errorClass: 'invalid',
-  validClass: "valid",
-  errorPlacement: function(error, element) {
-    $(element)
-      .closest("form")
-      .find("label[for='" + element.attr("id") + "']")
-      .attr('data-error', error.text());
-  }
-});
-
+/**
+ * Valida que los datos del form_grupo sean correctos con JQuery Validator.
+ * 
+ * @event     validate#form_grupo
+ * @type      {object}
+ * @property  {event} validate - Valida que los datos ingresado sean correctos.
+ */
 var validator = $("#form_grupo").validate({
   rules: {
     clase_id:{
@@ -153,6 +191,14 @@ var validator = $("#form_grupo").validate({
   }
 });
 
+/**
+ * Realiza una petición ajax para agregar un nuevo estudiante al grupo.
+ *
+ * @async
+ * @function   store_grupo
+ * @param      {json} json - JSON con los datos a almacenar.
+ * @return     {null}
+ */
 function store_grupo(json){
   $.post('/admin/academicos/grupos',json,function(data){
     $('#table_grupo').DataTable().ajax.reload();
@@ -189,6 +235,14 @@ function store_grupo(json){
   });
 }
 
+/**
+ * Asignacion del evento on:click para eliminar un estudiante del grupo.
+ *
+ * @function  btn_delete_grupo
+ * @param     {tbody} - tbody del DataTable.
+ * @param     {DataTable} table - Datos del DataTable.
+ * @return    {null}
+ */
 function btn_delete_grupo (tbody,table){
   $(tbody).on('click','a.delete-grupo',function(){
     var data = table.row( $(this).parents('tr') ).data();
@@ -210,6 +264,14 @@ function btn_delete_grupo (tbody,table){
   });
 }
 
+/**
+ * Realiza una petición ajax para elimiar un estudiante del grupo.
+ *
+ * @async
+ * @function  destroy_grupo
+ * @param     {integer} grupo_id - ID del registro del grupo a eliminar.
+ * @return    {null}
+ */
 function destroy_grupo(grupo_id){
   $.ajax({
     url: '/admin/academicos/grupos/'+grupo_id,

@@ -1,8 +1,36 @@
+/**
+ * @fileOverview  Carga la tabla para mosta los títulos de los docentes, además de las petuciones para
+ *                agregar, actualizar y eliminar un título.
+ *
+ * @version       1.0
+ *
+ * @author        Julio Cesar Valle Rodríguez
+ * @copyright     APPSA México
+ */
+
 load_titulos_docentes();
 
 var new_titulo_docente = false;
 var titulo_id = null;
 
+$.validator.setDefaults({
+  errorClass: 'invalid',
+  validClass: "valid",
+  errorPlacement: function(error, element) {
+    $(element)
+      .closest("form")
+      .find("label[for='" + element.attr("id") + "']")
+      .attr('data-error', error.text());
+  }
+});
+
+/**
+ * Realiza una petición ajax para obtener los títulos de los docentes y cargarlas al DataTable.
+ *
+ * @async
+ * @function  load_titulos_docentes
+ * @return    {null}
+ */
 function load_titulos_docentes(){
 	var table = $('#table_titulos_docentes').DataTable({
   	"language": {
@@ -61,6 +89,13 @@ function load_titulos_docentes(){
   delete_titulo_docente('#table_titulos_docentes tbody',table);
 }
 
+/**
+ * Inicializa el modal para agregar un nuevo título de docente.
+ * 
+ * @event     on:click#create_titulo_docente
+ * @type      {object}
+ * @property  {event} on:click - Detecta si se hizo click en el botón para agregar un nuevo titulo.
+ */
 $('#create_titulo_docente').on('click',function(){
 	$('#titulo').val('');
 	$('#descripcion').val('');
@@ -72,6 +107,14 @@ $('#create_titulo_docente').on('click',function(){
 	$('#modal_titulo_docente').modal('open');
 });
 
+/**
+ * Carga la información del título de docente a actualizar.
+ *
+ * @function  edit_titulo_docente
+ * @param     {tbody} tbody - tbody del DataTable.
+ * @param     {DataTable} table - Instancia dele DataTable.
+ * @return    {null}
+ */
 function edit_titulo_docente (tbody,table){
   $(tbody).on('click','a.edit-titulo-docente',function(){
     var data = table.row( $(this).parents('tr') ).data();
@@ -87,17 +130,14 @@ function edit_titulo_docente (tbody,table){
   });
 }
 
-$.validator.setDefaults({
-  errorClass: 'invalid',
-  validClass: "valid",
-  errorPlacement: function(error, element) {
-    $(element)
-      .closest("form")
-      .find("label[for='" + element.attr("id") + "']")
-      .attr('data-error', error.text());
-  }
-});
-
+/**
+ * Valida la información del form_titulo_docente con la libreria JQuery Validator.
+ * 
+ * @event       validate#form_titulo_docente
+ * @type        {object}
+ * @property    {event} validate - Valida la información para agregar o actualiza un titulo
+ *                                 del docente y llama a la función correspondiente.
+ */
 var validator = $("#form_titulo_docente").validate({
 	rules: {
     titulo: {
@@ -127,6 +167,14 @@ var validator = $("#form_titulo_docente").validate({
   }
 });
 
+/**
+ * Realiza la petición para agregar un nuevo título de docente.
+ *
+ * @async
+ * @function    store_titulo_docente
+ * @param       {json} json - JSON con la información a agregar.
+ * @return      {null}
+ */
 function store_titulo_docente(json){
 	$.post('/admin/configuraciones/titulos_docentes',json,function(data){
 		$('#table_titulos_docentes').DataTable().ajax.reload();
@@ -146,6 +194,14 @@ function store_titulo_docente(json){
 	});
 }
 
+/**
+ * Realiza la petición para actualiza el titulo de un docente.
+ *
+ * @async 
+ * @function    update_titulo_docente
+ * @param       {json} json - JSON con la información a actualizar.
+ * @return      {null}
+ */
 function update_titulo_docente(json){
   $.ajax({
     url: '/admin/configuraciones/titulos_docentes/'+titulo_id,
@@ -171,6 +227,15 @@ function update_titulo_docente(json){
   });
 }
 
+
+/**
+ * Recupera el ID del título a eliminar
+ *
+ * @function  delete_titulo_docente
+ * @param     {tbody} tbody - tbody del DataTable.
+ * @param     {DataTable} table - Instancia del DataTable.
+ * @return    {null}
+ */
 function delete_titulo_docente (tbody,table){
   $(tbody).on('click','a.delete-titulo-docente',function(){
     var data = table.row( $(this).parents('tr') ).data();
@@ -192,6 +257,14 @@ function delete_titulo_docente (tbody,table){
   });
 }
 
+/**
+ * Realiza la petición para la eliminación del título del docente.
+ *
+ * @async
+ * @function  destroy_titulo_docente
+ * @param     {integer} titulo_id - ID del título del docente.
+ * @return    {null}
+ */
 function destroy_titulo_docente(titulo_id){
   $.ajax({
     url: '/admin/configuraciones/titulos_docentes/'+titulo_id,

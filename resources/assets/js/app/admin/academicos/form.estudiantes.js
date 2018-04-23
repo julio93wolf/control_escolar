@@ -1,9 +1,22 @@
+/**
+ * ============================================================================================
+ * @fileOverview  Valida el formulario de la información del estudiante, ademas de cargar los
+ *                municipios, localidades, institutos de procedencia y empresas. 
+ *                Además de permitir agregar nuevos institutos y empresas.
+ *
+ * @version       1.0
+ *
+ * @author        Julio Cesar Valle Rodriguez <jvalle@appsamx.com>
+ * @copyright     APPSA México
+ * ============================================================================================
+ */
+
 $('#municipio_id').select2();
 $('#localidad_id').select2();
 $('#instituto_id').select2();
 $('#empresa_id').select2();
 $('#instituto_municipio_id').select2();
-documentos();
+checked_documento();
 
 $.validator.setDefaults({
   errorClass: 'invalid',
@@ -16,6 +29,13 @@ $.validator.setDefaults({
   }
 });
 
+/**
+ * Inicializa todos los dropify que hay en el formulario.
+ * 
+ * @event     dropify.dropify
+ * @type      {object}
+ * @property  {event} dropify - Inicializa los componentes para usar el dropify
+ */
 var dropify = $('.dropify').dropify({
   messages: {
       'default': 'Arrastra y suelta una imagen aquí o haz clic',
@@ -43,6 +63,15 @@ var dropify = $('.dropify').dropify({
   }
 });
 
+/**
+ * Carga los municipios del estado seleccionado.
+ *
+ * @async
+ * @function  load_municipios
+ * @param     {integer} municipio_id - ID del municipio seleccionado.
+ * @param     {integer} localidad_id - ID de la localidad seleccionada.
+ * @return    {null}
+ */
 function load_municipios (municipio_id,localidad_id){
 	var estado_id = $('#estado_id').val();
 	$.get('/admin/select/municipios/'+estado_id,function(data) {
@@ -67,6 +96,14 @@ function load_municipios (municipio_id,localidad_id){
 	});
 }
 
+/**
+ * Carga las localidades del municipio seleccionado.
+ *
+ * @async
+ * @function  load_localidades
+ * @param     {integer} localidad_id - ID de la localidad seleccionada.
+ * @return    {null}
+ */
 function load_localidades (localidad_id){
 	var municipio_id = $('#municipio_id').val();
 	$.get('/admin/select/localidades/'+municipio_id,function(data) {
@@ -91,6 +128,15 @@ function load_localidades (localidad_id){
 	});
 }
 
+/**
+ * Carga las especialidades del nivel de estudios seleccionado.
+ *
+ * @async
+ * @function  load_especialidades
+ * @param     {integer} especialidad_id      - ID de la especialidad seleccionada.
+ * @param     {integer} plan_especialidad_id - ID del plan de estudios seleccionado.
+ * @return    {null}
+ */
 function load_especialidades (especialidad_id,plan_especialidad_id){
 	var nivel_academico_id = $('#nivel_academico_id').val();
 	$.get('/admin/select/especialidades_nivel/' + nivel_academico_id,function(data) {
@@ -117,6 +163,14 @@ function load_especialidades (especialidad_id,plan_especialidad_id){
 	});
 }
 
+/**
+ * Carga los planes de estudio de la especialidad seleccionada.
+ *
+ * @async
+ * @function  load_planes
+ * @param     {integer} plan_especialidad_id - ID del plan de estudios seleccionado.
+ * @return    {null}
+ */
 function load_planes (plan_especialidad_id){
   var especialidad_id = $('#especialidad_id').val();
   $.get('/admin/select/planes_especialidades/' + especialidad_id,function(data) {
@@ -145,23 +199,58 @@ function load_planes (plan_especialidad_id){
   });
 }
 
+/**
+ * Llama la funcion para cargar las especialidades del nuvel academico seleccionado.
+ * 
+ * @event     change#nivel_academico_id
+ * @type      {object}
+ * @property  {event} change - Detecta el cambio del nivel académico.
+ */
 $('#nivel_academico_id').change(function(){
 	load_especialidades();
 });
 
+/**
+ * Llama la función para cargar los planes academicos de la especialidad seleccionada.
+ * 
+ * @event     change#especialidad_id
+ * @type      {object}
+ * @property  {event} change - Detecta el cambio de especialidad.
+ */
 $('#especialidad_id').change(function(){
 	load_planes();
 });
 
+/**
+ * Llama la función para cargar los municipios del estado seleccionado
+ * 
+ * @event     change#estado_id
+ * @type      {object}
+ * @property  {event} change - Detecta el cambio del estado.
+ */
 $('#estado_id').change(function(event){
 	load_municipios();
 });
 
+/**
+ * Llama la función para cargar las localidades del municipio seleccionado.
+ * 
+ * @event     change#municipio_id
+ * @type      {object}
+ * @property  {event} change - Detecta el cambio del municipio.
+ */
 $('#municipio_id').change(function(event){
 	load_localidades();
 });
 
-function documentos(){ 
+/**
+ * Carga el evento on:click a los checkbox para habilitar o deshabilitar los dropify
+ * de los archivos del estudiante.
+ *
+ * @function  checked_documento
+ * @return    {null}
+ */
+function checked_documento(){ 
 	var no_documentos = $('#documentos').attr('no_documentos');
 	for (var i = 0; i < no_documentos; i++) {
 		$('#tipo_documento_'+i+'').on("click",function(event){
@@ -190,7 +279,13 @@ function documentos(){
 }
 
 
-
+/**
+ * Valida los campos del fomulario para el estudiante con la libreria JQuery Validation
+ *
+ * @event     validate#form_estudiante
+ * @type      {object}
+ * @property  {event} validate - Valida los datos del estudiante.
+ */
 var validator = $("#form_estudiante").validate({
 	rules: {
 		//Datos Generales
@@ -374,6 +469,14 @@ var validator = $("#form_estudiante").validate({
 });
 
 
+/**
+ * Carga los institutos de procedencia de los estudiantes por municipio.
+ *
+ * @async
+ * @function  load_instituto_municipios  
+ * @param     {integer} municipio_id - ID del municipio del instituto de procedencia
+ * @return    {null}
+ */
 function load_instituto_municipios (municipio_id){
   var estado_id = $('#instituto_estado_id').val();
   $.get('/admin/select/municipios/'+estado_id,function(data) {
@@ -397,10 +500,24 @@ function load_instituto_municipios (municipio_id){
   });
 }
 
+/**
+ * Llama la funcion para cargar los institutos de procedencia por municipio seleccionado.
+ * 
+ * @event     change#instituto_estado_id
+ * @type      {object}
+ * @property  {event} change - Detecta el cambio de estado del instituto de procedencia.
+ */
 $('#instituto_estado_id').change(function(event){
   load_instituto_municipios();
 })
 
+/**
+ * Inicializa los input del modal para agregar una nueva empresa.
+ * 
+ * @event     on:click#create_empresa
+ * @type      {object}
+ * @property  {event} on:click - Detecta el click en el botón para agregar una nueva empresa.
+ */
 $('#create_empresa').on('click',function(event){
   $('#empresa').val('');
   $("label[for='empresa']").attr('data-error','');
@@ -409,6 +526,13 @@ $('#create_empresa').on('click',function(event){
   $('#modal_empresa').modal('open');
 });
 
+/**
+ * Inicializa los input del modal para agregar una institución de procedencia.
+ * 
+ * @event     on:click#create_instituto
+ * @type      {object}
+ * @property  {event} on:click - Detecta el click en el botón para agregar un nuevo instituto.
+ */
 $('#create_instituto').on('click',function(event){
   
   $('#instituto').val('');
@@ -425,6 +549,13 @@ $('#create_instituto').on('click',function(event){
   $('#modal_instituto').modal('open');
 });
 
+/**
+ * Valida los campos del fomulario para agregar una nueva empresa con la libreria JQuery Validation
+ * 
+ * @event     validate#form_empresa
+ * @type      {obejct}
+ * @property  {event} validate - Valida los campos del modal para agregar una nueva empresa.
+ */
 var validator_empresa = $("#form_empresa").validate({
   rules: {
     empresa: {
@@ -444,6 +575,13 @@ var validator_empresa = $("#form_empresa").validate({
   }
 });
 
+/**
+ * Valida los campos del formulario para agregar una nueva institución con la libreria JQuery Validation
+ * 
+ * @event     validate#form_instituto
+ * @type      {object}
+ * @property  {event} validate - Valida los campos del modal para agregar una nueva institución.
+ */
 var validator_instituto = $("#form_instituto").validate({
   rules: {
     instituto: {
@@ -474,6 +612,14 @@ var validator_instituto = $("#form_instituto").validate({
   }
 });
 
+/**
+ * Realiza una petición para almacenar una nueva empresa.
+ *
+ * @async
+ * @function  store_empresa
+ * @param     {json} json - JSON con la información a almacenar.
+ * @return    {null}
+ */
 function store_empresa(json){
   $.post('/admin/academicos/empresas',json,function(data){    
     $('#empresa_id').empty();
@@ -502,6 +648,14 @@ function store_empresa(json){
   });
 }
 
+/**
+ * Realiza una petición para almacenar una nueva institución
+ *
+ * @async
+ * @function  store_instituto
+ * @param     {json} json - JSON con la información a almacenar.
+ * @return    {null}
+ */
 function store_instituto(json){
   $.post('/admin/academicos/institutos_procedencias',json,function(data){    
     $('#instituto_id').empty();

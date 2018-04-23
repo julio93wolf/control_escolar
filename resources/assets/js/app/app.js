@@ -1,10 +1,22 @@
-$.ajaxSetup({
-	headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-	}
-});
+
+/**
+ * ============================================================================
+ * @fileoverview  Carga las inicializaciones de los componentes MaterializeCSS.
+ * 
+ * @version       1.0
+ *
+ * @author        Julio Cesar Valle Rodríguez <jvalle@appsamx.com>
+ * @copyright     APPSA México
+ * ============================================================================
+ */
 
 $(document).ready(function(){
+
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
 	
 	$('.dropdown-button').dropdown({
     inDuration: 300,
@@ -81,6 +93,6 @@ $(document).ready(function(){
     aftershow: function(){} //Function for after opening timepicker
   });
 
-});
+  $('.chips').material_chip();
 
-$('.chips').material_chip();
+});
