@@ -14,24 +14,54 @@ use App\Http\Controllers\Controller;
 
 class SelectController extends Controller
 {
-    public function especialidades_nivel($nivel_academico_id){
-    	$especialidades = Especialidad::where('nivel_academico_id',$nivel_academico_id)->get();
+
+    /**
+     * Regresa las especialidades del nivel académico especifíco.
+     *
+     * @author Julio Cesar Valle Rodríguez <jvalle@appsamx.com>
+     * @param  \Illuminate\Http\Request  $request   - Nivel académico
+     * @return \Illuminate\Http\Response            - Especialidades el nivel académico
+     */
+    public function especialidades_nivel(Request $request){
+    	$especialidades = Especialidad::where('nivel_academico_id',$request->nivel_academico_id)->get();
     	return $especialidades;
     }
 
-    public function planes_especialidades($especialidad_id){
-        $planes_especialidades = PlanEspecialidad::where('especialidad_id',$especialidad_id)->get();
+    /**
+     * Regresa los planes académicos de una especialidad.
+     *
+     * @author Julio Cesar Valle Rodríguez <jvalle@appsamx.com>
+     * @param  \Illuminate\Http\Request  $request   - Especialidad
+     * @return \Illuminate\Http\Response            - Planes académicos
+     */
+    public function planes_especialidades(Request $request){
+        $planes_especialidades = PlanEspecialidad::where('especialidad_id',$request->especialidad_id)->get();
         return $planes_especialidades;
     }
 
-    public function reticulas($especialidad_id){
-    	$reticulas = Reticula::where('especialidad_id',$especialidad_id)->get();
+    /**
+     * Regresa la reticula de la especialidad.
+     *
+     * @author Julio Cesar Valle Rodríguez <jvalle@appsamx.com>
+     * @param  \Illuminate\Http\Request  $request   - Especialidad
+     * @return \Illuminate\Http\Response            - Reticula de la especialidad
+     */
+    public function reticulas(Request $request){
+    	$reticulas = Reticula::where('especialidad_id',$request->especialidad_id)->get();
     	return $reticulas;
     }
 
-	public function asignaturas_reticula($plan_especialidad_id){
+    /**
+     * Regresa las asignaturas que pueden agregarse a una reticula y que estas no se encuentren 
+     * ya agregadas.
+     *
+     * @author Julio Cesar Valle Rodríguez <jvalle@appsamx.com>
+     * @param  \Illuminate\Http\Request  $request   - Plan de estudios
+     * @return \Illuminate\Http\Response            - Asignaturas
+     */
+	public function asignaturas_reticula(Request $request){
     	$response = [];
-    	$plan_especialidad = PlanEspecialidad::find($plan_especialidad_id);
+    	$plan_especialidad = PlanEspecialidad::find($request->plan_especialidad_id);
     	$asignaturas_plan = $plan_especialidad->asignaturas;
     	$asignaturas = Asignatura::get();
 
@@ -49,10 +79,17 @@ class SelectController extends Controller
     	return $response;
     }    
 
-    public function asignaturas_requisito($reticula_id){
+    /**
+     * Asignaturas que estan en la reticula y pueden ser requisitos.
+     *
+     * @author Julio Cesar Valle Rodríguez <jvalle@appsamx.com>
+     * @param  \Illuminate\Http\Request  $request   - Asignatura (Retícula)
+     * @return \Illuminate\Http\Response            - Asignaturas (Retículas)
+     */
+    public function asignaturas_requisito(Request $request){
         $response = [];
 
-        $reticula = Reticula::find($reticula_id);
+        $reticula = Reticula::find($request->reticula_id);
         $requisitos = $reticula->requisitos;
 
         $plan_especialidad = PlanEspecialidad::find($reticula->plan_especialidad_id);
@@ -85,13 +122,27 @@ class SelectController extends Controller
         return $response;
     }
 
-    public function municipios($estado_id){
-        $municipios = Municipio::where('estado_id',$estado_id)->orderBy('municipio','asc')->get();
+    /**
+     * Regresa lo municipios de un estado especifíco.
+     *
+     * @author Julio Cesar Valle Rodríguez <jvalle@appsamx.com>
+     * @param  \Illuminate\Http\Request  $request   - Estado
+     * @return \Illuminate\Http\Response            - Municipios
+     */
+    public function municipios(Request $request){
+        $municipios = Municipio::where('estado_id',$request->estado_id)->orderBy('municipio','asc')->get();
         return $municipios;
     }
 
-    public function localidades($municipio_id){
-        $localidades = Localidad::where('municipio_id',$municipio_id)->orderBy('localidad','asc')->get();
+    /**
+     * Regresa las localidades de un municipio especifíco.
+     *
+     * @author Julio Cesar Valle Rodríguez <jvalle@appsamx.com>
+     * @param  \Illuminate\Http\Request  $request   - Municipio
+     * @return \Illuminate\Http\Response            - Localidades
+     */
+    public function localidades(Request $request){
+        $localidades = Localidad::where('municipio_id',$request->municipio_id)->orderBy('localidad','asc')->get();
         return $localidades;
     }    
 }
