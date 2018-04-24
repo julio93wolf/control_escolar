@@ -1,5 +1,25 @@
+/**
+ * ==============================================================================================
+ * @fileOverview  Carga la tabla de periodos y realiza las peticiones para elimianar un 
+ *                periodo especifíco.
+ *
+ * @version       1.0
+ *
+ *
+ * @author        Julio Cesar Valle Rodríguez
+ * @copyright     APPSA México
+ * ==============================================================================================
+ */
+
 load_periodos();
 
+/**
+ * Realiza una petición ajax para obtener los períodos y cargarlos en el DataTable.
+ *
+ * @async
+ * @function  load_periodos
+ * @return    {null}
+ */
 function load_periodos(){
 	var table = $('#table_periodos').DataTable({
   	language: {
@@ -69,6 +89,14 @@ function load_periodos(){
   $("select[name$='table_periodos_length']").material_select();
 }
 
+/**
+ * Recupera el ID de un período especifíco para ser eliminado.
+ *
+ * @function  delete_periodo
+ * @param     {tbody} tbody - tbody del DataTable.
+ * @param     {DataTable} table - Instancia del DataTable.
+ * @return    {null}
+ */
 function delete_periodo (tbody,table){
   $(tbody).on('click','a.delete-periodo',function(){
     var data = table.row( $(this).parents('tr') ).data();
@@ -90,6 +118,14 @@ function delete_periodo (tbody,table){
   });
 }
 
+/**
+ * Realiza la petición para destruir un periodo
+ *
+ * @async
+ * @function  destroy_periodo
+ * @param     {integer} periodo_id - ID del Período
+ * @return    {null}
+ */
 function destroy_periodo(periodo_id){
   $.ajax({
     url: '/admin/escolares/periodos/'+periodo_id,

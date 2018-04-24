@@ -30,7 +30,7 @@ class CreateDatosGeneralesTable extends Migration
             $table->enum('sexo',['F','M','O']);
             $table->date('fecha_registro');
             $table->integer('nacionalidad_id')->unsigned();
-            $table->string('email',128)->unique()->nullable();
+            $table->string('email',128)->nullable();
             $table->text('foto')->nullable();
             
             $table->foreign('localidad_id')->references('id')->on('localidades');

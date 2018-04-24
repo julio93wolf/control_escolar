@@ -1,3 +1,14 @@
+/**
+ * =================================================================================================
+ * @fileOverview  Carga las reticulas de un plan de estudios especifico, adema de sus requisitos y 
+ *                permitir agregar nuevas materias a la reticula y dependencias.
+ *
+ * @version        1.0
+ *
+ * @author        Julio Cesar Valle Rodríguez
+ * @copyright     APPSA México
+ * =================================================================================================
+ */
 load_especialidades();
 
 var periodo_reticula = null;
@@ -6,10 +17,37 @@ var asignatura_id = null;
 var reticula_id = null;
 var requisito_id = null;
 
+$.validator.setDefaults({
+  errorClass: 'invalid',
+  validClass: "valid",
+  errorPlacement: function(error, element) {
+    $(element)
+      .closest("form")
+      .find("label[for='" + element.attr("id") + "']")
+      .attr('data-error', error.text());
+  }
+});
+
+/**
+ * Carga las especialidades del nivel académico seleccionado.
+ * 
+ * @event     on:click#btn_tab_reticulas
+ * @type      {object}
+ * @property  {event} on:click - Detecta sí se hizo click en el tab para cambiar del tab.
+ */
 $('#btn_tab_reticulas').on('click',function(event){
   load_especialidades();
 });
 
+
+/**
+ * Realiza una petición ajax para obtener las especialidades de un nivel académico especifico
+ * y cargarlos a un select
+ *
+ * @async
+ * @function  load_especialidades 
+ * @return    {null}
+ */
 function load_especialidades (){
 	var nivel_academico_id = $('#nivel_academico').val();
 	$.get('/admin/select/especialidades_nivel/' + nivel_academico_id,function(data) {
@@ -28,6 +66,14 @@ function load_especialidades (){
 	});
 }
 
+/**
+ * Realiza una petición ajax para obtener los planes de estudio de las especialidades y cargarlos
+ * en un select.
+ *
+ * @async
+ * @function  load_planes
+ * @return    {null}
+ */
 function load_planes (){
   var especialidad_id = $('#especialidad_id').val();
   $.get('/admin/select/planes_especialidades/' + especialidad_id,function(data) {
@@ -45,18 +91,47 @@ function load_planes (){
   });
 }
 
+/**
+ * Llama a la función para cargar las especialidaes.
+ * 
+ * @event     change#nivel_academico
+ * @type      {object}
+ * @property  {event} change - Detecta el cambio en el nivel académico
+ */
 $('#nivel_academico').change(function(){
 	load_especialidades();
 });
 
+/**
+ * Llama a la funcíón para vargar los planes de estudio.
+ * 
+ * @event     change#especialidad_id
+ * @type      {object}
+ * @property  {event} change - Detecta el cambio en la especialidad.
+ */
 $('#especialidad_id').change(function(){
 	load_planes();
 });
 
+/**
+ * Llama a la función para cargar la reticula del plan de estudios.
+ * 
+ * @event     change#plan_especialidad_id
+ * @type      {object}
+ * @property  {event} change - Detecta el cambio en plan de estudios.
+ */
 $('#plan_especialidad_id').change(function(){
   load_reticula();
 });
 
+/**
+ * Realiza una petición ajax para obtener los datos del plan de estudios y cargar toda
+ * la reticula.
+ * 
+ * @async
+ * @function  load_reticula
+ * @return    {null}
+ */
 function load_reticula (){
 	plan_especialidad_id = $('#plan_especialidad_id').val();
 	$.get('/admin/escolares/planes_especialidades/' + plan_especialidad_id,function(data){
@@ -83,7 +158,13 @@ function load_reticula (){
 	});
 }
 
-
+/**
+ * Realiza una petición ajax para recuperar las asignaturas de un período especifíco de la retícula,
+ * y cargarlas en el DOM.
+ * 
+ * @param  {integer} periodo - Periodo que se quiere cargar.
+ * @return {string} - El HTML con las asignaturas por período
+ */
 function asignaturas_periodo (periodo){
 	json = {
 		plan_especialidad_id: plan_especialidad_id,
@@ -112,7 +193,13 @@ function asignaturas_periodo (periodo){
 	});
 }
 
-
+/**
+ * Imprimer un string con la estructura de una CARD para agregar al DOM.
+ * 
+ * @param  {asignatura} asignatura  - JSON con los datos de la asignatura.
+ * @param  {integer} periodo        - Período al que pertenece
+ * @return {string}                 - String con el HTML par agregar al DOM.
+ */
 function print_card_reticula(asignatura,periodo){
   var card =``; 
   if (periodo>1){
@@ -164,7 +251,13 @@ function print_card_reticula(asignatura,periodo){
   return card;
 }
 
-
+/**
+ * Imprime un string con la estructura de una CARD para agregar una nueva asignatura a la 
+ * retícula.
+ * 
+ * @param  {integer} periodo - Período al que pertenece
+ * @return {string}          - String con el HTML para agregar al DOM
+ */
 function new_card_reticula(periodo){
 	var card = 
 	`<div class="col s12 m6 l4 xl3">
@@ -186,7 +279,13 @@ function new_card_reticula(periodo){
   return card;
 }
 
-
+/**
+ * Función para inicializar el botón para agregar una asignatura a la reticula.
+ *
+ * @function  btn_add_reticula
+ * @param     {integer} periodo - Período al que se va a agregar.
+ * @return    {null}
+ */
 function btn_add_reticula(periodo){
 	$('#add_reticula_'+periodo).on('click', function(event) {
 		periodo_reticula = $(this).attr('periodo_reticula');
@@ -194,7 +293,13 @@ function btn_add_reticula(periodo){
 	});
 }
 
-
+/**
+ * Función para inicializar el botón para eliminar una asignatura de la reticula.
+ *
+ * @function  btn_delete_reticula
+ * @param     {reticula} reticula - Asignatura de la reticula
+ * @return    {null}
+ */
 function btn_delete_reticula(reticula){
   $(`#delete_reticula_`+reticula+``).on('click', function() {
     periodo_reticula = $(this).attr('periodo_reticula');
@@ -204,6 +309,13 @@ function btn_delete_reticula(reticula){
   });
 }
 
+/**
+ * Función para inicializar el botón para agregar un requisito a la reticula
+ *
+ * @function  btn_requisito_asignatura
+ * @param     {reticula} reticula - Asignatura de la reticula
+ * @return    {null}
+ */
 function btn_requisito_asignatura(reticula){
   $(`#requisito_reticula_`+reticula+``).on('click', function() {
     reticula_id = $(this).attr('reticula');
@@ -212,13 +324,25 @@ function btn_requisito_asignatura(reticula){
   });
 }
 
+/**
+ * Carga las asignaturas que se pueden agregar a la reticula e inicializa el modal.
+ *
+ * @function  create_reticula
+ * @return    {null}
+ */
 function create_reticula(){
   load_asignaturas_reticula();
   $('#title_modal_reticula').text('Agregar asignatura al período '+periodo_reticula);
   $('#modal_reticula').modal('open');
 }
 
-
+/**
+ * Realiza una petición ajax para obtener las asignaturas que se pueden agregar a la reticula 
+ * y las carga en un select2.
+ *
+ * @function  load_asignaturas_reticula
+ * @return    {null}
+ */
 function load_asignaturas_reticula(){
   $.get('/admin/select/asignaturas_reticula/' + plan_especialidad_id,function(data) {
     $('#select_asignaturas').empty();
@@ -233,18 +357,14 @@ function load_asignaturas_reticula(){
   });
 }
 
-
-$.validator.setDefaults({
-  errorClass: 'invalid',
-  validClass: "valid",
-  errorPlacement: function(error, element) {
-    $(element)
-      .closest("form")
-      .find("label[for='" + element.attr("id") + "']")
-      .attr('data-error', error.text());
-  }
-});
-
+/**
+ * Valida los datos del form_reticula usando la libreria JQuery Validator y llama el la función para
+ * almacenarla.
+ * 
+ * @event     validate#form_reticula
+ * @type      {object}
+ * @property  {event} validate - Valida los datos para agregar una nueva asignatura a la reticula.
+ */
 var validator = $("#form_reticula").validate({
 	rules: {
     select_asignaturas: {
@@ -270,6 +390,14 @@ var validator = $("#form_reticula").validate({
   }
 });
 
+/**
+ * Realiza una petición para almacenar una asignatura en la reticula.
+ *
+ * @async
+ * @function  store_reticula
+ * @param     {json} json - JSON con la información a almacenar,
+ * @return    {null}
+ */
 function store_reticula(json){
   $.post('/admin/escolares/reticulas',json,function(data){
   	asignaturas_periodo(periodo_reticula);
@@ -291,6 +419,13 @@ function store_reticula(json){
   });
 }
 
+/**
+ * Verifica si desea eliminar la asignatura de la reticula e invoca a la función para hacerlo.
+ *
+ * @function  delete_reticula
+ * @param     {string} asignatura - Nombre de la asignatura
+ * @return    {null}
+ */
 function delete_reticula(asignatura){
   swal({
     title: 'Desea eliminar '+asignatura+'',
@@ -308,6 +443,13 @@ function delete_reticula(asignatura){
   });
 }
 
+/**
+ * Realiza una petición para eliminar la asignatura de la reticula.
+ *
+ * @async
+ * @function  destroy_reticula 
+ * @return    {null}
+ */
 function destroy_reticula(){
   $.ajax({
     url: '/admin/escolares/reticulas/'+reticula_id,
@@ -335,12 +477,27 @@ function destroy_reticula(){
 
 //Requisitos
 
+/**
+ * Llama la función que carga las materias que pueden agregarse como requisitos e inicializa
+ * el modal.
+ *
+ * @function  create_requisito
+ * @param     {asignatura} asignatura - Nombre de la asignatura.
+ * @return    {null}
+ */
 function create_requisito(asignatura){
   load_asignaturas_requisito();
   $('#title_modal_requisito').text('Requisitos para '+asignatura);
   $('#modal_requisito').modal('open');
 }
 
+/**
+ * Realiza una peticion ajax para cargar las asignaturas que pueden ser requisitos en un select2.
+ *
+ * @async
+ * @function  load_asignaturas_requisito 
+ * @return    {null}
+ */
 function load_asignaturas_requisito(){
   $.get('/admin/select/asignaturas_requisito/'+reticula_id,function(data) {
     $('#select_requisitos').empty();
@@ -356,7 +513,14 @@ function load_asignaturas_requisito(){
   asignaturas_requisito();
 }
 
-
+/**
+ * Realiza una petición ajax para cargar las asignaturas que son requisitos de la 
+ * asignatura seleccionada
+ *
+ * @async
+ * @function  asignaturas_requisito
+ * @return    {[type]} [description]
+ */
 function asignaturas_requisito (){
   $('#requisitos_reticula').empty();
   var asignaturas_requisito = ``;
@@ -377,6 +541,13 @@ function asignaturas_requisito (){
 
 }
 
+/**
+ * Genera un string con la estructura de una CARD para agregar al DOM con la información de 
+ * la asignatura requisito.
+ * 
+ * @param  {asignatura} asignatura - Asignatura requisito.
+ * @return {string} - String con la estructura CARD.
+ */
 function print_card_requisito(asignatura){
   var card = 
   `<div class="col s12 l6">
@@ -401,6 +572,12 @@ function print_card_requisito(asignatura){
 }
 
 
+/**
+ * Función para inicializa el botón para eliminar una asignatura requisito.
+ * 
+ * @param  {integer} requisito - ID del requisito.
+ * @return {null}
+ */
 function btn_delete_requisito(requisito){
   $(`#delete_requisito_`+requisito+``).on('click', function() {
     requisito_id = $(this).attr('requisito');
@@ -409,6 +586,14 @@ function btn_delete_requisito(requisito){
   });
 }
 
+/**
+ * Valida el form_requisito con la libreria JQuery Validator y llama a la función para
+ * almacenarlo.
+ * 
+ * @event     validate#form_requisito
+ * @type      {object}
+ * @property  {event} validate - Valida los datos al agregar un requisito a la asignatura
+ */
 var validator = $("#form_requisito").validate({
   rules: {
     select_requisitos: {
@@ -433,6 +618,14 @@ var validator = $("#form_requisito").validate({
   }
 });
 
+/**
+ * Reliza una petición para almacenar un nuevo requisito
+ *
+ * @async
+ * @function  store_requisito
+ * @param     {json} json - JSON con la información a almacenar.
+ * @return    {null}
+ */
 function store_requisito(json){
   $.post('/admin/escolares/requisitos_reticulas',json,function(data){
     load_asignaturas_requisito();
@@ -451,6 +644,13 @@ function store_requisito(json){
   });
 }
 
+/**
+ * Confirmación para eliminar un requisito de la asignatura.
+ *
+ * @function  delete_requisito
+ * @param     {string} asignatura - Nombre de la asignatura.
+ * @return    {null}
+ */
 function delete_requisito(asignatura){
   swal({
     title: 'Desea eliminar '+asignatura+'',
@@ -468,6 +668,13 @@ function delete_requisito(asignatura){
   });
 }
 
+/**
+ * Realiza una petición para destruir un requisito de una asignatura.
+ *
+ * @async
+ * @function  destroy_requisito
+ * @return    {null}
+ */
 function destroy_requisito(){
   $.ajax({
     url: '/admin/escolares/requisitos_reticulas/'+requisito_id,

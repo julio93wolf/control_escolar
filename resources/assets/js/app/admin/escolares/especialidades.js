@@ -1,8 +1,38 @@
+/**
+ * ================================================================================================
+ * @fileOverview    Carga la tabla con las especialidades ademas de permitir alamcenar y actualizar 
+ *                  la información de la misma.
+ *
+ * @version         1.0
+ *
+ * @author          Julio Cesa Valle Rodríguez <jvalle@appsamx.com>
+ * @copyright       APPSA México.
+ * ================================================================================================
+ */
+
 load_especialidades();
 
 var new_especialidad = false;
 var especialidad_id = null;
 
+$.validator.setDefaults({
+  errorClass: 'invalid',
+  validClass: "valid",
+  errorPlacement: function(error, element) {
+    $(element)
+      .closest("form")
+      .find("label[for='" + element.attr("id") + "']")
+      .attr('data-error', error.text());
+  }
+});
+
+/**
+ * Realiza una peticion ajax para obtener las especialidades y cargarlas en el DataTable.
+ *
+ * @async
+ * @function    load_especialidades 
+ * @return      {null}
+ */
 function load_especialidades(){
 	var table = $('#table_especialidades').DataTable({
   	"language": {
@@ -87,6 +117,14 @@ function load_especialidades(){
   edit_especialidad('#table_especialidades tbody',table);
 }
 
+/**
+ * Inicializa el modal para crear una nueva especialidad.
+ * 
+ * @event     on:click#create_especialidad
+ * @type      {object}
+ * @property  {event} on:click - Detecta sí se dio click en el botón para crear una nueva
+ *                               especialidad.
+ */
 $('#create_especialidad').on('click',function(){
   $('#nivel_academico_id').val(1).material_select();
   $('#especialidad').val('');
@@ -125,6 +163,14 @@ $('#create_especialidad').on('click',function(){
   $('#modal_especialidad').modal('open');
 });
 
+/**
+ * Carga los datos de una especialidad para editarla.
+ *
+ * @function  edit_especialidad
+ * @param     {tbody} tbody - tbody del DataTable.
+ * @param     {DataTable} table - Instancia del Datatable
+ * @return    {null}
+ */
 function edit_especialidad (tbody,table){
   $(tbody).on('click','a.edit-especialidad',function(){
     var data = table.row( $(this).parents('tr') ).data();
@@ -176,17 +222,14 @@ function edit_especialidad (tbody,table){
   });
 }
 
-$.validator.setDefaults({
-  errorClass: 'invalid',
-  validClass: "valid",
-  errorPlacement: function(error, element) {
-    $(element)
-      .closest("form")
-      .find("label[for='" + element.attr("id") + "']")
-      .attr('data-error', error.text());
-  }
-});
-
+/**
+ * Valida los datos del form_especialida con la libreria JQuery Validator.
+ *
+ * @event     validate#form_especialidad
+ * @type      {object}
+ * @property  {event} validate - Valida que los datos para agregar o actualizar una especialidad
+ *                               sean correctos y manda llamar a la función indicada.
+ */
 var validator = $("#form_especialidad").validate({
   rules: {
     nivel_academico_id: {
@@ -284,6 +327,14 @@ var validator = $("#form_especialidad").validate({
   }
 });
 
+/**
+ * Realiza una petición ajax para almacenar una nueva especialidad.
+ *
+ * @async
+ * @function    store_especialidad
+ * @param       {json} json - JSON con la información a agregar.
+ * @return      {null}
+ */
 function store_especialidad(json){
   $.post('/admin/escolares/especialidades',json,function(data){
     $('#table_especialidades').DataTable().ajax.reload();
@@ -303,6 +354,14 @@ function store_especialidad(json){
   });
 }
 
+/**
+ * Realiza una petición ajax para actualizar la especialidad seleccionada.
+ *
+ * @async
+ * @function  update_especialidad 
+ * @param     {json} json - JSON con la información a actualizar.
+ * @return    {null}
+ */
 function update_especialidad(json){
   $.ajax({
     url: '/admin/escolares/especialidades/'+especialidad_id,

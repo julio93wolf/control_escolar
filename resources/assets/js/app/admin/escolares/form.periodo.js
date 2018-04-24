@@ -1,3 +1,14 @@
+/**
+ * =====================================================================================
+ * @fileOverview  Valida los campos para agregar o actualizar un nuevo periodo.
+ *
+ * @version       1.0
+ *
+ * @author        Julio Cesar Valle Rodríguez <jvalle@appsamx.com>
+ * @copyright     APPSA México
+ * =====================================================================================
+ */
+
 $.validator.setDefaults({
   errorClass: 'invalid',
   validClass: "valid",
@@ -9,6 +20,14 @@ $.validator.setDefaults({
   }
 });
 
+
+/**
+ * Valida los campos del form_periodo con la librerira JQuery Validator.
+ *
+ * @event     validate#form_periodo
+ * @type      {object}
+ * @property  {event} validate - Valida los datos par aagregar o actualizar un nuevo período.
+ */
 var validator = $("#form_periodo").validate({
 	rules: {
     anio: {

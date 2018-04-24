@@ -1,8 +1,39 @@
+/**
+ * ========================================================================================
+ * @fileOverview  Carga la tabla con las asignaturas regristradas en la institución, además
+ *                de realizar las peticiones para agregar y actualizar una asignatura.
+ *
+ * @version       1.0
+ *
+ * @author        Julio Cesar Valle Rodríguez <jvalle@appsamx.com>
+ * @copyright     APPSA México
+ * ========================================================================================
+ */
+
 load_asignaturas();
 
 var new_asignatura = false;
 var asignatura_id = null;
 
+
+$.validator.setDefaults({
+  errorClass: 'invalid',
+  validClass: "valid",
+  errorPlacement: function(error, element) {
+    $(element)
+      .closest("form")
+      .find("label[for='" + element.attr("id") + "']")
+      .attr('data-error', error.text());
+  }
+});
+
+/**
+ * Realiza una petición ajax para obtener todas las asignaturas y cargarlas al DataTable.
+ *
+ * @async
+ * @function  load_asignaturas
+ * @return    {null}
+ */
 function load_asignaturas(){
 	var table = $('#table_asignaturas').DataTable({
   	"language": {
@@ -53,6 +84,14 @@ function load_asignaturas(){
   edit_asignatura('#table_asignaturas tbody',table);
 }
 
+/**
+ * Inicializa el modal para agregar una nueva asignatura.
+ * 
+ * @event     on:click#create_asignatura
+ * @type      {object}
+ * @property  {event} on:click - Detecta cuando se hace click en el botón para crear una 
+ *                               nueva asignatura.
+ */
 $('#create_asignatura').on('click',function(){
 	$('#asignatura').val('');
 	$('#codigo').val('');
@@ -72,6 +111,14 @@ $('#create_asignatura').on('click',function(){
 	$('#modal_asignatura').modal('open');
 });
 
+/**
+ * Recupera la información para editar una asignatura
+ *
+ * @function  edit_asignatura
+ * @param     {tbody} tbody - tbody del DataTable.
+ * @param     {DataTable} table - Instancia del DataTable.
+ * @return    {null}
+ */
 function edit_asignatura (tbody,table){
   $(tbody).on('click','a.edit-asignatura',function(){
     var data = table.row( $(this).parents('tr') ).data();
@@ -94,17 +141,14 @@ function edit_asignatura (tbody,table){
   });
 }
 
-$.validator.setDefaults({
-  errorClass: 'invalid',
-  validClass: "valid",
-  errorPlacement: function(error, element) {
-    $(element)
-      .closest("form")
-      .find("label[for='" + element.attr("id") + "']")
-      .attr('data-error', error.text());
-  }
-});
-
+/**
+ * Valida los datos de form_asignatura con la libreria JQuery Validator
+ * 
+ * @event     validate#form_asignatura
+ * @type      {object}
+ * @property  {event} validate - Valida los datos para crear o actualiza una asignatura y
+ *                               realiza la peticion correspondiente.
+ */
 var validator = $("#form_asignatura").validate({
 	rules: {
     asignatura: {
@@ -152,6 +196,14 @@ var validator = $("#form_asignatura").validate({
   }
 });
 
+/**
+ * Realiza la petición para almacenar una nueva asignatura.
+ *
+ * @async
+ * @function  store_asignatura
+ * @param     {json} json - JSON con la información a agregar.
+ * @return    {null}
+ */
 function store_asignatura(json){
 	$.post('/admin/escolares/asignaturas',json,function(data){
 		$('#table_asignaturas').DataTable().ajax.reload();
@@ -171,6 +223,14 @@ function store_asignatura(json){
 	});
 }
 
+/**
+ * Realiza la petición para actualizar una asignatura.
+ *
+ * @async
+ * @function  update_asignatura
+ * @param     {json} json - JSON con la información a actualizar
+ * @return    {null}
+ */
 function update_asignatura(json){
   $.ajax({
     url: '/admin/escolares/asignaturas/'+asignatura_id,

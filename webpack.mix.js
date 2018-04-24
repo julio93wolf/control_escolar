@@ -12,6 +12,7 @@ let mix = require('laravel-mix');
  */
 
 /** Vendor  **/
+
 mix.styles([
 	'resources/assets/css/vendor/materialize.css',
 	'resources/assets/css/vendor/datatables.css',
@@ -40,36 +41,36 @@ mix.scripts([
 	/** Academicos **/
 
 		/** Docentes  **/
-		mix.scripts([
+		mix.js([
 			'resources/assets/js/app/admin/academicos/docentes.js'
 		],'public/js/admin/academicos/docentes.js');
-		mix.scripts([
+		mix.js([
 			'resources/assets/js/app/admin/academicos/form.docentes.js'
 		],'public/js/admin/academicos/form.docentes.js');
 
 		/** Clases  **/
-		mix.scripts([
+		mix.js([
 			'resources/assets/js/app/admin/academicos/clases.js'
 		],'public/js/admin/academicos/clases.js');
-		mix.scripts([
+		mix.js([
 			'resources/assets/js/app/admin/academicos/form.clases.js'
 		],'public/js/admin/academicos/form.clases.js');
 
 		/** Grupos  **/
-		mix.scripts([
+		mix.js([
 			'resources/assets/js/app/admin/academicos/grupos.js'
 		],'public/js/admin/academicos/grupos.js');
 
 		/** Estudiantes  **/
-		mix.scripts([
+		mix.js([
 			'resources/assets/js/app/admin/academicos/estudiantes.js'
 		],'public/js/admin/academicos/estudiantes.js');
-		mix.scripts([
+		mix.js([
 			'resources/assets/js/app/admin/academicos/form.estudiantes.js'
 		],'public/js/admin/academicos/form.estudiantes.js');
 
 		/** Kardex  **/
-		mix.scripts([
+		mix.js([
 			'resources/assets/js/app/admin/academicos/kardex.js'
 		],'public/js/admin/academicos/kardex.js');
 
@@ -77,61 +78,61 @@ mix.scripts([
 	/** Escolares **/
 
 		/**  Asignaturas  **/
-		mix.scripts([
+		mix.js([
 			'resources/assets/js/app/admin/escolares/asignaturas.js'
 		],'public/js/admin/escolares/asignaturas.js');
 
 		/**  Periodos  **/
-		mix.scripts([
+		mix.js([
 			'resources/assets/js/app/admin/escolares/periodos.js'
 		],'public/js/admin/escolares/periodos.js');
-		mix.scripts([
+		mix.js([
 			'resources/assets/js/app/admin/escolares/form.periodo.js'
 		],'public/js/admin/escolares/form.periodo.js');
 
 		/** Fechas Examenes  **/
-		mix.scripts([
+		mix.js([
 			'resources/assets/js/app/admin/escolares/fechas_examenes.js'
 		],'public/js/admin/escolares/fechas_examenes.js');
 
 		/** Especialidades  **/
-		mix.scripts([
+		mix.js([
 			'resources/assets/js/app/admin/escolares/especialidades.js'
 		],'public/js/admin/escolares/especialidades.js');
 
 		/** Planes especialidades  **/
-		mix.scripts([
+		mix.js([
 			'resources/assets/js/app/admin/escolares/planes_especialidades.js'
 		],'public/js/admin/escolares/planes_especialidades.js');
 
 		/** Reticulas  **/
-		mix.scripts([
+		mix.js([
 			'resources/assets/js/app/admin/escolares/reticulas.js'
 		],'public/js/admin/escolares/reticulas.js');
 
 	/** Configuraciones **/
 
 		/** Estados estudiantes  **/
-		mix.scripts([
+		mix.js([
 			'resources/assets/js/app/admin/configuraciones/estados_estudiantes.js'
 		],'public/js/admin/configuraciones/estados_estudiantes.js');
 
 		/** Títulos del docente  **/
-		mix.scripts([
+		mix.js([
 			'resources/assets/js/app/admin/configuraciones/titulos_docentes.js'
 		],'public/js/admin/configuraciones/titulos_docentes.js');
 
 		/** Tipos de examenes  **/
-		mix.scripts([
+		mix.js([
 			'resources/assets/js/app/admin/configuraciones/tipos_examenes.js'
 		],'public/js/admin/configuraciones/tipos_examenes.js');
 
 		/** Oportunidades  **/
-		mix.scripts([
+		mix.js([
 			'resources/assets/js/app/admin/configuraciones/oportunidades.js'
 		],'public/js/admin/configuraciones/oportunidades.js');
 
 		/** Niveles academicos  **/
-		mix.scripts([
+		mix.js([
 			'resources/assets/js/app/admin/configuraciones/niveles_academicos.js'
 		],'public/js/admin/configuraciones/niveles_academicos.js');

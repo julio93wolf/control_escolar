@@ -1,8 +1,39 @@
+/**
+ * ===============================================================================================
+ * @fileOverview  Carga la tabla con los planes de estudio de las especialidades además de las 
+ *                periciones necesarias para agregar, actualizar y eliminar un período.
+ *
+ * @version       1.0
+ *
+ * @author        Julio Cesar Valle Rodríguez <jvalle@appsamx.com>
+ * @copyright     APPSA México
+ * ===============================================================================================
+ */
+
 load_planes_especialidades();
 
 var edit_plan_especialidad = false;
 var plan_especialidad_id = null;
 
+$.validator.setDefaults({
+  errorClass: 'invalid',
+  validClass: "valid",
+  errorPlacement: function(error, element) {
+    $(element)
+      .closest("form")
+      .find("label[for='" + element.attr("id") + "']")
+      .attr('data-error', error.text());
+  }
+});
+
+/**
+ * Reliza una petición ajax para obtener los planes de estudio de la especialida  y los carga
+ * en el DataTable.
+ *
+ * @async
+ * @function  load_planes_especialidades
+ * @return    {null}
+ */
 function load_planes_especialidades(){
 	var table = $('#table_planes_especialidades').DataTable({
   	language: {
@@ -61,7 +92,15 @@ function load_planes_especialidades(){
   $("select[name$='table_planes_especialidades_length']").material_select();
 }
 
-
+/**
+ * Inicializa los eventos on:click para recuperar la información al editar y eliminar un
+ * plan de estudios
+ *
+ * @function  action_plan_especialidad 
+ * @param     {tbody} tbody - tbody del DataTable.
+ * @param     {table} table - Instancia del DataTable.
+ * @return    {null}
+ */
 function action_plan_especialidad (tbody,table){
   $(tbody).on('click','a.edit-plan-especialidad',function(){
     var data = table.row( $(this).parents('tr') ).data();
@@ -89,6 +128,13 @@ function action_plan_especialidad (tbody,table){
   });
 }
 
+/**
+ * Vacia los campos del formulario y cancela la edicion del plan de estudio
+ *
+ * @event     on:click#cancel_plan_especialidad
+ * @type      {object}
+ * @property  {event} on:click - Detecta si se hizó click en el botón para cancelar la edición
+ */
 $('#cancel_plan_especialidad').on('click',function(){
     plan_especialidad_id = null;
     $('#plan_especialidad').val('');
@@ -106,17 +152,14 @@ $('#cancel_plan_especialidad').on('click',function(){
     $('#cancel_plan_especialidad').addClass('hide');
 });
 
-$.validator.setDefaults({
-  errorClass: 'invalid',
-  validClass: "valid",
-  errorPlacement: function(error, element) {
-    $(element)
-      .closest("form")
-      .find("label[for='" + element.attr("id") + "']")
-      .attr('data-error', error.text());
-  }
-});
-
+/**
+ * Valida los campos del form_plan_especialidad con la libreria JQuery Validator.
+ * 
+ * @event       validate#form_plan_especialidad
+ * @type        {object}
+ * @property    {event} validate - Valida los campos para el almacenamiento y actualización 
+ *                                 de un plan de estudios y llama a la función correspondiente.
+ */
 var validator = $("#form_plan_especialidad").validate({
   rules: {
     plan_especialidad: {
@@ -169,6 +212,14 @@ var validator = $("#form_plan_especialidad").validate({
   }
 });
 
+/**
+ * Realiza la petición para almacenar un nuevo plan de estudios
+ *
+ * @async
+ * @function  store_plan_especialidad
+ * @param     {json} json - JSON con la información a almacenar.
+ * @return    {null}
+ */
 function store_plan_especialidad(json){
   $.post('/admin/escolares/planes_especialidades',json,function(data){
     
@@ -193,6 +244,14 @@ function store_plan_especialidad(json){
   });
 }
 
+/**
+ * Realiza la petición para actualizar un plan de estudios.
+ *
+ * @async
+ * @function  update_plan_especialidad
+ * @param     {json} json - JSON con la información a actualizar
+ * @return    {null}
+ */
 function update_plan_especialidad(json){
   $.ajax({
     url: '/admin/escolares/planes_especialidades/'+plan_especialidad_id,
@@ -226,6 +285,13 @@ function update_plan_especialidad(json){
   });
 }
 
+/**
+ * Realiza la confirmación para elimiar un plan de estudios y llama a la función
+ * para destruirla.
+ *
+ * @function  delete_plan_especialidad 
+ * @return    {null}
+ */
 function delete_plan_especialidad(){
   swal({
     title: 'Desea eliminar el plan de estudios?',
@@ -243,6 +309,13 @@ function delete_plan_especialidad(){
   });
 }
 
+/**
+ * Realiza la petición para destruir un plan de estudios
+ *
+ * @async
+ * @function  destroy_plan_especialidad 
+ * @return    {null}
+ */
 function destroy_plan_especialidad(){
   $.ajax({
     url: '/admin/escolares/planes_especialidades/'+plan_especialidad_id,

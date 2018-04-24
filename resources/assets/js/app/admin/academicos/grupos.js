@@ -130,7 +130,7 @@ $('#matricula').bind("enterKey",function(event){
  * @property  {event} keyup - Detecta la presión de cualquier tecla en el input.
  */
 $('#matricula').keyup(function(event){
-    if(e.keyCode == 13)
+    if(event.keyCode == 13)
     {
         $(this).trigger("enterKey");
     }

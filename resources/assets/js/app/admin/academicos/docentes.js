@@ -61,7 +61,7 @@ function load_docentes(){
         {
           data: 'docente_id',
           render: function ( data, type, row, meta ) {
-            return `<a href="/admin/academicos/docentes/`+data+`/edit" class="btn-floating btn-meddium waves-effect waves-light"><i class="material-icons circle green">mode_edit</i></a>`;
+            return '<a href="/admin/academicos/docentes/'+data+'/edit" class="btn-floating btn-meddium waves-effect waves-light"><i class="material-icons circle green">mode_edit</i></a>';
           },
           orderable: false, 
           searchable: false
@@ -69,7 +69,7 @@ function load_docentes(){
         {
           data: 'docente_id',
           render: function ( data, type, row, meta ) {
-            return `<a class="btn-floating btn-meddium waves-effect waves-light delete-docente"><i class="material-icons circle red">close</i></a>`;
+            return '<a class="btn-floating btn-meddium waves-effect waves-light delete-docente"><i class="material-icons circle red">close</i></a>';
           },
           orderable: false, 
           searchable: false
