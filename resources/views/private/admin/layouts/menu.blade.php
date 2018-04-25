@@ -98,16 +98,6 @@
     </li>
     <li><div class="divider"></div></li>
     <li>
-      <div class="collapsible-header"><i class="material-icons">location_city</i>Escolares</div>
-      <div class="collapsible-body">
-        <ul>
-          <li><a href="#!"><i class="material-icons blue-text text-darken-2">create</i>Asignaturas</a></li>
-          <li><a href="#!"><i class="material-icons blue-text text-darken-2">date_range</i>Periodos</a></li>
-          <li><a href="#!"><i class="material-icons blue-text text-darken-2">build</i>Especialidades</a></li>  
-        </ul>
-      </div>
-    </li>
-    <li>
       <div class="collapsible-header"><i class="material-icons">account_circle</i>Cuenta</div>
       <div class="collapsible-body">
         <ul>

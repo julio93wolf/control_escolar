@@ -110,14 +110,6 @@
 					</a>
 				</div>
 				<div class="col s6 m4">
-					<a href="{{--route('conf.especialidades.index')--}}">
-						<div class="center promo hoverable">
-							<i class="material-icons">build</i>
-							<p class="promo-caption">Especialidades</p>
-						</div>
-					</a>
-				</div>
-				<div class="col s6 m4">
 					<a href="{{ route('tipos_examenes.index') }}">
 						<div class="center promo hoverable">
 							<i class="material-icons">description</i>
