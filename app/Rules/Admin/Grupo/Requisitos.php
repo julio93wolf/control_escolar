@@ -11,8 +11,18 @@ use Illuminate\Contracts\Validation\Rule;
 
 class Requisitos implements Rule
 {
+    /**
+     * ID del estudiante
+     * @var integer estudiante_id
+     */
     public $estudiante_id;
+
+    /**
+     * ID de la clase
+     * @var integer clase_id
+     */
     public $clase_id;
+
     /**
      * Create a new rule instance.
      *
@@ -25,7 +35,8 @@ class Requisitos implements Rule
     }
 
     /**
-     * Determine if the validation rule passes.
+     * Determina sí un alumno cumple con los requísitos para ser inscrito
+     * en un grupo.
      *
      * @param  string  $attribute
      * @param  mixed  $value

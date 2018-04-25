@@ -9,6 +9,12 @@ use App\Http\Controllers\Controller;
 class LoginController extends Controller
 {
     
+    /**
+     * Revisa sí el usuario esta logueado de lo contrario envia al form login
+     *
+     * @author Julio Cesar Valle Rodríguez <jvalle@appsamx.com>
+     * @return redirect
+     */
     public function showLoginForm()
     {
         if(\Session::has('usuario')){
@@ -17,11 +23,18 @@ class LoginController extends Controller
         return view('public.auth.login');
     }
     
-    public function login(Request $req)
+    /**
+     * Valida las credenciales del usuario.
+     *
+     * @author Julio Cesar Valle Rodríguez <jvalle@appsamx.com>
+     * @param  \Illuminate\Http\Request     $request    - Credenciales del Usuario
+     * @return redirect
+     */
+    public function login(Request $request)
     {
-        $usuario = Usuario::where('email',$req->email)->first();
+        $usuario = Usuario::where('email',$request->email)->first();
         if($usuario){
-            if(password_verify($req -> password,$usuario -> password)){
+            if(password_verify($request -> password,$usuario -> password)){
                 \Session::put('usuario', $usuario);
                 return redirect(route('admin.menu'));
             }else{
@@ -33,6 +46,12 @@ class LoginController extends Controller
         return redirect(route('login'));
     }
 
+    /**
+     * Cerrar la sesión del usuario.
+     *
+     * @author Julio Cesar Valle Rodríguez <jvalle@appsamx.com>
+     * @return redirect
+     */
     public function logout()
     {
         \Session::flush();

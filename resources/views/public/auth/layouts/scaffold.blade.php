@@ -29,7 +29,7 @@
         $(document).ready(function() {
           Materialize.updateTextFields();
         });
-      </script></s>
+      </script>
     </body>
   </html>
         

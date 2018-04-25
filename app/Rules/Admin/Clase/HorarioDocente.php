@@ -8,13 +8,48 @@ use Illuminate\Contracts\Validation\Rule;
 
 class HorarioDocente implements Rule
 {
+    /**
+     * Array con los días seleccionados.
+     * @var array dia
+     */
     public $dia;
+
+    /**
+     * Array con las horas de entrada.
+     * @var array hora_entrada
+     */
     public $hora_entrada;
+
+    /**
+     * Array con las horas de salida.
+     * @var array hora_salida
+     */
     public $hora_salida;
+
+    /**
+     * ID del período.
+     * @var integer periodo_id
+     */
     public $periodo_id;
+
+    /**
+     * ID del docente.
+     * @var integer docente_id
+     */
     public $docente_id;
+
+    /**
+     * ID de la clase
+     * @var integer clase_id
+     */
     public $clase_id;
+
+    /**
+     * Materia con la que hay cruce.
+     * @var string materia.
+     */
     public $materia;
+
     /**
      * Create a new rule instance.
      *
@@ -34,7 +69,8 @@ class HorarioDocente implements Rule
     }
 
     /**
-     * Determine if the validation rule passes.
+     * Determina que el docente no tenga cruce de horario con otras clases
+     * asignadas en el mismo periodo.
      *
      * @param  string  $attribute
      * @param  mixed  $value

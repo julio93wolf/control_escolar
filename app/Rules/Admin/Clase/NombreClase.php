@@ -8,10 +8,28 @@ use Illuminate\Contracts\Validation\Rule;
 
 class NombreClase implements Rule
 {
-    
+    /**
+     * ID de la asignatura
+     * @var integer asignatura_id
+     */
     public $asignatura_id;
+
+    /**
+     * ID de la especialidad
+     * @var integer especialidad_id
+     */
     public $especialidad_id;
+
+    /**
+     * ID del periodo
+     * @var integer periodo_id
+     */
     public $periodo_id;
+
+    /**
+     * ID de la clase
+     * @var integer clase_id
+     */
     public $clase_id;
     
     /**
@@ -30,7 +48,7 @@ class NombreClase implements Rule
     }
 
     /**
-     * Determine if the validation rule passes.
+     * Determina sí el nombre de una clase es valido.
      *
      * @param  string  $attribute
      * @param  mixed  $value
