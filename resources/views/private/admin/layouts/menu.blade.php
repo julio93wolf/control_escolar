@@ -89,7 +89,6 @@
         <ul>
           <li><a href="{{ route('estados_estudiantes.index') }}"><i class="material-icons blue-text text-darken-2">school</i>Estados de estudiante</a></li>
           <li><a href="{{ route('titulos_docentes.index') }}"><i class="material-icons blue-text text-darken-2">work</i>Títulos de profesor</a></li>
-          <li><a href="#!"><i class="material-icons blue-text text-darken-2">build</i>Especialidades</a></li>
           <li><a href="{{ route('tipos_examenes.index') }}"><i class="material-icons blue-text text-darken-2">description</i>Tipos de exámenes</a></li>
           <li><a href="{{ route('oportunidades.index') }}"><i class="material-icons blue-text text-darken-2">autorenew</i>Oportunidades de clase</a></li>
           <li><a href="{{ route('niveles_academicos.index') }}"><i class="material-icons blue-text text-darken-2">class</i>Niveles y grados</a></li>
