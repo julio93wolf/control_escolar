@@ -197,19 +197,19 @@ Route::group(['middleware' => ['login']], function () {
 		Route::prefix('select')->group(function () {
 
 			// Especialidades
-			Route::get('especialidades_nivel/{nivel_academico}','Admin\SelectController@especialidades_nivel')
+			Route::get('especialidades_nivel','Admin\SelectController@especialidades_nivel')
 				->name('select.especialidades_nivel');
 
 			// Especialidades
-			Route::get('planes_especialidades/{especialidad_id}','Admin\SelectController@planes_especialidades')
+			Route::get('planes_especialidades','Admin\SelectController@planes_especialidades')
 				->name('select.planes_especialidades');
 
 			// Asignaturas Reticula
-			Route::get('asignaturas_reticula/{plan_especialidad_id}','Admin\SelectController@asignaturas_reticula')
+			Route::get('asignaturas_reticula','Admin\SelectController@asignaturas_reticula')
 				->name('select.asignaturas_reticula');
 
 			// Asignaturas Requisito
-			Route::get('asignaturas_requisito/{reticula_id}','Admin\SelectController@asignaturas_requisito')
+			Route::get('asignaturas_requisito','Admin\SelectController@asignaturas_requisito')
 				->name('select.asignaturas_requisito');
 
 			// Municipios

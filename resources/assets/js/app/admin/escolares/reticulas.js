@@ -49,8 +49,10 @@ $('#btn_tab_reticulas').on('click',function(event){
  * @return    {null}
  */
 function load_especialidades (){
-	var nivel_academico_id = $('#nivel_academico').val();
-	$.get('/admin/select/especialidades_nivel/' + nivel_academico_id,function(data) {
+  json = {
+    nivel_academico_id: $('#nivel_academico').val()
+  }
+	$.get('/admin/select/especialidades_nivel',json,function(data) {
 		$('#especialidad_id').empty();
 		for(i = 0; i < data.length; i++){
 			$('#especialidad_id').append('<option value="' + data[i].id + '">' + data[i].especialidad + ' (' + data[i].clave +')</option>');
@@ -75,8 +77,10 @@ function load_especialidades (){
  * @return    {null}
  */
 function load_planes (){
-  var especialidad_id = $('#especialidad_id').val();
-  $.get('/admin/select/planes_especialidades/' + especialidad_id,function(data) {
+  json = {
+    especialidad_id: $('#especialidad_id').val()
+  };
+  $.get('/admin/select/planes_especialidades',json,function(data) {
     $('#plan_especialidad_id').empty();
     for(i = 0; i < data.length; i++){
       $('#plan_especialidad_id').append('<option value="' + data[i].id + '">' + data[i].plan_especialidad + '</option>');
@@ -344,7 +348,10 @@ function create_reticula(){
  * @return    {null}
  */
 function load_asignaturas_reticula(){
-  $.get('/admin/select/asignaturas_reticula/' + plan_especialidad_id,function(data) {
+  json = {
+    plan_especialidad_id: plan_especialidad_id
+  };
+  $.get('/admin/select/asignaturas_reticula',json,function(data) {
     $('#select_asignaturas').empty();
     for(i = 0; i < data.length; i++){
       $('#select_asignaturas').append('<option value="' + data[i].id + '">' + data[i].asignatura + ' (' + data[i].codigo +')</option>');
@@ -499,7 +506,10 @@ function create_requisito(asignatura){
  * @return    {null}
  */
 function load_asignaturas_requisito(){
-  $.get('/admin/select/asignaturas_requisito/'+reticula_id,function(data) {
+  json = {
+    reticula_id: reticula_id
+  };
+  $.get('/admin/select/asignaturas_requisito',json,function(data) {
     $('#select_requisitos').empty();
     for(i = 0; i < data.length; i++){
       $('#select_requisitos').append('<option value="' + data[i].reticula + '">' + data[i].asignatura + ' (' + data[i].codigo +')</option>');
