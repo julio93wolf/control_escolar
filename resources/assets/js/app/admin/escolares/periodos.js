@@ -50,7 +50,7 @@ function load_periodos(){
     processing: true,
     serverSide: true,
     scrollX: true,
-    ajax: '/admin/datatable/periodos',
+    ajax: public_path + 'admin/datatable/periodos',
     columns: [
         { data: 'periodo',			name: 'periodo' },
         { data: 'anio',	name: 'anio' },
@@ -60,7 +60,11 @@ function load_periodos(){
         {
           data: 'id',
           render: function ( data, type, row, meta ) {
-            return `<a href="/admin/escolares/periodos/fechas_examenes?periodo=`+data+`" class="btn-floating btn-meddium waves-effect waves-light"><i class="material-icons circle blue">school</i></a>`;
+            return `
+              <a href="` + public_path + `admin/escolares/periodos/fechas_examenes?periodo=`+data+`" 
+                class="btn-floating btn-meddium waves-effect waves-light">
+                <i class="material-icons circle blue">school</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -68,7 +72,11 @@ function load_periodos(){
         {
           data: 'id',
           render: function ( data, type, row, meta ) {
-            return `<a href="/admin/escolares/periodos/`+data+`/edit" class="btn-floating btn-meddium waves-effect waves-light"><i class="material-icons circle green">mode_edit</i></a>`;
+            return `
+              <a href="`+ public_path +`admin/escolares/periodos/`+data+`/edit" 
+                class="btn-floating btn-meddium waves-effect waves-light">
+                <i class="material-icons circle green">mode_edit</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -76,7 +84,10 @@ function load_periodos(){
         {
           data: 'id',
           render: function ( data, type, row, meta ) {
-            return `<a class="btn-floating btn-meddium waves-effect waves-light delete-periodo"><i class="material-icons circle red">close</i></a>`;
+            return `
+              <a class="btn-floating btn-meddium waves-effect waves-light delete-periodo">
+                <i class="material-icons circle red">close</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -128,7 +139,7 @@ function delete_periodo (tbody,table){
  */
 function destroy_periodo(periodo_id){
   $.ajax({
-    url: '/admin/escolares/periodos/'+periodo_id,
+    url: public_path + 'admin/escolares/periodos/'+periodo_id,
     type: 'DELETE',
     success: function(result) {
       load_periodos();

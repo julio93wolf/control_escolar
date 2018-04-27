@@ -48,7 +48,7 @@ function load_kardex(){
     processing: true,
     serverSide: true,
     scrollX: true,
-    ajax: '/admin/datatable/kardex/'+$('#estudiante_id').val(),
+    ajax: public_path + 'admin/datatable/kardex?estudiante_id=' + $('#estudiante_id').val(),
     columns: [
         { data: 'codigo',  name: 'codigo' },
         { data: 'asignatura',	name: 'asignatura' },

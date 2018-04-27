@@ -32,11 +32,6 @@
 						</select>
 						<label for="tipo_examen_id">Tipo de examen</label>
 					</div>
-					{{--<div class="input-field col s12">
-						<i class="material-icons prefix">account_circle</i>
-						<input type="text" class="validate" name="nombre">
-						<label>Examen</label>
-					</div>--}}
 					<div class="input-field col s12 m6">
 						<i class="material-icons prefix">date_range</i>
 						<input id="fecha_inicio" name="fecha_inicio" type="text" class="datepicker" required="" aria-required="true">

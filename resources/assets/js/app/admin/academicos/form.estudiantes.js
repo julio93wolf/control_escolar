@@ -73,8 +73,9 @@ var dropify = $('.dropify').dropify({
  * @return    {null}
  */
 function load_municipios (municipio_id,localidad_id){
-	var estado_id = $('#estado_id').val();
-	$.get('/admin/select/municipios/'+estado_id,function(data) {
+  var estado_id = $('#estado_id').val();
+  json = { estado_id: estado_id };
+	$.get(public_path + 'admin/select/municipios', json, function(data) {
 		$('#municipio_id').empty();
 		for(i = 0; i < data.length; i++){
       if(municipio_id != undefined){
@@ -105,8 +106,9 @@ function load_municipios (municipio_id,localidad_id){
  * @return    {null}
  */
 function load_localidades (localidad_id){
-	var municipio_id = $('#municipio_id').val();
-	$.get('/admin/select/localidades/'+municipio_id,function(data) {
+  var municipio_id = $('#municipio_id').val();
+  json = { municipio_id: municipio_id };
+	$.get(public_path + 'admin/select/localidades', json, function(data) {
 		$('#localidad_id').empty();
 		for(i = 0; i < data.length; i++){
       if (localidad_id != undefined) {
@@ -138,8 +140,9 @@ function load_localidades (localidad_id){
  * @return    {null}
  */
 function load_especialidades (especialidad_id,plan_especialidad_id){
-	var nivel_academico_id = $('#nivel_academico_id').val();
-	$.get('/admin/select/especialidades_nivel/' + nivel_academico_id,function(data) {
+  var nivel_academico_id = $('#nivel_academico_id').val();
+  json = { nivel_academico_id: nivel_academico_id };
+	$.get(public_path + 'admin/select/especialidades_nivel', json, function(data) {
 		$('#especialidad_id').empty();
 		for(i = 0; i < data.length; i++){
       if (especialidad_id != undefined) {
@@ -173,7 +176,8 @@ function load_especialidades (especialidad_id,plan_especialidad_id){
  */
 function load_planes (plan_especialidad_id){
   var especialidad_id = $('#especialidad_id').val();
-  $.get('/admin/select/planes_especialidades/' + especialidad_id,function(data) {
+  json = { especialidad_id: especialidad_id };
+  $.get(public_path + 'admin/select/planes_especialidades', json, function(data) {
     $('#plan_especialidad_id').empty();
     for(i = 0; i < data.length; i++){
       if (plan_especialidad_id != undefined) {
@@ -479,7 +483,8 @@ var validator = $("#form_estudiante").validate({
  */
 function load_instituto_municipios (municipio_id){
   var estado_id = $('#instituto_estado_id').val();
-  $.get('/admin/select/municipios/'+estado_id,function(data) {
+  json  = { estado_id: estado_id };
+  $.get(public_path + 'admin/select/municipios', json, function(data) {
     $('#instituto_municipio_id').empty();
     for(i = 0; i < data.length; i++){
       if(municipio_id != undefined){
@@ -621,7 +626,7 @@ var validator_instituto = $("#form_instituto").validate({
  * @return    {null}
  */
 function store_empresa(json){
-  $.post('/admin/academicos/empresas',json,function(data){    
+  $.post(public_path + 'admin/academicos/empresas', json, function(data){    
     $('#empresa_id').empty();
     for(i = 0; i < data.length; i++){
       if(i+1==data.length){
@@ -657,7 +662,7 @@ function store_empresa(json){
  * @return    {null}
  */
 function store_instituto(json){
-  $.post('/admin/academicos/institutos_procedencias',json,function(data){    
+  $.post(public_path + 'admin/academicos/institutos_procedencias', json, function(data){    
     $('#instituto_id').empty();
     for(i = 0; i < data.length; i++){
       if(i+1==data.length){

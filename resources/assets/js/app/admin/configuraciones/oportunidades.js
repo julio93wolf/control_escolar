@@ -61,16 +61,17 @@ function load_oportunidades(){
     processing: true,
     serverSide: true,
     scrollX: true,
-    ajax: '/admin/datatable/oportunidades',
+    ajax: public_path + 'admin/datatable/oportunidades',
     columns: [
         { data: 'oportunidad',  name: 'oportunidad' },
         { data: 'descripcion',	name: 'descripcion' },
         {
           data: 'id',
           render: function ( data, type, row, meta ) {
-            return `<a class="btn-floating btn-meddium waves-effect waves-light edit-oportunidad">
-                      <i class="material-icons circle green">mode_edit</i>
-                    </a>`;
+            return `
+              <a class="btn-floating btn-meddium waves-effect waves-light edit-oportunidad">
+                <i class="material-icons circle green">mode_edit</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -78,9 +79,10 @@ function load_oportunidades(){
         {
           data: 'id',
           render: function ( data, type, row, meta ) {
-            return `<a class="btn-floating btn-meddium waves-effect waves-light delete-oportunidad">
-                      <i class="material-icons circle red">close</i>
-                    </a>`;
+            return `
+              <a class="btn-floating btn-meddium waves-effect waves-light delete-oportunidad">
+                <i class="material-icons circle red">close</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -180,7 +182,7 @@ var validator = $("#form_oportunidad").validate({
  * @return    {null}
  */
 function store_oportunidad(json){
-	$.post('/admin/configuraciones/oportunidades',json,function(data){
+	$.post(public_path + 'admin/configuraciones/oportunidades', json, function(data){
 		$('#table_oportunidades').DataTable().ajax.reload();
 		swal({
 		  type: 'success',
@@ -208,7 +210,7 @@ function store_oportunidad(json){
  */
 function update_oportunidad(json){
   $.ajax({
-    url: '/admin/configuraciones/oportunidades/'+oportunidad_id,
+    url: public_path + 'admin/configuraciones/oportunidades/'+oportunidad_id,
     data: json,
     type: 'PUT',
     success: function(result) {
@@ -270,7 +272,7 @@ function delete_oportunidad (tbody,table){
  */
 function destroy_oportunidad(oportunidad_id){
   $.ajax({
-    url: '/admin/configuraciones/oportunidades/'+oportunidad_id,
+    url: public_path + 'admin/configuraciones/oportunidades/'+oportunidad_id,
     type: 'DELETE',
     success: function(result) {
       $('#table_oportunidades').DataTable().ajax.reload();

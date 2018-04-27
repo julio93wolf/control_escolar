@@ -62,7 +62,7 @@ function load_niveles_academicos(){
     processing: true,
     serverSide: true,
     scrollX: true,
-    ajax: '/admin/datatable/niveles_academicos',
+    ajax: public_path + 'admin/datatable/niveles_academicos',
     columns: [
         { data: 'nivel_academico',  name: 'nivel_academico' },
         { data: 'descripcion',      name: 'descripcion' },
@@ -177,7 +177,7 @@ var validator = $("#form_nivel_academico").validate({
  * @return    {null}
  */
 function store_nivel_academico(json){
-	$.post('/admin/configuraciones/niveles_academicos',json,function(data){
+	$.post(public_path + 'admin/configuraciones/niveles_academicos', json, function(data){
 		$('#table_niveles_academicos').DataTable().ajax.reload();
 		swal({
 		  type: 'success',
@@ -205,7 +205,7 @@ function store_nivel_academico(json){
  */
 function update_nivel_academico(json){
   $.ajax({
-    url: '/admin/configuraciones/niveles_academicos/'+nivel_academico_id,
+    url: public_path + 'admin/configuraciones/niveles_academicos/'+nivel_academico_id,
     data: json,
     type: 'PUT',
     success: function(result) {
@@ -268,7 +268,7 @@ function delete_nivel_academico (tbody,table){
  */
 function destroy_nivel_academico(nivel_academico_id){
   $.ajax({
-    url: '/admin/configuraciones/niveles_academicos/'+nivel_academico_id,
+    url: public_path + 'admin/configuraciones/niveles_academicos/'+nivel_academico_id,
     type: 'DELETE',
     success: function(result) {
       $('#table_niveles_academicos').DataTable().ajax.reload();

@@ -101,49 +101,52 @@ class HorarioDocente implements Rule
             }
         }
 
-        foreach ($this->dia as $key => $dia_id) {
+        if($this->dia){
+
+            foreach ($this->dia as $key => $dia_id) {
             
-            if (isset($this->hora_entrada[$dia_id]) && isset($this->hora_salida[$dia_id])) {
-                    
-                foreach ($horarios_docente as $key_h => $horario_docente) {
-
-                    if ( ($horario_docente->dia_id - 1) == $dia_id ) {
-
-                        $hora_entrada_request   = date("H:i:s", strtotime($this->hora_entrada[$dia_id]));
-                        $hora_salida_request    = date("H:i:s", strtotime($this->hora_salida[$dia_id]));
-
-                        $hora_entrada_docente   = date("H:i:s", strtotime($horario_docente->hora_entrada));
-                        $hora_salida_docente    = date("H:i:s", strtotime($horario_docente->hora_salida));
-
-                        if( $hora_entrada_request >= $hora_entrada_docente &&
-                            $hora_entrada_request < $hora_salida_docente){
-
-                            $asignatura = $horario_docente->clase->asignatura->asignatura;
-                            $especialidad = $horario_docente->clase->especialidad->especialidad;
-                            $clase = $horario_docente->clase->clase;
-
-                            $this->materia = $asignatura.' ['. $clase .'] - '.$especialidad;
-                            $horario_valido = false ;  
-                        } 
-                        if( $hora_salida_request > $hora_entrada_docente &&
-                            $hora_salida_request <= $hora_salida_docente){
-
-                            $asignatura = $horario_docente->clase->asignatura->asignatura;
-                            $especialidad = $horario_docente->clase->especialidad->especialidad;
-                            $clase = $horario_docente->clase->clase;
-
-                            $this->materia = $asignatura.' ['. $clase .'] - '.$especialidad;
-                            $horario_valido = false ;
-                        }
-                        if( $hora_entrada_request <= $hora_entrada_docente &&
-                            $hora_salida_request >= $hora_salida_docente){
-
-                            $asignatura = $horario_docente->clase->asignatura->asignatura;
-                            $especialidad = $horario_docente->clase->especialidad->especialidad;
-                            $clase = $horario_docente->clase->clase;
-
-                            $this->materia = $asignatura.' ['. $clase .'] - '.$especialidad;
-                            $horario_valido = false;
+                if (isset($this->hora_entrada[$dia_id]) && isset($this->hora_salida[$dia_id])) {
+                        
+                    foreach ($horarios_docente as $key_h => $horario_docente) {
+    
+                        if ( ($horario_docente->dia_id - 1) == $dia_id ) {
+    
+                            $hora_entrada_request   = date("H:i:s", strtotime($this->hora_entrada[$dia_id]));
+                            $hora_salida_request    = date("H:i:s", strtotime($this->hora_salida[$dia_id]));
+    
+                            $hora_entrada_docente   = date("H:i:s", strtotime($horario_docente->hora_entrada));
+                            $hora_salida_docente    = date("H:i:s", strtotime($horario_docente->hora_salida));
+    
+                            if( $hora_entrada_request >= $hora_entrada_docente &&
+                                $hora_entrada_request < $hora_salida_docente){
+    
+                                $asignatura = $horario_docente->clase->asignatura->asignatura;
+                                $especialidad = $horario_docente->clase->especialidad->especialidad;
+                                $clase = $horario_docente->clase->clase;
+    
+                                $this->materia = $asignatura.' ['. $clase .'] - '.$especialidad;
+                                $horario_valido = false ;  
+                            } 
+                            if( $hora_salida_request > $hora_entrada_docente &&
+                                $hora_salida_request <= $hora_salida_docente){
+    
+                                $asignatura = $horario_docente->clase->asignatura->asignatura;
+                                $especialidad = $horario_docente->clase->especialidad->especialidad;
+                                $clase = $horario_docente->clase->clase;
+    
+                                $this->materia = $asignatura.' ['. $clase .'] - '.$especialidad;
+                                $horario_valido = false ;
+                            }
+                            if( $hora_entrada_request <= $hora_entrada_docente &&
+                                $hora_salida_request >= $hora_salida_docente){
+    
+                                $asignatura = $horario_docente->clase->asignatura->asignatura;
+                                $especialidad = $horario_docente->clase->especialidad->especialidad;
+                                $clase = $horario_docente->clase->clase;
+    
+                                $this->materia = $asignatura.' ['. $clase .'] - '.$especialidad;
+                                $horario_valido = false;
+                            }
                         }
                     }
                 }

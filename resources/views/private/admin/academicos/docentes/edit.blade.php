@@ -53,8 +53,7 @@
 	</script>
 	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
 	<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.js"></script>
-	<script type="text/javascript" src="{{ asset('js/admin/academicos/form.docentes.js') }}"></script>
-	<script type="text/javascript">
+	<script type="text/javascript" src="{{ asset('js/admin/academicos/form.docentes.js') }}">
 		@if (old('municipio_id') && old('localidad_id'))
 			load_municipios( {{ old('municipio_id') }} ,  {{ old('localidad_id') }});
 		@endif

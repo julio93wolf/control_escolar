@@ -64,7 +64,7 @@ function load_asignaturas(){
     processing: true,
     serverSide: true,
     scrollX: true,
-    ajax: '/admin/datatable/asignaturas',
+    ajax: public_path + 'admin/datatable/asignaturas',
     columns: [
         { data: 'codigo',			name: 'codigo' },
         { data: 'asignatura',	name: 'asignatura' },
@@ -72,7 +72,10 @@ function load_asignaturas(){
         {
           data: 'id',
           render: function ( data, type, row, meta ) {
-            return `<a class="btn-floating btn-meddium waves-effect waves-light edit-asignatura"><i class="material-icons circle green">mode_edit</i></a>`;
+            return `
+              <a class="btn-floating btn-meddium waves-effect waves-light edit-asignatura">
+                <i class="material-icons circle green">mode_edit</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -205,7 +208,7 @@ var validator = $("#form_asignatura").validate({
  * @return    {null}
  */
 function store_asignatura(json){
-	$.post('/admin/escolares/asignaturas',json,function(data){
+	$.post(public_path + 'admin/escolares/asignaturas',json,function(data){
 		$('#table_asignaturas').DataTable().ajax.reload();
 		swal({
 		  type: 'success',
@@ -233,7 +236,7 @@ function store_asignatura(json){
  */
 function update_asignatura(json){
   $.ajax({
-    url: '/admin/escolares/asignaturas/'+asignatura_id,
+    url: public_path + 'admin/escolares/asignaturas/'+asignatura_id,
     data: json,
     type: 'PUT',
     success: function(result) {

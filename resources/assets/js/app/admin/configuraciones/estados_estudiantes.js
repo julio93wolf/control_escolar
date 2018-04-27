@@ -61,14 +61,17 @@ function load_estados_estudiantes(){
     processing: true,
     serverSide: true,
     scrollX: true,
-    ajax: '/admin/datatable/estados_estudiantes',
+    ajax: public_path+'admin/datatable/estados_estudiantes',
     columns: [
         { data: 'estado_estudiante',			name: 'estado_estudiante' },
         { data: 'descripcion',	name: 'descripcion' },
         {
           data: 'id',
           render: function ( data, type, row, meta ) {
-            return `<a class="btn-floating btn-meddium waves-effect waves-light edit-estado-estudiante"><i class="material-icons circle green">mode_edit</i></a>`;
+            return `
+              <a class="btn-floating btn-meddium waves-effect waves-light edit-estado-estudiante">
+                <i class="material-icons circle green">mode_edit</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -76,7 +79,10 @@ function load_estados_estudiantes(){
         {
           data: 'id',
           render: function ( data, type, row, meta ) {
-            return `<a class="btn-floating btn-meddium waves-effect waves-light delete-estado-estudiante"><i class="material-icons circle red">close</i></a>`;
+            return `
+              <a class="btn-floating btn-meddium waves-effect waves-light delete-estado-estudiante">
+                <i class="material-icons circle red">close</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -176,7 +182,7 @@ var validator = $("#form_estado_estudiante").validate({
  * @return    {null}
  */
 function store_estado_estudiante(json){
-	$.post('/admin/configuraciones/estados_estudiantes',json,function(data){
+	$.post(public_path + 'admin/configuraciones/estados_estudiantes', json, function(data){
 		$('#table_estados_estudiantes').DataTable().ajax.reload();
 		swal({
 		  type: 'success',
@@ -204,7 +210,7 @@ function store_estado_estudiante(json){
  */
 function update_estado_estudiante(json){
   $.ajax({
-    url: '/admin/configuraciones/estados_estudiantes/'+estado_estudiante_id,
+    url: public_path + 'admin/configuraciones/estados_estudiantes/'+estado_estudiante_id,
     data: json,
     type: 'PUT',
     success: function(result) {
@@ -266,7 +272,7 @@ function delete_estado_estudiante (tbody,table){
  */
 function destroy_estado_estudiante(estado_estudiante_id){
   $.ajax({
-    url: '/admin/configuraciones/estados_estudiantes/'+estado_estudiante_id,
+    url: public_path + 'admin/configuraciones/estados_estudiantes/'+estado_estudiante_id,
     type: 'DELETE',
     success: function(result) {
       $('#table_estados_estudiantes').DataTable().ajax.reload();

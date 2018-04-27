@@ -48,7 +48,7 @@ function load_estudiantes(){
     processing: true,
     serverSide: true,
     scrollX: true,
-    ajax: "/admin/datatable/estudiantes",
+    ajax: public_path+"admin/datatable/estudiantes",
     columns: [
         { data: 'matricula',  name: 'matricula' },
         { data: 'nombre',     name: 'nombre' },
@@ -91,7 +91,11 @@ function load_estudiantes(){
         {
           data: 'estudiante_id',
           render: function ( data, type, row, meta ) {
-            return `<a href="/admin/academicos/kardex?estudiante=`+data+`" class="btn-floating btn-meddium waves-effect waves-light"><i class="material-icons circle yellow darken-4">format_list_numbered</i></a>`;
+            return `
+              <a href="`+public_path+`admin/academicos/kardex?estudiante=`+data+`" 
+                class="btn-floating btn-meddium waves-effect waves-light">
+                <i class="material-icons circle yellow darken-4">format_list_numbered</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -99,7 +103,11 @@ function load_estudiantes(){
         {
           data: 'estudiante_id',
           render: function ( data, type, row, meta ) {
-            return `<a href="/admin/academicos/estudiantes/`+data+`/edit" class="btn-floating btn-meddium waves-effect waves-light"><i class="material-icons circle green">mode_edit</i></a>`;
+            return `
+              <a href="`+public_path+`admin/academicos/estudiantes/`+data+`/edit" 
+                class="btn-floating btn-meddium waves-effect waves-light">
+                <i class="material-icons circle green">mode_edit</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false

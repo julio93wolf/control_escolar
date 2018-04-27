@@ -63,7 +63,7 @@ function load_especialidades(){
     processing: true,
     serverSide: true,
     scrollX: true,
-    ajax: '/admin/datatable/especialidades',
+    ajax: public_path + 'admin/datatable/especialidades',
     columns: [
         { 
           data: 'clave',
@@ -97,7 +97,11 @@ function load_especialidades(){
         {
           data: 'id',
           render: function ( data, type, row, meta ) {
-            return `<a href="/admin/escolares/planes_especialidades?especialidad=`+data+`" class="btn-floating btn-meddium waves-effect waves-light"><i class="material-icons circle teal">chrome_reader_mode</i></a>`;
+            return `
+              <a href="` + public_path + `admin/escolares/planes_especialidades?especialidad=`+data+`" 
+                class="btn-floating btn-meddium waves-effect waves-light">
+                <i class="material-icons circle teal">chrome_reader_mode</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -105,7 +109,10 @@ function load_especialidades(){
         {
           data: 'id',
           render: function ( data, type, row, meta ) {
-            return `<a class="btn-floating btn-meddium waves-effect waves-light edit-especialidad"><i class="material-icons circle green">mode_edit</i></a>`;
+            return `
+              <a class="btn-floating btn-meddium waves-effect waves-light edit-especialidad">
+                <i class="material-icons circle green">mode_edit</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -336,7 +343,7 @@ var validator = $("#form_especialidad").validate({
  * @return      {null}
  */
 function store_especialidad(json){
-  $.post('/admin/escolares/especialidades',json,function(data){
+  $.post(public_path + 'admin/escolares/especialidades',json,function(data){
     $('#table_especialidades').DataTable().ajax.reload();
     swal({
       type: 'success',
@@ -364,7 +371,7 @@ function store_especialidad(json){
  */
 function update_especialidad(json){
   $.ajax({
-    url: '/admin/escolares/especialidades/'+especialidad_id,
+    url: public_path + 'admin/escolares/especialidades/'+especialidad_id,
     data: json,
     type: 'PUT',
     success: function(result) {

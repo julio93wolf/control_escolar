@@ -60,7 +60,7 @@ function load_grupo(){
     processing: true,
     serverSide: true,
     scrollX: true,
-    ajax: '/admin/datatable/grupos?clase='+$('#clase_id').val(),
+    ajax: public_path + 'admin/datatable/grupos?clase='+$('#clase_id').val(),
     columns: [
         { data: 'matricula',    name: 'matricula' },
         { data: 'nombre',	      name: 'nombre' },
@@ -69,7 +69,10 @@ function load_grupo(){
         {
           data: 'grupo_id',
           render: function ( data, type, row, meta ) {
-            return `<a class="btn-floating btn-meddium waves-effect waves-light delete-grupo"><i class="material-icons circle red">close</i></a>`;
+            return `
+              <a class="btn-floating btn-meddium waves-effect waves-light delete-grupo">
+                <i class="material-icons circle red">close</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -97,7 +100,7 @@ $('#matricula').bind("enterKey",function(event){
       especialidad_id: $('#especialidad_id').val(),
       clase_id: $('#clase_id').val()
     };
-    $.get('/admin/academicos/estudiante',json,function(data) {
+    $.get(public_path + 'admin/academicos/estudiante', json, function(data) {
       if (!data.error) {
         $('#estudiante_id').val(data.estudiante_id);
         $('#nombre').val(data.nombre);
@@ -130,9 +133,8 @@ $('#matricula').bind("enterKey",function(event){
  * @property  {event} keyup - Detecta la presión de cualquier tecla en el input.
  */
 $('#matricula').keyup(function(event){
-    if(event.keyCode == 13)
-    {
-        $(this).trigger("enterKey");
+    if(event.keyCode == 13){
+      $(this).trigger("enterKey");
     }
 });
 
@@ -200,7 +202,7 @@ var validator = $("#form_grupo").validate({
  * @return     {null}
  */
 function store_grupo(json){
-  $.post('/admin/academicos/grupos',json,function(data){
+  $.post(public_path + 'admin/academicos/grupos', json, function(data){
     $('#table_grupo').DataTable().ajax.reload();
     $('#matricula').val('');
     $('#nombre').val('');
@@ -274,7 +276,7 @@ function btn_delete_grupo (tbody,table){
  */
 function destroy_grupo(grupo_id){
   $.ajax({
-    url: '/admin/academicos/grupos/'+grupo_id,
+    url: public_path + 'admin/academicos/grupos/'+grupo_id,
     type: 'DELETE',
     success: function(result) {
       $('#table_grupo').DataTable().ajax.reload();

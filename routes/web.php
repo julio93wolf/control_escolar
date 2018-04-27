@@ -143,7 +143,7 @@ Route::group(['middleware' => ['login']], function () {
 				->name('periodos.get');
 
 			// Fechas de Examenes
-			Route::get('fechas_examenes/{periodo_id}','Admin\DataTableController@fechas_examenes')
+			Route::get('fechas_examenes','Admin\DataTableController@fechas_examenes')
 				->name('fechas_examenes.get');
 
 			// Especialidades
@@ -151,7 +151,7 @@ Route::group(['middleware' => ['login']], function () {
 				->name('especialidades.get');
 
 			// Planes especialidades
-			Route::get('planes_especialidades/{especialidad_id}','Admin\DataTableController@planes_especialidades')
+			Route::get('planes_especialidades','Admin\DataTableController@planes_especialidades')
 				->name('planes_especialidades.get');
 
 			// Docentes
@@ -163,7 +163,7 @@ Route::group(['middleware' => ['login']], function () {
 				->name('clases.get');
 
 			// Kardex
-			Route::get('kardex/{estudiante_id}','Admin\DataTableController@kardex')
+			Route::get('kardex','Admin\DataTableController@kardex')
 				->name('kardex.get');
 
 			// Grupos
@@ -213,11 +213,11 @@ Route::group(['middleware' => ['login']], function () {
 				->name('select.asignaturas_requisito');
 
 			// Municipios
-			Route::get('municipios/{estado_id}','Admin\SelectController@municipios')
+			Route::get('municipios','Admin\SelectController@municipios')
 				->name('select.municipios');
 
 			// Localidades
-			Route::get('localidades/{municipio_id}','Admin\SelectController@localidades')
+			Route::get('localidades','Admin\SelectController@localidades')
 				->name('select.localidades');
 
 		});

@@ -35,18 +35,30 @@ $.validator.setDefaults({
  * @return    {null}
  */
 function load_municipios (municipio_id,localidad_id){
-	var estado_id = $('#estado_id').val();
-	$.get('/admin/select/municipios/'+estado_id,function(data) {
+  var estado_id = $('#estado_id').val();
+  json = {
+    estado_id: estado_id
+  };
+	$.get(public_path+'admin/select/municipios/', json, function(data) {
 		$('#municipio_id').empty();
 		for(i = 0; i < data.length; i++){
       if(municipio_id != undefined){
         if(municipio_id == data[i].id ){
-          $('#municipio_id').append('<option value="' + data[i].id + '" selected>'+ data[i].municipio+'</option>');
+          $('#municipio_id').append(`
+            <option value="` + data[i].id + `" selected>`
+              + data[i].municipio +
+            `</option>`);
         }else{
-          $('#municipio_id').append('<option value="' + data[i].id + '">'+ data[i].municipio+'</option>');
+          $('#municipio_id').append(`
+            <option value="` + data[i].id + `">`
+              + data[i].municipio +
+            `</option>`);
         }
       }else{
-        $('#municipio_id').append('<option value="' + data[i].id + '">'+ data[i].municipio+'</option>');
+        $('#municipio_id').append(`
+          <option value="` + data[i].id + `">`
+            + data[i].municipio +
+          `</option>`);
       }
 		}
 		$('#municipio_id').select2();
@@ -67,18 +79,30 @@ function load_municipios (municipio_id,localidad_id){
  * @return    {null}
  */
 function load_localidades (localidad_id){
-	var municipio_id = $('#municipio_id').val();
-	$.get('/admin/select/localidades/'+municipio_id,function(data) {
+  var municipio_id = $('#municipio_id').val();
+  json = {
+    municipio_id: municipio_id
+  };
+	$.get(public_path + 'admin/select/localidades/', json, function(data) {
 		$('#localidad_id').empty();
 		for(i = 0; i < data.length; i++){
       if (localidad_id != undefined) {
         if(localidad_id == data[i].id){
-          $('#localidad_id').append('<option value="' + data[i].id + '" selected>'+ data[i].localidad+'</option>');
+          $('#localidad_id').append(`
+            <option value="` + data[i].id + `" selected>`
+              + data[i].localidad +
+            `</option>`);
         }else{
-          $('#localidad_id').append('<option value="' + data[i].id + '">'+ data[i].localidad+'</option>');
+          $('#localidad_id').append(`
+            <option value="` + data[i].id + `">`
+              + data[i].localidad +
+            `</option>`);
         }
       }else{
-        $('#localidad_id').append('<option value="' + data[i].id + '">'+ data[i].localidad+'</option>');
+        $('#localidad_id').append(`
+          <option value="` + data[i].id + `">`
+            + data[i].localidad + 
+          `</option>`);
       }
 			
 		}

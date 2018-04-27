@@ -61,14 +61,17 @@ function load_titulos_docentes(){
     processing: true,
     serverSide: true,
     scrollX: true,
-    ajax: '/admin/datatable/titulos_docentes',
+    ajax: public_path + 'admin/datatable/titulos_docentes',
     columns: [
         { data: 'titulo',			name: 'titulo' },
         { data: 'descripcion',	name: 'descripcion' },
         {
           data: 'id',
           render: function ( data, type, row, meta ) {
-            return `<a class="btn-floating btn-meddium waves-effect waves-light edit-titulo-docente"><i class="material-icons circle green">mode_edit</i></a>`;
+            return `
+              <a class="btn-floating btn-meddium waves-effect waves-light edit-titulo-docente">
+                <i class="material-icons circle green">mode_edit</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -76,7 +79,10 @@ function load_titulos_docentes(){
         {
           data: 'id',
           render: function ( data, type, row, meta ) {
-            return `<a class="btn-floating btn-meddium waves-effect waves-light delete-titulo-docente"><i class="material-icons circle red">close</i></a>`;
+            return `
+              <a class="btn-floating btn-meddium waves-effect waves-light delete-titulo-docente">
+                <i class="material-icons circle red">close</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -176,7 +182,7 @@ var validator = $("#form_titulo_docente").validate({
  * @return      {null}
  */
 function store_titulo_docente(json){
-	$.post('/admin/configuraciones/titulos_docentes',json,function(data){
+	$.post(public_path + 'admin/configuraciones/titulos_docentes',json,function(data){
 		$('#table_titulos_docentes').DataTable().ajax.reload();
 		swal({
 		  type: 'success',
@@ -204,7 +210,7 @@ function store_titulo_docente(json){
  */
 function update_titulo_docente(json){
   $.ajax({
-    url: '/admin/configuraciones/titulos_docentes/'+titulo_id,
+    url: public_path + 'admin/configuraciones/titulos_docentes/'+titulo_id,
     data: json,
     type: 'PUT',
     success: function(result) {
@@ -267,7 +273,7 @@ function delete_titulo_docente (tbody,table){
  */
 function destroy_titulo_docente(titulo_id){
   $.ajax({
-    url: '/admin/configuraciones/titulos_docentes/'+titulo_id,
+    url: public_path + 'admin/configuraciones/titulos_docentes/'+titulo_id,
     type: 'DELETE',
     success: function(result) {
       $('#table_titulos_docentes').DataTable().ajax.reload();

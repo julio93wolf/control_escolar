@@ -52,7 +52,7 @@ function load_especialidades (){
   json = {
     nivel_academico_id: $('#nivel_academico').val()
   }
-	$.get('/admin/select/especialidades_nivel',json,function(data) {
+	$.get(public_path + 'admin/select/especialidades_nivel', json, function(data) {
 		$('#especialidad_id').empty();
 		for(i = 0; i < data.length; i++){
 			$('#especialidad_id').append('<option value="' + data[i].id + '">' + data[i].especialidad + ' (' + data[i].clave +')</option>');
@@ -80,7 +80,7 @@ function load_planes (){
   json = {
     especialidad_id: $('#especialidad_id').val()
   };
-  $.get('/admin/select/planes_especialidades',json,function(data) {
+  $.get(public_path + 'admin/select/planes_especialidades',json,function(data) {
     $('#plan_especialidad_id').empty();
     for(i = 0; i < data.length; i++){
       $('#plan_especialidad_id').append('<option value="' + data[i].id + '">' + data[i].plan_especialidad + '</option>');
@@ -138,7 +138,7 @@ $('#plan_especialidad_id').change(function(){
  */
 function load_reticula (){
 	plan_especialidad_id = $('#plan_especialidad_id').val();
-	$.get('/admin/escolares/planes_especialidades/' + plan_especialidad_id,function(data){
+	$.get(public_path + 'admin/escolares/planes_especialidades/' + plan_especialidad_id,function(data){
 		var plan_especialidad = data;		
 		$('#section_reticula').empty();
 		for (var i = 1; i <= plan_especialidad.periodos; i++) {
@@ -176,7 +176,7 @@ function asignaturas_periodo (periodo){
 	};
 	$('#periodo_'+periodo+'').empty();
 	var asignaturas_periodo = ``;
-	$.get('/admin/escolares/reticulas/asignaturas',json,function(data){
+	$.get(public_path + 'admin/escolares/reticulas/asignaturas',json,function(data){
 		var asignaturas = data;
 		for (var i = 0; i < asignaturas.length; i++) {
 			var asignatura = asignaturas[i];
@@ -351,7 +351,7 @@ function load_asignaturas_reticula(){
   json = {
     plan_especialidad_id: plan_especialidad_id
   };
-  $.get('/admin/select/asignaturas_reticula',json,function(data) {
+  $.get(public_path + 'admin/select/asignaturas_reticula', json, function(data) {
     $('#select_asignaturas').empty();
     for(i = 0; i < data.length; i++){
       $('#select_asignaturas').append('<option value="' + data[i].id + '">' + data[i].asignatura + ' (' + data[i].codigo +')</option>');
@@ -406,7 +406,7 @@ var validator = $("#form_reticula").validate({
  * @return    {null}
  */
 function store_reticula(json){
-  $.post('/admin/escolares/reticulas',json,function(data){
+  $.post(public_path + 'admin/escolares/reticulas', json, function(data){
   	asignaturas_periodo(periodo_reticula);
     periodo_reticula = null;
     asignatura_id = null;
@@ -459,7 +459,7 @@ function delete_reticula(asignatura){
  */
 function destroy_reticula(){
   $.ajax({
-    url: '/admin/escolares/reticulas/'+reticula_id,
+    url: public_path + 'admin/escolares/reticulas/'+reticula_id,
     type: 'DELETE',
     success: function(result) {      
       asignaturas_periodo(periodo_reticula);
@@ -509,7 +509,7 @@ function load_asignaturas_requisito(){
   json = {
     reticula_id: reticula_id
   };
-  $.get('/admin/select/asignaturas_requisito',json,function(data) {
+  $.get(public_path + 'admin/select/asignaturas_requisito',json,function(data) {
     $('#select_requisitos').empty();
     for(i = 0; i < data.length; i++){
       $('#select_requisitos').append('<option value="' + data[i].reticula + '">' + data[i].asignatura + ' (' + data[i].codigo +')</option>');
@@ -534,7 +534,7 @@ function load_asignaturas_requisito(){
 function asignaturas_requisito (){
   $('#requisitos_reticula').empty();
   var asignaturas_requisito = ``;
-  $.get('/admin/escolares/reticulas/asignaturas_requisito/'+reticula_id,function(data){
+  $.get(public_path + 'admin/escolares/reticulas/asignaturas_requisito/' + reticula_id, function(data){
     var asignaturas = data;
     for (var i = 0; i < asignaturas.length; i++) {
       var asignatura = asignaturas[i];
@@ -637,7 +637,7 @@ var validator = $("#form_requisito").validate({
  * @return    {null}
  */
 function store_requisito(json){
-  $.post('/admin/escolares/requisitos_reticulas',json,function(data){
+  $.post(public_path + 'admin/escolares/requisitos_reticulas', json, function(data){
     load_asignaturas_requisito();
     swal({
       type: 'success',
@@ -663,7 +663,7 @@ function store_requisito(json){
  */
 function delete_requisito(asignatura){
   swal({
-    title: 'Desea eliminar '+asignatura+'',
+    title: 'Desea eliminar ' + asignatura + '',
     text: "Esta acción no se puede revertir",
     type: 'warning',
     showCancelButton: true,
@@ -687,7 +687,7 @@ function delete_requisito(asignatura){
  */
 function destroy_requisito(){
   $.ajax({
-    url: '/admin/escolares/requisitos_reticulas/'+requisito_id,
+    url: public_path + 'admin/escolares/requisitos_reticulas/' + requisito_id,
     type: 'DELETE',
     success: function(result) {      
       load_asignaturas_requisito();

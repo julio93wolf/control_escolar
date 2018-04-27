@@ -64,7 +64,7 @@ function load_planes_especialidades(){
     processing: true,
     serverSide: true,
     scrollX: true,
-    ajax: '/admin/datatable/planes_especialidades/'+$('#especialidad_id').val(),
+    ajax: public_path + 'admin/datatable/planes_especialidades?especialidad_id='+$('#especialidad_id').val(),
     columns: [
         { data: 'plan_especialidad',  name: 'plan_especialidad' },
         { data: 'periodos',	name: 'periodos' },
@@ -72,7 +72,10 @@ function load_planes_especialidades(){
         {
           data: 'id',
           render: function ( data, type, row, meta ) {
-            return `<a class="btn-floating btn-meddium waves-effect waves-light edit-plan-especialidad"><i class="material-icons circle green">mode_edit</i></a>`;
+            return `
+              <a class="btn-floating btn-meddium waves-effect waves-light edit-plan-especialidad">
+                <i class="material-icons circle green">mode_edit</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -80,7 +83,10 @@ function load_planes_especialidades(){
         {
           data: 'id',
           render: function ( data, type, row, meta ) {
-            return `<a class="btn-floating btn-meddium waves-effect waves-light delete-plan-especialidad"><i class="material-icons circle red">close</i></a>`;
+            return `
+              <a class="btn-floating btn-meddium waves-effect waves-light delete-plan-especialidad">
+                <i class="material-icons circle red">close</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -221,7 +227,7 @@ var validator = $("#form_plan_especialidad").validate({
  * @return    {null}
  */
 function store_plan_especialidad(json){
-  $.post('/admin/escolares/planes_especialidades',json,function(data){
+  $.post(public_path + 'admin/escolares/planes_especialidades', json, function(data){
     
     $('#plan_especialidad').val('');
     $('#periodos').val('1');
@@ -254,7 +260,7 @@ function store_plan_especialidad(json){
  */
 function update_plan_especialidad(json){
   $.ajax({
-    url: '/admin/escolares/planes_especialidades/'+plan_especialidad_id,
+    url: public_path + 'admin/escolares/planes_especialidades/'+plan_especialidad_id,
     data: json,
     type: 'PUT',
     success: function(result) {
@@ -318,7 +324,7 @@ function delete_plan_especialidad(){
  */
 function destroy_plan_especialidad(){
   $.ajax({
-    url: '/admin/escolares/planes_especialidades/'+plan_especialidad_id,
+    url: public_path + 'admin/escolares/planes_especialidades/'+plan_especialidad_id,
     type: 'DELETE',
     success: function(result) {
       plan_especialidad_id = null;

@@ -48,7 +48,7 @@ function load_docentes(){
     processing: true,
     serverSide: true,
     scrollX: true,
-    ajax: '/admin/datatable/docentes',
+    ajax: public_path+'admin/datatable/docentes',
     columns: [
         { data: 'codigo',			    name: 'codigo' },
         { data: 'nombre',	        name: 'nombre' },
@@ -61,7 +61,11 @@ function load_docentes(){
         {
           data: 'docente_id',
           render: function ( data, type, row, meta ) {
-            return '<a href="/admin/academicos/docentes/'+data+'/edit" class="btn-floating btn-meddium waves-effect waves-light"><i class="material-icons circle green">mode_edit</i></a>';
+            return `
+              <a href="`+public_path+`admin/academicos/docentes/`+data+`/edit" 
+                class="btn-floating btn-meddium waves-effect waves-light">
+                <i class="material-icons circle green">mode_edit</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -69,7 +73,10 @@ function load_docentes(){
         {
           data: 'docente_id',
           render: function ( data, type, row, meta ) {
-            return '<a class="btn-floating btn-meddium waves-effect waves-light delete-docente"><i class="material-icons circle red">close</i></a>';
+            return `
+              <a class="btn-floating btn-meddium waves-effect waves-light delete-docente">
+                <i class="material-icons circle red">close</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -120,7 +127,7 @@ function delete_docente (tbody,table){
  */
 function destroy_docente(docente_id){
   $.ajax({
-    url: '/admin/academicos/docentes/'+docente_id,
+    url: public_path+'admin/academicos/docentes/'+docente_id,
     type: 'DELETE',
     success: function(result) {
       load_docentes();

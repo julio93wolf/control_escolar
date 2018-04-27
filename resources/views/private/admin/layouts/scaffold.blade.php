@@ -41,6 +41,7 @@
 	
 
 	<!-- Compiled and minified JavaScript -->
+	<script> var public_path = "{{ asset('/') }}"; </script>
 	<script src="{{ asset('/js/vendor.js') }}"></script>
 	<script src="{{ asset('/js/app.js') }}"></script>
 	@yield('script')

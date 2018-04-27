@@ -64,7 +64,7 @@ function load_fechas_examenes(){
     processing: true,
     serverSide: true,
     scrollX: true,
-    ajax: '/admin/datatable/fechas_examenes/'+$('#periodo_id').val(),
+    ajax: public_path + 'admin/datatable/fechas_examenes?periodo_id='+$('#periodo_id').val(),
     columns: [
         { data: 'tipo_examen',  name: 'tipo_examen' },
         { data: 'fecha_inicio',	name: 'fecha_inicio' },
@@ -73,7 +73,10 @@ function load_fechas_examenes(){
         {
           data: 'id',
           render: function ( data, type, row, meta ) {
-            return `<a class="btn-floating btn-meddium waves-effect waves-light edit-fecha-examen"><i class="material-icons circle green">mode_edit</i></a>`;
+            return `
+              <a class="btn-floating btn-meddium waves-effect waves-light edit-fecha-examen">
+                <i class="material-icons circle green">mode_edit</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -81,7 +84,10 @@ function load_fechas_examenes(){
         {
           data: 'id',
           render: function ( data, type, row, meta ) {
-            return `<a class="btn-floating btn-meddium waves-effect waves-light delete-fecha-examen"><i class="material-icons circle red">close</i></a>`;
+            return `
+              <a class="btn-floating btn-meddium waves-effect waves-light delete-fecha-examen">
+                <i class="material-icons circle red">close</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -257,7 +263,7 @@ var validator = $("#form_fecha_examen").validate({
  * @return      {null}
  */
 function store_fecha_examen(json){
-  $.post('/admin/escolares/periodos/fechas_examenes',json,function(data){
+  $.post(public_path + 'admin/escolares/periodos/fechas_examenes', json, function(data){
     $('#tipo_examen_id').val(1).material_select();
     $('#fecha_inicio').val('');
     $('#fecha_final').val('');
@@ -289,7 +295,7 @@ function store_fecha_examen(json){
  */
 function update_fecha_examen(json){
   $.ajax({
-    url: '/admin/escolares/periodos/fechas_examenes/'+fecha_examen_id,
+    url: public_path + 'admin/escolares/periodos/fechas_examenes/' + fecha_examen_id,
     data: json,
     type: 'PUT',
     success: function(result) {
@@ -353,7 +359,7 @@ function delete_fecha_examen(){
  */
 function destroy_fecha_examen(fecha_examen_id){
   $.ajax({
-    url: '/admin/escolares/periodos/fechas_examenes/'+fecha_examen_id,
+    url: public_path + 'admin/escolares/periodos/fechas_examenes/' + fecha_examen_id,
     type: 'DELETE',
     success: function(result) {
       fecha_examen_id = null;

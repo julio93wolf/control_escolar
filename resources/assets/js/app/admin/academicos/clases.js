@@ -22,14 +22,21 @@ var table = null;
  * @return    {null}
  */
 function carga_especialidades (){
-	var nivel_academico_id = $('#nivel_academico_id').val();
-	$.get('/admin/select/especialidades_nivel/' + nivel_academico_id,function(data) {
+  var nivel_academico_id = $('#nivel_academico_id').val();
+  json = { nivel_academico_id: nivel_academico_id };
+	$.get(public_path+'admin/select/especialidades_nivel/',json,function(data) {
 		$('#especialidad_id').empty();
 		for(i = 0; i < data.length; i++){
       if(i==0){
-        $('#especialidad_id').append('<option value="' + data[i].id + '" selected>' + data[i].especialidad + ' (' + data[i].clave +')</option>');
+        $('#especialidad_id').append(`
+          <option value="` + data[i].id + `" selected>` 
+            + data[i].especialidad + ` (` + data[i].clave +
+          `)</option>`);
       }else{
-        $('#especialidad_id').append('<option value="' + data[i].id + '">' + data[i].especialidad + ' (' + data[i].clave +')</option>');  
+        $('#especialidad_id').append(`
+          <option value="` + data[i].id + `">` 
+            + data[i].especialidad + ` (` + data[i].clave +
+          `)</option>`);  
       }
 			
 		}
@@ -120,7 +127,7 @@ function carga_clases(){
     processing: true,
     serverSide: true,
     scrollX: true,
-    ajax: '/admin/datatable/clases?periodo_id='+$('#periodo_id').val()+'&especialidad_id='+$('#especialidad_id').val(),
+    ajax: public_path+'admin/datatable/clases?periodo_id='+$('#periodo_id').val()+'&especialidad_id='+$('#especialidad_id').val(),
     columns: [
         { data: 'codigo',     name: 'codigo' },
         { data: 'clase',      name: 'clase' },
@@ -129,7 +136,11 @@ function carga_clases(){
         {
           data: 'clase_id',
           render: function ( data, type, row, meta ) {
-            return `<a href="/admin/academicos/grupos?clase=`+data+`" class="btn-floating btn-meddium waves-effect waves-light"><i class="material-icons circle teal">group</i></a>`;
+            return `
+              <a href="`+public_path+`admin/academicos/grupos?clase=`+data+`" 
+                class="btn-floating btn-meddium waves-effect waves-light">
+                <i class="material-icons circle teal">group</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -137,7 +148,11 @@ function carga_clases(){
         {
           data: 'clase_id',
           render: function ( data, type, row, meta ) {
-            return `<a href="/admin/academicos/clases/`+data+`/edit" class="btn-floating btn-meddium waves-effect waves-light"><i class="material-icons circle green">mode_edit</i></a>`;
+            return `
+              <a href="`+public_path+`admin/academicos/clases/`+data+`/edit" 
+                class="btn-floating btn-meddium waves-effect waves-light">
+                <i class="material-icons circle green">mode_edit</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -145,7 +160,10 @@ function carga_clases(){
         {
           data: 'clase_id',
           render: function ( data, type, row, meta ) {
-            return `<a class="btn-floating btn-meddium waves-effect waves-light delete-clase"><i class="material-icons circle red">close</i></a>`;
+            return `
+              <a class="btn-floating btn-meddium waves-effect waves-light delete-clase">
+                <i class="material-icons circle red">close</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -202,7 +220,7 @@ function elimina_clase(clase_id){
  */
 function destroy_clase(clase_id){
   $.ajax({
-    url: '/admin/academicos/clases/'+clase_id,
+    url: public_path+'admin/academicos/clases/'+clase_id,
     type: 'DELETE',
     success: function(result) {
       carga_clases();
@@ -230,5 +248,5 @@ function destroy_clase(clase_id){
  * @return    {null}
  */
 function create_clase(){
-  $('#create_clase').attr('href','/admin/academicos/clases/create?periodo_id='+$('#periodo_id').val()+'&especialidad_id='+$('#especialidad_id').val());
+  $('#create_clase').attr('href',public_path+'admin/academicos/clases/create?periodo_id='+$('#periodo_id').val()+'&especialidad_id='+$('#especialidad_id').val());
 }

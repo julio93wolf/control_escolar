@@ -63,14 +63,17 @@ function load_tipos_examenes(){
     processing: true,
     serverSide: true,
     scrollX: true,
-    ajax: '/admin/datatable/tipos_examenes',
+    ajax: public_path + 'admin/datatable/tipos_examenes',
     columns: [
         { data: 'tipo_examen',			name: 'tipo_examen' },
         { data: 'descripcion',	name: 'descripcion' },
         {
           data: 'id',
           render: function ( data, type, row, meta ) {
-            return `<a class="btn-floating btn-meddium waves-effect waves-light edit-tipo-examen"><i class="material-icons circle green">mode_edit</i></a>`;
+            return `
+              <a class="btn-floating btn-meddium waves-effect waves-light edit-tipo-examen">
+                <i class="material-icons circle green">mode_edit</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -78,7 +81,10 @@ function load_tipos_examenes(){
         {
           data: 'id',
           render: function ( data, type, row, meta ) {
-            return `<a class="btn-floating btn-meddium waves-effect waves-light delete-tipo-examen"><i class="material-icons circle red">close</i></a>`;
+            return `
+              <a class="btn-floating btn-meddium waves-effect waves-light delete-tipo-examen">
+                <i class="material-icons circle red">close</i>
+              </a>`;
           },
           orderable: false, 
           searchable: false
@@ -178,7 +184,7 @@ var validator = $("#form_tipo_examen").validate({
  * @return    {null}
  */
 function store_tipo_examen(json){
-	$.post('/admin/configuraciones/tipos_examenes',json,function(data){
+	$.post(public_path + 'admin/configuraciones/tipos_examenes', json, function(data){
 		$('#table_tipos_examenes').DataTable().ajax.reload();
 		swal({
 		  type: 'success',
@@ -206,7 +212,7 @@ function store_tipo_examen(json){
  */
 function update_tipo_examen(json){
   $.ajax({
-    url: '/admin/configuraciones/tipos_examenes/'+tipo_examen_id,
+    url: public_path + 'admin/configuraciones/tipos_examenes/'+tipo_examen_id,
     data: json,
     type: 'PUT',
     success: function(result) {
@@ -268,7 +274,7 @@ function delete_tipo_examen (tbody,table){
  */
 function destroy_tipo_examen(tipo_examen_id){
   $.ajax({
-    url: '/admin/configuraciones/tipos_examenes/'+tipo_examen_id,
+    url: public_path + 'admin/configuraciones/tipos_examenes/'+tipo_examen_id,
     type: 'DELETE',
     success: function(result) {
       $('#table_tipos_examenes').DataTable().ajax.reload();

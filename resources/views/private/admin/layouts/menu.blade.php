@@ -100,7 +100,7 @@
       <div class="collapsible-header"><i class="material-icons">account_circle</i>Cuenta</div>
       <div class="collapsible-body">
         <ul>
-          <li><a href="#!"><i class="material-icons blue-text text-darken-2">power_settings_new</i>Salir</a></li>
+          <li><a href="{{route('logout')}}"><i class="material-icons blue-text text-darken-2">power_settings_new</i>Salir</a></li>
         </ul>
       </div>
     </li>
