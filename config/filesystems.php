@@ -58,6 +58,7 @@ return [
         'docentes' => [
             'driver' => 'local',
             'root' => public_path('images/docentes'),
+            //'root' => base_path('../public_html/controlescolar/images/docentes'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
@@ -65,6 +66,7 @@ return [
         'estudiantes' => [
             'driver' => 'local',
             'root' => public_path('images/estudiantes'),
+            //'root' => base_path('../public_html/controlescolar/images/estudiantes'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],

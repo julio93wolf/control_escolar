@@ -24,6 +24,8 @@ class CreateDocentesTable extends Migration
             $table->foreign('dato_general_id')->references('id')->on('datos_generales');
             $table->foreign('titulo_id')->references('id')->on('titulos');
             $table->foreign('usuario_id')->references('id')->on('usuarios');
+
+            $table->engine = 'InnoDB';
         });
     }
 

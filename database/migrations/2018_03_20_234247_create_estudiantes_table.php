@@ -36,6 +36,8 @@ class CreateEstudiantesTable extends Migration
             $table->foreign('periodo_id')->references('id')->on('periodos');
             $table->foreign('usuario_id')->references('id')->on('usuarios');
             $table->foreign('plan_especialidad_id')->references('id')->on('planes_especialidades');
+
+            $table->engine = 'InnoDB';
         });
     }
 

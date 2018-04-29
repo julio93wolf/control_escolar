@@ -15,7 +15,7 @@
 			<h5><a class="valign-wrapper" href="{{route('estudiantes.index')}}"><i class="material-icons">arrow_back</i> Regresar</a></h5>
 			
 			
-			<form id="form_docente" class="col s12" action="/admin/academicos/estudiantes/{{ $estudiante->id }}" method="post" enctype="multipart/form-data" novalidate="novalidate">
+			<form id="form_docente" class="col s12" action="{{asset('/')}}admin/academicos/estudiantes/{{ $estudiante->id }}" method="post" enctype="multipart/form-data" novalidate="novalidate">
 				<input type="hidden" name="_method" value="put"/>
 				<input type="hidden" name="dato_general_id" value="{{$estudiante->dato_general_id}}"/>
 				@include('private.admin.academicos.estudiantes.forms.form')

@@ -36,6 +36,8 @@ class CreateDatosGeneralesTable extends Migration
             $table->foreign('localidad_id')->references('id')->on('localidades');
             $table->foreign('estado_civil_id')->references('id')->on('estados_civiles');
             $table->foreign('nacionalidad_id')->references('id')->on('nacionalidades');
+
+            $table->engine = 'InnoDB';
         });
     }
 

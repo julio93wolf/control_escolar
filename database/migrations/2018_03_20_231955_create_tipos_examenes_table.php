@@ -17,6 +17,7 @@ class CreateTiposExamenesTable extends Migration
             $table->increments('id');
             $table->string('tipo_examen',64)->unique();
             $table->string('descripcion',255)->nullable();
+            $table->engine = 'InnoDB';
         });
     }
 

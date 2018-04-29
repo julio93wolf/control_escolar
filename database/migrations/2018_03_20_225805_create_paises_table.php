@@ -17,6 +17,8 @@ class CreatePaisesTable extends Migration
             $table->increments('id');
             $table->string('clave',3)->unique();
             $table->string('pais',64);
+
+            $table->engine = 'InnoDB';
         });
     }
 

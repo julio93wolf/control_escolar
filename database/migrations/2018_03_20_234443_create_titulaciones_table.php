@@ -24,6 +24,8 @@ class CreateTitulacionesTable extends Migration
             $table->foreign('tipo_id')->references('id')->on('tipos_titulaciones');
             $table->foreign('estudiante_id')->references('id')->on('estudiantes');
             $table->foreign('estado_id')->references('id')->on('estados_titulaciones');
+
+            $table->engine = 'InnoDB';
         });
     }
 

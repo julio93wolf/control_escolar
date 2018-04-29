@@ -20,6 +20,8 @@ class CreateEquivalenciasTable extends Migration
             $table->date('fecha');
 
             $table->foreign('estudiante_id')->references('id')->on('estudiantes');
+
+            $table->engine = 'InnoDB';
         });
     }
 

@@ -28,6 +28,8 @@ class CreateEspecialidadesTable extends Migration
             $table->foreign('nivel_academico_id')->references('id')->on('niveles_academicos');
             $table->foreign('modalidad_id')->references('id')->on('modalidades_especialidades');
             $table->foreign('tipo_plan_especialidad_id')->references('id')->on('tipos_planes_especialidades');
+
+            $table->engine = 'InnoDB';
         });
     }
 

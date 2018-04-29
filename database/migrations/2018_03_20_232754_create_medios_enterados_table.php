@@ -17,6 +17,8 @@ class CreateMediosEnteradosTable extends Migration
             $table->increments('id');
             $table->string('medio_enterado',64)->unique();
             $table->string('descripcion',255)->nullable();
+
+            $table->engine = 'InnoDB';
         });
     }
 

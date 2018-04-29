@@ -22,6 +22,8 @@ class CreateEstadosTable extends Migration
             $table->tinyInteger('activo');
 
             $table->foreign('pais_id')->references('id')->on('paises');
+
+            $table->engine = 'InnoDB';
         });
     }
 

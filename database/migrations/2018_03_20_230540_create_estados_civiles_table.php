@@ -16,6 +16,8 @@ class CreateEstadosCivilesTable extends Migration
         Schema::create('estados_civiles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('estado_civil',16)->unique();
+
+            $table->engine = 'InnoDB';
         });
     }
 

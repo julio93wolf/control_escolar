@@ -21,6 +21,8 @@ class CreateReticulasTable extends Migration
             
             $table->foreign('asignatura_id')->references('id')->on('asignaturas');
             $table->foreign('plan_especialidad_id')->references('id')->on('planes_especialidades');
+
+            $table->engine = 'InnoDB';
         });
     }
 

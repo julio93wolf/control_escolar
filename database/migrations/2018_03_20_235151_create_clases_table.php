@@ -25,6 +25,8 @@ class CreateClasesTable extends Migration
             $table->foreign('docente_id')->references('id')->on('docentes');
             $table->foreign('especialidad_id')->references('id')->on('especialidades');
             $table->foreign('periodo_id')->references('id')->on('periodos');
+
+            $table->engine = 'InnoDB';
         });
     }
 

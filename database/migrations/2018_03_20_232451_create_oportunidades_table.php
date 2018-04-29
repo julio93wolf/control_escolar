@@ -17,6 +17,8 @@ class CreateOportunidadesTable extends Migration
             $table->increments('id');
             $table->string('oportunidad',32)->unique();
             $table->string('descripcion',255)->nullable();
+
+            $table->engine = 'InnoDB';
         });
     }
 

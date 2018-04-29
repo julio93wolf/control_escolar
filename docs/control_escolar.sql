@@ -6,7 +6,15 @@ as
         matricula, 
         concat(apaterno,' ',amaterno,' ',nombre) as nombre,
         grupo,
-        concat(calle_numero,', ',colonia,', ',codigo_postal,', ',municipio) as  direccion,
+        concat(
+			calle_numero,
+            ', ',
+            colonia,
+            ', ',
+            codigo_postal,
+            ', ',
+            municipio
+		) as  direccion,
         telefono_personal,
         email,
         fecha_nacimiento,
@@ -16,13 +24,13 @@ as
         empresa,
         puesto
     from estudiantes
-		left join datos_generales on datos_generales.id = estudiantes.dato_general_id
-        left join localidades on localidades.id = datos_generales.localidad_id
-        left join municipios on municipios.id = localidades.municipio_id
-        left join modalidades_estudiantes on modalidades_estudiantes.id = estudiantes.modalidad_id
-        left join medios_enterados on medios_enterados.id = estudiantes.medio_enterado_id
-        left join estudiantes_trabajos on estudiantes_trabajos.estudiante_id = estudiantes.id
-        left join empresas on empresas.id = estudiantes_trabajos.empresa_id;
+		left join datos_generales 			on datos_generales.id 					= estudiantes.dato_general_id
+        left join localidades 				on localidades.id 						= datos_generales.localidad_id
+        left join municipios 				on municipios.id 						= localidades.municipio_id
+        left join modalidades_estudiantes 	on modalidades_estudiantes.id 			= estudiantes.modalidad_id
+        left join medios_enterados 			on medios_enterados.id 					= estudiantes.medio_enterado_id
+        left join estudiantes_trabajos 		on estudiantes_trabajos.estudiante_id 	= estudiantes.id
+        left join empresas 					on empresas.id 							= estudiantes_trabajos.empresa_id;
         
 drop view if exists vw_fechas_examenes;
 create view vw_fechas_examenes
@@ -57,9 +65,9 @@ as
         tipo_plan_especialidad_id,
         tipo_plan_especialidad
     from especialidades
-		join niveles_academicos on niveles_academicos.id = especialidades.nivel_academico_id
-        join modalidades_especialidades on modalidades_especialidades.id = especialidades.modalidad_id
-        join tipos_planes_especialidades on tipos_planes_especialidades.id = especialidades.tipo_plan_especialidad_id;
+		join niveles_academicos 			on niveles_academicos.id 			= especialidades.nivel_academico_id
+        join modalidades_especialidades 	on modalidades_especialidades.id 	= especialidades.modalidad_id
+        join tipos_planes_especialidades 	on tipos_planes_especialidades.id 	= especialidades.tipo_plan_especialidad_id;
 
 select * from vw_especialidades;
 
@@ -77,8 +85,8 @@ as
         rfc,
         titulo
     from docentes
-		join datos_generales on datos_generales.id = docentes.dato_general_id
-        join titulos on titulos.id = docentes.titulo_id;
+		join datos_generales 	on datos_generales.id 	= docentes.dato_general_id
+        join titulos			on titulos.id 			= docentes.titulo_id;
 select * from vw_docentes;
 
 
@@ -94,9 +102,9 @@ as
         clases.periodo_id,
         clases.especialidad_id
     from clases
-        join asignaturas on asignaturas.id = clases.asignatura_id
-        join docentes on docentes.id = clases.docente_id
-        join datos_generales on datos_generales.id = docentes.dato_general_id
+        join asignaturas 		on asignaturas.id 		= clases.asignatura_id
+        join docentes 			on docentes.id 			= clases.docente_id
+        join datos_generales 	on datos_generales.id 	= docentes.dato_general_id
 	order by clases.especialidad_id,clases.periodo_id,asignaturas.codigo,clases.clase;
 
 select * from vw_clases;
@@ -114,9 +122,9 @@ as
         periodos.anio,
         kardexs.estudiante_id
     from kardexs
-        join asignaturas on asignaturas.id = kardexs.asignatura_id
-        join oportunidades on oportunidades.id = kardexs.oportunidad_id
-        join periodos on periodos.id = kardexs.periodo_id
+        join asignaturas 	on asignaturas.id 		= kardexs.asignatura_id
+        join oportunidades 	on oportunidades.id 	= kardexs.oportunidad_id
+        join periodos 		on periodos.id 			= kardexs.periodo_id
 	order by kardexs.semestre asc;
 select * from vw_kardex;
 

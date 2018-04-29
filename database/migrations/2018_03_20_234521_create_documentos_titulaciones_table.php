@@ -21,6 +21,8 @@ class CreateDocumentosTitulacionesTable extends Migration
             
             $table->foreign('tipo_documento_id')->references('id')->on('tipos_documentos_titulaciones');
             $table->foreign('titulo_id')->references('id')->on('titulaciones');
+
+            $table->engine = 'InnoDB';
         });
     }
 

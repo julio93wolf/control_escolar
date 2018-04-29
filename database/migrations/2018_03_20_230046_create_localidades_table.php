@@ -26,6 +26,8 @@ class CreateLocalidadesTable extends Migration
             $table->tinyInteger('activo');
 
             $table->foreign('municipio_id')->references('id')->on('municipios');
+
+            $table->engine = 'InnoDB';
         });
     }
 

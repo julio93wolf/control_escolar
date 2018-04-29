@@ -17,6 +17,8 @@ class CreateEmpresasTable extends Migration
             $table->increments('id');
             $table->string('empresa',128)->unique();
             $table->string('direccion',255)->nullable();
+
+            $table->engine = 'InnoDB';
         });
     }
 

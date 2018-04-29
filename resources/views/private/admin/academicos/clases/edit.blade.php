@@ -15,7 +15,7 @@
 			<h5><a class="valign-wrapper" href="{{route('clases.index')}}"><i class="material-icons">arrow_back</i> Regresar</a></h5>
 			
 			
-			<form id="form_clase" class="col s12" action="/admin/academicos/clases/{{$clase->id}}" method="post" novalidate="novalidate">
+			<form id="form_clase" class="col s12" action="{{asset('/')}}admin/academicos/clases/{{$clase->id}}" method="post" novalidate="novalidate">
 				
 				<input type="hidden" name="_token" value="{{csrf_token()}}">
 				<input type="hidden" name="_method" value="put"/>

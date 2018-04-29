@@ -17,6 +17,8 @@ class CreateModalidadesEspecialidadesTable extends Migration
             $table->increments('id');
             $table->string('modalidad_especialidad',64)->unique();
             $table->string('descripcion',255)->nullable();
+
+            $table->engine = 'InnoDB';
         });
     }
 

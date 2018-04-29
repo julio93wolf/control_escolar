@@ -20,6 +20,8 @@ class CreateRequisitosReticulasTable extends Migration
 
             $table->foreign('reticula_id')->references('id')->on('reticulas')->onDelete('cascade');
             $table->foreign('reticula_requisito_id')->references('id')->on('reticulas');
+
+            $table->engine = 'InnoDB';
         });
     }
 

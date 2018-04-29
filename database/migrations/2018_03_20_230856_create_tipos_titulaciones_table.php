@@ -17,6 +17,8 @@ class CreateTiposTitulacionesTable extends Migration
             $table->increments('id');
             $table->string('tipo_titulacion',32)->unique();
             $table->string('descripcion',255)->nullable();
+
+            $table->engine = 'InnoDB';
         });
     }
 

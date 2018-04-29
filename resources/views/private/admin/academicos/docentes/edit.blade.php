@@ -15,7 +15,7 @@
 			<h5><a class="valign-wrapper" href="{{route('docentes.index')}}"><i class="material-icons">arrow_back</i> Regresar</a></h5>
 			
 			
-			<form id="form_docente" class="col s12" action="/admin/academicos/docentes/{{ $docente->id }}" method="post" enctype="multipart/form-data" novalidate="novalidate">
+			<form id="form_docente" class="col s12" action="{{asset('/')}}admin/academicos/docentes/{{ $docente->id }}" method="post" enctype="multipart/form-data" novalidate="novalidate">
 				<input type="hidden" name="_method" value="put"/>
 				<input type="hidden" id="id" name="id" value="{{ $docente->id }}" />
 				<input type="hidden" id="dato_general_id" name="dato_general_id" value="{{ $docente->dato_general_id }}" />

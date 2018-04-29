@@ -20,6 +20,8 @@ class CreateUsuariosTable extends Migration
             $table->integer('rol_id')->unsigned();
 
             $table->foreign('rol_id')->references('id')->on('roles_usuarios');
+
+            $table->engine = 'InnoDB';
         });
     }
 

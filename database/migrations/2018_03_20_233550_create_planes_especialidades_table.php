@@ -21,6 +21,8 @@ class CreatePlanesEspecialidadesTable extends Migration
             $table->integer('especialidad_id')->unsigned();
             
             $table->foreign('especialidad_id')->references('id')->on('especialidades');
+
+            $table->engine = 'InnoDB';
         });
     }
 

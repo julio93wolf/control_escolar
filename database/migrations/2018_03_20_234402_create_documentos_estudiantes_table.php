@@ -21,6 +21,8 @@ class CreateDocumentosEstudiantesTable extends Migration
 
             $table->foreign('estudiante_id')->references('id')->on('estudiantes');
             $table->foreign('tipo_documento_id')->references('id')->on('tipos_documentos_estudiantes');
+
+            $table->engine = 'InnoDB';
         });
     }
 

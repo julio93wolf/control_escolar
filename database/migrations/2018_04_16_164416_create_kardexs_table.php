@@ -26,6 +26,8 @@ class CreateKardexsTable extends Migration
             $table->foreign('asignatura_id')->references('id')->on('asignaturas');
             $table->foreign('oportunidad_id')->references('id')->on('oportunidades');
             $table->foreign('periodo_id')->references('id')->on('periodos');
+
+            $table->engine = 'InnoDB';
         });
     }
 

@@ -18,6 +18,8 @@ class CreateAsignaturasTable extends Migration
             $table->string('codigo',32)->unique();
             $table->string('asignatura',64);
             $table->tinyInteger('creditos');
+
+            $table->engine = 'InnoDB';
         });
     }
 

@@ -16,7 +16,7 @@
 			<h5><a class="valign-wrapper" href="{{route('periodos.index')}}"><i class="material-icons">arrow_back</i> Regresar</a></h5>
 			<br>
 			
-			<form id="form_periodo" class="col s12" action="/admin/escolares/periodos/{{ $periodo->id }}" method="POST" novalidate="novalidate">
+			<form id="form_periodo" class="col s12" action="{{asset('/')}}admin/escolares/periodos/{{ $periodo->id }}" method="POST" novalidate="novalidate">
 				<input type="hidden" name="_method" value="put"/>
 				<input type="hidden" name="id" value="{{ $periodo->id }}" />
 				@include('private.admin.escolares.periodos.forms.form')

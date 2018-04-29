@@ -19,6 +19,8 @@ class CreateInstitutosProcedenciaTable extends Migration
             $table->integer('municipio_id')->unsigned();
             
             $table->foreign('municipio_id')->references('id')->on('municipios');
+
+            $table->engine = 'InnoDB';
         });
     }
 

@@ -20,6 +20,8 @@ class CreateProcedenciasEstudiantesTable extends Migration
 
             $table->foreign('estudiante_id')->references('id')->on('estudiantes');
             $table->foreign('instituto_id')->references('id')->on('institutos_procedencias');
+
+            $table->engine = 'InnoDB';
         });
     }
 

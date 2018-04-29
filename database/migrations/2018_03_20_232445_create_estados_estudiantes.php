@@ -17,6 +17,8 @@ class CreateEstadosEstudiantes extends Migration
             $table->increments('id');
             $table->string('estado_estudiante',32)->unique();
             $table->string('descripcion',255)->nullable();
+
+            $table->engine = 'InnoDB';
         });
     }
 

@@ -20,6 +20,8 @@ class CreatePeriodosTable extends Migration
             $table->string('reconocimiento_oficial',64)->unique();
             $table->string('dges',64)->unique();
             $table->date('fecha_reconocimiento');
+
+            $table->engine = 'InnoDB';
         });
     }
 

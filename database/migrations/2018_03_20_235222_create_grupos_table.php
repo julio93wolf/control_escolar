@@ -22,6 +22,8 @@ class CreateGruposTable extends Migration
             $table->foreign('clase_id')->references('id')->on('clases');
             $table->foreign('estudiante_id')->references('id')->on('estudiantes');
             $table->foreign('oportunidad_id')->references('id')->on('oportunidades');
+
+            $table->engine = 'InnoDB';
         });
     }
 

@@ -22,6 +22,8 @@ class CreateHorariosTable extends Migration
 
             $table->foreign('dia_id')->references('id')->on('dias');
             $table->foreign('clase_id')->references('id')->on('clases')->onDelete('cascade');
+
+            $table->engine = 'InnoDB';
         });
     }
 

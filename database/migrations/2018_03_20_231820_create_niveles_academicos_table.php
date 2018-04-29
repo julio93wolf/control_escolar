@@ -17,6 +17,8 @@ class CreateNivelesAcademicosTable extends Migration
             $table->increments('id');
             $table->string('nivel_academico',32)->unique();
             $table->string('descripcion',255)->nullable();
+
+            $table->engine = 'InnoDB';
         });
     }
 

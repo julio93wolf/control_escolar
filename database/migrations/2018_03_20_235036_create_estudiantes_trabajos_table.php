@@ -21,6 +21,8 @@ class CreateEstudiantesTrabajosTable extends Migration
 
             $table->foreign('estudiante_id')->references('id')->on('estudiantes');
             $table->foreign('empresa_id')->references('id')->on('empresas');
+
+            $table->engine = 'InnoDB';
         });
     }
 

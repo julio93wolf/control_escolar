@@ -21,6 +21,8 @@ class CreateMunicipiosTable extends Migration
             $table->tinyInteger('activo');
 
             $table->foreign('estado_id')->references('id')->on('estados');
+
+            $table->engine = 'InnoDB';
         });
     }
 

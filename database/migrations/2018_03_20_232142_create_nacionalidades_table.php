@@ -16,6 +16,8 @@ class CreateNacionalidadesTable extends Migration
         Schema::create('nacionalidades', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nacionalidad',64);
+
+            $table->engine = 'InnoDB';
         });
     }
 
