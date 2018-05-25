@@ -16,7 +16,7 @@ class CreateAsignaturasTable extends Migration
         Schema::create('asignaturas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('codigo',32)->unique();
-            $table->string('asignatura',64);
+            $table->string('asignatura',128);
             $table->tinyInteger('creditos');
 
             $table->engine = 'InnoDB';

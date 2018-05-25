@@ -16,10 +16,10 @@ class CreateEspecialidadesTable extends Migration
         Schema::create('especialidades', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('nivel_academico_id')->unsigned();
-            $table->string('clave',8)->unique();
-            $table->string('especialidad',128);
-            $table->string('reconocimiento_oficial',64)->unique();
-            $table->string('dges',64)->unique();
+            $table->string('clave',10)->unique();
+            $table->string('especialidad',200);
+            $table->string('reconocimiento_oficial',64);
+            $table->string('dges',64);
             $table->date('fecha_reconocimiento');
             $table->string('descripcion',255)->nullable();
             $table->integer('modalidad_id')->unsigned();

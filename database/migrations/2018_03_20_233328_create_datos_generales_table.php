@@ -15,24 +15,23 @@ class CreateDatosGeneralesTable extends Migration
     {
         Schema::create('datos_generales', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('curp',18);
+            $table->string('curp',18)->nullable();
             $table->string('nombre',32);
             $table->string('apaterno',32);
             $table->string('amaterno',32);
-            $table->date('fecha_nacimiento');
-            $table->string('calle_numero',64);
-            $table->string('colonia',32);
-            $table->integer('codigo_postal')->unsigned();
-            $table->integer('localidad_id')->unsigned();
+            $table->date('fecha_nacimiento')->nullable();
+            $table->string('calle_numero',64)->nullable();
+            $table->string('colonia',32)->nullable();
+            $table->integer('codigo_postal')->unsigned()->nullable();
+            $table->integer('localidad_id')->unsigned()->nullable();
             $table->string('telefono_casa')->nullable();
             $table->string('telefono_personal')->nullable();
-            $table->integer('estado_civil_id')->unsigned();
-            $table->enum('sexo',['F','M','O']);
-            $table->date('fecha_registro');
-            $table->integer('nacionalidad_id')->unsigned();
+            $table->integer('estado_civil_id')->unsigned()->nullable();
+            $table->enum('sexo',['F','M','O'])->nullable();
+            $table->date('fecha_registro')->nullable();
+            $table->integer('nacionalidad_id')->unsigned()->nullable();
             $table->string('email',128)->nullable();
             $table->text('foto')->nullable();
-            
             $table->foreign('localidad_id')->references('id')->on('localidades');
             $table->foreign('estado_civil_id')->references('id')->on('estados_civiles');
             $table->foreign('nacionalidad_id')->references('id')->on('nacionalidades');

@@ -17,9 +17,11 @@ class CreatePeriodosTable extends Migration
             $table->increments('id');
             $table->year('anio');
             $table->string('periodo',64);
-            $table->string('reconocimiento_oficial',64)->unique();
-            $table->string('dges',64)->unique();
-            $table->date('fecha_reconocimiento');
+            $table->string('fecha_reconocimiento',64);
+            $table->string('reconocimiento_oficial',64)->nullable();
+            $table->string('dges',64)->nullable();
+            $table->string('jefe_control',200);
+            $table->string('director',200);
 
             $table->engine = 'InnoDB';
         });
