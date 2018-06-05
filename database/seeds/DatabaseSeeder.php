@@ -11,7 +11,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(RolesUsuariosTableSeeder::class);
+        $this->call(NacionalidadesTableSeeder::class);
+        
+        /*$this->call(RolesUsuariosTableSeeder::class);
         $this->call(TiposDocumentosEstudiantesTableSeeder::class);
         $this->call(EstadosEstudiantesTableSeeder::class);
         $this->call(EstadosCivilesTableSeeder::class);
@@ -19,7 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MediosEnteradosTableSeeder::class);
         $this->call(ModalidadesEspecialidadesTableSeeder::class);
         $this->call(ModalidadesEstudiantesTableSeeder::class);
-        $this->call(NacionalidadesTableSeeder::class);
+        
         $this->call(NivelesAcademicosTableSeeder::class);
         $this->call(TiposPlanesEspecialidadesTableSeeder::class);
         //$this->call(TiposPlanesReticulasTableSeeder::class);
@@ -41,6 +43,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ClasesTableSeeder::class);
         $this->call(DiasTableSeeder::class);
         $this->call(OportunidadesTableSeeder::class);
-        $this->call(GruposKardexTableSeeder::class);
+        $this->call(GruposKardexTableSeeder::class);*/
     }
 }

@@ -17,6 +17,7 @@ class CreateGruposTable extends Migration
             $table->increments('id');
             $table->integer('clase_id')->unsigned();
             $table->integer('estudiante_id')->unsigned();
+            $table->tinyInteger('calificacion')->nullable();
             $table->integer('oportunidad_id')->unsigned();
 
             $table->foreign('clase_id')->references('id')->on('clases');

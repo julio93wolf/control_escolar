@@ -2491,4 +2491,5 @@ INSERT INTO `municipios` (`id`, `estado_id`, `clave`, `municipio`, `activo`) VAL
 (2489, 32, '055', 'Villanueva', 1),
 (2490, 32, '056', 'Zacatecas', 1),
 (2491, 32, '057', 'Trancoso', 1),
-(2492, 32, '058', 'Santa María de la Paz', 1);
+(2492, 32, '058', 'Santa María de la Paz', 1),
+(2493, 33, '001', 'Otro', 1);

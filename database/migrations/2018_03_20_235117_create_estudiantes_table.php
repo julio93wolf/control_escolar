@@ -18,16 +18,17 @@ class CreateEstudiantesTable extends Migration
             $table->integer('dato_general_id')->unsigned();
             $table->integer('especialidad_id')->unsigned();
             $table->integer('estado_estudiante_id')->unsigned();
-            $table->string('matricula',32)->unique();
-            $table->tinyInteger('semestre');
-            $table->tinyInteger('semester_disp');
-            $table->string('grupo',32);
+            $table->integer('matricula')->unique();
+            $table->string('semestre', 100)->nullable();
+            $table->string('semestre_disp', 100)->nullable();
+            $table->string('grupo', 100);
             $table->integer('modalidad_id')->unsigned();
             $table->integer('medio_enterado_id')->unsigned();
             $table->integer('periodo_id')->unsigned();
             $table->text('otros')->nullable();
             $table->integer('usuario_id')->unsigned();
             $table->integer('plan_especialidad_id')->unsigned();
+            $table->string('clave_pago',100)->nullable();
 
             $table->foreign('dato_general_id')->references('id')->on('datos_generales');
             $table->foreign('especialidad_id')->references('id')->on('especialidades');

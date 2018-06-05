@@ -15,8 +15,8 @@ class CreatePlanesEspecialidadesTable extends Migration
     {
         Schema::create('planes_especialidades', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('plan_especialidad',32)->unique();
-            $table->tinyInteger('periodos');
+            $table->string('plan_especialidad',32);
+            $table->tinyInteger('semestres');
             $table->integer('especialidad_id')->unsigned();
             $table->integer('coordinador_id')->unsigned();
             $table->string('descripcion',255)->nullable();

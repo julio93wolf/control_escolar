@@ -18,7 +18,7 @@ class CreateKardexsTable extends Migration
             $table->integer('estudiante_id')->unsigned();
             $table->integer('asignatura_id')->unsigned();
             $table->integer('oportunidad_id')->unsigned();
-            $table->tinyInteger('semestre');
+            $table->tinyInteger('semestre')->nullable();
             $table->integer('periodo_id')->unsigned();
             $table->decimal('calificacion',3,1)->nullable();
             

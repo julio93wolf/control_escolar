@@ -30,4 +30,5 @@ INSERT INTO `estados` (`id`, `clave`, `pais_id`, `estado`, `abreviatura`, `activ
 (29, '29', 35, 'Tlaxcala', 'Tlax.', 1),
 (30, '30', 35, 'Veracruz de Ignacio de la Llave', 'Ver.', 1),
 (31, '31', 35, 'Yucatán', 'Yuc.', 1),
-(32, '32', 35, 'Zacatecas', 'Zac.', 1);
+(32, '32', 35, 'Zacatecas', 'Zac.', 1),
+(33, '33', 35, 'Otro', 'Otro', 1);

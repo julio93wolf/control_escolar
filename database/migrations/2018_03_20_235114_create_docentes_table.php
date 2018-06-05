@@ -17,7 +17,7 @@ class CreateDocentesTable extends Migration
             $table->increments('id');
             $table->string('codigo',32)->unique();
             $table->integer('dato_general_id')->unsigned();
-            $table->string('rfc',16)->unique();
+            $table->string('rfc',16)->nullable();
             $table->integer('titulo_id')->unsigned();
             $table->integer('usuario_id')->unsigned();
 
