@@ -39,8 +39,7 @@ as
 		fechas_examenes.id  as id,
         tipo_examen_id,
         tipo_examen,
-        fecha_inicio,
-        fecha_final,
+        fecha,
         fechas_examenes.descripcion as descripcion,
         periodo_id
 	from fechas_examenes
